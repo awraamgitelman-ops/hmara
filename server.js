@@ -14,12 +14,9 @@ app.use((req, res, next) => {
   res.removeHeader('X-Powered-By');
   res.setHeader('Server', 'webserver');
   res.setHeader('X-Content-Type-Options', 'nosniff');
-  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
-  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
-  
-  if (req.path.startsWith('/css/') || req.path.startsWith('/js/')) {
-    res.setHeader('Cache-Control', 'no-cache, must-revalidate');
-  }
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
   next();
 });
 
