@@ -1,4 +1,4 @@
-﻿const express = require('express');
+const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const https = require('https');
@@ -71,8 +71,10 @@ app.use((req, res, next) => {
   next();
 });
 
-// Static files delivery
-// Reverse proxy for images and Nuxt image optimizer assets
+// Serve local static files first (CSS, JS, Fonts, local images)
+app.use(express.static(path.join(__dirname, 'public'), { extensions: ['html'] }));
+
+// Reverse proxy fallback for any missing images or Nuxt image optimizer assets
 app.use(['/_ipx', '/images'], (req, res) => {
   const targetUrl = 'https://selectel.ru' + req.originalUrl;
   https.get(targetUrl, { rejectUnauthorized: false }, (proxyRes) => {
@@ -82,8 +84,6 @@ app.use(['/_ipx', '/images'], (req, res) => {
     res.status(404).end();
   });
 });
-
-app.use(express.static(path.join(__dirname, 'public'), { extensions: ['html'] }));
 
 // Healthcheck for Railway
 app.get('/health', (req, res) => {
