@@ -460,4 +460,49 @@ document.addEventListener('DOMContentLoaded', function () {
       if (userDropdownMenu) userDropdownMenu.style.display = 'none';
     }
   });
+
+  // =========================================================================
+  // 7. SECURITY DATA STICKY SCROLL IMAGES SWITCHER
+  // =========================================================================
+  const secCards = [
+    document.querySelector('.security-data-card--1'),
+    document.querySelector('.security-data-card--2'),
+    document.querySelector('.security-data-card--3')
+  ];
+  const secPics = [
+    document.getElementById('sec-pic-0'),
+    document.getElementById('sec-pic-1'),
+    document.getElementById('sec-pic-2')
+  ];
+
+  function updateSecurityScroll() {
+    if (!secPics[0] || !secCards[0]) return;
+    const triggerY = window.innerHeight * 0.45;
+    let activeIdx = 0;
+
+    secCards.forEach((card, idx) => {
+      if (!card) return;
+      const rect = card.getBoundingClientRect();
+      if (rect.top <= triggerY) {
+        activeIdx = idx;
+      }
+    });
+
+    secPics.forEach((pic, idx) => {
+      if (!pic) return;
+      if (idx === activeIdx) {
+        pic.classList.add('visible');
+        pic.style.opacity = '1';
+        pic.style.zIndex = '2';
+      } else {
+        pic.classList.remove('visible');
+        pic.style.opacity = '0';
+        pic.style.zIndex = '1';
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updateSecurityScroll, { passive: true });
+  window.addEventListener('resize', updateSecurityScroll, { passive: true });
+  updateSecurityScroll();
 });
