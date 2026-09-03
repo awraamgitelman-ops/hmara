@@ -1,0 +1,735 @@
+﻿<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Безкоштовна міграція 1С, BAS та CRM систем у європейські хмари за 2 години | LIKEMARK CLOUD</title>
+  <meta name="description" content="Оренда надійних віртуальних серверів у Варшаві та Франкфурті (Tier III). Безкоштовна міграція баз 1С/BAS та CRM за 2 години без зупинки вашого бізнесу. Захист від блекаутів.">
+  <meta name="keywords" content="хмарні сервери, оренда VPS Україна, 1С в хмарі, міграція 1С, сервери Варшава, хмарний провайдер, IaaS Україна, LIKEMARK CLOUD, ТОВ ЛАЙКМАРК ЮКРЕЙН">
+  
+  <meta property="og:title" content="LIKEMARK CLOUD — Європейські хмари для українського бізнесу">
+  <meta property="og:description" content="Захищені віртуальні сервери у Варшаві та Франкфурті. Безкоштовний переїзд баз 1С/CRM під ключ за 2 години.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="uk_UA">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="/" class="logo-wrap">
+          <div class="logo-brand">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
+            </svg>
+            LIKEMARK
+          </div>
+          <span class="logo-badge">Cloud IaaS</span>
+        </a>
+
+        <nav class="nav-links" id="nav-links">
+          <a href="#tariffs" class="nav-link">Сервери та тарифи</a>
+          <a href="#migration" class="nav-link">Безкоштовна міграція</a>
+          <a href="#scenarios" class="nav-link">Рішення для 1С/CRM</a>
+          <a href="#datacenters" class="nav-link">Дата-центри ЄС</a>
+          <a href="#faq" class="nav-link">Часті питання</a>
+          <a href="/contacts" class="nav-link">Контакти</a>
+        </nav>
+
+        <div class="header-actions">
+          <div class="header-status">
+            <span class="pulse-dot"></span>
+            <span>SLA 99.98%</span>
+          </div>
+          <a href="tel:+380443345892" class="header-phone">+380 (44) 334-58-92</a>
+          <button class="btn btn-primary btn-sm" data-open-modal data-tariff="Тестовий період 7 днів (Швидкий старт)">
+            Тест 7 днів
+          </button>
+          <button class="btn-burger" id="burger-btn" aria-label="Меню">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== HERO ==================== -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-tag">
+          <span class="badge-dot"></span>
+          <span>🛡 Захист від блекаутів • Дата-центри Tier III у Варшаві та Франкфурті</span>
+        </div>
+
+        <h1 class="hero-title">
+          Європейські хмарні сервери для <span class="highlight">українського бізнесу</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          Надаємо в оренду швидкісні та відмовостійкі сервери під бази <strong>1С/BAS, CRM, сайти та корпоративні файли</strong>. Безкоштовно перенесемо вашу інфраструктуру у хмару за 2 години без зупинки роботи вашої команди.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#tariffs" class="btn btn-primary btn-lg">
+            Підібрати конфігурацію
+          </a>
+          <button class="btn btn-outline btn-lg" data-open-modal data-tariff="Запит на безкоштовну міграцію 1С/CRM">
+            Замовити безкоштовний переїзд
+          </button>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-val">15 хв</div>
+            <div class="stat-label">Середній час відповіді чергового інженера 24/7</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-val">0 ₴</div>
+            <div class="stat-label">Повна вартість перенесення баз «під ключ»</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-val">99.98%</div>
+            <div class="stat-label">Фінансово гарантована доступність за SLA</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-val">15 мс</div>
+            <div class="stat-label">Мінімальний пінг до Києва та міст України</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TARIFFS & CONFIGURATOR ==================== -->
+  <section class="section section-alt" id="tariffs">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-tag">Прозорі тарифи</span>
+        <h2 class="section-title">Хмарні сервери під будь-який масштаб</h2>
+        <p class="section-desc">
+          Обирайте перевірений готовий тариф або налаштуйте точну кількість ядер, оперативної пам'яті та NVMe-дисків за допомогою інтерактивного калькулятора.
+        </p>
+      </div>
+
+      <div class="calc-tabs">
+        <button class="tab-btn active" data-tab="presets">Готові конфігурації</button>
+        <button class="tab-btn" data-tab="custom">Калькулятор конфігуратора</button>
+      </div>
+
+      <!-- PRESETS GRID -->
+      <div class="tariffs-grid" id="tariffs-presets">
+        <!-- Card 1 -->
+        <div class="tariff-card">
+          <h3 class="tariff-name">Бухгалтерія Старт</h3>
+          <p class="tariff-desc">Для невеликих баз 1С/BAS та обліку до 3–5 співробітників.</p>
+          <div class="tariff-price-wrap">
+            <div class="tariff-price">790 ₴</div>
+            <div class="tariff-price-sub">~ $19 / місяць (SLA 99.98%)</div>
+          </div>
+          <div class="tariff-specs">
+            <div class="spec-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>2 vCPU</strong> AMD EPYC (3.4 GHz)</span>
+            </div>
+            <div class="spec-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>4 GB RAM</strong> DDR4 ECC</span>
+            </div>
+            <div class="spec-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>60 GB</strong> Ultra NVMe</span>
+            </div>
+            <div class="spec-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>1 виділений IPv4 + 1 Gbps канал</span>
+            </div>
+            <div class="spec-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Безкоштовна міграція баз</span>
+            </div>
+          </div>
+          <button class="btn btn-outline" style="width: 100%;" data-open-modal data-tariff="Тариф «Бухгалтерія Старт» (790 ₴/міс)">
+            Замовити сервер
+          </button>
+        </div>
+
+        <!-- Card 2 (FEATURED) -->
+        <div class="tariff-card featured">
+          <div class="tariff-badge">ХІТ ПРОДАЖІВ</div>
+          <h3 class="tariff-name">Бізнес Оптимальний</h3>
+          <p class="tariff-desc">Ідеальний вибір для 1С/BAS + CRM (Bitrix24, amoCRM) до 15 користувачів.</p>
+          <div class="tariff-price-wrap">
+            <div class="tariff-price">1 490 ₴</div>
+            <div class="tariff-price-sub">~ $36 / місяць (SLA 99.98%)</div>
+          </div>
+          <div class="tariff-specs">
+            <div class="spec-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>4 vCPU</strong> AMD EPYC (3.4 GHz)</span>
+            </div>
+            <div class="spec-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>8 GB RAM</strong> DDR4 ECC</span>
+            </div>
+            <div class="spec-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>120 GB</strong> Ultra NVMe</span>
+            </div>
+            <div class="spec-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Щоденний автоматичний бекап</span>
+            </div>
+            <div class="spec-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Безкоштовна міграція та налаштування</span>
+            </div>
+          </div>
+          <button class="btn btn-primary" style="width: 100%;" data-open-modal data-tariff="Тариф «Бізнес Оптимальний» (1 490 ₴/міс)">
+            Спробувати безкоштовно
+          </button>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="tariff-card">
+          <h3 class="tariff-name">Термінал RDP Про</h3>
+          <p class="tariff-desc">Віддалені робочі столи для всієї компанії до 30–40 активних сесій.</p>
+          <div class="tariff-price-wrap">
+            <div class="tariff-price">2 890 ₴</div>
+            <div class="tariff-price-sub">~ $70 / місяць (SLA 99.98%)</div>
+          </div>
+          <div class="tariff-specs">
+            <div class="spec-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>8 vCPU</strong> AMD EPYC Enterprise</span>
+            </div>
+            <div class="spec-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>16 GB RAM</strong> DDR4 ECC</span>
+            </div>
+            <div class="spec-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>240 GB</strong> Ultra NVMe</span>
+            </div>
+            <div class="spec-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Гарантовані виділені ресурси 100%</span>
+            </div>
+            <div class="spec-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Пріоритетна підтримка 24/7</span>
+            </div>
+          </div>
+          <button class="btn btn-outline" style="width: 100%;" data-open-modal data-tariff="Тариф «Термінал RDP Про» (2 890 ₴/міс)">
+            Замовити сервер
+          </button>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="tariff-card">
+          <h3 class="tariff-name">Enterprise Клауд</h3>
+          <p class="tariff-desc">Для важких баз SQL, високонавантажених інтернет-магазинів та ERP.</p>
+          <div class="tariff-price-wrap">
+            <div class="tariff-price">5 490 ₴</div>
+            <div class="tariff-price-sub">~ $132 / місяць (SLA 99.98%)</div>
+          </div>
+          <div class="tariff-specs">
+            <div class="spec-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>16 vCPU</strong> AMD EPYC Enterprise</span>
+            </div>
+            <div class="spec-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>32 GB RAM</strong> DDR4 ECC</span>
+            </div>
+            <div class="spec-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>500 GB</strong> Ultra NVMe</span>
+            </div>
+            <div class="spec-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Ізольована віртуальна мережа (VLAN)</span>
+            </div>
+            <div class="spec-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Персональний системний архітектор</span>
+            </div>
+          </div>
+          <button class="btn btn-outline" style="width: 100%;" data-open-modal data-tariff="Тариф «Enterprise Клауд» (5 490 ₴/міс)">
+            Замовити розрахунок
+          </button>
+        </div>
+      </div>
+
+      <!-- CUSTOM CALCULATOR (INTERACTIVE SLIDERS) -->
+      <div class="calc-box" id="tariffs-custom">
+        <div class="calc-controls">
+          <div class="control-item">
+            <div class="control-header">
+              <span class="control-label">Процесор (vCPU):</span>
+              <span class="control-val" id="val-cpu">4 vCPU</span>
+            </div>
+            <input type="range" min="1" max="32" step="1" value="4" class="range-slider" id="range-cpu">
+          </div>
+
+          <div class="control-item">
+            <div class="control-header">
+              <span class="control-label">Оперативна пам'ять (RAM):</span>
+              <span class="control-val" id="val-ram">8 GB</span>
+            </div>
+            <input type="range" min="2" max="64" step="2" value="8" class="range-slider" id="range-ram">
+          </div>
+
+          <div class="control-item">
+            <div class="control-header">
+              <span class="control-label">Швидкісний NVMe накопичувач:</span>
+              <span class="control-val" id="val-disk">120 GB NVMe</span>
+            </div>
+            <input type="range" min="20" max="1000" step="20" value="120" class="range-slider" id="range-disk">
+          </div>
+
+          <div class="control-item">
+            <label class="control-label" for="select-os">Операційна система:</label>
+            <select id="select-os" class="form-input">
+              <option value="linux">Linux (Ubuntu 22.04 / 24.04, Debian 12, Rocky Linux) — Безкоштовно</option>
+              <option value="windows">Windows Server 2022 / 2025 Standard (Офіційна ліцензія SPLA)</option>
+            </select>
+          </div>
+
+          <div class="control-item">
+            <label style="display:flex; align-items:center; gap:10px; cursor:pointer; color:#fff;">
+              <input type="checkbox" id="check-backup" checked style="width:18px; height:18px; accent-color:#00e599;">
+              <span>Увімкнути автоматичне щоденне резервне копіювання (бекап) в ізольоване сховище</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="calc-summary">
+          <div>
+            <h4 class="summary-title">Ваша конфігурація:</h4>
+            <div class="summary-list">
+              <div class="summary-item"><span>Процесор:</span> <strong id="sum-cpu">4 ядра</strong></div>
+              <div class="summary-item"><span>Пам'ять:</span> <strong id="sum-ram">8 GB RAM</strong></div>
+              <div class="summary-item"><span>Диск:</span> <strong id="sum-disk">120 GB NVMe</strong></div>
+              <div class="summary-item"><span>ОС:</span> <strong id="sum-os">Linux (Ubuntu/Debian)</strong></div>
+              <div class="summary-item"><span>Бекап:</span> <strong id="sum-backup">Увімкнено</strong></div>
+              <div class="summary-item"><span>Локація:</span> <strong>Варшава (Tier III)</strong></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="summary-total" id="sum-total">1 490 ₴/міс</div>
+            <div class="summary-total-sub" id="sum-usd">~ $36 / місяць (SLA 99.98%)</div>
+            <button class="btn btn-primary" id="btn-order-custom" style="width: 100%;" data-open-modal data-tariff="Кастомна конфігурація з калькулятора">
+              Отримати 7 днів тесту
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FREE MIGRATION ==================== -->
+  <section class="section" id="migration">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-tag">Безкоштовна послуга</span>
+        <h2 class="section-title">Переїзд у хмару «під ключ» без простою бізнесу</h2>
+        <p class="section-desc">
+          Вам не потрібно наймати дорогих системних адміністраторів чи хвилюватися про збереження бази. Наша інженерна команда виконає повний перенос безкоштовно.
+        </p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3 class="step-title">Аудит інфраструктури</h3>
+          <p class="step-desc">
+            Оцінюємо обсяг ваших баз даних 1С/BAS чи CRM, кількість одночасних користувачів та підбираємо оптимальні ресурси сервера без переплат.
+          </p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3 class="step-title">Тестовий перенос</h3>
+          <p class="step-desc">
+            Розгортаємо копію вашої робочої системи на хмарному сервері у вихідні або вночі, не перериваючи поточні операції вашого офісу.
+          </p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3 class="step-title">Перевірка швидкості</h3>
+          <p class="step-desc">
+            Ваш головний бухгалтер чи IT-спеціаліст перевіряє швидкість проведення документів та формування звітів на хмарному сервері.
+          </p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <h3 class="step-title">Фінальний запуск</h3>
+          <p class="step-desc">
+            Перемикаємо робочі місця на хмару. Ваші співробітники продовжують працювати з будь-якої точки, де є інтернет, навіть під час блекаутів.
+          </p>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 40px;">
+        <button class="btn btn-primary btn-lg" data-open-modal data-tariff="Заявка на безкоштовний переїзд 1С/CRM">
+          Замовити безкоштовний переїзд інфраструктури
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== BUSINESS SCENARIOS ==================== -->
+  <section class="section section-alt" id="scenarios">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-tag">Сценарії використання</span>
+        <h2 class="section-title">Рішення під завдання вашого бізнесу</h2>
+        <p class="section-desc">
+          Хмарні сервери LIKEMARK CLOUD адаптовані під найпопулярніші робочі завдання українських підприємств.
+        </p>
+      </div>
+
+      <div class="cases-grid">
+        <div class="case-card">
+          <div class="case-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
+          </div>
+          <h3 class="case-title">1С:Підприємство та BAS</h3>
+          <p class="case-text">
+            Розміщення файлових та клієнт-серверних баз (MS SQL / PostgreSQL). Швидке відкриття важких проводок, щоденні автобекапи, доступ бухгалтера з дому під час відключень світла.
+          </p>
+        </div>
+
+        <div class="case-card">
+          <div class="case-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3 class="case-title">Корпоративні CRM-системи</h3>
+          <p class="case-text">
+            Швидка робота коробкових версій Bitrix24, amoCRM, Creatio чи OneBox. Ваші менеджери з продажу завжди онлайн і не втрачають жодної вхідної заявки чи дзвінка від клієнтів.
+          </p>
+        </div>
+
+        <div class="case-card">
+          <div class="case-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <h3 class="case-title">Інтернет-магазини та сайти</h3>
+          <p class="case-text">
+            Хостинг для e-commerce проектів на OpenCart, WordPress, Magento, Laravel. Висока швидкість завантаження сторінок та стійкість до пікових навантажень під час розпродажів.
+          </p>
+        </div>
+
+        <div class="case-card">
+          <div class="case-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+          <h3 class="case-title">Віддалений віртуальний офіс</h3>
+          <p class="case-text">
+            Термінальні робочі столи (RDP) для безпечної роботи співробітників. Інформація не зберігається на ноутбуках працівників, а залишається під захистом у зашифрованій хмарі.
+          </p>
+        </div>
+
+        <div class="case-card">
+          <div class="case-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+          </div>
+          <h3 class="case-title">Хмарне S3 сховище бекапів</h3>
+          <p class="case-text">
+            Ізольоване географічно віддалене сховище даних за стандартом 3-2-1. Надійний захист від шифрувальників, людського фактору чи технічних аварій у локальному офісі.
+          </p>
+        </div>
+
+        <div class="case-card">
+          <div class="case-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3 class="case-title">Безпечний VPN та захист зв'язку</h3>
+          <p class="case-text">
+            Шифрований тунель зв'язку (WireGuard / OpenVPN) для об'єднання ваших філій, складів та віддалених працівників в єдину закриту безпечну корпоративну мережу.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== DATA CENTERS ==================== -->
+  <section class="section" id="datacenters">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-tag">Європейська інфраструктура</span>
+        <h2 class="section-title">Сертифіковані дата-центри Tier III</h2>
+        <p class="section-desc">
+          Ваші дані зберігаються на сучасному обладнанні у найбезпечніших телекомунікаційних вузлах Європейського Союзу.
+        </p>
+      </div>
+
+      <div class="dc-grid">
+        <div class="dc-card">
+          <div class="dc-header">
+            <div>
+              <h3 class="dc-title">Варшава, Польща (Atman / Equinix)</h3>
+              <p style="color:var(--text-muted); font-size:0.88rem; margin-top:4px;">Основний майданчик для українських клієнтів</p>
+            </div>
+            <span class="dc-tier">Tier III Certified</span>
+          </div>
+
+          <p style="color:var(--text-muted); font-size:0.92rem; line-height:1.6;">
+            Найближчий до України європейський телеком-хаб. Прямі волоконно-оптичні канали забезпечують мінімальний час відгуку (пінг до Києва всього 12–15 мс).
+          </p>
+
+          <div class="dc-specs-list">
+            <div class="dc-spec-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00e599" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Безперебійне живлення: <strong>2N ДБЖ + дизель-генератори</strong></span>
+            </div>
+            <div class="dc-spec-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00e599" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Сертифікація: <strong>ISO 9001, ISO 27001, PCI DSS</strong></span>
+            </div>
+            <div class="dc-spec-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00e599" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Канали зв'язку: <strong>Прямі стики з UA-IX, DTEL-IX</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dc-card">
+          <div class="dc-header">
+            <div>
+              <h3 class="dc-title">Франкфурт, Німеччина (Equinix FR5)</h3>
+              <p style="color:var(--text-muted); font-size:0.88rem; margin-top:4px;">Ключовий фінансовий хаб Європи</p>
+            </div>
+            <span class="dc-tier">Tier III+ Enterprise</span>
+          </div>
+
+          <p style="color:var(--text-muted); font-size:0.92rem; line-height:1.6;">
+            Один із найпотужніших вузлів обміну трафіком у світі (DE-CIX). Ідеально підходить для міжнародних проектів, високонавантажених SaaS та резервного зберігання баз.
+          </p>
+
+          <div class="dc-specs-list">
+            <div class="dc-spec-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00e599" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Енергетична стійкість: <strong>Автономність понад 72 години</strong></span>
+            </div>
+            <div class="dc-spec-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00e599" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Рівень безпеки: <strong>Біометричний контроль, охорона 24/7</strong></span>
+            </div>
+            <div class="dc-spec-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00e599" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Відповідність стандартам: <strong>GDPR, ISO 27001, SOC 1/2</strong></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FAQ ==================== -->
+  <section class="section section-alt" id="faq">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-tag">Відповіді на запитання</span>
+        <h2 class="section-title">Часті запитання українського бізнесу</h2>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item active">
+          <button class="faq-question">
+            <span>Як відбувається перенесення баз 1С/BAS без зупинки роботи офісу?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            Наші інженери копіюють дані у неробочий час (після закінчення робочого дня або у вихідний). Створюється повний зліпок вашої системи на хмарному сервері. Вранці співробітники просто підключаються до нової надійної адреси та продовжують роботу без жодного дня простою.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Чи зможуть співробітники працювати, якщо в офісі чи вдома вимкнуть світло?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            Так! Оскільки сам сервер фізично розміщений у дата-центрі Варшави чи Франкфурта з промисловими дизель-генераторами, він ніколи не вимикається. Працівнику достатньо роздати інтернет з мобільного телефону або сісти в найближчому коворкінгу/кафе, щоб повноцінно проводити документи в 1С чи працювати в CRM.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Як оплачувати послуги? Чи надаєте ви офіційні бухгалтерські документи?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            Так, ми працюємо офіційно через українську юридичну особу ТОВ "ЛАЙКМАРК ЮКРЕЙН" (код ЄДРПОУ 45356074). Укладається договір оферти або індивідуальний договір про надання хмарних послуг. Оплата здійснюється по безготівковому розрахунку у гривнях. Щомісяця надаються акти виконаних робіт через системи електронного документообігу (Вчасно, M.E.Doc).
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Що входить у безкоштовний 7-денний тестовий період?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            Ви отримуєте повнофункціональний віртуальний сервер обраної конфігурації з виділеною IP-адресою та допомогою інженера у налаштуванні. Ви можете розгорнути копію своєї бази та протестувати реальну швидкість роботи в умовах вашого підприємства без будь-яких зобов'язань.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CTA BANNER ==================== -->
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner">
+        <h2 class="cta-title">Захистіть свій бізнес від ризиків та втрати баз даних вже сьогодні</h2>
+        <p class="cta-desc">
+          Залиште заявку на безкоштовну консультацію. Наш інженер проведе аудит вашої системи та розгорне тестовий сервер протягом 15 хвилин.
+        </p>
+        <button class="btn btn-primary btn-lg" data-open-modal data-tariff="Заявка з фінального банера (Консультація)">
+          Отримати безкоштовний тест на 7 днів
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-company-name">ТОВ «ЛАЙКМАРК ЮКРЕЙН»</div>
+          <p class="footer-desc">
+            Надійний український IaaS-провайдер хмарної інфраструктури для малого, середнього та корпоративного бізнесу. Відмовостійкі сервери в ЄС, міграція систем під ключ, гарантія безпеки даних.
+          </p>
+          <div class="footer-legal-badge">
+            Код ЄДРПОУ: <strong>45356074</strong> • КВЕД: 63.11
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Послуги</h4>
+          <ul class="footer-links">
+            <li><a href="#tariffs" class="footer-link">Хмарні сервери VPS/VDS</a></li>
+            <li><a href="#scenarios" class="footer-link">Хмара для 1С / BAS</a></li>
+            <li><a href="#migration" class="footer-link">Міграція в хмару під ключ</a></li>
+            <li><a href="#scenarios" class="footer-link">Віртуальні робочі столи RDP</a></li>
+            <li><a href="#scenarios" class="footer-link">S3 сховище бекапів</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Інформація</h4>
+          <ul class="footer-links">
+            <li><a href="#datacenters" class="footer-link">Дата-центри Варшава / Франкфурт</a></li>
+            <li><a href="#faq" class="footer-link">Часті запитання (FAQ)</a></li>
+            <li><a href="/contacts" class="footer-link">Контакти та реквізити</a></li>
+            <li><a href="/privacy" class="footer-link">Політика конфіденційності</a></li>
+            <li><a href="/terms" class="footer-link">Публічна оферта (Договір IaaS)</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Зв'язок з нами</h4>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <div>
+              <strong>+380 (44) 334-58-92</strong><br>
+              <span style="font-size:0.8rem; color:var(--text-dark);">Гаряча лінія 24/7/365</span>
+            </div>
+          </div>
+
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            <div>
+              <a href="mailto:support@likemark.cloud" style="color:var(--color-primary);">support@likemark.cloud</a><br>
+              <span style="font-size:0.8rem; color:var(--text-dark);">Відділ турботи та чергові інженери</span>
+            </div>
+          </div>
+
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div>
+              <span style="font-size:0.82rem;">Україна, 15600, Чернігівська обл., Корюківський р-н, місто Мена, вул. Виноградна</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          © 2023–2026 ТОВ «ЛАЙКМАРК ЮКРЕЙН». Усі права захищені.
+        </div>
+        <div>
+          Статус мережі: <span style="color:#00e599;">● Усі системи в нормі (SLA 99.98%)</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== LEAD CAPTURE MODAL ==================== -->
+  <div class="modal-overlay" id="lead-modal">
+    <div class="modal-box">
+      <button class="modal-close" id="modal-close-btn" aria-label="Закрити">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <h3 class="modal-title">Отримати тестовий доступ</h3>
+      <p class="modal-desc" id="modal-desc">
+        Залиште контактні дані для відкриття 7-денного безкоштовного доступу до хмарного сервера або розрахунку міграції.
+      </p>
+
+      <form class="ajax-lead-form">
+        <input type="hidden" name="tariff" id="modal-tariff-input" value="Швидкий старт">
+        <input type="hidden" name="source" value="Модальне вікно замовлення сайту">
+
+        <div class="form-group">
+          <label class="form-label" for="inp-name">Ваше ім'я або назва компанії:</label>
+          <input type="text" id="inp-name" name="name" class="form-input" placeholder="Наприклад: ТОВ «Пром-Трейд» або Іван" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="inp-phone">Номер телефону:</label>
+          <input type="tel" id="inp-phone" name="phone" class="form-input" placeholder="+380 (XX) XXX-XX-XX" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="inp-email">Робочий Email (для доступу):</label>
+          <input type="email" id="inp-email" name="email" class="form-input" placeholder="name@company.com">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="inp-msg">Що саме потрібно перенести? (необов'язково):</label>
+          <textarea id="inp-msg" name="comment" class="form-input" rows="2" placeholder="Наприклад: База 1С УТП на 7 користувачів, потрібна міграція у вихідний день"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+          Отримати доступ та розрахунок
+        </button>
+
+        <p class="form-notice">
+          🔒 Натискаючи кнопку, ви погоджуєтеся з Політикою конфіденційності ТОВ «ЛАЙКМАРК ЮКРЕЙН». Ваші дані надійно захищені.
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>
+
