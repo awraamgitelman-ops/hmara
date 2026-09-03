@@ -138,25 +138,24 @@ document.addEventListener('DOMContentLoaded', function () {
   updateSlider();
 
   // =========================================================================
-  // 2. COOKIE NOTICE BANNER
+  // 2. NATIVE COOKIE NOTICE BANNER
   // =========================================================================
-  const cookieBanner = document.getElementById('cookie-notice-banner');
-  const cookieAcceptBtn = document.getElementById('cookie-accept-btn');
-  const cookieCloseBtn = document.getElementById('cookie-close-btn');
+  const cookieBanner = document.getElementById('native-cookie-banner') || document.getElementById('cookie-notice-banner') || document.querySelector('.cookies');
+  const cookieAcceptBtn = document.getElementById('btn-cookie-native-accept') || document.getElementById('cookie-accept-btn');
+  const cookieCloseBtn = document.getElementById('btn-cookie-native-close') || document.getElementById('cookie-close-btn') || (cookieBanner ? cookieBanner.querySelector('.cookies__close') : null);
 
   if (cookieBanner) {
     const isAccepted = localStorage.getItem('likemark_cookie_accepted');
     if (isAccepted === 'true') {
-      cookieBanner.style.display = 'none';
-    } else {
-      cookieBanner.style.display = 'flex';
+      cookieBanner.style.setProperty('display', 'none', 'important');
     }
 
-    function dismissCookie() {
+    function dismissCookie(e) {
+      if (e) e.preventDefault();
       localStorage.setItem('likemark_cookie_accepted', 'true');
       cookieBanner.style.opacity = '0';
       cookieBanner.style.transition = 'opacity 0.3s ease';
-      setTimeout(() => { cookieBanner.style.display = 'none'; }, 300);
+      setTimeout(() => { cookieBanner.style.setProperty('display', 'none', 'important'); }, 300);
     }
 
     if (cookieAcceptBtn) cookieAcceptBtn.addEventListener('click', dismissCookie);
