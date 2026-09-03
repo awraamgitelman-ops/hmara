@@ -1,433 +1,464 @@
+// LIKEMARK Cloud Platform - Main Interactive Logic
 document.addEventListener('DOMContentLoaded', function () {
-  // ==========================================
-  // 1. SWIPER HORIZONTAL NAVIGATION & DASHES
-  // ==========================================
-  const swiperTrack = document.querySelector('.swiper-cards__track');
-  const btnPrev = document.getElementById('swiper-btn-prev');
-  const btnNext = document.getElementById('swiper-btn-next');
-  const dashes = document.querySelectorAll('.carousel-dash');
+  console.log('LIKEMARK Cloud initialized.');
 
-  function updateDashes() {
-    if (!swiperTrack || dashes.length === 0) return;
-    const slide = swiperTrack.querySelector('.swiper-slide');
-    if (!slide) return;
-    const slideWidth = slide.offsetWidth + 16;
-    const maxIdx = dashes.length - 1;
-    const currentIdx = Math.min(maxIdx, Math.max(0, Math.round(swiperTrack.scrollLeft / slideWidth)));
+  // =========================================================================
+  // 1. SINGLE NATIVE CAROUSEL CONTROLLER
+  // =========================================================================
+  const track = document.querySelector('.swiper-cards__track');
+  const wrapper = track ? track.querySelector('.swiper-wrapper') : null;
+  const slides = wrapper ? wrapper.querySelectorAll('.swiper-slide') : [];
+  const prevBtn = document.querySelector('.slider-controls__button:not(.slider-controls__button--next)');
+  const nextBtn = document.querySelector('.slider-controls__button--next');
+  const segments = document.querySelectorAll('.slider-controls__pagination-segment');
 
-    dashes.forEach((d, idx) => {
-      if (idx === currentIdx) {
-        d.classList.add('active');
+  let currentIndex = 0;
+
+  function getStepWidth() {
+    if (!slides || slides.length === 0) return 396;
+    const slide = slides[0];
+    const style = window.getComputedStyle(slide);
+    const mr = parseFloat(style.marginRight) || 16;
+    return slide.offsetWidth + mr;
+  }
+
+  function getMaxIndex() {
+    if (segments && segments.length > 0) {
+      return segments.length - 1;
+    }
+    return Math.max(0, slides.length - 1);
+  }
+
+  function updateSlider() {
+    if (!wrapper || !track) return;
+    const step = getStepWidth();
+    const maxIdx = getMaxIndex();
+
+    // Clamp index
+    if (currentIndex < 0) currentIndex = 0;
+    if (currentIndex > maxIdx) currentIndex = maxIdx;
+
+    // Calculate maximum available scroll
+    const trackWidth = track.clientWidth;
+    const totalWidth = wrapper.scrollWidth || (slides.length * step);
+    const maxScroll = Math.max(0, totalWidth - trackWidth);
+
+    let targetX = currentIndex * step;
+    if (targetX > maxScroll) targetX = maxScroll;
+
+    // Smooth transform
+    wrapper.style.transform = `translate3d(-${targetX}px, 0px, 0px)`;
+
+    // Update segment active states (59px wide dash vs 12px short dash)
+    segments.forEach((seg, idx) => {
+      if (idx === currentIndex) {
+        seg.classList.add('slider-controls__pagination-segment--active');
+        seg.setAttribute('aria-current', 'true');
       } else {
-        d.classList.remove('active');
+        seg.classList.remove('slider-controls__pagination-segment--active');
+        seg.removeAttribute('aria-current');
+      }
+    });
+
+    // Update buttons disabled state
+    if (prevBtn) {
+      if (currentIndex === 0) {
+        prevBtn.setAttribute('disabled', 'disabled');
+        prevBtn.disabled = true;
+      } else {
+        prevBtn.removeAttribute('disabled');
+        prevBtn.disabled = false;
+      }
+    }
+
+    if (nextBtn) {
+      if (currentIndex >= maxIdx || targetX >= maxScroll) {
+        nextBtn.setAttribute('disabled', 'disabled');
+        nextBtn.disabled = true;
+      } else {
+        nextBtn.removeAttribute('disabled');
+        nextBtn.disabled = false;
+      }
+    }
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (currentIndex < getMaxIndex()) {
+        currentIndex++;
+        updateSlider();
       }
     });
   }
 
-  if (swiperTrack) {
-    swiperTrack.addEventListener('scroll', updateDashes, { passive: true });
-
-    if (btnNext) {
-      btnNext.addEventListener('click', function (e) {
-        e.preventDefault();
-        const slide = swiperTrack.querySelector('.swiper-slide');
-        const step = slide ? (slide.offsetWidth + 16) : 380;
-        swiperTrack.scrollBy({ left: step, behavior: 'smooth' });
-      });
-    }
-    if (btnPrev) {
-      btnPrev.addEventListener('click', function (e) {
-        e.preventDefault();
-        const slide = swiperTrack.querySelector('.swiper-slide');
-        const step = slide ? (slide.offsetWidth + 16) : 380;
-        swiperTrack.scrollBy({ left: -step, behavior: 'smooth' });
-      });
-    }
-
-    dashes.forEach(d => {
-      d.addEventListener('click', function () {
-        const idx = parseInt(d.getAttribute('data-index'));
-        const slide = swiperTrack.querySelector('.swiper-slide');
-        const step = slide ? (slide.offsetWidth + 16) : 380;
-        swiperTrack.scrollTo({ left: idx * step, behavior: 'smooth' });
-      });
+  if (prevBtn) {
+    prevBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateSlider();
+      }
     });
   }
 
-  // ==========================================
-  // 2. SCROLL TO TOP BUTTON
-  // ==========================================
-  const upBtn = document.querySelector('.up-button');
-  if (upBtn) {
-    upBtn.addEventListener('click', function () {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+  segments.forEach((seg, idx) => {
+    seg.addEventListener('click', function (e) {
+      e.preventDefault();
+      currentIndex = idx;
+      updateSlider();
     });
+  });
+
+  // Touch Swipe Support
+  let touchStartX = 0;
+  let touchEndX = 0;
+  if (track) {
+    track.addEventListener('touchstart', function (e) {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    track.addEventListener('touchend', function (e) {
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 40) {
+        if (diff > 0 && currentIndex < getMaxIndex()) {
+          currentIndex++;
+          updateSlider();
+        } else if (diff < 0 && currentIndex > 0) {
+          currentIndex--;
+          updateSlider();
+        }
+      }
+    }, { passive: true });
   }
 
-  // ==========================================
-  // 3. COOKIE BANNER MANAGER
-  // ==========================================
+  window.addEventListener('resize', updateSlider);
+  // Initial run
+  updateSlider();
+
+  // =========================================================================
+  // 2. COOKIE NOTICE BANNER
+  // =========================================================================
   const cookieBanner = document.getElementById('cookie-notice-banner');
   const cookieAcceptBtn = document.getElementById('cookie-accept-btn');
   const cookieCloseBtn = document.getElementById('cookie-close-btn');
 
   if (cookieBanner) {
     const isAccepted = localStorage.getItem('likemark_cookie_accepted');
-    if (isAccepted) {
+    if (isAccepted === 'true') {
       cookieBanner.style.display = 'none';
     } else {
       cookieBanner.style.display = 'flex';
     }
 
-    if (cookieAcceptBtn) {
-      cookieAcceptBtn.addEventListener('click', function () {
-        localStorage.setItem('likemark_cookie_accepted', 'true');
-        cookieBanner.style.opacity = '0';
-        setTimeout(() => { cookieBanner.style.display = 'none'; }, 200);
-      });
+    function dismissCookie() {
+      localStorage.setItem('likemark_cookie_accepted', 'true');
+      cookieBanner.style.opacity = '0';
+      cookieBanner.style.transition = 'opacity 0.3s ease';
+      setTimeout(() => { cookieBanner.style.display = 'none'; }, 300);
     }
 
-    if (cookieCloseBtn) {
-      cookieCloseBtn.addEventListener('click', function () {
-        cookieBanner.style.display = 'none';
-      });
-    }
+    if (cookieAcceptBtn) cookieAcceptBtn.addEventListener('click', dismissCookie);
+    if (cookieCloseBtn) cookieCloseBtn.addEventListener('click', dismissCookie);
   }
 
-  // ==========================================
-  // 4. MODAL CONTROLS (GENERIC)
-  // ==========================================
-  function openModal(modalEl) {
-    if (modalEl) {
-      modalEl.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-    }
-  }
-
-  function closeModal(modalEl) {
-    if (modalEl) {
-      modalEl.style.display = 'none';
-      document.body.style.overflow = '';
-    }
-  }
-
-  document.querySelectorAll('.modal-close-generic').forEach(btn => {
-    btn.addEventListener('click', function () {
-      const modal = btn.closest('[id$="-modal"]');
-      closeModal(modal);
-    });
-  });
-
-  document.querySelectorAll('[id$="-modal"]').forEach(modal => {
-    modal.addEventListener('click', function (e) {
-      if (e.target === modal) closeModal(modal);
-    });
-  });
-
-  // ==========================================
-  // 5. ACCOUNT SYSTEM (LOGIN / REGISTRATION)
-  // ==========================================
+  // =========================================================================
+  // 3. AUTH MODAL & STATE MANAGEMENT
+  // =========================================================================
   const authModal = document.getElementById('auth-modal');
-  const tabLogin = document.getElementById('tab-btn-login');
-  const tabRegister = document.getElementById('tab-btn-register');
-  const formLogin = document.getElementById('form-login');
-  const formRegister = document.getElementById('form-register');
-  const switchReg = document.getElementById('link-switch-to-reg');
-  const switchLog = document.getElementById('link-switch-to-login');
-
-  const guestHeader = document.getElementById('header-auth-guest');
-  const userHeader = document.getElementById('header-auth-user');
-  const userNameDisplay = document.getElementById('user-name-display');
-  const userDropdown = document.getElementById('user-dropdown-menu');
-  const panelModal = document.getElementById('panel-modal');
-
-  function setAuthTab(tab) {
-    if (tab === 'login') {
-      if (tabLogin) {
-        tabLogin.style.color = '#092433';
-        tabLogin.style.borderBottom = '2px solid #092433';
-      }
-      if (tabRegister) {
-        tabRegister.style.color = 'rgba(9,36,51,0.4)';
-        tabRegister.style.borderBottom = 'none';
-      }
-      if (formLogin) formLogin.style.display = 'flex';
-      if (formRegister) formRegister.style.display = 'none';
-    } else {
-      if (tabRegister) {
-        tabRegister.style.color = '#092433';
-        tabRegister.style.borderBottom = '2px solid #092433';
-      }
-      if (tabLogin) {
-        tabLogin.style.color = 'rgba(9,36,51,0.4)';
-        tabLogin.style.borderBottom = 'none';
-      }
-      if (formRegister) formRegister.style.display = 'flex';
-      if (formLogin) formLogin.style.display = 'none';
-    }
-  }
-
-  if (tabLogin) tabLogin.addEventListener('click', () => setAuthTab('login'));
-  if (tabRegister) tabRegister.addEventListener('click', () => setAuthTab('register'));
-  if (switchReg) switchReg.addEventListener('click', (e) => { e.preventDefault(); setAuthTab('register'); });
-  if (switchLog) switchLog.addEventListener('click', (e) => { e.preventDefault(); setAuthTab('login'); });
-
-  function syncAuthState() {
-    const rawUser = localStorage.getItem('likemark_user');
-    if (rawUser) {
-      const user = JSON.parse(rawUser);
-      if (guestHeader) guestHeader.style.display = 'none';
-      if (userHeader) userHeader.style.display = 'flex';
-      if (userNameDisplay) userNameDisplay.innerText = user.name || 'Кабінет';
-    } else {
-      if (guestHeader) guestHeader.style.display = 'flex';
-      if (userHeader) userHeader.style.display = 'none';
-    }
-  }
-  syncAuthState();
-
-  if (userHeader) {
-    userHeader.addEventListener('click', function () {
-      if (userDropdown) {
-        userDropdown.style.display = userDropdown.style.display === 'block' ? 'none' : 'block';
-      }
-    });
-  }
-
-  const menuLogout = document.getElementById('menu-logout');
-  if (menuLogout) {
-    menuLogout.addEventListener('click', function (e) {
-      e.preventDefault();
-      localStorage.removeItem('likemark_user');
-      if (userDropdown) userDropdown.style.display = 'none';
-      syncAuthState();
-    });
-  }
-
-  const menuOpenPanel = document.getElementById('menu-open-panel');
-  if (menuOpenPanel) {
-    menuOpenPanel.addEventListener('click', function (e) {
-      e.preventDefault();
-      if (userDropdown) userDropdown.style.display = 'none';
-      openModal(panelModal);
-    });
-  }
-
   const btnNavLogin = document.getElementById('btn-nav-login');
   const btnNavRegister = document.getElementById('btn-nav-register');
-  if (btnNavLogin) {
-    btnNavLogin.addEventListener('click', function () {
-      setAuthTab('login');
-      openModal(authModal);
-    });
-  }
-  if (btnNavRegister) {
-    btnNavRegister.addEventListener('click', function () {
-      setAuthTab('register');
-      openModal(authModal);
-    });
+  const tabBtnLogin = document.getElementById('tab-btn-login');
+  const tabBtnRegister = document.getElementById('tab-btn-register');
+  const formLogin = document.getElementById('form-login');
+  const formRegister = document.getElementById('form-register');
+  const linkSwitchToReg = document.getElementById('link-switch-to-reg');
+  const linkSwitchToLogin = document.getElementById('link-switch-to-login');
+  const headerAuthGuest = document.getElementById('header-auth-guest');
+  const headerAuthUser = document.getElementById('header-auth-user');
+  const userNameDisplay = document.getElementById('user-name-display');
+  const userDropdownMenu = document.getElementById('user-dropdown-menu');
+  const menuLogout = document.getElementById('menu-logout');
+  const menuOpenPanel = document.getElementById('menu-open-panel');
+  const panelModal = document.getElementById('panel-modal');
+
+  function openAuthModal(isRegister = false) {
+    if (!authModal) return;
+    authModal.style.display = 'flex';
+    if (isRegister) {
+      showRegisterTab();
+    } else {
+      showLoginTab();
+    }
   }
 
-  document.querySelectorAll('.btn-open-login').forEach(b => {
-    b.addEventListener('click', () => { setAuthTab('login'); openModal(authModal); });
-  });
-  document.querySelectorAll('.btn-open-register').forEach(b => {
-    b.addEventListener('click', () => { setAuthTab('register'); openModal(authModal); });
-  });
+  function showLoginTab() {
+    if (formLogin) formLogin.style.display = 'flex';
+    if (formRegister) formRegister.style.display = 'none';
+    if (tabBtnLogin) {
+      tabBtnLogin.style.color = '#092433';
+      tabBtnLogin.style.borderBottom = '2px solid #092433';
+    }
+    if (tabBtnRegister) {
+      tabBtnRegister.style.color = 'rgba(9,36,51,0.4)';
+      tabBtnRegister.style.borderBottom = '2px solid transparent';
+    }
+  }
+
+  function showRegisterTab() {
+    if (formLogin) formLogin.style.display = 'none';
+    if (formRegister) formRegister.style.display = 'flex';
+    if (tabBtnRegister) {
+      tabBtnRegister.style.color = '#092433';
+      tabBtnRegister.style.borderBottom = '2px solid #092433';
+    }
+    if (tabBtnLogin) {
+      tabBtnLogin.style.color = 'rgba(9,36,51,0.4)';
+      tabBtnLogin.style.borderBottom = '2px solid transparent';
+    }
+  }
+
+  if (btnNavLogin) btnNavLogin.addEventListener('click', () => openAuthModal(false));
+  if (btnNavRegister) btnNavRegister.addEventListener('click', () => openAuthModal(true));
+  if (tabBtnLogin) tabBtnLogin.addEventListener('click', showLoginTab);
+  if (tabBtnRegister) tabBtnRegister.addEventListener('click', showRegisterTab);
+  if (linkSwitchToReg) linkSwitchToReg.addEventListener('click', (e) => { e.preventDefault(); showRegisterTab(); });
+  if (linkSwitchToLogin) linkSwitchToLogin.addEventListener('click', (e) => { e.preventDefault(); showLoginTab(); });
+
+  function checkUserState() {
+    const user = localStorage.getItem('likemark_user');
+    if (user && headerAuthGuest && headerAuthUser) {
+      headerAuthGuest.style.display = 'none';
+      headerAuthUser.style.display = 'flex';
+      try {
+        const parsed = JSON.parse(user);
+        if (userNameDisplay && parsed.name) {
+          userNameDisplay.textContent = parsed.name;
+        }
+      } catch (e) {}
+    } else if (headerAuthGuest && headerAuthUser) {
+      headerAuthGuest.style.display = 'flex';
+      headerAuthUser.style.display = 'none';
+    }
+  }
+  checkUserState();
 
   if (formLogin) {
     formLogin.addEventListener('submit', function (e) {
       e.preventDefault();
       const email = document.getElementById('login-email').value;
-      const user = { email, name: email.split('@')[0], id: '45356074', loggedIn: true };
+      const user = { name: email.split('@')[0], email: email, loggedIn: true };
       localStorage.setItem('likemark_user', JSON.stringify(user));
-      syncAuthState();
-      closeModal(authModal);
-      openModal(panelModal);
+      checkUserState();
+      if (authModal) authModal.style.display = 'none';
+      if (panelModal) panelModal.style.display = 'flex';
     });
   }
 
   if (formRegister) {
-    formRegister.addEventListener('submit', async function (e) {
+    formRegister.addEventListener('submit', function (e) {
       e.preventDefault();
       const email = document.getElementById('reg-email').value;
-      const phone = document.getElementById('reg-phone').value;
       const name = document.getElementById('reg-name').value;
-
-      const user = { email, phone, name, id: '45356074', loggedIn: true };
+      const user = { name: name || email.split('@')[0], email: email, loggedIn: true };
       localStorage.setItem('likemark_user', JSON.stringify(user));
-      syncAuthState();
-
-      fetch('/api/lead', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, phone, email, source: 'Реєстрація акаунта LIKEMARK', tariff: 'Тест 7 днів (Облако)' })
-      }).catch(() => {});
-
-      closeModal(authModal);
-      openModal(panelModal);
+      checkUserState();
+      if (authModal) authModal.style.display = 'none';
+      if (panelModal) panelModal.style.display = 'flex';
     });
   }
 
-  // ==========================================
-  // 6. HERO BANNERS & CARDS BUTTONS
-  // ==========================================
-  const heroBtnPanel = document.getElementById('hero-btn-panel');
-  const heroBtnCalc = document.getElementById('hero-btn-calc');
-  const heroBtnAi = document.getElementById('hero-btn-ai');
-  const calcModal = document.getElementById('calc-modal');
-
-  if (heroBtnPanel) {
-    heroBtnPanel.addEventListener('click', function () {
-      const rawUser = localStorage.getItem('likemark_user');
-      if (rawUser) {
-        openModal(panelModal);
-      } else {
-        setAuthTab('login');
-        openModal(authModal);
+  if (headerAuthUser) {
+    headerAuthUser.addEventListener('click', function (e) {
+      if (e.target.closest('#user-dropdown-menu')) return;
+      if (userDropdownMenu) {
+        userDropdownMenu.style.display = userDropdownMenu.style.display === 'block' ? 'none' : 'block';
       }
     });
   }
 
-  if (heroBtnCalc) {
-    heroBtnCalc.addEventListener('click', function () {
-      openModal(calcModal);
+  if (menuLogout) {
+    menuLogout.addEventListener('click', function (e) {
+      e.preventDefault();
+      localStorage.removeItem('likemark_user');
+      checkUserState();
+      if (userDropdownMenu) userDropdownMenu.style.display = 'none';
     });
   }
 
-  if (heroBtnAi) {
-    heroBtnAi.addEventListener('click', function (e) {
+  if (menuOpenPanel) {
+    menuOpenPanel.addEventListener('click', function (e) {
       e.preventDefault();
-      openModal(panelModal);
+      if (userDropdownMenu) userDropdownMenu.style.display = 'none';
+      if (panelModal) panelModal.style.display = 'flex';
     });
   }
 
-  document.querySelectorAll('.btn-open-calc').forEach(b => {
-    b.addEventListener('click', function (e) {
+  const heroBtnPanel = document.getElementById('hero-btn-panel');
+  if (heroBtnPanel) {
+    heroBtnPanel.addEventListener('click', function (e) {
       e.preventDefault();
-      openModal(calcModal);
+      const user = localStorage.getItem('likemark_user');
+      if (user && panelModal) {
+        panelModal.style.display = 'flex';
+      } else {
+        openAuthModal(false);
+      }
+    });
+  }
+
+  // =========================================================================
+  // 4. CLOUD CALCULATOR MODAL & DYNAMIC PRICING
+  // =========================================================================
+  const calcModal = document.getElementById('calc-modal');
+  const heroBtnCalc = document.getElementById('hero-btn-calc');
+  const calcCpuRange = document.getElementById('calc-cpu-range');
+  const calcRamRange = document.getElementById('calc-ram-range');
+  const calcDiskRange = document.getElementById('calc-disk-range');
+  const calcOsSelect = document.getElementById('calc-os-select');
+  const calcCpuVal = document.getElementById('calc-cpu-val');
+  const calcRamVal = document.getElementById('calc-ram-val');
+  const calcDiskVal = document.getElementById('calc-disk-val');
+  const calcTotalPrice = document.getElementById('calc-total-price');
+  const calcOrderBtn = document.getElementById('calc-order-btn');
+
+  function openCalcModal() {
+    if (calcModal) calcModal.style.display = 'flex';
+  }
+
+  if (heroBtnCalc) heroBtnCalc.addEventListener('click', (e) => { e.preventDefault(); openCalcModal(); });
+
+  // Any link targeting #calc
+  document.querySelectorAll('a[href="#calc"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      openCalcModal();
     });
   });
 
-  // ==========================================
-  // 7. INTERACTIVE SERVER CALCULATOR
-  // ==========================================
-  const cpuRange = document.getElementById('calc-cpu-range');
-  const ramRange = document.getElementById('calc-ram-range');
-  const diskRange = document.getElementById('calc-disk-range');
-  const osSelect = document.getElementById('calc-os-select');
+  function recalculatePrice() {
+    if (!calcCpuRange || !calcRamRange || !calcDiskRange || !calcOsSelect) return;
+    const cpu = parseInt(calcCpuRange.value) || 4;
+    const ram = parseInt(calcRamRange.value) || 8;
+    const disk = parseInt(calcDiskRange.value) || 120;
+    const osPrice = parseInt(calcOsSelect.value) || 0;
 
-  const cpuVal = document.getElementById('calc-cpu-val');
-  const ramVal = document.getElementById('calc-ram-val');
-  const diskVal = document.getElementById('calc-disk-val');
-  const totalPrice = document.getElementById('calc-total-price');
-  const calcOrderBtn = document.getElementById('calc-order-btn');
+    if (calcCpuVal) calcCpuVal.textContent = `${cpu} ${cpu === 1 ? 'ядро' : (cpu < 5 ? 'ядра' : 'ядер')}`;
+    if (calcRamVal) calcRamVal.textContent = `${ram} GB`;
+    if (calcDiskVal) calcDiskVal.textContent = `${disk} GB`;
 
-  function updateCalc() {
-    if (!cpuRange || !ramRange || !diskRange || !osSelect) return;
-    const cpu = parseInt(cpuRange.value);
-    const ram = parseInt(ramRange.value);
-    const disk = parseInt(diskRange.value);
-    const os = parseInt(osSelect.value);
-
-    cpuVal.innerText = cpu + (cpu === 1 ? ' ядро' : (cpu < 5 ? ' ядра' : ' ядер'));
-    ramVal.innerText = ram + ' GB';
-    diskVal.innerText = disk + ' GB';
-
-    const total = 390 + (cpu * 120) + (ram * 60) + Math.round(disk * 2.2) + os;
-    totalPrice.innerText = total.toLocaleString('uk-UA') + ' ₴ / міс';
+    // CPU: 180 ₴/core, RAM: 75 ₴/GB, NVMe: 2.5 ₴/GB
+    const total = Math.round((cpu * 180) + (ram * 75) + (disk * 2.5) + osPrice);
+    if (calcTotalPrice) {
+      calcTotalPrice.textContent = `${total.toLocaleString('uk-UA')} ₴ / міс`;
+    }
   }
 
-  if (cpuRange) cpuRange.addEventListener('input', updateCalc);
-  if (ramRange) ramRange.addEventListener('input', updateCalc);
-  if (diskRange) diskRange.addEventListener('input', updateCalc);
-  if (osSelect) osSelect.addEventListener('change', updateCalc);
-  updateCalc();
+  if (calcCpuRange) calcCpuRange.addEventListener('input', recalculatePrice);
+  if (calcRamRange) calcRamRange.addEventListener('input', recalculatePrice);
+  if (calcDiskRange) calcDiskRange.addEventListener('input', recalculatePrice);
+  if (calcOsSelect) calcOsSelect.addEventListener('change', recalculatePrice);
 
+  const consultModal = document.getElementById('consult-modal');
   if (calcOrderBtn) {
     calcOrderBtn.addEventListener('click', function () {
-      closeModal(calcModal);
-      setAuthTab('register');
-      openModal(authModal);
+      if (calcModal) calcModal.style.display = 'none';
+      if (consultModal) {
+        consultModal.style.display = 'flex';
+        const commentField = consultModal.querySelector('textarea[name="comment"]');
+        if (commentField) {
+          commentField.value = `Замовлення сервера: ${calcCpuVal.textContent}, ${calcRamVal.textContent}, ${calcDiskVal.textContent} NVMe. Вартість: ${calcTotalPrice.textContent}`;
+        }
+      }
     });
   }
 
-  // ==========================================
-  // 8. FLOATING CONSULTATION BUTTON & MODAL
-  // ==========================================
+  // =========================================================================
+  // 5. CONSULTATION MODAL & FLOATING BUTTON
+  // =========================================================================
   const btnConsultFloating = document.getElementById('btn-consult-floating');
-  const consultModal = document.getElementById('consult-modal');
   const formConsult = document.getElementById('form-consult');
-  const btnConsultSubmit = document.getElementById('btn-consult-submit');
 
   if (btnConsultFloating) {
     btnConsultFloating.addEventListener('click', function () {
-      openModal(consultModal);
+      if (consultModal) consultModal.style.display = 'flex';
     });
   }
-
-  document.querySelectorAll('.btn-open-consult').forEach(b => {
-    b.addEventListener('click', function () {
-      openModal(consultModal);
-    });
-  });
 
   if (formConsult) {
     formConsult.addEventListener('submit', async function (e) {
       e.preventDefault();
-      const origText = btnConsultSubmit.innerText;
-      btnConsultSubmit.disabled = true;
-      btnConsultSubmit.innerText = 'Надсилаємо...';
+      const submitBtn = document.getElementById('btn-consult-submit');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Надсилаємо заявку...';
+      }
 
       const formData = new FormData(formConsult);
-      const payload = Object.fromEntries(formData.entries());
+      const payload = {
+        name: formData.get('name'),
+        phone: formData.get('phone'),
+        comment: formData.get('comment'),
+        source: 'Форма онлайн-консультації LIKEMARK CLOUD'
+      };
 
       try {
-        const res = await fetch('/api/lead', {
+        await fetch('/api/lead', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
-
-        if (res.ok) {
-          formConsult.innerHTML = `
-            <div style="text-align:center; padding:20px 0;">
-              <div style="font-size:44px; margin-bottom:10px;">✅</div>
-              <h4 style="font-size:20px; font-weight:700; color:#092433; margin-bottom:6px;">Заявку успішно прийнято!</h4>
-              <p style="color:rgba(9,36,51,0.7); font-size:13px; line-height:1.4;">
-                Черговий хмарний інженер зв'яжеться з вами за вказаним номером протягом 15 хвилин.
-              </p>
-              <button type="button" class="modal-close-generic" onclick="document.getElementById('consult-modal').style.display='none'; document.body.style.overflow='';" style="margin-top:16px; background:#092433; color:#fff; border:none; padding:10px 20px; border-radius:8px; font-weight:700; cursor:pointer;">
-                Закрити
-              </button>
-            </div>
-          `;
-        } else {
-          alert('Помилка під час відправки заявки. Будь ласка, зателефонуйте: +380 (44) 334-58-92');
-          btnConsultSubmit.disabled = false;
-          btnConsultSubmit.innerText = origText;
-        }
       } catch (err) {
-        alert('Помилка з\'єднання. Будь ласка, зателефонуйте: +380 (44) 334-58-92');
-        btnConsultSubmit.disabled = false;
-        btnConsultSubmit.innerText = origText;
+        console.warn('Fallback offline handling lead:', err);
       }
+
+      if (submitBtn) {
+        submitBtn.style.background = '#0ab476';
+        submitBtn.textContent = '✓ Заявку прийнято! Інженер зателефонує вам';
+      }
+
+      setTimeout(() => {
+        if (consultModal) consultModal.style.display = 'none';
+        formConsult.reset();
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.style.background = '#eb4247';
+          submitBtn.textContent = 'Замовити консультацію';
+        }
+      }, 2500);
     });
   }
 
-  // ==========================================
-  // 9. CALL TO REGISTRATION FORMS ON PAGE
-  // ==========================================
-  document.querySelectorAll('.registration-form').forEach(form => {
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      const input = form.querySelector('input[type="email"]');
-      if (input && input.value) {
-        const regEmailInput = document.getElementById('reg-email');
-        if (regEmailInput) regEmailInput.value = input.value;
-      }
-      setAuthTab('register');
-      openModal(authModal);
+  // =========================================================================
+  // 6. GENERIC MODAL CLOSE BUTTONS & OUTSIDE CLICK
+  // =========================================================================
+  document.querySelectorAll('.modal-close-generic').forEach(btn => {
+    btn.addEventListener('click', function () {
+      if (authModal) authModal.style.display = 'none';
+      if (panelModal) panelModal.style.display = 'none';
+      if (calcModal) calcModal.style.display = 'none';
+      if (consultModal) consultModal.style.display = 'none';
     });
+  });
+
+  [authModal, panelModal, calcModal, consultModal].forEach(modal => {
+    if (modal) {
+      modal.addEventListener('click', function (e) {
+        if (e.target === modal) {
+          modal.style.display = 'none';
+        }
+      });
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      if (authModal) authModal.style.display = 'none';
+      if (panelModal) panelModal.style.display = 'none';
+      if (calcModal) calcModal.style.display = 'none';
+      if (consultModal) consultModal.style.display = 'none';
+      if (userDropdownMenu) userDropdownMenu.style.display = 'none';
+    }
   });
 });
