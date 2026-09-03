@@ -36,14 +36,14 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // ==========================================
-  // 3. COOKIE BANNER MANAGER
+  // 3. COOKIE BANNER MANAGER (UKRAINIAN)
   // ==========================================
   const cookieBanner = document.getElementById('cookie-notice-banner');
   const cookieAcceptBtn = document.getElementById('cookie-accept-btn');
   const cookieCloseBtn = document.getElementById('cookie-close-btn');
 
   if (cookieBanner) {
-    const isAccepted = localStorage.getItem('selectel_cookie_accepted');
+    const isAccepted = localStorage.getItem('likemark_cookie_accepted');
     if (isAccepted) {
       cookieBanner.style.display = 'none';
     } else {
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (cookieAcceptBtn) {
       cookieAcceptBtn.addEventListener('click', function () {
-        localStorage.setItem('selectel_cookie_accepted', 'true');
+        localStorage.setItem('likemark_cookie_accepted', 'true');
         cookieBanner.style.opacity = '0';
         setTimeout(() => { cookieBanner.style.display = 'none'; }, 200);
       });
@@ -114,19 +114,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function setAuthTab(tab) {
     if (tab === 'login') {
-      tabLogin.style.color = '#092433';
-      tabLogin.style.borderBottom = '2px solid #092433';
-      tabRegister.style.color = 'rgba(9,36,51,0.4)';
-      tabRegister.style.borderBottom = 'none';
-      formLogin.style.display = 'flex';
-      formRegister.style.display = 'none';
+      if (tabLogin) {
+        tabLogin.style.color = '#092433';
+        tabLogin.style.borderBottom = '2px solid #092433';
+      }
+      if (tabRegister) {
+        tabRegister.style.color = 'rgba(9,36,51,0.4)';
+        tabRegister.style.borderBottom = 'none';
+      }
+      if (formLogin) formLogin.style.display = 'flex';
+      if (formRegister) formRegister.style.display = 'none';
     } else {
-      tabRegister.style.color = '#092433';
-      tabRegister.style.borderBottom = '2px solid #092433';
-      tabLogin.style.color = 'rgba(9,36,51,0.4)';
-      tabLogin.style.borderBottom = 'none';
-      formRegister.style.display = 'flex';
-      formLogin.style.display = 'none';
+      if (tabRegister) {
+        tabRegister.style.color = '#092433';
+        tabRegister.style.borderBottom = '2px solid #092433';
+      }
+      if (tabLogin) {
+        tabLogin.style.color = 'rgba(9,36,51,0.4)';
+        tabLogin.style.borderBottom = 'none';
+      }
+      if (formRegister) formRegister.style.display = 'flex';
+      if (formLogin) formLogin.style.display = 'none';
     }
   }
 
@@ -135,14 +143,14 @@ document.addEventListener('DOMContentLoaded', function () {
   if (switchReg) switchReg.addEventListener('click', (e) => { e.preventDefault(); setAuthTab('register'); });
   if (switchLog) switchLog.addEventListener('click', (e) => { e.preventDefault(); setAuthTab('login'); });
 
-  // Check login state
+  // Sync auth state from localStorage
   function syncAuthState() {
-    const rawUser = localStorage.getItem('selectel_user');
+    const rawUser = localStorage.getItem('likemark_user');
     if (rawUser) {
       const user = JSON.parse(rawUser);
       if (guestHeader) guestHeader.style.display = 'none';
       if (userHeader) userHeader.style.display = 'flex';
-      if (userNameDisplay) userNameDisplay.innerText = user.name || 'Аккаунт';
+      if (userNameDisplay) userNameDisplay.innerText = user.name || 'Кабінет';
     } else {
       if (guestHeader) guestHeader.style.display = 'flex';
       if (userHeader) userHeader.style.display = 'none';
@@ -152,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // User Dropdown toggle
   if (userHeader) {
-    userHeader.addEventListener('click', function (e) {
+    userHeader.addEventListener('click', function () {
       if (userDropdown) {
         userDropdown.style.display = userDropdown.style.display === 'block' ? 'none' : 'block';
       }
@@ -164,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (menuLogout) {
     menuLogout.addEventListener('click', function (e) {
       e.preventDefault();
-      localStorage.removeItem('selectel_user');
+      localStorage.removeItem('likemark_user');
       if (userDropdown) userDropdown.style.display = 'none';
       syncAuthState();
     });
@@ -209,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function () {
       e.preventDefault();
       const email = document.getElementById('login-email').value;
       const user = { email, name: email.split('@')[0], id: '45356074', loggedIn: true };
-      localStorage.setItem('selectel_user', JSON.stringify(user));
+      localStorage.setItem('likemark_user', JSON.stringify(user));
       syncAuthState();
       closeModal(authModal);
       openModal(panelModal);
@@ -225,14 +233,14 @@ document.addEventListener('DOMContentLoaded', function () {
       const name = document.getElementById('reg-name').value;
 
       const user = { email, phone, name, id: '45356074', loggedIn: true };
-      localStorage.setItem('selectel_user', JSON.stringify(user));
+      localStorage.setItem('likemark_user', JSON.stringify(user));
       syncAuthState();
 
       // Submit lead to backend
       fetch('/api/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, phone, email, source: 'Регистрация аккаунта Selectel', tariff: 'Тест 7 дней (Облако)' })
+        body: JSON.stringify({ name, phone, email, source: 'Реєстрація акаунта LIKEMARK', tariff: 'Тест 7 днів (Облако)' })
       }).catch(() => {});
 
       closeModal(authModal);
@@ -250,7 +258,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (heroBtnPanel) {
     heroBtnPanel.addEventListener('click', function () {
-      const rawUser = localStorage.getItem('selectel_user');
+      const rawUser = localStorage.getItem('likemark_user');
       if (rawUser) {
         openModal(panelModal);
       } else {
@@ -267,13 +275,21 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   if (heroBtnAi) {
-    heroBtnAi.addEventListener('click', function () {
+    heroBtnAi.addEventListener('click', function (e) {
+      e.preventDefault();
       openModal(panelModal);
     });
   }
 
+  document.querySelectorAll('.btn-open-calc').forEach(b => {
+    b.addEventListener('click', function (e) {
+      e.preventDefault();
+      openModal(calcModal);
+    });
+  });
+
   // ==========================================
-  // 7. INTERACTIVE SERVER CALCULATOR
+  // 7. INTERACTIVE SERVER CALCULATOR (UKRAINIAN)
   // ==========================================
   const cpuRange = document.getElementById('calc-cpu-range');
   const ramRange = document.getElementById('calc-ram-range');
@@ -299,7 +315,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Pricing formula
     const total = 390 + (cpu * 120) + (ram * 60) + Math.round(disk * 2.2) + os;
-    totalPrice.innerText = total.toLocaleString('ru-RU') + ' ₴ / мес';
+    totalPrice.innerText = total.toLocaleString('uk-UA') + ' ₴ / міс';
   }
 
   if (cpuRange) cpuRange.addEventListener('input', updateCalc);
@@ -330,12 +346,18 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  document.querySelectorAll('.btn-open-consult').forEach(b => {
+    b.addEventListener('click', function () {
+      openModal(consultModal);
+    });
+  });
+
   if (formConsult) {
     formConsult.addEventListener('submit', async function (e) {
       e.preventDefault();
       const origText = btnConsultSubmit.innerText;
       btnConsultSubmit.disabled = true;
-      btnConsultSubmit.innerText = 'Отправка...';
+      btnConsultSubmit.innerText = 'Надсилаємо...';
 
       const formData = new FormData(formConsult);
       const payload = Object.fromEntries(formData.entries());
@@ -351,22 +373,22 @@ document.addEventListener('DOMContentLoaded', function () {
           formConsult.innerHTML = `
             <div style="text-align:center; padding:20px 0;">
               <div style="font-size:44px; margin-bottom:10px;">✅</div>
-              <h4 style="font-size:20px; font-weight:700; color:#092433; margin-bottom:6px;">Заявка принята!</h4>
+              <h4 style="font-size:20px; font-weight:700; color:#092433; margin-bottom:6px;">Заявку успішно прийнято!</h4>
               <p style="color:rgba(9,36,51,0.7); font-size:13px; line-height:1.4;">
-                Дежурный инженер свяжется с вами по указанному номеру в течение 15 минут.
+                Черговий хмарний інженер зв'яжеться з вами за вказаним номером протягом 15 хвилин.
               </p>
               <button type="button" class="modal-close-generic" onclick="document.getElementById('consult-modal').style.display='none'; document.body.style.overflow='';" style="margin-top:16px; background:#092433; color:#fff; border:none; padding:10px 20px; border-radius:8px; font-weight:700; cursor:pointer;">
-                Закрыть
+                Закрити
               </button>
             </div>
           `;
         } else {
-          alert('Ошибка при отправке заявки. Пожалуйста, позвоните: +380 (44) 334-58-92');
+          alert('Помилка під час відправки заявки. Будь ласка, зателефонуйте: +380 (44) 334-58-92');
           btnConsultSubmit.disabled = false;
           btnConsultSubmit.innerText = origText;
         }
       } catch (err) {
-        alert('Ошибка связи. Пожалуйста, позвоните: +380 (44) 334-58-92');
+        alert('Помилка з\'єднання. Будь ласка, зателефонуйте: +380 (44) 334-58-92');
         btnConsultSubmit.disabled = false;
         btnConsultSubmit.innerText = origText;
       }
