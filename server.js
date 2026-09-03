@@ -72,6 +72,17 @@ app.use((req, res, next) => {
 });
 
 // Static files delivery
+// Reverse proxy for images and Nuxt image optimizer assets
+app.use(['/_ipx', '/images'], (req, res) => {
+  const targetUrl = 'https://selectel.ru' + req.originalUrl;
+  https.get(targetUrl, { rejectUnauthorized: false }, (proxyRes) => {
+    res.writeHead(proxyRes.statusCode, proxyRes.headers);
+    proxyRes.pipe(res);
+  }).on('error', () => {
+    res.status(404).end();
+  });
+});
+
 app.use(express.static(path.join(__dirname, 'public'), { extensions: ['html'] }));
 
 // Healthcheck for Railway
@@ -173,4 +184,6 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => {
   console.log(`[LIKEMARK CLOUD] Server running on port ${PORT}`);
 });
+
+
 
