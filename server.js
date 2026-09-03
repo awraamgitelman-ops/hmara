@@ -16,7 +16,6 @@ app.use((req, res, next) => {
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('X-Frame-Options', 'SAMEORIGIN');
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
-  res.setHeader('Content-Security-Policy', "default-src * 'unsafe-inline' 'unsafe-eval' data: blob: chrome-extension:; script-src * 'unsafe-inline' 'unsafe-eval' data: blob: chrome-extension:; img-src * data: blob:; font-src * data:; style-src * 'unsafe-inline'; connect-src *;");
   
   if (req.path.startsWith('/css/') || req.path.startsWith('/js/')) {
     res.setHeader('Cache-Control', 'no-cache, must-revalidate');
