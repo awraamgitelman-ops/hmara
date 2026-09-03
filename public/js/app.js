@@ -505,4 +505,13 @@ document.addEventListener('DOMContentLoaded', function () {
   window.addEventListener('scroll', updateSecurityScroll, { passive: true });
   window.addEventListener('resize', updateSecurityScroll, { passive: true });
   updateSecurityScroll();
+
+  // =========================================================================
+  // 8. ZERO HORIZONTAL DRIFT SAFETY LOCK
+  // =========================================================================
+  window.addEventListener('scroll', function () {
+    if (window.scrollX !== 0) {
+      window.scrollTo(0, window.scrollY);
+    }
+  }, { passive: true });
 });
