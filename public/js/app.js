@@ -99,7 +99,6 @@ document.addEventListener('DOMContentLoaded', function () {
   // ==========================================
   function openModal(modalEl) {
     if (modalEl) {
-      modalEl.classList.remove('hidden');
       modalEl.style.display = 'flex';
       document.body.style.overflow = 'hidden';
     }
@@ -107,7 +106,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function closeModal(modalEl) {
     if (modalEl) {
-      modalEl.classList.add('hidden');
       modalEl.style.display = 'none';
       document.body.style.overflow = '';
     }
@@ -115,18 +113,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
   document.querySelectorAll('.modal-close-generic').forEach(btn => {
     btn.addEventListener('click', function () {
-      const modal = btn.closest('#auth-modal') || btn.closest('#panel-modal') || btn.closest('#consult-modal');
+      const modal = btn.closest('[id$="-modal"]');
       closeModal(modal);
     });
   });
 
-  ['auth-modal', 'panel-modal', 'consult-modal'].forEach(id => {
-    const m = document.getElementById(id);
-    if (m) {
-      m.addEventListener('click', function (e) {
-        if (e.target === m) closeModal(m);
-      });
-    }
+  document.querySelectorAll('[id$="-modal"]').forEach(modal => {
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) closeModal(modal);
+    });
   });
 
   // ==========================================
@@ -137,6 +132,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const tabRegister = document.getElementById('tab-btn-register');
   const formLogin = document.getElementById('form-login');
   const formRegister = document.getElementById('form-register');
+  const switchReg = document.getElementById('link-switch-to-reg');
+  const switchLog = document.getElementById('link-switch-to-login');
 
   const guestHeader = document.getElementById('header-auth-guest');
   const userHeader = document.getElementById('header-auth-user');
@@ -147,42 +144,44 @@ document.addEventListener('DOMContentLoaded', function () {
   function setAuthTab(tab) {
     if (tab === 'login') {
       if (tabLogin) {
-        tabLogin.classList.remove('text-gray-400', 'border-transparent');
-        tabLogin.classList.add('text-brand-navy', 'border-brand-navy');
+        tabLogin.style.color = '#092433';
+        tabLogin.style.borderBottom = '2px solid #092433';
       }
       if (tabRegister) {
-        tabRegister.classList.remove('text-brand-navy', 'border-brand-navy');
-        tabRegister.classList.add('text-gray-400', 'border-transparent');
+        tabRegister.style.color = 'rgba(9,36,51,0.4)';
+        tabRegister.style.borderBottom = 'none';
       }
-      if (formLogin) { formLogin.classList.remove('hidden'); formLogin.style.display = 'flex'; }
-      if (formRegister) { formRegister.classList.add('hidden'); formRegister.style.display = 'none'; }
+      if (formLogin) formLogin.style.display = 'flex';
+      if (formRegister) formRegister.style.display = 'none';
     } else {
       if (tabRegister) {
-        tabRegister.classList.remove('text-gray-400', 'border-transparent');
-        tabRegister.classList.add('text-brand-navy', 'border-brand-navy');
+        tabRegister.style.color = '#092433';
+        tabRegister.style.borderBottom = '2px solid #092433';
       }
       if (tabLogin) {
-        tabLogin.classList.remove('text-brand-navy', 'border-brand-navy');
-        tabLogin.classList.add('text-gray-400', 'border-transparent');
+        tabLogin.style.color = 'rgba(9,36,51,0.4)';
+        tabLogin.style.borderBottom = 'none';
       }
-      if (formRegister) { formRegister.classList.remove('hidden'); formRegister.style.display = 'flex'; }
-      if (formLogin) { formLogin.classList.add('hidden'); formLogin.style.display = 'none'; }
+      if (formRegister) formRegister.style.display = 'flex';
+      if (formLogin) formLogin.style.display = 'none';
     }
   }
 
   if (tabLogin) tabLogin.addEventListener('click', () => setAuthTab('login'));
   if (tabRegister) tabRegister.addEventListener('click', () => setAuthTab('register'));
+  if (switchReg) switchReg.addEventListener('click', (e) => { e.preventDefault(); setAuthTab('register'); });
+  if (switchLog) switchLog.addEventListener('click', (e) => { e.preventDefault(); setAuthTab('login'); });
 
   function syncAuthState() {
     const rawUser = localStorage.getItem('likemark_user');
     if (rawUser) {
       const user = JSON.parse(rawUser);
-      if (guestHeader) { guestHeader.classList.add('hidden'); guestHeader.style.display = 'none'; }
-      if (userHeader) { userHeader.classList.remove('hidden'); userHeader.style.display = 'flex'; }
+      if (guestHeader) guestHeader.style.display = 'none';
+      if (userHeader) userHeader.style.display = 'flex';
       if (userNameDisplay) userNameDisplay.innerText = user.name || 'Кабінет';
     } else {
-      if (guestHeader) { guestHeader.classList.remove('hidden'); guestHeader.style.display = 'flex'; }
-      if (userHeader) { userHeader.classList.add('hidden'); userHeader.style.display = 'none'; }
+      if (guestHeader) guestHeader.style.display = 'flex';
+      if (userHeader) userHeader.style.display = 'none';
     }
   }
   syncAuthState();
@@ -190,7 +189,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (userHeader) {
     userHeader.addEventListener('click', function () {
       if (userDropdown) {
-        userDropdown.classList.toggle('hidden');
+        userDropdown.style.display = userDropdown.style.display === 'block' ? 'none' : 'block';
       }
     });
   }
@@ -200,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function () {
     menuLogout.addEventListener('click', function (e) {
       e.preventDefault();
       localStorage.removeItem('likemark_user');
-      if (userDropdown) userDropdown.classList.add('hidden');
+      if (userDropdown) userDropdown.style.display = 'none';
       syncAuthState();
     });
   }
@@ -209,7 +208,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (menuOpenPanel) {
     menuOpenPanel.addEventListener('click', function (e) {
       e.preventDefault();
-      if (userDropdown) userDropdown.classList.add('hidden');
+      if (userDropdown) userDropdown.style.display = 'none';
       openModal(panelModal);
     });
   }
@@ -229,6 +228,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  document.querySelectorAll('.btn-open-login').forEach(b => {
+    b.addEventListener('click', () => { setAuthTab('login'); openModal(authModal); });
+  });
   document.querySelectorAll('.btn-open-register').forEach(b => {
     b.addEventListener('click', () => { setAuthTab('register'); openModal(authModal); });
   });
@@ -268,11 +270,12 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // ==========================================
-  // 6. HERO BUTTONS
+  // 6. HERO BANNERS & CARDS BUTTONS
   // ==========================================
   const heroBtnPanel = document.getElementById('hero-btn-panel');
   const heroBtnCalc = document.getElementById('hero-btn-calc');
   const heroBtnAi = document.getElementById('hero-btn-ai');
+  const calcModal = document.getElementById('calc-modal');
 
   if (heroBtnPanel) {
     heroBtnPanel.addEventListener('click', function () {
@@ -288,8 +291,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (heroBtnCalc) {
     heroBtnCalc.addEventListener('click', function () {
-      const calcSection = document.getElementById('calc');
-      if (calcSection) calcSection.scrollIntoView({ behavior: 'smooth' });
+      openModal(calcModal);
     });
   }
 
@@ -303,8 +305,7 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('.btn-open-calc').forEach(b => {
     b.addEventListener('click', function (e) {
       e.preventDefault();
-      const calcSection = document.getElementById('calc');
-      if (calcSection) calcSection.scrollIntoView({ behavior: 'smooth' });
+      openModal(calcModal);
     });
   });
 
@@ -345,13 +346,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (calcOrderBtn) {
     calcOrderBtn.addEventListener('click', function () {
+      closeModal(calcModal);
       setAuthTab('register');
       openModal(authModal);
     });
   }
 
   // ==========================================
-  // 8. CONSULTATION MODAL & FLOATING BUTTON
+  // 8. FLOATING CONSULTATION BUTTON & MODAL
   // ==========================================
   const btnConsultFloating = document.getElementById('btn-consult-floating');
   const consultModal = document.getElementById('consult-modal');
@@ -389,20 +391,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (res.ok) {
           formConsult.innerHTML = `
-            <div class="text-center py-6">
-              <div class="text-5xl mb-3">✅</div>
-              <h4 class="text-xl font-extrabold text-brand-navy mb-2">Заявку прийнято!</h4>
-              <p class="text-gray-600 text-xs leading-relaxed">Черговий хмарний інженер зателефонує вам протягом 15 хвилин.</p>
-              <button type="button" class="modal-close-generic mt-5 px-5 py-2.5 rounded-xl bg-brand-navy text-white font-bold text-xs cursor-pointer">Закрити</button>
+            <div style="text-align:center; padding:20px 0;">
+              <div style="font-size:44px; margin-bottom:10px;">✅</div>
+              <h4 style="font-size:20px; font-weight:700; color:#092433; margin-bottom:6px;">Заявку успішно прийнято!</h4>
+              <p style="color:rgba(9,36,51,0.7); font-size:13px; line-height:1.4;">
+                Черговий хмарний інженер зв'яжеться з вами за вказаним номером протягом 15 хвилин.
+              </p>
+              <button type="button" class="modal-close-generic" onclick="document.getElementById('consult-modal').style.display='none'; document.body.style.overflow='';" style="margin-top:16px; background:#092433; color:#fff; border:none; padding:10px 20px; border-radius:8px; font-weight:700; cursor:pointer;">
+                Закрити
+              </button>
             </div>
           `;
         } else {
-          alert('Помилка під час відправки заявки. Зателефонуйте: +380 (44) 334-58-92');
+          alert('Помилка під час відправки заявки. Будь ласка, зателефонуйте: +380 (44) 334-58-92');
           btnConsultSubmit.disabled = false;
           btnConsultSubmit.innerText = origText;
         }
       } catch (err) {
-        alert('Помилка з\'єднання. Зателефонуйте: +380 (44) 334-58-92');
+        alert('Помилка з\'єднання. Будь ласка, зателефонуйте: +380 (44) 334-58-92');
         btnConsultSubmit.disabled = false;
         btnConsultSubmit.innerText = origText;
       }
@@ -410,45 +416,18 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // ==========================================
-  // 9. MAIN LEAD FORM ON PAGE
+  // 9. CALL TO REGISTRATION FORMS ON PAGE
   // ==========================================
-  const formLeadMain = document.getElementById('form-lead-main');
-  if (formLeadMain) {
-    formLeadMain.addEventListener('submit', async function (e) {
+  document.querySelectorAll('.registration-form').forEach(form => {
+    form.addEventListener('submit', function (e) {
       e.preventDefault();
-      const btn = formLeadMain.querySelector('button[type="submit"]');
-      const origText = btn.innerText;
-      btn.disabled = true;
-      btn.innerText = 'Надсилаємо заявку...';
-
-      const formData = new FormData(formLeadMain);
-      const payload = Object.fromEntries(formData.entries());
-
-      try {
-        const res = await fetch('/api/lead', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-
-        if (res.ok) {
-          formLeadMain.innerHTML = `
-            <div class="text-center py-8">
-              <div class="text-5xl mb-3">🎉</div>
-              <h3 class="text-2xl font-extrabold text-brand-navy mb-2">Дякуємо! Вашу заявку успішно надіслано</h3>
-              <p class="text-gray-600 text-sm max-w-md mx-auto">Черговий інженер LIKEMARK CLOUD зв'яжеться з вами за 15 хвилин для надання доступу до тестового сервера.</p>
-            </div>
-          `;
-        } else {
-          alert('Помилка під час відправки. Зателефонуйте нам: +380 (44) 334-58-92');
-          btn.disabled = false;
-          btn.innerText = origText;
-        }
-      } catch (err) {
-        alert('Помилка під час відправки. Зателефонуйте нам: +380 (44) 334-58-92');
-        btn.disabled = false;
-        btn.innerText = origText;
+      const input = form.querySelector('input[type="email"]');
+      if (input && input.value) {
+        const regEmailInput = document.getElementById('reg-email');
+        if (regEmailInput) regEmailInput.value = input.value;
       }
+      setAuthTab('register');
+      openModal(authModal);
     });
-  }
+  });
 });
