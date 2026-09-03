@@ -1,28 +1,57 @@
 document.addEventListener('DOMContentLoaded', function () {
   // ==========================================
-  // 1. SWIPER HORIZONTAL NAVIGATION
+  // 1. SWIPER HORIZONTAL NAVIGATION & DASHES
   // ==========================================
   const swiperTrack = document.querySelector('.swiper-cards__track');
-  const btnPrev = document.querySelector('.swiper-button-prev');
-  const btnNext = document.querySelector('.swiper-button-next');
+  const btnPrev = document.getElementById('swiper-btn-prev');
+  const btnNext = document.getElementById('swiper-btn-next');
+  const dashes = document.querySelectorAll('.carousel-dash');
+
+  function updateDashes() {
+    if (!swiperTrack || dashes.length === 0) return;
+    const slide = swiperTrack.querySelector('.swiper-slide');
+    if (!slide) return;
+    const slideWidth = slide.offsetWidth + 16;
+    const maxIdx = dashes.length - 1;
+    const currentIdx = Math.min(maxIdx, Math.max(0, Math.round(swiperTrack.scrollLeft / slideWidth)));
+
+    dashes.forEach((d, idx) => {
+      if (idx === currentIdx) {
+        d.classList.add('active');
+      } else {
+        d.classList.remove('active');
+      }
+    });
+  }
 
   if (swiperTrack) {
-    swiperTrack.style.overflowX = 'auto';
-    swiperTrack.style.scrollBehavior = 'smooth';
-    swiperTrack.style.scrollbarWidth = 'none';
+    swiperTrack.addEventListener('scroll', updateDashes, { passive: true });
 
     if (btnNext) {
       btnNext.addEventListener('click', function (e) {
         e.preventDefault();
-        swiperTrack.scrollBy({ left: 380, behavior: 'smooth' });
+        const slide = swiperTrack.querySelector('.swiper-slide');
+        const step = slide ? (slide.offsetWidth + 16) : 380;
+        swiperTrack.scrollBy({ left: step, behavior: 'smooth' });
       });
     }
     if (btnPrev) {
       btnPrev.addEventListener('click', function (e) {
         e.preventDefault();
-        swiperTrack.scrollBy({ left: -380, behavior: 'smooth' });
+        const slide = swiperTrack.querySelector('.swiper-slide');
+        const step = slide ? (slide.offsetWidth + 16) : 380;
+        swiperTrack.scrollBy({ left: -step, behavior: 'smooth' });
       });
     }
+
+    dashes.forEach(d => {
+      d.addEventListener('click', function () {
+        const idx = parseInt(d.getAttribute('data-index'));
+        const slide = swiperTrack.querySelector('.swiper-slide');
+        const step = slide ? (slide.offsetWidth + 16) : 380;
+        swiperTrack.scrollTo({ left: idx * step, behavior: 'smooth' });
+      });
+    });
   }
 
   // ==========================================
@@ -143,7 +172,6 @@ document.addEventListener('DOMContentLoaded', function () {
   if (switchReg) switchReg.addEventListener('click', (e) => { e.preventDefault(); setAuthTab('register'); });
   if (switchLog) switchLog.addEventListener('click', (e) => { e.preventDefault(); setAuthTab('login'); });
 
-  // Sync auth state from localStorage
   function syncAuthState() {
     const rawUser = localStorage.getItem('likemark_user');
     if (rawUser) {
@@ -158,7 +186,6 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   syncAuthState();
 
-  // User Dropdown toggle
   if (userHeader) {
     userHeader.addEventListener('click', function () {
       if (userDropdown) {
@@ -167,7 +194,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Logout
   const menuLogout = document.getElementById('menu-logout');
   if (menuLogout) {
     menuLogout.addEventListener('click', function (e) {
@@ -178,7 +204,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Open Panel from Menu
   const menuOpenPanel = document.getElementById('menu-open-panel');
   if (menuOpenPanel) {
     menuOpenPanel.addEventListener('click', function (e) {
@@ -188,7 +213,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Open Auth Modal buttons
   const btnNavLogin = document.getElementById('btn-nav-login');
   const btnNavRegister = document.getElementById('btn-nav-register');
   if (btnNavLogin) {
@@ -211,7 +235,6 @@ document.addEventListener('DOMContentLoaded', function () {
     b.addEventListener('click', () => { setAuthTab('register'); openModal(authModal); });
   });
 
-  // Handle Login submission
   if (formLogin) {
     formLogin.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -224,7 +247,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Handle Registration submission
   if (formRegister) {
     formRegister.addEventListener('submit', async function (e) {
       e.preventDefault();
@@ -236,7 +258,6 @@ document.addEventListener('DOMContentLoaded', function () {
       localStorage.setItem('likemark_user', JSON.stringify(user));
       syncAuthState();
 
-      // Submit lead to backend
       fetch('/api/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -313,7 +334,6 @@ document.addEventListener('DOMContentLoaded', function () {
     ramVal.innerText = ram + ' GB';
     diskVal.innerText = disk + ' GB';
 
-    // Pricing formula
     const total = 390 + (cpu * 120) + (ram * 60) + Math.round(disk * 2.2) + os;
     totalPrice.innerText = total.toLocaleString('uk-UA') + ' ₴ / міс';
   }
