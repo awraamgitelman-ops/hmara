@@ -16,6 +16,7 @@ app.use((req, res, next) => {
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('X-Frame-Options', 'SAMEORIGIN');
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  res.setHeader('Content-Security-Policy', "default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https: chrome-extension:; img-src 'self' data: blob: https:; font-src 'self' data: https:; connect-src 'self' https:;");
   
   if (req.path.startsWith('/css/') || req.path.startsWith('/js/')) {
     res.setHeader('Cache-Control', 'no-cache, must-revalidate');
@@ -172,3 +173,4 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => {
   console.log(`[LIKEMARK CLOUD] Server running on port ${PORT}`);
 });
+
