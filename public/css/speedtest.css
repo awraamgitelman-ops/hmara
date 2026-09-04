@@ -237,18 +237,137 @@
   margin: 0 auto;
 }
 
-.speedtest-results__desktop {
-  display: flex !important;
-  justify-content: center;
-  align-items: flex-end;
-  gap: 32px;
-  flex-wrap: wrap;
-  width: 100%;
-  max-width: 1320px;
-  margin: 0 auto;
+/* ==================== Compact & Proportional Speedtest UI ==================== */
+.page-hero {
+  padding-top: 14px !important;
+  padding-bottom: 20px !important;
 }
 
-@media (max-width: 991px) {
+.page-hero__breadcrumbs {
+  margin-bottom: 16px !important;
+}
+
+.page-hero__title {
+  font-size: clamp(28px, 3.2vw, 42px) !important;
+  font-weight: 700 !important;
+  line-height: 115% !important;
+  margin-bottom: 8px !important;
+  text-align: center !important;
+  margin-inline: auto !important;
+}
+
+.page-hero__description {
+  font-size: 15px !important;
+  line-height: 150% !important;
+  margin: 8px auto 18px !important;
+  max-width: 660px !important;
+  color: rgba(9, 36, 51, 0.7) !important;
+  text-align: center !important;
+}
+
+.page-hero__buttons {
+  margin-top: 14px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.page-hero__buttons .button {
+  min-width: 220px !important;
+  height: 48px !important;
+  padding: 12px 28px !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  border-radius: 10px !important;
+}
+
+.speedtest-results {
+  padding-top: 8px !important;
+  padding-bottom: 36px !important;
+}
+
+.speedtest-results__inner {
+  align-items: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Force exactly 4 columns on 1 line on desktop */
+.speedtest-results__desktop {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+  width: 100% !important;
+  max-width: 1040px !important;
+  margin: 0 auto !important;
+  align-items: end !important;
+}
+
+.speedtest-meter {
+  --speedtest-meter-unit-height: 22px !important;
+  width: 100% !important;
+  max-width: 235px !important;
+  margin: 0 auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+
+.speedtest-meter__title {
+  font-size: 17px !important;
+  font-weight: 600 !important;
+  line-height: 130% !important;
+  margin: 0 0 10px !important;
+  color: #092433 !important;
+}
+
+.speedtest-meter__visual {
+  height: 108px !important;
+  width: 100% !important;
+  max-width: 200px !important;
+  margin: 0 auto 20px !important;
+  position: relative !important;
+}
+
+.speedtest-meter__canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+}
+
+.speedtest-meter__value-block {
+  align-items: center !important;
+  bottom: -18px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  left: 50% !important;
+  position: absolute !important;
+  transform: translate(-50%) !important;
+  width: 130px !important;
+}
+
+.speedtest-meter__value {
+  font-family: "JetBrains Mono", monospace !important;
+  font-size: 34px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  line-height: 100% !important;
+  transition: color 0.2s ease !important;
+}
+
+.speedtest-meter.active .speedtest-meter__value {
+  color: #0057B7 !important;
+}
+
+.speedtest-meter__unit {
+  font-size: 13px !important;
+  line-height: 130% !important;
+  color: rgba(9, 36, 51, 0.6) !important;
+  margin-top: 2px !important;
+}
+
+@media (max-width: 820px) {
   .speedtest-results__desktop {
     display: none !important;
   }
@@ -257,8 +376,20 @@
   }
 }
 
-@media (min-width: 992px) {
+@media (min-width: 821px) {
   .speedtest-results__compact {
+    display: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .speedtest-controls-pill {
+    border-radius: 12px !important;
+    padding: 10px 14px !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  .speedtest-controls-divider {
     display: none !important;
   }
 }

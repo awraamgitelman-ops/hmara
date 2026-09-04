@@ -373,12 +373,12 @@
           </nav>
         </div>
         <div class="page-hero__label"></div>
-        <h1 class="page-hero__title" style="letter-spacing: -0.03em; text-align: center; margin-inline: auto;">LIKEMARK Speedtest</h1>
-        <div class="page-hero__description" style="max-width: 720px; margin: 20px auto 32px; text-align: center; font-size: 18px; line-height: 150%; color: rgba(9,36,51,0.75);">
+        <h1 class="page-hero__title">LIKEMARK Speedtest</h1>
+        <div class="page-hero__description">
           Виміряйте реальну швидкість передачі даних, затримку відгуку (Ping) та стабільність каналу (Jitter) до європейських вузлів LIKEMARK CLOUD у Варшаві, Франкфурті та Амстердамі.
         </div>
-        <div class="page-hero__buttons" style="display: flex; justify-content: center; align-items: center;">
-          <button type="button" class="button button--lg button--colored button--dark !text-center" id="btn-start-speedtest" data-v-36641f6a data-v-c5d5fa05 style="min-width: 240px; font-size: 17px; font-weight: 700; cursor: pointer;">
+        <div class="page-hero__buttons">
+          <button type="button" class="button button--lg button--colored button--dark !text-center" id="btn-start-speedtest" data-v-36641f6a data-v-c5d5fa05>
             <span>Перевірити швидкість</span>
           </button>
         </div>
@@ -488,28 +488,30 @@
         </div>
 
         <!-- Controls: Server selector and IP info bar -->
-        <div style="margin-top: 40px; display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: center; width: 100%;">
-          <div style="display: flex; align-items: center; gap: 10px; background: #ffffff; border: 1px solid rgba(9,36,51,0.12); padding: 10px 18px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
-            <span style="font-size: 13px; font-weight: 700; color: #092433;">Тестова локація:</span>
-            <select id="speed-server-select" style="border: none; background: transparent; font-size: 14px; font-weight: 600; color: #0057B7; cursor: pointer; outline: none; font-family: inherit;">
-              <option value="waw">Варшава, Польща (Atman WAW-1, Tier III)</option>
-              <option value="fra">Франкфурт, Німеччина (Equinix FR-2, Tier IV)</option>
-              <option value="ams">Амстердам, Нідерланди (Equinix AM-4, Tier III)</option>
-            </select>
+        <div class="speedtest-controls-wrap" style="margin-top: 24px; display: flex; justify-content: center; width: 100%;">
+          <div class="speedtest-controls-pill" style="display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px; background: #ffffff; border: 1px solid rgba(9,36,51,0.12); padding: 7px 18px; border-radius: 9999px; box-shadow: 0 2px 8px rgba(9,36,51,0.04);">
+            <div style="display: inline-flex; align-items: center; gap: 8px;">
+              <span style="font-size: 13px; font-weight: 600; color: rgba(9,36,51,0.65);">Тестова локація:</span>
+              <select id="speed-server-select" style="border: none; background: transparent; font-size: 13px; font-weight: 600; color: #0057B7; cursor: pointer; outline: none; font-family: inherit;">
+                <option value="waw">Варшава, Польща (Atman WAW-1, Tier III)</option>
+                <option value="fra">Франкфурт, Німеччина (Equinix FR-2, Tier IV)</option>
+                <option value="ams">Амстердам, Нідерланди (Equinix AM-4, Tier III)</option>
+              </select>
+            </div>
+            <div class="speedtest-controls-divider" style="width: 1px; height: 16px; background: rgba(9,36,51,0.12);"></div>
+            <p class="speedtest-results__ip" style="margin: 0; font-size: 13px; font-weight: 600; color: #092433; display: inline-flex; align-items: center; gap: 8px;">
+              <span class="status-indicator-dot" style="width: 7px; height: 7px; background: #10b981; border-radius: 50%; display: inline-block;"></span>
+              IP-адреса: <span id="speed-client-ip" style="color: #092433; font-weight: 700;">Визначається...</span>
+            </p>
           </div>
-
-          <p class="speedtest-results__ip" style="margin: 0; font-size: 15px; font-weight: 600; color: #092433; display: inline-flex; align-items: center; gap: 8px;">
-            <span class="status-indicator-dot" style="width: 8px; height: 8px; background: #10b981; border-radius: 50%; display: inline-block;"></span>
-            IP-адреса: <span id="speed-client-ip" style="color: #092433; font-weight: 700;">Визначається...</span>
-          </p>
         </div>
       </div>
     </section>
 
     <!-- 3. HOW SPEEDTEST WORKS (Selectel Reference Steps) -->
-    <section class="speedtest-steps section container" data-v-36641f6a style="padding: 90px 20px;">
+    <section class="speedtest-steps section container" data-v-36641f6a style="padding: 60px 20px;">
       <div class="speedtest-steps__content prose" data-v-36641f6a style="max-width: 860px; margin: 0 auto;">
-        <h3 class="text-center mb-10 !mt-0" data-v-36641f6a style="font-size: 36px; font-weight: 700; color: #092433; margin-bottom: 40px;">Як працює Speedtest</h3>
+        <h3 class="text-center mb-10 !mt-0" data-v-36641f6a style="font-size: 30px; font-weight: 700; color: #092433; margin-bottom: 28px;">Як працює Speedtest</h3>
         <ol class="super-list" data-v-36641f6a style="display: flex; flex-direction: column; gap: 28px; list-style: none; padding: 0;">
           <li data-v-36641f6a style="display: flex; gap: 20px; align-items: flex-start;">
             <span style="flex-shrink: 0; width: 36px; height: 36px; background: #092433; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px;">1</span>
