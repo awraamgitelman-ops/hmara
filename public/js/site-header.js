@@ -13,6 +13,7 @@
       if (drawerOverlay && drawer) {
         drawerOverlay.classList.add('active');
         drawer.classList.add('active');
+        if (burgerBtn) burgerBtn.classList.add('open');
         document.body.style.overflow = 'hidden';
       }
     }
@@ -21,6 +22,7 @@
       if (drawerOverlay && drawer) {
         drawerOverlay.classList.remove('active');
         drawer.classList.remove('active');
+        if (burgerBtn) burgerBtn.classList.remove('open');
         document.body.style.overflow = '';
       }
     }
