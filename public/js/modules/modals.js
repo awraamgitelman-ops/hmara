@@ -9,18 +9,19 @@
       document.getElementById('auth-modal'),
       document.getElementById('panel-modal'),
       document.getElementById('calc-modal'),
-      document.getElementById('consult-modal')
+      document.getElementById('consult-modal'),
+      document.getElementById('newsletter-modal')
     ].filter(Boolean);
 
     // Close on any modal close button or ESC
     document.addEventListener('click', function (e) {
       if (e.target.classList.contains('modal-close-generic') || e.target.closest('.modal-close-generic')) {
-        document.querySelectorAll('#auth-modal, #panel-modal, #calc-modal, #consult-modal, #lead-modal').forEach(function (m) {
+        document.querySelectorAll('#auth-modal, #panel-modal, #calc-modal, #consult-modal, #lead-modal, #newsletter-modal').forEach(function (m) {
           m.style.display = 'none';
         });
       }
       var targetModal = e.target;
-      if (targetModal && (targetModal.id === 'auth-modal' || targetModal.id === 'panel-modal' || targetModal.id === 'calc-modal' || targetModal.id === 'consult-modal' || targetModal.id === 'lead-modal')) {
+      if (targetModal && (targetModal.id === 'auth-modal' || targetModal.id === 'panel-modal' || targetModal.id === 'calc-modal' || targetModal.id === 'consult-modal' || targetModal.id === 'lead-modal' || targetModal.id === 'newsletter-modal')) {
         targetModal.style.display = 'none';
       }
     });
@@ -28,7 +29,7 @@
     // ESC key
     document.addEventListener('keydown', function (e) {
       if (e.key !== 'Escape') return;
-      document.querySelectorAll('#auth-modal, #panel-modal, #calc-modal, #consult-modal, #lead-modal').forEach(function (m) {
+      document.querySelectorAll('#auth-modal, #panel-modal, #calc-modal, #consult-modal, #lead-modal, #newsletter-modal').forEach(function (m) {
         m.style.display = 'none';
       });
       var dropdown = document.getElementById('user-dropdown-menu');
