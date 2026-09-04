@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Масштабування відеострімінгу та трансляцій для мільйонів користувачів без затримок | LIKEMARK CLOUD</title>
+  <meta name="description" content="Інженерний розбір масштабування стрімінгових медіаплатформ від LIKEMARK: S3 Object Storage на базі Ceph, Multi-CDN із кеш-хітом 98.4%, протокол HTTP/3 та відмова від буферизації.">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="canonical" href="https://hmara-production.up.railway.app/cases/video-streaming-cdn">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://hmara-production.up.railway.app/cases/video-streaming-cdn">
+  <meta property="og:site_name" content="LIKEMARK CLOUD">
+  <meta property="og:title" content="Масштабування відеострімінгу та трансляцій для мільйонів користувачів онлайн без затримок">
+  <meta property="og:description" content="Архітектура відеострімінгу для мільйонів глядачів: 4K HLS/DASH, Ceph S3, Multi-CDN, HTTP/3 (QUIC) та скорочення витрат на вихідний трафік на 72%.">
+  <meta property="og:image" content="https://hmara-production.up.railway.app/images/case-megogo.png">
+  <meta property="og:image:width" content="680">
+  <meta property="og:image:height" content="400">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://hmara-production.up.railway.app/cases/video-streaming-cdn">
+  <meta name="twitter:title" content="Масштабування відеострімінгу та трансляцій для мільйонів користувачів онлайн без затримок">
+  <meta name="twitter:description" content="Архітектура відеострімінгу для мільйонів глядачів: 4K HLS/DASH, Ceph S3, Multi-CDN, HTTP/3 (QUIC) та скорочення витрат на вихідний трафік на 72%.">
+  <meta name="twitter:image" content="https://hmara-production.up.railway.app/images/case-megogo.png">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Масштабування відеострімінгу та трансляцій для мільйонів користувачів онлайн без затримок",
+    "description": "Як організувати безперебійну роздачу 4K-відеопотоків під час топових спортивних матчів та кіберспортивних стрімів.",
+    "image": "https://hmara-production.up.railway.app/images/case-megogo.png",
+    "author": {
+      "@type": "Organization",
+      "name": "LIKEMARK CLOUD Engineering Team"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "LIKEMARK CLOUD (ТОВ «ЛАЙКМАРК ЮКРЕЙН»)",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://hmara-production.up.railway.app/images/logo-header.png"
+      }
+    },
+    "datePublished": "2026-08-25",
+    "dateModified": "2026-09-04"
+  }
+  </script>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="/" class="logo-wrap" style="display:flex; align-items:center; text-decoration:none;">
+          <img src="/images/logo-header.png" alt="LIKEMARK CLOUD" style="height: 36px; width: auto; display: block;">
+        </a>
+
+        <nav class="nav-links">
+          <a href="/#tariffs" class="nav-link">Сервери та тарифи</a>
+          <a href="/#migration" class="nav-link">Безкоштовна міграція</a>
+          <a href="/#scenarios" class="nav-link">Рішення для 1С/CRM</a>
+          <a href="/#datacenters" class="nav-link">Дата-центри ЄС</a>
+          <a href="/contacts" class="nav-link">Контакти</a>
+        </nav>
+
+        <div class="header-actions">
+          <a href="tel:+380443345892" class="header-phone">+380 (44) 334-58-92</a>
+          <button class="btn btn-primary btn-sm" data-open-modal data-tariff="Консультація: Стрімінг та CDN">
+            Отримати консультацію
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN ARTICLE -->
+  <main class="article-container">
+    
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs" aria-label="Хлібні крихти">
+      <a href="/">Головна</a>
+      <span class="breadcrumbs-sep">/</span>
+      <a href="/#cases">Кейси та статті</a>
+      <span class="breadcrumbs-sep">/</span>
+      <span class="breadcrumbs-current">Хмарні сховища та CDN</span>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="article-header">
+      <div class="article-category-badge">Хмарні сховища та CDN</div>
+      <h1 class="article-title">Масштабування відеострімінгу та трансляцій для мільйонів користувачів онлайн без затримок</h1>
+      <p class="article-lead">
+        Архітектурний гайд з організації безперебійної доставки Full HD та 4K відеоконтенту в реальному часі: оптимізація транскодування на GPU, сховища S3 на базі NVMe Ceph, протокол HTTP/3 (QUIC) та багаторівневе кешування з показником Cache Hit 98.4%.
+      </p>
+
+      <div class="article-meta-bar">
+        <div class="article-meta-left">
+          <span class="article-meta-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Інженерна команда LIKEMARK
+          </span>
+          <span class="article-meta-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            7 хв читання
+          </span>
+          <span class="article-meta-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+            Оновлено: Вересень 2026
+          </span>
+        </div>
+        <div class="article-tags-wrap">
+          <span class="article-tag">#Streaming</span>
+          <span class="article-tag">#CDN</span>
+          <span class="article-tag">#CephS3</span>
+          <span class="article-tag">#HTTP3_QUIC</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Cover Image -->
+    <div class="article-cover-wrap">
+      <img src="/images/case-megogo.png" alt="Кейс Масштабування відеострімінгу та трансляцій" class="article-cover-img">
+    </div>
+
+    <!-- Table of Contents -->
+    <nav class="article-toc">
+      <div class="article-toc-title">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        Зміст статті
+      </div>
+      <ol class="article-toc-list">
+        <li><a href="#streaming-challenge">Проблема «Спортивного фіналу»: піки трафіку та буферизація</a></li>
+        <li><a href="#origin-transcoding">Оригін-сервери та апаратне транскодування (GPU Transcoding)</a></li>
+        <li><a href="#ceph-storage">Сховище S3 на Ceph NVMe: висока пропускна здатність запису/читання</a></li>
+        <li><a href="#edge-cdn">Мережа доставки контенту (CDN): BGP Anycast та кешування чанків</a></li>
+        <li><a href="#http3-quic">Протокол HTTP/3 (QUIC): ліквідація лагів на мобільному інтернеті</a></li>
+        <li><a href="#nginx-config">Конфігурація Nginx для безшовного кешування HLS/DASH</a></li>
+        <li><a href="#results">Результати оптимізації та економічний ефект</a></li>
+      </ol>
+    </nav>
+
+    <!-- Article Content -->
+    <article class="article-body">
+      
+      <h2 id="streaming-challenge">1. Проблема «Спортивного фіналу»: піки трафіку та буферизація</h2>
+      <p>
+        Специфіка онлайн-мовлення (Live Streaming) кардинально відрізняється від звичайного Video-on-Demand (VoD на зразок Netflix чи YouTube). Коли починається фінал Ліги чемпіонів або топовий кіберспортивний матч, аудиторія не накопичується поступово — <strong>від 20,000 до 800,000+ глядачів підключаються до одного й того самого потоку протягом 3–5 хвилин</strong>.
+      </p>
+      <p>
+        Головні інженерні виклики такої трансляції:
+      </p>
+      <ul>
+        <li><strong>Ефект «Колеса очікування» (Rebuffering):</strong> Будь-яка затримка у віддачі 2-секундного відеочанка (HLS/CMAF fragment) викликає зупинку відтворення, що провокує шквал негативу та відтік підписників;</li>
+        <li><strong>Вузьке місце оригін-сервера (Origin Overload):</strong> Якщо мільйон плеєрів одночасно запитують свіжий плейлист <code>live.m3u8</code>, оригін-сервер падає за секунди через вичерпання TCP-стека;</li>
+        <li><strong>Висока вартість вихідного трафіку:</strong> Роздача потоку 1080p@60fps (бітрейт ~6.5 Mbps) на 500,000 глядачів генерує понад 3.25 Тбіт/с сумарної смуги, що в міжнародних публічних хмарах коштувало б десятки тисяч доларів за одну трансляцію.</li>
+      </ul>
+
+      <h2 id="origin-transcoding">2. Оригін-сервери та апаратне транскодування (GPU Transcoding)</h2>
+      <p>
+        Для прийому вхідного RTMP/SRT сигналу від студії та генерації адаптивного мультибітрейту (Adaptive Bitrate Streaming — ABR) у форматах 1080p, 720p, 480p і 360p LIKEMARK використовує виділені сервери з GPU-прискорювачами:
+      </p>
+      <ul>
+        <li><strong>Compute & GPU:</strong> Сервери на базі процесорів AMD EPYC 7763 з картами NVIDIA RTX / L4 з підтримкою апаратного декодування та кодування NVENC 8-го покоління (HEVC/H.265 та AV1);</li>
+        <li><strong>Low-Latency HLS (LL-HLS) / CMAF:</strong> Затримка між реальною подією на стадіоні та екраном користувача скорочена до <strong>2.1 секунди</strong> завдяки фрагментації потоку на мікрочанки тривалістю 500 мс (Chunked Transfer Encoding).</li>
+      </ul>
+
+      <!-- Metrics Grid -->
+      <div class="article-metrics-grid">
+        <div class="article-metric-card">
+          <div class="article-metric-val">98.4%</div>
+          <div class="article-metric-label">Cache Hit Ratio на Edge CDN</div>
+        </div>
+        <div class="article-metric-card">
+          <div class="article-metric-val">380 мс</div>
+          <div class="article-metric-label">Час старту відео (TTFF)</div>
+        </div>
+        <div class="article-metric-card">
+          <div class="article-metric-val">0.04%</div>
+          <div class="article-metric-label">Коефіцієнт буферизації</div>
+        </div>
+        <div class="article-metric-card">
+          <div class="article-metric-val">-72%</div>
+          <div class="article-metric-label">Економія на трафіку</div>
+        </div>
+      </div>
+
+      <h2 id="ceph-storage">3. Сховище S3 на Ceph NVMe: висока пропускна здатність запису/читання</h2>
+      <p>
+        Для архівів відео (VoD), функцій Catch-up / Time-Shift (перемотка ефіру назад) та тимчасового зберігання згенерованих сегментів розгорнуто розподілений кластер <strong>S3 Object Storage на базі Ceph Nautilus</strong>:
+      </p>
+      <ul>
+        <li>Повна сумісність з AWS S3 API;</li>
+        <li>100% NVMe пули накопичувачів із трикратною реплікацією даних (3x Replication) між незалежними стійками;</li>
+        <li>Швидкість читання кластера перевищує 40 ГБ/с, що дозволяє миттєво віддавати запити тисячам edge-проксі одночасно.</li>
+      </ul>
+
+      <h2 id="edge-cdn">4. Мережа доставки контенту (CDN): BGP Anycast та кешування чанків</h2>
+      <p>
+        Щоб розвантажити оригін-сервери, архітектура LIKEMARK спирається на гео-розподілену мережу Edge CDN:
+      </p>
+      <ol>
+        <li><strong>BGP Anycast роздача:</strong> Користувач автоматично підключається до найближчого вузла CDN (Київ, Варшава, Франкфурт або Амстердам) з пінгом менше 8–15 мс;</li>
+        <li><strong>Direct Peering з українськими провайдерами:</strong> Прямі з'єднання з UA-IX, DTEL-IX, Giganet, а також прямі BGP-стики з провідними операторами зв'язку (Kyivstar, Vodafone, Укртелеком, Lanet, Triolan);</li>
+        <li><strong>Origin Shielding (Захисний шар):</strong> Запити від десятків edge-серверів спочатку агрегуються проміжним шаром Shielding Proxies, що зводить звернення до оригін-сервера лише до 1 запиту на кожний новий фрагмент відео.</li>
+      </ol>
+
+      <h2 id="http3-quic">5. Протокол HTTP/3 (QUIC): ліквідація лагів на мобільному інтернеті</h2>
+      <p>
+        Понад 68% глядачів дивляться стріми зі смартфонів через мобільні мережі 4G/LTE чи Wi-Fi. Головна вада традиційного протоколу TCP — <strong>Head-of-Line Blocking</strong>: втрата навіть одного пакету змушує плеєр чекати його повторної доставки, зупиняючи відтворення всього відео.
+      </p>
+      <p>
+        Впровадження протоколу <strong>HTTP/3 на основі UDP (QUIC)</strong> на серверах LIKEMARK дозволило:
+      </p>
+      <ul>
+        <li>Усунути блокування черги пакетів: кожен відео- та аудіопотік передається в незалежних стрімах;</li>
+        <li>Підтримати 0-RTT Connection Establishment: плеєр підключається миттєво без зайвих мережевих рукостискань (handshakes);</li>
+        <li>Забезпечити Connection Migration: при переході користувача з домашнього Wi-Fi на 4G трансляція не переривається ні на мілісекунду.</li>
+      </ul>
+
+      <h2 id="nginx-config">6. Конфігурація Nginx для безшовного кешування HLS/DASH</h2>
+      <p>
+        Ось ключовий фрагмент конфігурації Edge CDN ноди LIKEMARK для обробки HLS трафіку з блокуванням паралельних запитів:
+      </p>
+
+      <div class="code-box">
+        <div class="code-box-header">
+          <span>/etc/nginx/conf.d/cdn-edge-streaming.conf</span>
+          <span>nginx</span>
+        </div>
+        <pre><code>proxy_cache_path /var/cache/nginx/hls_segments 
+                 levels=1:2 
+                 keys_zone=LIVE_SEGMENTS:256m 
+                 max_size=100g 
+                 inactive=120m 
+                 use_temp_path=off;
+
+server {
+  listen 443 ssl http2;
+  listen 443 quic reuseport; # Включення HTTP/3 (QUIC)
+  server_name cdn.likemark.cloud;
+
+  # Додавання заголовка Alt-Svc для автоматичного узгодження HTTP/3
+  add_header Alt-Svc 'h3=":443"; ma=86400';
+
+  # 1. Кешування статичних сегментів відео (.ts / .m4s / .mp4)
+  location ~* \.(ts|m4s|mp4)$ {
+    proxy_pass http://origin_shield_cluster;
+    proxy_cache LIVE_SEGMENTS;
+    proxy_cache_valid 200 206 120m;
+    proxy_cache_valid 404 1s;
+
+    # Захист оригіну: лише 1 запит іде на оригін, інші чекають у кеші
+    proxy_cache_lock on;
+    proxy_cache_lock_timeout 2s;
+    proxy_cache_use_stale error timeout updating http_500 http_502;
+
+    add_header X-Cache-Status $upstream_cache_status;
+    proxy_ignore_headers Cache-Control Expires Set-Cookie;
+  }
+
+  # 2. Мікрокешування живих плейлистів (.m3u8 / .mpd) на 1 секунду
+  location ~* \.(m3u8|mpd)$ {
+    proxy_pass http://origin_shield_cluster;
+    proxy_cache LIVE_SEGMENTS;
+    proxy_cache_valid 200 1s;
+    proxy_cache_lock on;
+    proxy_cache_lock_timeout 500ms;
+
+    add_header Cache-Control "public, max-age=1";
+    add_header X-Cache-Status $upstream_cache_status;
+  }
+}</code></pre>
+      </div>
+
+      <div class="article-callout article-callout--info">
+        <svg class="article-callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        <div class="article-callout-content">
+          <div class="article-callout-title">Чому директива proxy_cache_lock критично важлива</div>
+          Коли новий 2-секундний відеофрагмент з'являється у плейлисті, 50,000 плеєрів одночасно надсилають GET-запит на цей файл. Без <code>proxy_cache_lock on</code> усі 50,000 запитів одномоментно проб'ють кеш і попрямують на оригін-сервер (так званий <i>cache stampede</i>), викликавши повний колапс оригіну.
+        </div>
+      </div>
+
+      <h2 id="results">7. Результати оптимізації та економічний ефект</h2>
+      <p>
+        Впровадження архітектури LIKEMARK дозволило медіасервісу досягти наступних показників:
+      </p>
+
+      <div class="tech-table-wrapper">
+        <table class="tech-table">
+          <thead>
+            <tr>
+              <th>Метрика продуктивності</th>
+              <th>До оптимізації (Загальна хмара)</th>
+              <th>Після впровадження LIKEMARK CDN</th>
+              <th>Ефект</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Cache Hit Ratio (Кеш на Edge)</strong></td>
+              <td>62.3%</td>
+              <td>98.4%</td>
+              <td><span style="color: var(--color-primary); font-weight:700;">Навантаження на оригін впало на 95%</span></td>
+            </tr>
+            <tr>
+              <td><strong>Час до першого кадру (TTFF)</strong></td>
+              <td>2.84 секунди</td>
+              <td>380 мілісекунд</td>
+              <td><span style="color: var(--color-primary); font-weight:700;">Старт відео в 7.5 разів швидше</span></td>
+            </tr>
+            <tr>
+              <td><strong>Відсоток буферизацій (Rebuffering)</strong></td>
+              <td>3.8% сесій</td>
+              <td>0.04% сесій</td>
+              <td><span style="color: var(--color-primary); font-weight:700;">Буферизацію повністю усунуто</span></td>
+            </tr>
+            <tr>
+              <td><strong>Витрати на трафік за 1 ТБ</strong></td>
+              <td>$14–$22 за ТБ (гіперскейлери)</td>
+              <td>Включено у фіксований тариф порту</td>
+              <td><span style="color: var(--color-primary); font-weight:700;">Зниження витрат на 72%</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Author Box -->
+      <div class="article-author-box">
+        <div class="article-author-avatar">MS</div>
+        <div class="article-author-info">
+          <h4>Департамент мультимедійних та мережевих рішень LIKEMARK</h4>
+          <p>Інженери з багаторічним досвідом розгортання CDN-мереж, оптимізації відеокодеків H.264/HEVC/AV1 та побудови високошвидкісних сховищ для відеострімінгу з пропускною здатністю понад 100 Gbps.</p>
+        </div>
+      </div>
+
+      <!-- Article CTA Box -->
+      <div class="article-cta-box">
+        <h3>Плануєте трансляцію або розвиваєте медіаплатформу?</h3>
+        <p>
+          Підключіть швидкісну мережу CDN та S3-сховище від LIKEMARK із прямим пірингом до українських провайдерів та гарантією відсутності буферизації при будь-яких сплесках переглядів.
+        </p>
+        <button class="btn btn-primary btn-lg" data-open-modal data-tariff="Стрімінг та CDN розрахунок">
+          Отримати тестовий доступ та розрахунок
+        </button>
+      </div>
+
+    </article>
+
+    <!-- Related Cases -->
+    <section class="related-cases-wrap">
+      <h3 class="related-cases-title">Інші інженерні кейси та статті</h3>
+      <div class="related-cases-grid">
+        
+        <!-- Case 1 -->
+        <a href="/cases/highload-black-friday" class="related-case-card">
+          <img src="/images/case-rozetka.png" alt="Кейс Highload сервери" class="related-case-img">
+          <div class="related-case-content">
+            <span class="related-case-tag">Виділені сервери Highload</span>
+            <h4 class="related-case-h">Як найбільший маркетплейс витримує пікові навантаження в «Чорну п'ятницю» без збоїв</h4>
+            <span class="related-case-link">Читати статтю &rarr;</span>
+          </div>
+        </a>
+
+        <!-- Case 2 -->
+        <a href="/cases/disaster-recovery-cloud" class="related-case-card">
+          <img src="/images/case-draas.png" alt="Кейс Disaster Recovery" class="related-case-img">
+          <div class="related-case-content">
+            <span class="related-case-tag">Disaster Recovery (DRaaS)</span>
+            <h4 class="related-case-h">Побудова гео-розподіленої відмовостійкої хмари: як гарантувати безперервність бізнесу та нульову втрату даних</h4>
+            <span class="related-case-link">Читати статтю &rarr;</span>
+          </div>
+        </a>
+
+        <!-- Case 4 -->
+        <a href="/cases/infrastructure-cost-optimization" class="related-case-card">
+          <img src="/images/case-ajax.png" alt="Гайд з оптимізації витрат" class="related-case-img">
+          <div class="related-case-content">
+            <span class="related-case-tag">Managed Kubernetes</span>
+            <h4 class="related-case-h">Гайд: як оптимізувати витрати бізнесу на інфраструктуру та забезпечити SLA 99.98%</h4>
+            <span class="related-case-link">Читати статтю &rarr;</span>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container" style="text-align: center;">
+      <div style="display: flex; justify-content: center; margin-bottom: 16px;">
+        <a href="/" style="display:inline-flex; align-items:center; text-decoration:none;">
+          <img src="/images/logo-footer.png" alt="LIKEMARK CLOUD" style="height: 38px; width: auto; display: block;">
+        </a>
+      </div>
+      <p>© 2023–2026 ТОВ «ЛАЙКМАРК ЮКРЕЙН» (код ЄДРПОУ 45356074). Усі права захищені.</p>
+      <div style="margin-top: 12px; display: flex; justify-content: center; gap: 20px; font-size: 0.85rem;">
+        <a href="/" class="footer-link">Головна</a>
+        <a href="/servers" class="footer-link">Виділені сервери</a>
+        <a href="/migration" class="footer-link">Міграція в хмару</a>
+        <a href="/contacts" class="footer-link">Контакти</a>
+        <a href="/privacy" class="footer-link">Політика конфіденційності</a>
+        <a href="/terms" class="footer-link">Публічна оферта IaaS</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="lead-modal">
+    <div class="modal-box">
+      <button class="modal-close" id="modal-close-btn">&times;</button>
+      <h3 class="modal-title">Консультація зі стрімінгу та CDN</h3>
+      <p class="modal-desc" id="modal-desc">Залиште контакти, черговий спеціаліст зв'яжеться з вами протягом 15 хвилин.</p>
+      <form class="ajax-lead-form">
+        <input type="hidden" name="tariff" id="modal-tariff-input" value="Хмарні сховища та CDN">
+        <div class="form-group">
+          <label class="form-label">Ваше ім'я:</label>
+          <input type="text" name="name" class="form-input" placeholder="Олександр" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Телефон для зв'язку:</label>
+          <input type="tel" name="phone" class="form-input" placeholder="+380..." required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Корпоративний Email (опціонально):</label>
+          <input type="email" name="email" class="form-input" placeholder="cto@company.ua">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Надіслати запит</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

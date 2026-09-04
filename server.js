@@ -88,6 +88,12 @@ app.get('/contacts', (req, res) => res.sendFile(path.join(__dirname, 'public', '
 app.get('/privacy', (req, res) => res.sendFile(path.join(__dirname, 'public', 'privacy.html')));
 app.get('/terms', (req, res) => res.sendFile(path.join(__dirname, 'public', 'terms.html')));
 
+// Knowledge Base & Case Study Articles (Clean URLs)
+app.get('/cases/highload-black-friday', (req, res) => res.sendFile(path.join(__dirname, 'public', 'cases', 'highload-black-friday.html')));
+app.get('/cases/disaster-recovery-cloud', (req, res) => res.sendFile(path.join(__dirname, 'public', 'cases', 'disaster-recovery-cloud.html')));
+app.get('/cases/video-streaming-cdn', (req, res) => res.sendFile(path.join(__dirname, 'public', 'cases', 'video-streaming-cdn.html')));
+app.get('/cases/infrastructure-cost-optimization', (req, res) => res.sendFile(path.join(__dirname, 'public', 'cases', 'infrastructure-cost-optimization.html')));
+
 // Helper to broadcast lead to Telegram if configured
 function sendTelegramNotification(text) {
   const token = process.env.TELEGRAM_BOT_TOKEN;

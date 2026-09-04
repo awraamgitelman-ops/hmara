@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Гайд: як оптимізувати витрати бізнесу на інфраструктуру та забезпечити SLA 99.98% | LIKEMARK CLOUD</title>
+  <meta name="description" content="Практичний посібник з FinOps та оптимізації IT-інфраструктури від LIKEMARK: скорочення хмарних рахунків на 40–60%, правильний sizing у Kubernetes, тюнінг ресурсів та збереження SLA 99.98%.">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="canonical" href="https://hmara-production.up.railway.app/cases/infrastructure-cost-optimization">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://hmara-production.up.railway.app/cases/infrastructure-cost-optimization">
+  <meta property="og:site_name" content="LIKEMARK CLOUD">
+  <meta property="og:title" content="Гайд: як оптимізувати витрати бізнесу на інфраструктуру та забезпечити SLA 99.98%">
+  <meta property="og:description" content="Покрокова методологія FinOps: аудит Kubernetes-кластерів, ліквідація прихованих витрат на трафік та міграція на виділену приватну хмару з ефектом окупності за 2.5 місяці.">
+  <meta property="og:image" content="https://hmara-production.up.railway.app/images/case-ajax.png">
+  <meta property="og:image:width" content="680">
+  <meta property="og:image:height" content="400">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://hmara-production.up.railway.app/cases/infrastructure-cost-optimization">
+  <meta name="twitter:title" content="Гайд: як оптимізувати витрати бізнесу на інфраструктуру та забезпечити SLA 99.98%">
+  <meta name="twitter:description" content="Покрокова методологія FinOps: аудит Kubernetes-кластерів, ліквідація прихованих витрат на трафік та міграція на виділену приватну хмару з ефектом окупності за 2.5 місяці.">
+  <meta name="twitter:image" content="https://hmara-production.up.railway.app/images/case-ajax.png">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Гайд: як оптимізувати витрати бізнесу на інфраструктуру та забезпечити SLA 99.98%",
+    "description": "Посібник для CTO та DevOps-лідерів: FinOps практики оптимізації витрат на хмару без втрати швидкості та надійності.",
+    "image": "https://hmara-production.up.railway.app/images/case-ajax.png",
+    "author": {
+      "@type": "Organization",
+      "name": "LIKEMARK CLOUD Engineering Team"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "LIKEMARK CLOUD (ТОВ «ЛАЙКМАРК ЮКРЕЙН»)",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://hmara-production.up.railway.app/images/logo-header.png"
+      }
+    },
+    "datePublished": "2026-08-30",
+    "dateModified": "2026-09-04"
+  }
+  </script>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="/" class="logo-wrap" style="display:flex; align-items:center; text-decoration:none;">
+          <img src="/images/logo-header.png" alt="LIKEMARK CLOUD" style="height: 36px; width: auto; display: block;">
+        </a>
+
+        <nav class="nav-links">
+          <a href="/#tariffs" class="nav-link">Сервери та тарифи</a>
+          <a href="/#migration" class="nav-link">Безкоштовна міграція</a>
+          <a href="/#scenarios" class="nav-link">Рішення для 1С/CRM</a>
+          <a href="/#datacenters" class="nav-link">Дата-центри ЄС</a>
+          <a href="/contacts" class="nav-link">Контакти</a>
+        </nav>
+
+        <div class="header-actions">
+          <a href="tel:+380443345892" class="header-phone">+380 (44) 334-58-92</a>
+          <button class="btn btn-primary btn-sm" data-open-modal data-tariff="Консультація: FinOps та оптимізація">
+            Отримати консультацію
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN ARTICLE -->
+  <main class="article-container">
+    
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs" aria-label="Хлібні крихти">
+      <a href="/">Головна</a>
+      <span class="breadcrumbs-sep">/</span>
+      <a href="/#cases">Кейси та статті</a>
+      <span class="breadcrumbs-sep">/</span>
+      <span class="breadcrumbs-current">Managed Kubernetes</span>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="article-header">
+      <div class="article-category-badge">Managed Kubernetes</div>
+      <h1 class="article-title">Гайд: як оптимізувати витрати бізнесу на інфраструктуру та забезпечити SLA 99.98%</h1>
+      <p class="article-lead">
+        Комплексна інструкція для CTO, Tech Lead та фінансових директорів із впровадження практик FinOps: як скоротити бюджет на IT-інфраструктуру на 40–50%, прибрати оверпровіжинінг у Kubernetes, позбутися переплат за трафік і при цьому підвищити аптайм до 99.98%.
+      </p>
+
+      <div class="article-meta-bar">
+        <div class="article-meta-left">
+          <span class="article-meta-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Інженерна команда LIKEMARK
+          </span>
+          <span class="article-meta-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            10 хв читання
+          </span>
+          <span class="article-meta-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+            Оновлено: Вересень 2026
+          </span>
+        </div>
+        <div class="article-tags-wrap">
+          <span class="article-tag">#FinOps</span>
+          <span class="article-tag">#Kubernetes</span>
+          <span class="article-tag">#CostOptimization</span>
+          <span class="article-tag">#SLA_99_98</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Cover Image -->
+    <div class="article-cover-wrap">
+      <img src="/images/case-ajax.png" alt="Гайд з оптимізації витрат на інфраструктуру" class="article-cover-img">
+    </div>
+
+    <!-- Table of Contents -->
+    <nav class="article-toc">
+      <div class="article-toc-title">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        Зміст статті
+      </div>
+      <ol class="article-toc-list">
+        <li><a href="#cloud-shock">Синдром «Хмарного шоку»: куди непомітно зникають гроші</a></li>
+        <li><a href="#finops-framework">Методологія FinOps: Інформування &rarr; Оптимізація &rarr; Контроль</a></li>
+        <li><a href="#k8s-rightsizing">Оптимізація Kubernetes: Rightsizing, Requests vs Limits</a></li>
+        <li><a href="#hidden-costs">Приховані витрати: Egress traffic, міжзонний трафік та IOPS</a></li>
+        <li><a href="#manifest-config">Приклад конфігурації: HPA + VPA та ResourceQuota у K8s</a></li>
+        <li><a href="#private-cloud-roi">Міграція в приватну хмару LIKEMARK: економічний розрахунок</a></li>
+        <li><a href="#checklist">7-кроковий чек-лист експрес-аудиту IT-витрат</a></li>
+      </ol>
+    </nav>
+
+    <!-- Article Content -->
+    <article class="article-body">
+      
+      <h2 id="cloud-shock">1. Синдром «Хмарного шоку»: куди непомітно зникають гроші</h2>
+      <p>
+        Більшість українських технологічних компаній, стартапів та e-commerce проєктів спочатку обирають великі публічні гіперскейлери (AWS, Azure, GCP), розраховуючи на гнучкість та простоту старту. Проте вже за 6–12 місяців бізнес стикається з явищем <strong>Cloud Bill Shock</strong>: щомісячні рахунки зростають у 2.5–4 рази швидше, ніж дохід компанії.
+      </p>
+      <p>
+        Аналіз понад 80 аудитованих інфраструктур показує стандартні джерела фінансових витоків:
+      </p>
+      <ul>
+        <li><strong>Хронічний оверпровіжинінг (Overprovisioning):</strong> Запитані ресурси (CPU/RAM requests) у Kubernetes по замовчуванню завищені в 3–5 разів «про всяк випадок», через що середнє корисне завантаження серверів становить лише 18–25%;</li>
+        <li><strong>«Забуті» ресурси (Orphaned Resources):</strong> Невидалені тестові середовища розробників (Dev/Staging), невживані томи дисків (Unattached EBS volumes), снапшоти трирічної давнини та статичні IP-адреси;</li>
+        <li><strong>Плата за вихідний трафік (Egress Tax):</strong> Гіперскейлери стягують від $0.09 до $0.14 за кожен гігабайт даних, що виходить за межі їхньої мережі, включаючи API-запити та бекапи.</li>
+      </ul>
+
+      <div class="article-callout article-callout--tip">
+        <svg class="article-callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        <div class="article-callout-content">
+          <div class="article-callout-title">Парадокс хмарної економіки</div>
+          Компанії часто вважають, що публічна хмара дешевша завдяки відсутності капітальних витрат (CapEx). Проте при стабільному цілодобовому навантаженні (baseline load) операційні витрати (OpEx) на оренду віртуальних ядер у гіперскейлерах перевищують вартість виділеної приватної хмари <strong>в 2.8–3.4 раза щомісяця</strong>.
+        </div>
+      </div>
+
+      <h2 id="finops-framework">2. Методологія FinOps: Інформування &rarr; Оптимізація &rarr; Контроль</h2>
+      <p>
+        FinOps (Financial Operations) — це інженерно-управлінська дисципліна, яка об'єднує розробників, інфраструктурних інженерів та фінансовий департамент навколо прозорості вартості кожного мікросервісу:
+      </p>
+      <ol>
+        <li><strong>Етап 1: Інформування (Inform):</strong> Впровадження інструментів деталізації витрат (OpenCost / Kubecost / Prometheus cost-metrics). Кожна команда бачить, скільки коштує розгорнутий ними мікросервіс у перерахунку на 1 активного клієнта;</li>
+        <li><strong>Етап 2: Оптимізація (Optimize):</strong> Вирівнювання лімітів, видалення зайвих інстансів, перехід на енергоефективні процесори AMD EPYC, впровадження компресії трафіку та автоматичного вимикання dev-середовищ на вихідні;</li>
+        <li><strong>Етап 3: Контроль (Operate):</strong> Автоматизовані CI/CD перевірки: якщо пул-реквест збільшує очікувані інфраструктурні витрати на 15%+, він потребує обов'язкового апруву ліда команди.</li>
+      </ol>
+
+      <!-- Metrics Grid -->
+      <div class="article-metrics-grid">
+        <div class="article-metric-card">
+          <div class="article-metric-val">-42%</div>
+          <div class="article-metric-label">Середнє скорочення IT-бюджету</div>
+        </div>
+        <div class="article-metric-card">
+          <div class="article-metric-val">74%</div>
+          <div class="article-metric-label">Корисна утилізація CPU/RAM</div>
+        </div>
+        <div class="article-metric-card">
+          <div class="article-metric-val">99.98%</div>
+          <div class="article-metric-label">Гарантований SLA доступності</div>
+        </div>
+        <div class="article-metric-card">
+          <div class="article-metric-val">2.5 міс.</div>
+          <div class="article-metric-label">Повний термін окупності міграції</div>
+        </div>
+      </div>
+
+      <h2 id="k8s-rightsizing">3. Оптимізація Kubernetes: Rightsizing, Requests vs Limits</h2>
+      <p>
+        Найбільш поширена помилка в Kubernetes — неправильне конфігурування <code>resources.requests</code> та <code>resources.limits</code>:
+      </p>
+      <ul>
+        <li>Якщо встановити <strong>занадто високі requests</strong>: Планувальник (kube-scheduler) вважає, що нода заповнена, і не розміщує нові поди, змушуючи кластер додавати нові дорогі вузли (node autoscaling), хоча реальний CPU тримається на рівні 15%;</li>
+        <li>Якщо встановити <strong>занадто жорсткі CPU limits</strong>: Linux-ядро задіює механізм CFS Quota Throttling, штучно сповільнюючи виконання коду та викликаючи 504 таймаути;</li>
+        <li><strong>Рішення LIKEMARK:</strong> Поєднання <i>Vertical Pod Autoscaler (VPA)</i> в режимі recommendations з <i>Horizontal Pod Autoscaler (HPA)</i> по користувацьких метриках (RPS та черга повідомлень RabbitMQ/Kafka, а не тільки сирий CPU).</li>
+      </ul>
+
+      <h2 id="hidden-costs">4. Приховані витрати: Egress traffic, міжзонний трафік та IOPS</h2>
+      <p>
+        Гіперскейлери часто будують свою маржинальність не на вартості процесорних ядер, а на «дрібних» послугах:
+      </p>
+      <div class="tech-table-wrapper">
+        <table class="tech-table">
+          <thead>
+            <tr>
+              <th>Стаття витрат</th>
+              <th>Публічний гіперскейлер</th>
+              <th>LIKEMARK Cloud (Tier III ЄС)</th>
+              <th>Економія</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Вихідний трафік в інтернет (Egress)</strong></td>
+              <td>$0.09 – $0.12 за 1 ГБ</td>
+              <td><strong>0 ₴ (Безлімітний порт 1–10 Gbps)</strong></td>
+              <td><span style="color: var(--color-primary); font-weight:700;">100% економія на трафіку</span></td>
+            </tr>
+            <tr>
+              <td><strong>Міжзонний трафік (Cross-AZ Traffic)</strong></td>
+              <td>$0.02 за кожен ГБ між зонами</td>
+              <td><strong>0 ₴ (Внутрішній vLAN безкоштовно)</strong></td>
+              <td><span style="color: var(--color-primary); font-weight:700;">Повна відсутність прихованих плат</span></td>
+            </tr>
+            <tr>
+              <td><strong>Швидкісний диск NVMe (IOPS)</strong></td>
+              <td>Окремий щомісячний чек за IOPS</td>
+              <td><strong>Включено в тариф дисків до 1,400,000 IOPS</strong></td>
+              <td><span style="color: var(--color-primary); font-weight:700;">Без лімітів та burst-кредитів</span></td>
+            </tr>
+            <tr>
+              <td><strong>Managed Control Plane K8s</strong></td>
+              <td>$73–$100 / місяць за кластер</td>
+              <td><strong>Безкоштовно включено в Managed SLA</strong></td>
+              <td><span style="color: var(--color-primary); font-weight:700;">Нуль витрат на підтримку майстрів</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="manifest-config">5. Приклад конфігурації: HPA + VPA та ResourceQuota у K8s</h2>
+      <p>
+        Зразок продакшн-маніфесту LIKEMARK для безпечного автоскейлінгу мікросервісу без переплат:
+      </p>
+
+      <div class="code-box">
+        <div class="code-box-header">
+          <span>k8s-production-finops.yaml</span>
+          <span>yaml</span>
+        </div>
+        <pre><code>apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: api-service-hpa
+  namespace: production
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: api-service
+  minReplicas: 2
+  maxReplicas: 16
+  metrics:
+  # Пріоритетна бізнес-метрика: кількість запитів на секунду (RPS)
+  - type: Pods
+    pods:
+      metric:
+        name: http_requests_per_second
+      target:
+        type: AverageValue
+        averageValue: "450"
+  # Допоміжна метрика CPU з порогом 75%
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 75
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 300 # Плавний спад, щоб уникнути флеппінгу
+      policies:
+      - type: Percent
+        value: 20
+        periodSeconds: 60
+    scaleUp:
+      stabilizationWindowSeconds: 0   # Миттєва реакція на сплеск
+      policies:
+      - type: Percent
+        value: 100
+        periodSeconds: 15</code></pre>
+      </div>
+
+      <h2 id="private-cloud-roi">6. Міграція в приватну хмару LIKEMARK: економічний розрахунок</h2>
+      <p>
+        Реальний кейс міграції IT-компанії з 65 мікросервісами, 4 продуктивними базами PostgreSQL та середовищем Kubernetes:
+      </p>
+      <ul>
+        <li><strong>Витрати в AWS до міграції:</strong> $11,450 на місяць (з них $3,200 — трафік між сервісами та вихідний інтернет);</li>
+        <li><strong>Витрати в LIKEMARK Private Cloud:</strong> Фіксовані <strong>€5,200 на місяць</strong> за виділений кластер серверів AMD EPYC 9654, NVMe RAID-10 Ceph сховище, гарантований SLA 99.98% та прямий піринг до Києва;</li>
+        <li><strong>Чиста економія за рік:</strong> <strong>Понад $70,000</strong>, які компанія реінвестувала у розширення команди розробки.</li>
+      </ul>
+
+      <h2 id="checklist">7. 7-кроковий чек-лист експрес-аудиту IT-витрат</h2>
+      <ol>
+        <li><strong>Зробіть ревізію Dev/Staging середовищ:</strong> Налаштуйте автоматичну зупинку неробочих інстансів з 20:00 до 08:00 у будні та повне вимкнення на вихідні (економія до 60% на тестових серверах);</li>
+        <li><strong>Перевірте співвідношення Requests до реального використання:</strong> Якщо середній CPU pod становить менше 30% від request, зменшуйте запит на 40%;</li>
+        <li><strong>Приберіть CPU limits там, де це можливо:</strong> Залишайте тільки Memory Limits для запобігання OOMKilled, а для CPU дозволяйте burst-споживання в межах ноди;</li>
+        <li><strong>Очистіть непідключені диски та снапшоти:</strong> Запустіть скрипт пошуку <code>status: available</code> дисків і видаліть старі копії;</li>
+        <li><strong>Переведіть статичний контент на Edge CDN:</strong> Розвантажте додатки від роздачі картинок та відео;</li>
+        <li><strong>Відмовтеся від погодинних віртуалок під baseline-навантаження:</strong> Постійне навантаження повинно жити на виділеному залокованому залізі або приватній хмарі;</li>
+        <li><strong>Замовте незалежний аудит:</strong> Свіжий погляд сертифікованих інженерів LIKEMARK дозволяє знайти оптимізаційні резерви вже протягом перших 48 годин перевірки.</li>
+      </ol>
+
+      <!-- Author Box -->
+      <div class="article-author-box">
+        <div class="article-author-avatar">FO</div>
+        <div class="article-author-info">
+          <h4>Практика FinOps та Cloud Architecture LIKEMARK</h4>
+          <p>Команда сертифікованих Kubernetes Administrators (CKA) та FinOps Certified Practitioners. Допомагаємо бізнесу отримати максимальну продуктивність від кожного інвестованого в IT-інфраструктуру євро чи гривні.</p>
+        </div>
+      </div>
+
+      <!-- Article CTA Box -->
+      <div class="article-cta-box">
+        <h3>Хочете оптимізувати свої хмарні витрати вже цього місяця?</h3>
+        <p>
+          Замовте комплексний FinOps-аудит вашої інфраструктури від інженерів LIKEMARK. Ми знайдемо неефективно витрачені ресурси та покажемо конкретний план скорочення бюджету без ризиків для SLA.
+        </p>
+        <button class="btn btn-primary btn-lg" data-open-modal data-tariff="FinOps аудит інфраструктури">
+          Замовити безкоштовний аудит витрат
+        </button>
+      </div>
+
+    </article>
+
+    <!-- Related Cases -->
+    <section class="related-cases-wrap">
+      <h3 class="related-cases-title">Інші інженерні кейси та статті</h3>
+      <div class="related-cases-grid">
+        
+        <!-- Case 1 -->
+        <a href="/cases/highload-black-friday" class="related-case-card">
+          <img src="/images/case-rozetka.png" alt="Кейс Highload сервери" class="related-case-img">
+          <div class="related-case-content">
+            <span class="related-case-tag">Виділені сервери Highload</span>
+            <h4 class="related-case-h">Як найбільший маркетплейс витримує пікові навантаження в «Чорну п'ятницю» без збоїв</h4>
+            <span class="related-case-link">Читати статтю &rarr;</span>
+          </div>
+        </a>
+
+        <!-- Case 2 -->
+        <a href="/cases/disaster-recovery-cloud" class="related-case-card">
+          <img src="/images/case-draas.png" alt="Кейс Disaster Recovery" class="related-case-img">
+          <div class="related-case-content">
+            <span class="related-case-tag">Disaster Recovery (DRaaS)</span>
+            <h4 class="related-case-h">Побудова гео-розподіленої відмовостійкої хмари: як гарантувати безперервність бізнесу та нульову втрату даних</h4>
+            <span class="related-case-link">Читати статтю &rarr;</span>
+          </div>
+        </a>
+
+        <!-- Case 3 -->
+        <a href="/cases/video-streaming-cdn" class="related-case-card">
+          <img src="/images/case-megogo.png" alt="Кейс Масштабування відеострімінгу" class="related-case-img">
+          <div class="related-case-content">
+            <span class="related-case-tag">Хмарні сховища та CDN</span>
+            <h4 class="related-case-h">Масштабування відеострімінгу та трансляцій для мільйонів користувачів онлайн без затримок</h4>
+            <span class="related-case-link">Читати статтю &rarr;</span>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container" style="text-align: center;">
+      <div style="display: flex; justify-content: center; margin-bottom: 16px;">
+        <a href="/" style="display:inline-flex; align-items:center; text-decoration:none;">
+          <img src="/images/logo-footer.png" alt="LIKEMARK CLOUD" style="height: 38px; width: auto; display: block;">
+        </a>
+      </div>
+      <p>© 2023–2026 ТОВ «ЛАЙКМАРК ЮКРЕЙН» (код ЄДРПОУ 45356074). Усі права захищені.</p>
+      <div style="margin-top: 12px; display: flex; justify-content: center; gap: 20px; font-size: 0.85rem;">
+        <a href="/" class="footer-link">Головна</a>
+        <a href="/servers" class="footer-link">Виділені сервери</a>
+        <a href="/migration" class="footer-link">Міграція в хмару</a>
+        <a href="/contacts" class="footer-link">Контакти</a>
+        <a href="/privacy" class="footer-link">Політика конфіденційності</a>
+        <a href="/terms" class="footer-link">Публічна оферта IaaS</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="lead-modal">
+    <div class="modal-box">
+      <button class="modal-close" id="modal-close-btn">&times;</button>
+      <h3 class="modal-title">Замовлення FinOps аудиту</h3>
+      <p class="modal-desc" id="modal-desc">Залиште контакти, черговий інженер зв'яжеться з вами протягом 15 хвилин.</p>
+      <form class="ajax-lead-form">
+        <input type="hidden" name="tariff" id="modal-tariff-input" value="FinOps аудит інфраструктури">
+        <div class="form-group">
+          <label class="form-label">Ваше ім'я:</label>
+          <input type="text" name="name" class="form-input" placeholder="Олександр" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Телефон для зв'язку:</label>
+          <input type="tel" name="phone" class="form-input" placeholder="+380..." required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Корпоративний Email (опціонально):</label>
+          <input type="email" name="email" class="form-input" placeholder="cto@company.ua">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Надіслати запит</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

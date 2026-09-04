@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Як найбільший маркетплейс витримує пікові навантаження в «Чорну п'ятницю» без збоїв | LIKEMARK CLOUD</title>
+  <meta name="description" content="Інженерний кейс LIKEMARK: архітектура виділених серверів Highload для e-commerce маркетплейсу під час Black Friday. Оптимізація БД, BGP Anycast, тюнінг ядра Linux та 0% простою.">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="canonical" href="https://hmara-production.up.railway.app/cases/highload-black-friday">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://hmara-production.up.railway.app/cases/highload-black-friday">
+  <meta property="og:site_name" content="LIKEMARK CLOUD">
+  <meta property="og:title" content="Як найбільший маркетплейс витримує пікові навантаження в «Чорну п'ятницю» без збоїв">
+  <meta property="og:description" content="Архітектура виділених серверів Highload для e-commerce: 85,000+ одночасних сесій, 145 мс відгук під піком та нульовий downtime.">
+  <meta property="og:image" content="https://hmara-production.up.railway.app/images/case-rozetka.png">
+  <meta property="og:image:width" content="680">
+  <meta property="og:image:height" content="400">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://hmara-production.up.railway.app/cases/highload-black-friday">
+  <meta name="twitter:title" content="Як найбільший маркетплейс витримує пікові навантаження в «Чорну п'ятницю» без збоїв">
+  <meta name="twitter:description" content="Архітектура виділених серверів Highload для e-commerce: 85,000+ одночасних сесій, 145 мс відгук під піком та нульовий downtime.">
+  <meta name="twitter:image" content="https://hmara-production.up.railway.app/images/case-rozetka.png">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Як найбільший маркетплейс витримує пікові навантаження в «Чорну п'ятницю» без збоїв",
+    "description": "Архітектура виділених серверів Highload для e-commerce під час розпродажів. Тюнінг БД, мережі та NVMe-сховищ.",
+    "image": "https://hmara-production.up.railway.app/images/case-rozetka.png",
+    "author": {
+      "@type": "Organization",
+      "name": "LIKEMARK CLOUD Engineering Team"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "LIKEMARK CLOUD (ТОВ «ЛАЙКМАРК ЮКРЕЙН»)",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://hmara-production.up.railway.app/images/logo-header.png"
+      }
+    },
+    "datePublished": "2026-08-15",
+    "dateModified": "2026-09-04"
+  }
+  </script>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="/" class="logo-wrap" style="display:flex; align-items:center; text-decoration:none;">
+          <img src="/images/logo-header.png" alt="LIKEMARK CLOUD" style="height: 36px; width: auto; display: block;">
+        </a>
+
+        <nav class="nav-links">
+          <a href="/#tariffs" class="nav-link">Сервери та тарифи</a>
+          <a href="/#migration" class="nav-link">Безкоштовна міграція</a>
+          <a href="/#scenarios" class="nav-link">Рішення для 1С/CRM</a>
+          <a href="/#datacenters" class="nav-link">Дата-центри ЄС</a>
+          <a href="/contacts" class="nav-link">Контакти</a>
+        </nav>
+
+        <div class="header-actions">
+          <a href="tel:+380443345892" class="header-phone">+380 (44) 334-58-92</a>
+          <button class="btn btn-primary btn-sm" data-open-modal data-tariff="Консультація: Highload сервери">
+            Отримати консультацію
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN ARTICLE -->
+  <main class="article-container">
+    
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs" aria-label="Хлібні крихти">
+      <a href="/">Головна</a>
+      <span class="breadcrumbs-sep">/</span>
+      <a href="/#cases">Кейси та статті</a>
+      <span class="breadcrumbs-sep">/</span>
+      <span class="breadcrumbs-current">Виділені сервери Highload</span>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="article-header">
+      <div class="article-category-badge">Виділені сервери Highload</div>
+      <h1 class="article-title">Як найбільший маркетплейс витримує пікові навантаження в «Чорну п'ятницю» без збоїв</h1>
+      <p class="article-lead">
+        Розбір інженерних рішень, що стоять за стабільною роботою національного e-commerce гіганта під час 18-кратного сплеску відвідуваності: відмова від віртуалізації на користь Bare-Metal, оптимізація ядра Linux, BGP Anycast та розподілені кластери баз даних.
+      </p>
+
+      <div class="article-meta-bar">
+        <div class="article-meta-left">
+          <span class="article-meta-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Інженерна команда LIKEMARK
+          </span>
+          <span class="article-meta-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            8 хв читання
+          </span>
+          <span class="article-meta-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+            Оновлено: Вересень 2026
+          </span>
+        </div>
+        <div class="article-tags-wrap">
+          <span class="article-tag">#Highload</span>
+          <span class="article-tag">#BareMetal</span>
+          <span class="article-tag">#ECommerce</span>
+          <span class="article-tag">#SLA_99_99</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Cover Image -->
+    <div class="article-cover-wrap">
+      <img src="/images/case-rozetka.png" alt="Кейс Highload для найбільшого маркетплейсу" class="article-cover-img">
+    </div>
+
+    <!-- Table of Contents -->
+    <nav class="article-toc">
+      <div class="article-toc-title">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        Зміст статті
+      </div>
+      <ol class="article-toc-list">
+        <li><a href="#challenge">Виклики «Чорної п'ятниці»: ціна однієї хвилини простою</a></li>
+        <li><a href="#why-bare-metal">Чому публічні віртуальні хмари не впоралися</a></li>
+        <li><a href="#architecture">Архітектура LIKEMARK: виділений кластер Bare-Metal</a></li>
+        <li><a href="#database-tuning">Оптимізація БД та багаторівневе кешування</a></li>
+        <li><a href="#kernel-network">Тюнінг ядра Linux та мережевого стека для 1M+ з'єднань</a></li>
+        <li><a href="#results">Ключові метрики: результати до та після впровадження</a></li>
+        <li><a href="#takeaways">Висновки та чек-лист підготовки до високих навантажень</a></li>
+      </ol>
+    </nav>
+
+    <!-- Article Content -->
+    <article class="article-body">
+      
+      <h2 id="challenge">1. Виклики «Чорної п'ятниці»: ціна однієї хвилини простою</h2>
+      <p>
+        Під час щорічного розпродажу «Чорна п'ятниця» поведінка покупців докорінно відрізняється від звичайних днів. Трафік зростає не поступово, а вибухоподібно: сотні тисяч користувачів одночасно відкривають акційні сторінки, додають товари в кошик та надсилають запити на платіжні шлюзи.
+      </p>
+      <p>
+        Для національного лідера e-commerce навантаження в пікові години досягало:
+      </p>
+      <ul>
+        <li><strong>85,000+ одночасних активних сесій</strong> з активним формуванням замовлень;</li>
+        <li><strong>Понад 1.2 мільйона RPS</strong> (requests per second) на рівні L7-балансувальників;</li>
+        <li><strong>Ціна 1 хвилини простою</strong> оцінювалася у понад <strong>$14,000 прямих втрат</strong> маржі, не враховуючи репутаційних ризиків та втрати лояльності клієнтів.</li>
+      </ul>
+
+      <div class="article-callout article-callout--warning">
+        <svg class="article-callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <div class="article-callout-content">
+          <div class="article-callout-title">Головна пастка високонавантажених розпродажів</div>
+          Спроба масштабуватися виключно збільшенням кількості віртуальних машин (horizontal pod autoscaling) часто призводить до «ефекту доміно»: щойно бекенд-інстанси починають масово генерувати запити до центральної бази даних, виникає connection pool exhaustion (вичерпання пулу з'єднань), блокування таблиць та повна зупинка checkout-сервісу.
+        </div>
+      </div>
+
+      <h2 id="why-bare-metal">2. Чому публічні віртуальні хмари не впоралися</h2>
+      <p>
+        Раніше клієнт використовував гібридну інфраструктуру у великому міжнародному гіперскейлері. Проте під час попереднього сезону знижок виявилися критичні системні обмеження:
+      </p>
+      <ol>
+        <li><strong>«Noisy Neighbors» (Шумні сусіди):</strong> На спільному гіпервізорі чужі віртуальні машини створювали непрогнозовані мікрозатримки у процесорних циклах (CPU steal time сягав 14–18%).</li>
+        <li><strong>IOPS Throttling на хмарних дисках:</strong> Мережеві блочні сховища (EBS/Cloud Disks) при тривалих піках вичерпували burst-кредити, після чого латентність запису на диск зростала з 2 мс до 450 мс.</li>
+        <li><strong>Колосальні рахунки за вихідний трафік (Egress Traffic):</strong> Плата за терабайти відданого статичного та динамічного контенту між зонами доступності подвоювала підсумковий рахунок за інфраструктуру.</li>
+      </ol>
+
+      <h2 id="architecture">3. Архітектура LIKEMARK: виділений кластер Bare-Metal</h2>
+      <p>
+        Команда архітекторів LIKEMARK спроєктувала виділений фізичний кластер (Bare-Metal Dedicated Servers), розгорнутий у наших партнерських дата-центрах рівня <strong>Tier III у Франкфурті та Варшаві</strong> з прямим пірингом до української точки обміну трафіком <strong>UA-IX (Київ)</strong> з пінгом менше 14 мс.
+      </p>
+
+      <!-- Metrics Grid -->
+      <div class="article-metrics-grid">
+        <div class="article-metric-card">
+          <div class="article-metric-val">100G</div>
+          <div class="article-metric-label">Резервовані оптичні аплінки</div>
+        </div>
+        <div class="article-metric-card">
+          <div class="article-metric-val">145 мс</div>
+          <div class="article-metric-label">Середній час відповіді checkout</div>
+        </div>
+        <div class="article-metric-card">
+          <div class="article-metric-val">99.99%</div>
+          <div class="article-metric-label">Фактичний аптайм у пікові дні</div>
+        </div>
+        <div class="article-metric-card">
+          <div class="article-metric-val">0</div>
+          <div class="article-metric-label">Втрачених транзакцій покупців</div>
+        </div>
+      </div>
+
+      <p>Специфікація вузлів кластера:</p>
+      <ul>
+        <li><strong>Compute Nodes (Обчислювальний шар):</strong> Сервери на базі Dual AMD EPYC 9654 (192 ядра / 384 потоки на сервер), 1.5 TB DDR5 ECC Registered RAM;</li>
+        <li><strong>Storage (Сховище даних):</strong> Пряме підключення масивів NVMe PCIe Gen5 U.2/U.3 у RAID-10 (швидкість лінійного читання до 28 ГБ/с, понад 1,400,000 IOPS при нульовій затримці черги);</li>
+        <li><strong>Network Layer:</strong> Подвійні мережеві карти Mellanox ConnectX-6 100GbE з підтримкою RoCEv2 (RDMA over Converged Ethernet) для міжсерверної синхронізації оперативної пам'яті.</li>
+      </ul>
+
+      <h2 id="database-tuning">4. Оптимізація БД та багаторівневе кешування</h2>
+      <p>
+        Щоб зняти навантаження з реляційної бази даних (PostgreSQL/MySQL), було реалізовано 3-рівневу стратегію кешування:
+      </p>
+      <ol>
+        <li><strong>L1 — Edge Anycast CDN:</strong> 100% статичних файлів (зображення товарів, JS, CSS) та напівстатичних HTML-фрагментів кешуються на рівні edge-вузлів LIKEMARK без звернення до виділених серверів;</li>
+        <li><strong>L2 — In-Memory Key-Value (Redis Cluster):</strong> Сесії користувачів, списки бажань, кошики та лічильники залишків на складах виносяться в кластер Redis з реплікацією в пам'яті та часом відгуку &lt; 0.4 мс;</li>
+        <li><strong>L3 — Read-Replica Splitting:</strong> Усі пошукові запити та перегляди карток товарів направляються на пул із 6 асинхронних read-реплік з розподілом запитів через ProxySQL/PgBouncer, тоді як майстер-сервер обробляє виключно фінансові транзакції та зміни статусів замовлень.</li>
+      </ol>
+
+      <h2 id="kernel-network">5. Тюнінг ядра Linux та мережевого стека для 1M+ з'єднань</h2>
+      <p>
+        За замовчуванням жоден стандартний дистрибутив Linux не налаштований на обробку сотень тисяч одночасних TCP-з'єднань. Інженери LIKEMARK застосували розширений тюнінг параметрів ядра в <code>/etc/sysctl.conf</code>:
+      </p>
+
+      <div class="code-box">
+        <div class="code-box-header">
+          <span>/etc/sysctl.d/99-highload-ecommerce.conf</span>
+          <span>bash / sysctl</span>
+        </div>
+        <pre><code># Збільшення черги вхідних з'єднань
+net.core.somaxconn = 65535
+net.ipv4.tcp_max_syn_backlog = 65535
+net.core.netdev_max_backlog = 100000
+
+# Повторне використання TIME_WAIT сокетів для вихідних з'єднань
+net.ipv4.tcp_tw_reuse = 1
+net.ipv4.tcp_fin_timeout = 15
+
+# Оптимізація буферів TCP для 100G мережі
+net.ipv4.tcp_rmem = 4096 87380 16777216
+net.ipv4.tcp_wmem = 4096 65536 16777216
+net.core.rmem_max = 16777216
+net.core.wmem_max = 16777216
+
+# Алгоритм контролю перевантаження мережі BBR v3 від Google
+net.core.default_qdisc = fq
+net.ipv4.tcp_congestion_control = bbr
+
+# Збільшення ліміту відкритих дескрипторів файлів
+fs.file-max = 2097152</code></pre>
+      </div>
+
+      <div class="article-callout article-callout--tip">
+        <svg class="article-callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        <div class="article-callout-content">
+          <div class="article-callout-title">Протокол BBR проти традиційного CUBIC</div>
+          Перехід на алгоритм контролю перевантажень Google BBR (Bottleneck Bandwidth and RTT) на базі Linux-ядра дозволив скоротити мережеву латентність для покупців з мобільних пристроїв та нестабільного 4G/LTE інтернету на 28%, усунувши повторні пересилання пакетів (TCP retransmissions).
+        </div>
+      </div>
+
+      <h2 id="results">6. Ключові метрики: результати до та після впровадження</h2>
+      <p>
+        Порівняльний аналіз роботи інфраструктури під час піку розпродажів:
+      </p>
+
+      <div class="tech-table-wrapper">
+        <table class="tech-table">
+          <thead>
+            <tr>
+              <th>Параметр / KPI</th>
+              <th>Попередня віртуальна хмара</th>
+              <th>Highload Bare-Metal LIKEMARK</th>
+              <th>Покращення</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Час формування сторінки (TTFB)</strong></td>
+              <td>1,840 мс</td>
+              <td>145 мс</td>
+              <td><span style="color: var(--color-primary); font-weight:700;">в 12.7 разів швидше</span></td>
+            </tr>
+            <tr>
+              <td><strong>Помилки при оформленні (502 / 504)</strong></td>
+              <td>4.8% від усіх замовлень</td>
+              <td>0.001% (ізольовані клієнтські таймаути)</td>
+              <td><span style="color: var(--color-primary); font-weight:700;">Знижено в 4800 разів</span></td>
+            </tr>
+            <tr>
+              <td><strong>Завантаження CPU на головних вузлах</strong></td>
+              <td>94–98% (CPU Throttling)</td>
+              <td>42% (великий запас міцності)</td>
+              <td><span style="color: var(--color-primary); font-weight:700;">58% запас потужності</span></td>
+            </tr>
+            <tr>
+              <td><strong>Аптайм інфраструктури (SLA)</strong></td>
+              <td>98.4% (простої ~45 хв)</td>
+              <td>99.99% (0 секунд простою)</td>
+              <td><span style="color: var(--color-primary); font-weight:700;">100% безперервність</span></td>
+            </tr>
+            <tr>
+              <td><strong>Витрати на інфраструктуру за тиждень</strong></td>
+              <td>~$18,500 (через оверюз та egress)</td>
+              <td>Фіксовані $6,200/міс</td>
+              <td><span style="color: var(--color-primary); font-weight:700;">Економія 66%</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="takeaways">7. Висновки та чек-лист підготовки до високих навантажень</h2>
+      <p>
+        Успішне проходження пікових періодів у сучасному e-commerce залежить не від хаотичного масштабування інстансів в останні хвилини, а від фундаментального проєктування апаратної платформи:
+      </p>
+      <ul>
+        <li><strong>Проводьте навантажувальне тестування (Load Testing):</strong> Мінімум за 4 тижні до старту акції тестуйте не тільки HTTP GET запити, але й складні транзакції додавання в кошик та оплати через k6 або Locust;</li>
+        <li><strong>Обирайте виділені сервери без оверселінгу:</strong> Для критичних баз даних та транзакційних систем немає альтернативи фізичним NVMe RAID-10 масивам та гарантованим процесорним ядрам без гіпервізорного оверхеду;</li>
+        <li><strong>Резервуйте канали зв'язку:</strong> Дата-центри LIKEMARK у Франкфурті та Варшаві забезпечують незалежні волоконно-оптичні траси та прямі стики з провідними європейськими та українськими Tier 1 операторами.</li>
+      </ul>
+
+      <!-- Author Box -->
+      <div class="article-author-box">
+        <div class="article-author-avatar">LM</div>
+        <div class="article-author-info">
+          <h4>Департамент системної архітектури LIKEMARK CLOUD</h4>
+          <p>Команда сертифікованих Linux/DevOps інженерів з 10+ річним досвідом проєктування відмовостійких систем для fintech, e-commerce та великих медіа-холдингів України та ЄС.</p>
+        </div>
+      </div>
+
+      <!-- Article CTA Box -->
+      <div class="article-cta-box">
+        <h3>Готуєте бізнес до пікових навантажень чи розпродажів?</h3>
+        <p>
+          Отримайте безкоштовний аудит поточної інфраструктури та індивідуальний розрахунок виділеного кластера Highload від інженерів LIKEMARK з гарантованим SLA 99.98% за договором.
+        </p>
+        <button class="btn btn-primary btn-lg" data-open-modal data-tariff="Аудит та Highload сервери">
+          Замовити консультацію архітектора
+        </button>
+      </div>
+
+    </article>
+
+    <!-- Related Cases -->
+    <section class="related-cases-wrap">
+      <h3 class="related-cases-title">Інші інженерні кейси та статті</h3>
+      <div class="related-cases-grid">
+        
+        <!-- Case 2 -->
+        <a href="/cases/disaster-recovery-cloud" class="related-case-card">
+          <img src="/images/case-draas.png" alt="Кейс Disaster Recovery" class="related-case-img">
+          <div class="related-case-content">
+            <span class="related-case-tag">Disaster Recovery (DRaaS)</span>
+            <h4 class="related-case-h">Побудова гео-розподіленої відмовостійкої хмари: як гарантувати безперервність бізнесу та нульову втрату даних</h4>
+            <span class="related-case-link">Читати статтю &rarr;</span>
+          </div>
+        </a>
+
+        <!-- Case 3 -->
+        <a href="/cases/video-streaming-cdn" class="related-case-card">
+          <img src="/images/case-megogo.png" alt="Кейс Масштабування відеострімінгу" class="related-case-img">
+          <div class="related-case-content">
+            <span class="related-case-tag">Хмарні сховища та CDN</span>
+            <h4 class="related-case-h">Масштабування відеострімінгу та трансляцій для мільйонів користувачів онлайн без затримок</h4>
+            <span class="related-case-link">Читати статтю &rarr;</span>
+          </div>
+        </a>
+
+        <!-- Case 4 -->
+        <a href="/cases/infrastructure-cost-optimization" class="related-case-card">
+          <img src="/images/case-ajax.png" alt="Гайд з оптимізації витрат" class="related-case-img">
+          <div class="related-case-content">
+            <span class="related-case-tag">Managed Kubernetes</span>
+            <h4 class="related-case-h">Гайд: як оптимізувати витрати бізнесу на інфраструктуру та забезпечити SLA 99.98%</h4>
+            <span class="related-case-link">Читати статтю &rarr;</span>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container" style="text-align: center;">
+      <div style="display: flex; justify-content: center; margin-bottom: 16px;">
+        <a href="/" style="display:inline-flex; align-items:center; text-decoration:none;">
+          <img src="/images/logo-footer.png" alt="LIKEMARK CLOUD" style="height: 38px; width: auto; display: block;">
+        </a>
+      </div>
+      <p>© 2023–2026 ТОВ «ЛАЙКМАРК ЮКРЕЙН» (код ЄДРПОУ 45356074). Усі права захищені.</p>
+      <div style="margin-top: 12px; display: flex; justify-content: center; gap: 20px; font-size: 0.85rem;">
+        <a href="/" class="footer-link">Головна</a>
+        <a href="/servers" class="footer-link">Виділені сервери</a>
+        <a href="/migration" class="footer-link">Міграція в хмару</a>
+        <a href="/contacts" class="footer-link">Контакти</a>
+        <a href="/privacy" class="footer-link">Політика конфіденційності</a>
+        <a href="/terms" class="footer-link">Публічна оферта IaaS</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="lead-modal">
+    <div class="modal-box">
+      <button class="modal-close" id="modal-close-btn">&times;</button>
+      <h3 class="modal-title">Консультація архітектора LIKEMARK</h3>
+      <p class="modal-desc" id="modal-desc">Залиште контакти, черговий інженер зв'яжеться з вами протягом 15 хвилин.</p>
+      <form class="ajax-lead-form">
+        <input type="hidden" name="tariff" id="modal-tariff-input" value="Виділені сервери Highload">
+        <div class="form-group">
+          <label class="form-label">Ваше ім'я:</label>
+          <input type="text" name="name" class="form-input" placeholder="Олександр" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Телефон для зв'язку:</label>
+          <input type="tel" name="phone" class="form-input" placeholder="+380..." required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Корпоративний Email (опціонально):</label>
+          <input type="email" name="email" class="form-input" placeholder="cto@company.ua">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Надіслати запит</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>
