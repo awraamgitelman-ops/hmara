@@ -28,105 +28,332 @@
 <body>
 
 <header class="site-header">
-    <!-- Top Bar -->
-    <div class="top-bar">
-      <div class="container">
-        <!-- Left: Language UA -->
-        <div class="top-bar-left">
-          <div class="top-bar-lang">
-            <svg width="18" height="13" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="18" height="6.5" fill="#0057B7"></rect>
-              <rect y="6.5" width="18" height="6.5" fill="#FFDD00"></rect>
-            </svg>
-            <span>UA</span>
+  <!-- Top Utility Bar (Selectel-style) -->
+  <div class="top-bar">
+    <div class="container">
+      <!-- Left: Language UA, Speed, Services Status -->
+      <div class="top-bar-left">
+        <div class="top-bar-lang" title="Мова інтерфейсу">
+          <svg width="18" height="13" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px; box-shadow:0 0 1px rgba(0,0,0,0.25);">
+            <rect width="18" height="6.5" fill="#0057B7"></rect>
+            <rect y="6.5" width="18" height="6.5" fill="#FFDD00"></rect>
+          </svg>
+          <span>UA</span>
+        </div>
+
+        <a href="#speed-test" class="top-bar-item top-bar-speed" id="btn-top-speed" title="Перевірити швидкість мережі до дата-центрів">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m12 14 4-4"></path>
+            <path d="M3.34 19a10 10 0 1 1 17.32 0"></path>
+          </svg>
+          <span>Швидкість мережі</span>
+        </a>
+
+        <a href="/datacenters.html#sla" class="top-bar-item top-bar-status" title="SLA 99.98% — всі вузли працюють у штатному режимі">
+          <span class="status-indicator-dot"></span>
+          <span>Всі сервіси доступні</span>
+        </a>
+      </div>
+
+      <!-- Right: Contacts -->
+      <div class="top-bar-right">
+        <a href="mailto:sales@likemark.cloud" class="top-bar-link">
+          <span>sales@likemark.cloud</span>
+        </a>
+
+        <a href="tel:+380443345892" class="top-bar-link top-bar-phone">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+          </svg>
+          <span>+380 (44) 334-58-92</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navigation Bar -->
+  <div class="header-main">
+    <div class="container">
+      <!-- Logo -->
+      <a href="/" class="header-logo" aria-label="LIKEMARK CLOUD Головна">
+        <img src="/images/logo-header.png" alt="LIKEMARK CLOUD">
+      </a>
+
+      <!-- Desktop Navigation Menu (Selectel-style with Chevrons) -->
+      <nav class="header-nav">
+        <!-- 1. Продукти -->
+        <div class="nav-item has-dropdown">
+          <button type="button" class="nav-link-btn" aria-expanded="false">
+            <span>Продукти</span>
+            <svg class="nav-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="nav-dropdown-menu">
+            <a href="/kb/cloud-vps.html" class="dropdown-item">
+              <span class="dropdown-title">Хмарні сервери (VPS/VDS)</span>
+              <span class="dropdown-desc">Швидке розгортання за 60 секунд на NVMe</span>
+            </a>
+            <a href="/servers.html" class="dropdown-item">
+              <span class="dropdown-title">Виділені сервери (Bare Metal)</span>
+              <span class="dropdown-desc">AMD EPYC та Intel Xeon без сусідок</span>
+            </a>
+            <a href="/kb/managed-databases.html" class="dropdown-item">
+              <span class="dropdown-title">Хмарні бази даних (DBaaS)</span>
+              <span class="dropdown-desc">PostgreSQL, MySQL, Redis з авто-бекапами</span>
+            </a>
+            <a href="/kb/s3-storage.html" class="dropdown-item">
+              <span class="dropdown-title">S3 Об'єктне сховище</span>
+              <span class="dropdown-desc">Сумісність з AWS S3, геореплікація даних</span>
+            </a>
+            <a href="/kb/managed-kubernetes.html" class="dropdown-item">
+              <span class="dropdown-title">Managed Kubernetes</span>
+              <span class="dropdown-desc">Оркестрація мікросервісів та кластерів</span>
+            </a>
+            <a href="/kb/gpu-servers.html" class="dropdown-item">
+              <span class="dropdown-title">GPU-сервери для AI та ML</span>
+              <span class="dropdown-desc">NVIDIA A100/H100 для складних обчислень</span>
+            </a>
           </div>
         </div>
 
-        <!-- Right: Contacts -->
-        <div class="top-bar-right">
-          <a href="mailto:sales@likemark.cloud" class="top-bar-link">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-            </svg>
-            <span>sales@likemark.cloud</span>
-          </a>
-
-          <a href="tel:+380443345892" class="top-bar-link" style="font-weight: 600;">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-            </svg>
-            <span>+380 (44) 334-58-92</span>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Main Navigation Bar -->
-    <div class="header-main">
-      <div class="container">
-        <!-- Logo -->
-        <a href="/" class="header-logo">
-          <img src="/images/logo-header.png" alt="LIKEMARK CLOUD">
-        </a>
-
-        <!-- Desktop Navigation -->
-        <nav class="header-nav">
-          <a href="/servers" class="header-nav-link">Сервери</a>
-          <a href="/migration" class="header-nav-link">Міграція</a>
-          <a href="/solutions" class="header-nav-link">Рішення</a>
-          <a href="/datacenters" class="header-nav-link">Дата-центри</a>
-          <a href="/cases" class="header-nav-link">Кейси</a>
-          <a href="/contacts" class="header-nav-link">Контакти</a>
-        </nav>
-
-        <!-- Right Controls -->
-        <div class="header-actions">
-          <a href="tel:+380443345892" class="header-phone">+380 (44) 334-58-92</a>
-          <button type="button" class="btn-header-login" id="btn-header-login" data-open-modal="" data-tariff="Вхід до кабінету">Увійти</button>
-          <button type="button" class="btn-header-cta" id="btn-header-cta" data-open-modal="" data-tariff="Консультація спеціаліста LIKEMARK">
-            Консультація
+        <!-- 2. Послуги -->
+        <div class="nav-item has-dropdown">
+          <button type="button" class="nav-link-btn" aria-expanded="false">
+            <span>Послуги</span>
+            <svg class="nav-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
-          
-          <!-- Mobile Burger Toggle -->
-          <button type="button" class="header-burger-btn" id="header-burger-btn" aria-label="Відкрити меню">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="3" y1="12" x2="21" y2="12"></line>
-              <line x1="3" y1="6" x2="21" y2="6"></line>
-              <line x1="3" y1="18" x2="21" y2="18"></line>
-            </svg>
-          </button>
+          <div class="nav-dropdown-menu">
+            <a href="/migration.html" class="dropdown-item">
+              <span class="dropdown-title">Безкоштовна міграція під ключ</span>
+              <span class="dropdown-desc">Перенесення без простою бізнес-процесів</span>
+            </a>
+            <a href="/kb/devops-admin.html" class="dropdown-item">
+              <span class="dropdown-title">DevOps та адміністрування 24/7</span>
+              <span class="dropdown-desc">Команда інженерів на варті вашого сервісу</span>
+            </a>
+            <a href="/kb/security-services.html" class="dropdown-item">
+              <span class="dropdown-title">Кібербезпека та Anti-DDoS</span>
+              <span class="dropdown-desc">Фільтрація L3–L7 трафіку до 3.2 Tbps</span>
+            </a>
+            <a href="/kb/vpn-services.html" class="dropdown-item">
+              <span class="dropdown-title">Корпоративний VPN та SD-WAN</span>
+              <span class="dropdown-desc">Захищені канали між офісами та хмарою</span>
+            </a>
+            <a href="/cases/disaster-recovery-cloud.html" class="dropdown-item">
+              <span class="dropdown-title">Disaster Recovery & Backup</span>
+              <span class="dropdown-desc">Миттєве аварійне відновлення за 15 хв</span>
+            </a>
+          </div>
         </div>
-      </div>
-    </div>
-  </header>
 
-  <!-- Mobile Drawer -->
-  <div class="mobile-drawer-overlay" id="mobile-drawer-overlay"></div>
-  <div class="mobile-drawer" id="mobile-drawer">
-    <div class="mobile-drawer-header">
-      <a href="/" class="header-logo">
-        <img src="/images/logo-header.png" alt="LIKEMARK CLOUD" style="height: 30px;">
-      </a>
-      <button class="mobile-drawer-close" id="mobile-drawer-close" aria-label="Закрити меню">&times;</button>
-    </div>
-    <div class="mobile-drawer-links">
-      <a href="/" class="mobile-drawer-link active">Головна</a>
-      <a href="/servers" class="mobile-drawer-link">Виділені сервери</a>
-      <a href="/migration" class="mobile-drawer-link">Безкоштовна міграція</a>
-      <a href="/solutions" class="mobile-drawer-link">Рішення для 1С/CRM</a>
-      <a href="/datacenters" class="mobile-drawer-link">Дата-центри ЄС</a>
-      <a href="/cases" class="mobile-drawer-link">Кейси та статті</a>
-      <a href="/contacts" class="mobile-drawer-link">Контакти та реквізити</a>
-    </div>
-    <div class="mobile-drawer-footer">
-      <a href="tel:+380443345892" class="top-bar-link" style="font-size: 15px; font-weight: 700; color: #092433;">+380 (44) 334-58-92</a>
-      <a href="mailto:sales@likemark.cloud" class="top-bar-link" style="font-size: 13px;">sales@likemark.cloud</a>
-      <button type="button" class="mobile-drawer-btn-cta" id="btn-drawer-cta" data-open-modal="" data-tariff="Запит з мобільного меню">
-        Замовити консультацію
-      </button>
+        <!-- 3. LIKEMARK -->
+        <div class="nav-item has-dropdown">
+          <button type="button" class="nav-link-btn" aria-expanded="false">
+            <span>LIKEMARK</span>
+            <svg class="nav-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="nav-dropdown-menu">
+            <a href="/datacenters.html" class="dropdown-item">
+              <span class="dropdown-title">Дата-центри у Варшаві та Франкфурті</span>
+              <span class="dropdown-desc">Рівень надійності Tier III та Tier IV в ЄС</span>
+            </a>
+            <a href="/datacenters.html#sla" class="dropdown-item">
+              <span class="dropdown-title">Фінансові гарантії SLA 99.98%</span>
+              <span class="dropdown-desc">Юридична відповідальність за доступність</span>
+            </a>
+            <a href="/contacts.html" class="dropdown-item">
+              <span class="dropdown-title">Контакти та офіційні реквізити</span>
+              <span class="dropdown-desc">ТОВ «ЛАЙКМАРК ЮКРЕЙН» (ЄДРПОУ 45356074)</span>
+            </a>
+            <a href="/privacy.html" class="dropdown-item">
+              <span class="dropdown-title">Безпека даних та GDPR</span>
+              <span class="dropdown-desc">Політика конфіденційності та шифрування</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- 4. Ціни -->
+        <div class="nav-item has-dropdown">
+          <button type="button" class="nav-link-btn" aria-expanded="false">
+            <span>Ціни</span>
+            <svg class="nav-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="nav-dropdown-menu">
+            <a href="/servers.html#calc" class="dropdown-item modal-trigger-calc">
+              <span class="dropdown-title">Хмарний калькулятор</span>
+              <span class="dropdown-desc">Точний розрахунок вартості під ваші задачі</span>
+            </a>
+            <a href="/kb/ready-configurations.html" class="dropdown-item">
+              <span class="dropdown-title">Готові тарифи серверів</span>
+              <span class="dropdown-desc">Оптимальні пакети Start, Pro, Ultra</span>
+            </a>
+            <a href="/kb/custom-configurations.html" class="dropdown-item">
+              <span class="dropdown-title">Кастомні конфігурації</span>
+              <span class="dropdown-desc">Індивідуальний підбір дисків та пам'яті</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- 5. Документація (Direct link to KB) -->
+        <div class="nav-item">
+          <a href="/kb/cloud-vps.html" class="nav-link-plain">Документація</a>
+        </div>
+
+        <!-- 6. Академія -->
+        <div class="nav-item has-dropdown">
+          <button type="button" class="nav-link-btn" aria-expanded="false">
+            <span>Академія</span>
+            <svg class="nav-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="nav-dropdown-menu">
+            <a href="/solutions.html" class="dropdown-item">
+              <span class="dropdown-title">Рішення для баз 1С та CRM</span>
+              <span class="dropdown-desc">Архітектура високої доступності під навантаження</span>
+            </a>
+            <a href="/kb/migration-guide.html" class="dropdown-item">
+              <span class="dropdown-title">Гайди з міграції даних</span>
+              <span class="dropdown-desc">Покрокові посібники для системних інженерів</span>
+            </a>
+            <a href="/kb/container-registry.html" class="dropdown-item">
+              <span class="dropdown-title">Реєстр контейнерів Docker</span>
+              <span class="dropdown-desc">CI/CD пайплайни та доставка додатків</span>
+            </a>
+            <a href="/kb/mobile-farm.html" class="dropdown-item">
+              <span class="dropdown-title">Мобільні ферми та емуляція</span>
+              <span class="dropdown-desc">Хмарні середовища тестування Android/iOS</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- 7. Кейси -->
+        <div class="nav-item">
+          <a href="/cases.html" class="nav-link-plain">Кейси</a>
+        </div>
+
+        <!-- 8. Пошук (SVG Loupe) -->
+        <button type="button" class="header-search-btn" id="btn-header-search" aria-label="Пошук по базі знань та документації" title="Пошук по документації (Ctrl + K)">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+      </nav>
+
+      <!-- Right Controls: 'Увійти' (text link) + 'Створити акаунт' (dark navy button) -->
+      <div class="header-actions">
+        <button type="button" class="btn-header-login" id="btn-header-login">Увійти</button>
+        <button type="button" class="btn-header-register" id="btn-header-register">Створити акаунт</button>
+
+        <!-- Mobile Burger Toggle -->
+        <button type="button" class="header-burger-btn" id="header-burger-btn" aria-label="Відкрити меню">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
     </div>
   </div>
+</header>
+
+<!-- Mobile Drawer Navigation -->
+<div class="mobile-drawer-overlay" id="mobile-drawer-overlay"></div>
+<div class="mobile-drawer" id="mobile-drawer">
+  <div class="mobile-drawer-header">
+    <a href="/" class="header-logo">
+      <img src="/images/logo-header.png" alt="LIKEMARK CLOUD" style="height: 30px;">
+    </a>
+    <button class="mobile-drawer-close" id="mobile-drawer-close" aria-label="Закрити меню">&times;</button>
+  </div>
+
+  <div class="mobile-drawer-actions">
+    <button type="button" class="mobile-btn-register" id="btn-mobile-register">Створити акаунт</button>
+    <button type="button" class="mobile-btn-login" id="btn-mobile-login">Увійти в кабінет</button>
+  </div>
+
+  <div class="mobile-drawer-links">
+    <!-- Accordion: Продукти -->
+    <div class="mobile-drawer-group">
+      <button type="button" class="mobile-group-title">
+        <span>Продукти</span>
+        <svg class="mobile-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+      <div class="mobile-group-content">
+        <a href="/kb/cloud-vps.html" class="mobile-drawer-link">Хмарні сервери (VPS/VDS)</a>
+        <a href="/servers.html" class="mobile-drawer-link">Виділені сервери (Bare Metal)</a>
+        <a href="/kb/managed-databases.html" class="mobile-drawer-link">Хмарні бази даних (DBaaS)</a>
+        <a href="/kb/s3-storage.html" class="mobile-drawer-link">S3 Об'єктне сховище</a>
+        <a href="/kb/managed-kubernetes.html" class="mobile-drawer-link">Managed Kubernetes</a>
+        <a href="/kb/gpu-servers.html" class="mobile-drawer-link">GPU-сервери AI/ML</a>
+      </div>
+    </div>
+
+    <!-- Accordion: Послуги -->
+    <div class="mobile-drawer-group">
+      <button type="button" class="mobile-group-title">
+        <span>Послуги</span>
+        <svg class="mobile-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+      <div class="mobile-group-content">
+        <a href="/migration.html" class="mobile-drawer-link">Безкоштовна міграція під ключ</a>
+        <a href="/kb/devops-admin.html" class="mobile-drawer-link">DevOps та адміністрування 24/7</a>
+        <a href="/kb/security-services.html" class="mobile-drawer-link">Кібербезпека та Anti-DDoS</a>
+        <a href="/kb/vpn-services.html" class="mobile-drawer-link">Корпоративний VPN</a>
+        <a href="/cases/disaster-recovery-cloud.html" class="mobile-drawer-link">Disaster Recovery</a>
+      </div>
+    </div>
+
+    <!-- Accordion: LIKEMARK -->
+    <div class="mobile-drawer-group">
+      <button type="button" class="mobile-group-title">
+        <span>LIKEMARK</span>
+        <svg class="mobile-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+      <div class="mobile-group-content">
+        <a href="/datacenters.html" class="mobile-drawer-link">Дата-центри у Варшаві та Франкфурті</a>
+        <a href="/datacenters.html#sla" class="mobile-drawer-link">Гарантії SLA 99.98%</a>
+        <a href="/contacts.html" class="mobile-drawer-link">Контакти та реквізити</a>
+        <a href="/privacy.html" class="mobile-drawer-link">GDPR та безпека</a>
+      </div>
+    </div>
+
+    <!-- Accordion: Ціни -->
+    <div class="mobile-drawer-group">
+      <button type="button" class="mobile-group-title">
+        <span>Ціни</span>
+        <svg class="mobile-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+      <div class="mobile-group-content">
+        <a href="/servers.html#calc" class="mobile-drawer-link modal-trigger-calc">Хмарний калькулятор</a>
+        <a href="/kb/ready-configurations.html" class="mobile-drawer-link">Готові конфігурації</a>
+        <a href="/kb/custom-configurations.html" class="mobile-drawer-link">Кастомні конфігурації</a>
+      </div>
+    </div>
+
+    <a href="/kb/cloud-vps.html" class="mobile-drawer-link mobile-link-direct">Документація</a>
+
+    <!-- Accordion: Академія -->
+    <div class="mobile-drawer-group">
+      <button type="button" class="mobile-group-title">
+        <span>Академія</span>
+        <svg class="mobile-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+      <div class="mobile-group-content">
+        <a href="/solutions.html" class="mobile-drawer-link">Рішення для 1С/CRM</a>
+        <a href="/kb/migration-guide.html" class="mobile-drawer-link">Гайди з міграції</a>
+        <a href="/kb/container-registry.html" class="mobile-drawer-link">Реєстр контейнерів Docker</a>
+        <a href="/kb/mobile-farm.html" class="mobile-drawer-link">Мобільні ферми</a>
+      </div>
+    </div>
+
+    <a href="/cases.html" class="mobile-drawer-link mobile-link-direct">Кейси</a>
+  </div>
+
+  <div class="mobile-drawer-footer">
+    <a href="tel:+380443345892" class="top-bar-link" style="font-size: 15px; font-weight: 700; color: #092433;">+380 (44) 334-58-92</a>
+    <a href="mailto:sales@likemark.cloud" class="top-bar-link" style="font-size: 13px;">sales@likemark.cloud</a>
+  </div>
+</div>
 
 <main class="docs-wrapper">
   <div class="site-container">
@@ -680,6 +907,101 @@ psql "sslmode=verify-full sslrootcert=/etc/ssl/likemark-ca.pem \
     
     <div id="newsletter-success-msg" style="display:none; text-align:center; padding:14px; background:#e6f9f0; border:1px solid #10b981; border-radius:8px; color:#065f46; font-size:14px; font-weight:600; margin-top:14px;">
       Дякуємо за підписку! Ваш Email додано до списку розсилки.
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SPEED TEST MODAL ==================== -->
+<div id="speed-modal" style="display:none; position:fixed; inset:0; background:rgba(9,36,51,0.7); backdrop-filter:blur(6px); z-index:99999; align-items:center; justify-content:center; padding:16px;">
+  <div style="background:#fff; border-radius:16px; width:100%; max-width:480px; padding:28px; box-shadow:0 20px 50px rgba(0,0,0,0.25); position:relative; font-family:Manrope,sans-serif; box-sizing:border-box;">
+    <button type="button" class="modal-close-generic" style="position:absolute; top:16px; right:16px; background:none; border:none; font-size:22px; cursor:pointer; color:#9ca3af; line-height:1; width:32px; height:32px; display:flex; align-items:center; justify-content:center; border-radius:50%;">✕</button>
+    
+    <div style="display:inline-flex; align-items:center; gap:6px; background:rgba(16,185,129,0.1); color:#059669; font-size:12px; font-weight:700; padding:4px 10px; border-radius:4px; margin-bottom:12px;">
+      <span style="width:7px; height:7px; background:#10b981; border-radius:50%; display:inline-block;"></span>
+      ДАТА-ЦЕНТРИ TIER III / IV В ЄС
+    </div>
+    
+    <h3 style="font-size:20px; font-weight:700; color:#092433; margin:0 0 6px;">Швидкість та пінг до дата-центрів</h3>
+    <p style="font-size:13px; color:rgba(9,36,51,0.65); margin:0 0 18px; line-height:1.45;">
+      Прямі BGP-лінки з провідними українськими точками обміну трафіком (DTEL-IX, Giganet, UA-IX).
+    </p>
+    
+    <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:20px;" id="speed-test-results">
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 14px; background:#f8fafc; border:1px solid rgba(9,36,51,0.08); border-radius:8px;">
+        <div>
+          <div style="font-size:13.5px; font-weight:700; color:#092433;">Варшава, Польща (Atman WAW-1)</div>
+          <div style="font-size:11.5px; color:rgba(9,36,51,0.5);">Основний дата-центр • 10 Gbps Uplink</div>
+        </div>
+        <div style="text-align:right;">
+          <span style="font-size:15px; font-weight:800; color:#059669;" id="ping-waw">14 ms</span>
+        </div>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 14px; background:#f8fafc; border:1px solid rgba(9,36,51,0.08); border-radius:8px;">
+        <div>
+          <div style="font-size:13.5px; font-weight:700; color:#092433;">Франкфурт, Німеччина (Equinix FR-2)</div>
+          <div style="font-size:11.5px; color:rgba(9,36,51,0.5);">Резервний вузол • DE-CIX прямий стик</div>
+        </div>
+        <div style="text-align:right;">
+          <span style="font-size:15px; font-weight:800; color:#059669;" id="ping-fra">22 ms</span>
+        </div>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 14px; background:#f8fafc; border:1px solid rgba(9,36,51,0.08); border-radius:8px;">
+        <div>
+          <div style="font-size:13.5px; font-weight:700; color:#092433;">Амстердам, Нідерланди (Equinix AM-4)</div>
+          <div style="font-size:11.5px; color:rgba(9,36,51,0.5);">Вузол сховища S3 та CDN • AMS-IX</div>
+        </div>
+        <div style="text-align:right;">
+          <span style="font-size:15px; font-weight:800; color:#059669;" id="ping-ams">27 ms</span>
+        </div>
+      </div>
+    </div>
+    
+    <div style="display:flex; gap:10px;">
+      <button type="button" id="btn-retest-speed" style="flex:1; background:#092433; color:#fff; border:none; padding:11px; border-radius:8px; font-size:14px; font-weight:700; cursor:pointer;">Тестувати знову</button>
+      <a href="/datacenters.html" style="background:#f1f5f9; color:#092433; text-decoration:none; display:inline-flex; align-items:center; justify-content:center; padding:11px 16px; border-radius:8px; font-size:14px; font-weight:600;">Про дата-центри</a>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SEARCH MODAL ==================== -->
+<div id="search-modal" style="display:none; position:fixed; inset:0; background:rgba(9,36,51,0.7); backdrop-filter:blur(6px); z-index:99999; align-items:flex-start; justify-content:center; padding:60px 16px 16px;">
+  <div style="background:#fff; border-radius:16px; width:100%; max-width:560px; padding:24px; box-shadow:0 25px 60px rgba(0,0,0,0.3); position:relative; font-family:Manrope,sans-serif; box-sizing:border-box;">
+    <button type="button" class="modal-close-generic" style="position:absolute; top:16px; right:16px; background:none; border:none; font-size:22px; cursor:pointer; color:#9ca3af; line-height:1; width:32px; height:32px; display:flex; align-items:center; justify-content:center; border-radius:50%;">✕</button>
+    
+    <div style="display:flex; align-items:center; gap:10px; border-bottom:2px solid rgba(9,36,51,0.08); padding-bottom:12px; margin-bottom:16px;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#092433" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="text" id="header-search-input" placeholder="Пошук по статтях, серверах та інструкціях..." style="flex:1; border:none; outline:none; font-size:16px; font-weight:600; color:#092433; font-family:inherit;">
+    </div>
+    
+    <div id="search-results-box" style="display:flex; flex-direction:column; gap:8px; max-height:360px; overflow-y:auto;">
+      <a href="/kb/cloud-vps.html" style="padding:10px 12px; border-radius:8px; background:#f8fafc; text-decoration:none; display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <div style="font-size:14px; font-weight:700; color:#092433;">Хмарні сервери (VPS/VDS)</div>
+          <div style="font-size:12px; color:rgba(9,36,51,0.6);">NVMe SSD, гарантований vCPU, 99.98% SLA</div>
+        </div>
+        <span style="font-size:11px; background:rgba(31,147,255,0.1); color:#1f93ff; font-weight:700; padding:3px 8px; border-radius:4px;">KB</span>
+      </a>
+      <a href="/servers.html" style="padding:10px 12px; border-radius:8px; background:#f8fafc; text-decoration:none; display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <div style="font-size:14px; font-weight:700; color:#092433;">Виділені сервери (Dedicated Bare Metal)</div>
+          <div style="font-size:12px; color:rgba(9,36,51,0.6);">AMD EPYC, Intel Xeon, IPMI консоль</div>
+        </div>
+        <span style="font-size:11px; background:rgba(10,180,118,0.1); color:#0ab476; font-weight:700; padding:3px 8px; border-radius:4px;">Сервери</span>
+      </a>
+      <a href="/kb/managed-databases.html" style="padding:10px 12px; border-radius:8px; background:#f8fafc; text-decoration:none; display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <div style="font-size:14px; font-weight:700; color:#092433;">Керування базами даних (PostgreSQL / MySQL)</div>
+          <div style="font-size:12px; color:rgba(9,36,51,0.6);">Автоматичні резервні копії та реплікація</div>
+        </div>
+        <span style="font-size:11px; background:rgba(31,147,255,0.1); color:#1f93ff; font-weight:700; padding:3px 8px; border-radius:4px;">DBaaS</span>
+      </a>
+      <a href="/migration.html" style="padding:10px 12px; border-radius:8px; background:#f8fafc; text-decoration:none; display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <div style="font-size:14px; font-weight:700; color:#092433;">Безкоштовна міграція інфраструктури</div>
+          <div style="font-size:12px; color:rgba(9,36,51,0.6);">Без простою та втрати замовлень</div>
+        </div>
+        <span style="font-size:11px; background:rgba(235,66,71,0.1); color:#eb4247; font-weight:700; padding:3px 8px; border-radius:4px;">Послуги</span>
+      </a>
     </div>
   </div>
 </div>
