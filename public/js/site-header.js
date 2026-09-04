@@ -105,7 +105,7 @@
       });
     });
 
-    // 3. Speed Test Modal
+    // 3. Speed Test Navigation
     var speedModal = document.getElementById('speed-modal');
     var btnTopSpeed = document.getElementById('btn-top-speed');
     var btnRetestSpeed = document.getElementById('btn-retest-speed');
@@ -114,13 +114,22 @@
       if (speedModal) {
         speedModal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
+      } else {
+        window.location.href = '/speedtest';
       }
     }
 
     if (btnTopSpeed) {
       btnTopSpeed.addEventListener('click', function (e) {
-        e.preventDefault();
-        openSpeed();
+        if (window.location.pathname === '/speedtest' || window.location.pathname === '/speedtest.html') {
+          e.preventDefault();
+          var startBtn = document.getElementById('btn-start-speedtest');
+          if (startBtn) {
+            startBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            startBtn.focus();
+          }
+        }
+        // Otherwise, allow standard navigation to /speedtest
       });
     }
 

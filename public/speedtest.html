@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Speedtest: онлайн тест швидкості інтернету та пінгу | LIKEMARK CLOUD</title>
+  <meta name="description" content="Перевірте швидкість свого з'єднання з дата-центрами LIKEMARK CLOUD у Варшаві, Франкфурті та Амстердамі: Download, Upload, Ping, Jitter.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/fonts.css">
+  <link rel="stylesheet" href="/css/site-theme.css">
+  <link rel="stylesheet" href="/css/site-header.css">
+  <link rel="stylesheet" href="/css/site-footer.css">
+  <link rel="stylesheet" href="/css/speedtest.css">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+</head>
+<body class="speedtest-page">
+
+<!-- HEADER TEMPLATE PLACEHOLDER -->
+<header class="site-header">
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-bar-left">
+        <div class="top-bar-lang" title="Мова інтерфейсу">
+          <svg width="18" height="13" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px; box-shadow:0 0 1px rgba(0,0,0,0.25);">
+            <rect width="18" height="6.5" fill="#0057B7"></rect>
+            <rect y="6.5" width="18" height="6.5" fill="#FFDD00"></rect>
+          </svg>
+          <span>UA</span>
+        </div>
+        <a href="/speedtest" class="top-bar-item top-bar-speed" id="btn-top-speed" title="Перевірити швидкість мережі до дата-центрів" style="color:#eb4247; font-weight:700;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m12 14 4-4"></path>
+            <path d="M3.34 19a10 10 0 1 1 17.32 0"></path>
+          </svg>
+          <span>Швидкість мережі</span>
+        </a>
+        <a href="/datacenters.html#sla" class="top-bar-item top-bar-status" title="SLA 99.98% — всі вузли працюють у штатному режимі">
+          <span class="status-indicator-dot"></span>
+          <span>Всі сервіси доступні</span>
+        </a>
+      </div>
+      <div class="top-bar-right">
+        <a href="mailto:sales@likemark.cloud" class="top-bar-link">
+          <span>sales@likemark.cloud</span>
+        </a>
+        <a href="tel:+380443345892" class="top-bar-link top-bar-phone">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+          </svg>
+          <span>+380 (44) 334-58-92</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="header-main">
+    <div class="container">
+      <a href="/" class="header-logo" aria-label="LIKEMARK CLOUD Головна">
+        <img src="/images/logo-header.png" alt="LIKEMARK CLOUD">
+      </a>
+      <nav class="header-nav">
+        <div class="nav-item has-dropdown">
+          <button type="button" class="nav-link-btn" aria-expanded="false">
+            <span>Продукти</span>
+            <svg class="nav-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="nav-dropdown-menu">
+            <a href="/kb/cloud-vps.html" class="dropdown-item"><span class="dropdown-title">Хмарні сервери (VPS/VDS)</span><span class="dropdown-desc">Швидке розгортання за 60 секунд на NVMe</span></a>
+            <a href="/servers.html" class="dropdown-item"><span class="dropdown-title">Виділені сервери (Bare Metal)</span><span class="dropdown-desc">AMD EPYC та Intel Xeon без сусідок</span></a>
+            <a href="/kb/managed-databases.html" class="dropdown-item"><span class="dropdown-title">Хмарні бази даних (DBaaS)</span><span class="dropdown-desc">PostgreSQL, MySQL, Redis з авто-бекапами</span></a>
+            <a href="/kb/s3-storage.html" class="dropdown-item"><span class="dropdown-title">S3 Об'єктне сховище</span><span class="dropdown-desc">Сумісність з AWS S3, геореплікація даних</span></a>
+            <a href="/kb/managed-kubernetes.html" class="dropdown-item"><span class="dropdown-title">Managed Kubernetes</span><span class="dropdown-desc">Оркестрація мікросервісів та кластерів</span></a>
+            <a href="/kb/gpu-servers.html" class="dropdown-item"><span class="dropdown-title">GPU-сервери для AI та ML</span><span class="dropdown-desc">NVIDIA A100/H100 для складних обчислень</span></a>
+          </div>
+        </div>
+        <div class="nav-item has-dropdown">
+          <button type="button" class="nav-link-btn" aria-expanded="false">
+            <span>Послуги</span>
+            <svg class="nav-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="nav-dropdown-menu">
+            <a href="/migration.html" class="dropdown-item"><span class="dropdown-title">Безкоштовна міграція під ключ</span><span class="dropdown-desc">Перенесення без простою бізнес-процесів</span></a>
+            <a href="/kb/devops-admin.html" class="dropdown-item"><span class="dropdown-title">DevOps та адміністрування 24/7</span><span class="dropdown-desc">Команда інженерів на варті вашого сервісу</span></a>
+            <a href="/kb/security-services.html" class="dropdown-item"><span class="dropdown-title">Кібербезпека та Anti-DDoS</span><span class="dropdown-desc">Фільтрація L3–L7 трафіку до 3.2 Tbps</span></a>
+            <a href="/kb/vpn-services.html" class="dropdown-item"><span class="dropdown-title">Корпоративний VPN та SD-WAN</span><span class="dropdown-desc">Захищені канали між офісами та хмарою</span></a>
+            <a href="/cases/disaster-recovery-cloud.html" class="dropdown-item"><span class="dropdown-title">Disaster Recovery & Backup</span><span class="dropdown-desc">Миттєве аварійне відновлення за 15 хв</span></a>
+          </div>
+        </div>
+        <div class="nav-item has-dropdown">
+          <button type="button" class="nav-link-btn" aria-expanded="false">
+            <span>LIKEMARK</span>
+            <svg class="nav-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="nav-dropdown-menu">
+            <a href="/datacenters.html" class="dropdown-item"><span class="dropdown-title">Дата-центри у Варшаві та Франкфурті</span><span class="dropdown-desc">Рівень надійності Tier III та Tier IV в ЄС</span></a>
+            <a href="/datacenters.html#sla" class="dropdown-item"><span class="dropdown-title">Фінансові гарантії SLA 99.98%</span><span class="dropdown-desc">Юридична відповідальність за доступність</span></a>
+            <a href="/contacts.html" class="dropdown-item"><span class="dropdown-title">Контакти та офіційні реквізити</span><span class="dropdown-desc">ТОВ «ЛАЙКМАРК ЮКРЕЙН» (ЄДРПОУ 45356074)</span></a>
+            <a href="/privacy.html" class="dropdown-item"><span class="dropdown-title">Безпека даних та GDPR</span><span class="dropdown-desc">Політика конфіденційності та шифрування</span></a>
+          </div>
+        </div>
+        <div class="nav-item has-dropdown">
+          <button type="button" class="nav-link-btn" aria-expanded="false">
+            <span>Ціни</span>
+            <svg class="nav-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="nav-dropdown-menu">
+            <a href="/servers.html#calc" class="dropdown-item modal-trigger-calc"><span class="dropdown-title">Хмарний калькулятор</span><span class="dropdown-desc">Точний розрахунок вартості під ваші задачі</span></a>
+            <a href="/kb/ready-configurations.html" class="dropdown-item"><span class="dropdown-title">Готові тарифи серверів</span><span class="dropdown-desc">Оптимальні пакети Start, Pro, Ultra</span></a>
+            <a href="/kb/custom-configurations.html" class="dropdown-item"><span class="dropdown-title">Кастомні конфігурації</span><span class="dropdown-desc">Індивідуальний підбір дисків та пам'яті</span></a>
+          </div>
+        </div>
+        <div class="nav-item"><a href="/kb/cloud-vps.html" class="nav-link-plain">Документація</a></div>
+        <div class="nav-item has-dropdown">
+          <button type="button" class="nav-link-btn" aria-expanded="false">
+            <span>Академія</span>
+            <svg class="nav-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="nav-dropdown-menu">
+            <a href="/solutions.html" class="dropdown-item"><span class="dropdown-title">Рішення для баз 1С та CRM</span><span class="dropdown-desc">Архітектура високої доступності під навантаження</span></a>
+            <a href="/kb/migration-guide.html" class="dropdown-item"><span class="dropdown-title">Гайди з міграції даних</span><span class="dropdown-desc">Покрокові посібники для системних інженерів</span></a>
+            <a href="/kb/container-registry.html" class="dropdown-item"><span class="dropdown-title">Реєстр контейнерів Docker</span><span class="dropdown-desc">CI/CD пайплайни та доставка додатків</span></a>
+            <a href="/kb/mobile-farm.html" class="dropdown-item"><span class="dropdown-title">Мобільні ферми та емуляція</span><span class="dropdown-desc">Хмарні середовища тестування Android/iOS</span></a>
+          </div>
+        </div>
+        <div class="nav-item"><a href="/cases.html" class="nav-link-plain">Кейси</a></div>
+        <button type="button" class="header-search-btn" id="btn-header-search" aria-label="Пошук" title="Пошук по документації (Ctrl + K)">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </button>
+      </nav>
+      <div class="header-actions">
+        <button type="button" class="btn-header-login" id="btn-header-login">Увійти</button>
+        <button type="button" class="btn-header-register" id="btn-header-register">Створити акаунт</button>
+        <button type="button" class="header-burger-btn" id="header-burger-btn" aria-label="Меню">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Drawer -->
+<div class="mobile-drawer-overlay" id="mobile-drawer-overlay"></div>
+<div class="mobile-drawer" id="mobile-drawer">
+  <div class="mobile-drawer-header">
+    <a href="/" class="header-logo"><img src="/images/logo-header.png" alt="LIKEMARK CLOUD" style="height: 30px;"></a>
+    <button class="mobile-drawer-close" id="mobile-drawer-close">&times;</button>
+  </div>
+  <div class="mobile-drawer-actions">
+    <button type="button" class="mobile-btn-register" id="btn-mobile-register">Створити акаунт</button>
+    <button type="button" class="mobile-btn-login" id="btn-mobile-login">Увійти в кабінет</button>
+  </div>
+  <div class="mobile-drawer-links">
+    <a href="/speedtest" class="mobile-drawer-link mobile-link-direct" style="color:#eb4247;">Швидкість мережі (Speedtest)</a>
+    <a href="/servers.html" class="mobile-drawer-link mobile-link-direct">Виділені сервери</a>
+    <a href="/migration.html" class="mobile-drawer-link mobile-link-direct">Безкоштовна міграція</a>
+    <a href="/datacenters.html" class="mobile-drawer-link mobile-link-direct">Дата-центри ЄС</a>
+    <a href="/kb/cloud-vps.html" class="mobile-drawer-link mobile-link-direct">Документація</a>
+    <a href="/cases.html" class="mobile-drawer-link mobile-link-direct">Кейси</a>
+    <a href="/contacts.html" class="mobile-drawer-link mobile-link-direct">Контакти</a>
+  </div>
+</div>
+
+<main>
+  <!-- Hero & Speedtest Box -->
+  <section class="speedtest-hero">
+    <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+      
+      <!-- Breadcrumbs -->
+      <nav class="theme-breadcrumbs" style="margin-bottom: 24px;">
+        <a href="/">Головна</a>
+        <span class="theme-breadcrumbs-separator">/</span>
+        <span class="theme-breadcrumbs-current">Тест швидкості мережі (Speedtest)</span>
+      </nav>
+
+      <div class="speedtest-header">
+        <div class="speedtest-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m12 14 4-4"></path><path d="M3.34 19a10 10 0 1 1 17.32 0"></path></svg>
+          Онлайн сервіс діагностики мережі
+        </div>
+        <h1 class="speedtest-title">Speedtest: перевірка швидкості інтернет-з'єднання</h1>
+        <p class="speedtest-subtitle">
+          Виміряйте реальну швидкість завантаження (Download), віддачі (Upload), час затримки (Ping) та стабільність каналу (Jitter) до європейських дата-центрів LIKEMARK CLOUD.
+        </p>
+      </div>
+
+      <!-- Main Speedometer Box -->
+      <div class="speedtest-box">
+        <div class="speed-gauge-wrapper">
+          <svg class="speed-gauge-svg" viewBox="0 0 200 120">
+            <!-- Background Arc -->
+            <path class="gauge-bg" d="M 20 100 A 80 80 0 0 1 180 100" />
+            <!-- Active Progress Arc -->
+            <path class="gauge-progress" id="speed-gauge-progress" d="M 20 100 A 80 80 0 0 1 180 100" />
+            <!-- Needle -->
+            <g id="speed-gauge-needle" class="gauge-needle">
+              <line x1="100" y1="100" x2="35" y2="100" stroke="#092433" stroke-width="4" stroke-linecap="round"/>
+              <circle cx="100" cy="100" r="7" fill="#092433"/>
+              <circle cx="100" cy="100" r="3" fill="#ffffff"/>
+            </g>
+          </svg>
+
+          <div class="speed-gauge-display">
+            <div class="speed-gauge-val" id="speed-gauge-value">0.0</div>
+            <div class="speed-gauge-unit" id="speed-gauge-unit">Мбіт/с</div>
+          </div>
+
+          <button type="button" class="btn-start-speed" id="btn-start-speedtest" aria-label="Почати тест швидкості">
+            <span class="btn-start-text">СТАРТ</span>
+          </button>
+
+          <div class="speed-status-text" id="speed-status-text">Натисніть СТАРТ для початку вимірювання</div>
+        </div>
+
+        <!-- Metric Cards (4 Cards: Download, Upload, Ping, Jitter) -->
+        <div class="speedtest-stats-grid">
+          <!-- Download -->
+          <div class="speedtest-stat-card">
+            <div class="speedtest-stat-header">
+              <span class="stat-dot stat-dot--blue"></span>
+              <span class="stat-title">Вхідна швидкість</span>
+            </div>
+            <div class="stat-value-row">
+              <span class="stat-value" id="val-speed-download">-</span>
+              <span class="stat-unit">Мбіт/с</span>
+            </div>
+          </div>
+
+          <!-- Upload -->
+          <div class="speedtest-stat-card">
+            <div class="speedtest-stat-header">
+              <span class="stat-dot stat-dot--orange"></span>
+              <span class="stat-title">Вихідна швидкість</span>
+            </div>
+            <div class="stat-value-row">
+              <span class="stat-value" id="val-speed-upload">-</span>
+              <span class="stat-unit">Мбіт/с</span>
+            </div>
+          </div>
+
+          <!-- Ping -->
+          <div class="speedtest-stat-card">
+            <div class="speedtest-stat-header">
+              <span class="stat-dot stat-dot--green"></span>
+              <span class="stat-title">Затримка (Ping)</span>
+            </div>
+            <div class="stat-value-row">
+              <span class="stat-value" id="val-speed-ping">-</span>
+              <span class="stat-unit">мс</span>
+            </div>
+          </div>
+
+          <!-- Jitter -->
+          <div class="speedtest-stat-card">
+            <div class="speedtest-stat-header">
+              <span class="stat-dot stat-dot--purple"></span>
+              <span class="stat-title">Джитер (Jitter)</span>
+            </div>
+            <div class="stat-value-row">
+              <span class="stat-value" id="val-speed-jitter">-</span>
+              <span class="stat-unit">мс</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Server Selector & Client Info -->
+        <div class="speedtest-server-bar">
+          <div class="server-selector">
+            <label for="speed-server-select">Сервер тестування:</label>
+            <select id="speed-server-select">
+              <option value="waw">🇵🇱 Варшава (Atman WAW-1) — 10 Gbps Uplink</option>
+              <option value="fra">🇩🇪 Франкфурт (Equinix FR-2) — DE-CIX</option>
+              <option value="ams">🇳🇱 Амстердам (Equinix AM-4) — AMS-IX</option>
+            </select>
+          </div>
+          <div class="client-info">
+            Ваш IP: <strong id="speed-client-ip">Визначається…</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLI Benchmarks Section -->
+  <section class="speedtest-cli-section">
+    <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+      <div style="text-align: center; max-width: 680px; margin: 0 auto 32px;">
+        <span class="speedtest-badge" style="background: rgba(31, 147, 255, 0.1); color: #1f93ff;">Консольні бенчмарки CLI</span>
+        <h2 style="font-size: 28px; font-weight: 800; color: #092433; margin: 0 0 10px;">Тестування швидкості через термінал Linux (wget / curl)</h2>
+        <p style="font-size: 15px; color: rgba(9, 36, 51, 0.65); margin: 0;">
+          Скопіюйте готову команду для перевірки пропускної здатності вашого сервера або VDS на максимальній швидкості прямого каналу.
+        </p>
+      </div>
+
+      <div class="speedtest-cli-grid">
+        <!-- 10 MB -->
+        <div class="cli-card">
+          <span class="cli-card-size">10 MB</span>
+          <div class="cli-card-title">Швидкий замір (wget)</div>
+          <div class="cli-command-box">wget -O /dev/null https://speedtest.likemark.cloud/10MB</div>
+          <button type="button" class="btn-copy-cli" data-cmd="wget -O /dev/null https://speedtest.likemark.cloud/10MB">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            Скопіювати команду
+          </button>
+        </div>
+
+        <!-- 100 MB -->
+        <div class="cli-card">
+          <span class="cli-card-size">100 MB</span>
+          <div class="cli-card-title">Стандартний тест каналу</div>
+          <div class="cli-command-box">wget -O /dev/null https://speedtest.likemark.cloud/100MB</div>
+          <button type="button" class="btn-copy-cli" data-cmd="wget -O /dev/null https://speedtest.likemark.cloud/100MB">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            Скопіювати команду
+          </button>
+        </div>
+
+        <!-- 1 GB -->
+        <div class="cli-card">
+          <span class="cli-card-size">1 GB</span>
+          <div class="cli-card-title">Стрес-тест 10G Uplink</div>
+          <div class="cli-command-box">curl -o /dev/null https://speedtest.likemark.cloud/1GB</div>
+          <button type="button" class="btn-copy-cli" data-cmd="curl -o /dev/null https://speedtest.likemark.cloud/1GB">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            Скопіювати команду
+          </button>
+        </div>
+
+        <!-- 10 GB -->
+        <div class="cli-card">
+          <span class="cli-card-size">10 GB</span>
+          <div class="cli-card-title">Максимальне навантаження</div>
+          <div class="cli-command-box">wget -O /dev/null https://speedtest.likemark.cloud/10GB</div>
+          <button type="button" class="btn-copy-cli" data-cmd="wget -O /dev/null https://speedtest.likemark.cloud/10GB">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            Скопіювати команду
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ / Explainer Section -->
+  <section class="speedtest-faq-section">
+    <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+      <div style="text-align: center; max-width: 680px; margin: 0 auto 36px;">
+        <h2 style="font-size: 28px; font-weight: 800; color: #092433; margin: 0 0 10px;">Як працює Speedtest від LIKEMARK CLOUD</h2>
+        <p style="font-size: 15px; color: rgba(9, 36, 51, 0.65); margin: 0;">
+          Основні метрики для оцінки якості зв'язку з хмарною інфраструктурою та базами даних.
+        </p>
+      </div>
+
+      <div class="faq-grid">
+        <div class="faq-card">
+          <h4>Вхідна та вихідна швидкість (Download / Upload)</h4>
+          <p>
+            Показує, скільки мегабіт інформації за секунду ваш пристрій здатний завантажити з сервера або надіслати назад. Висока вхідна швидкість важлива для завантаження резервних копій, а вихідна — для реплікації баз 1С та CRM.
+          </p>
+        </div>
+        <div class="faq-card">
+          <h4>Час затримки (Ping / RTT)</h4>
+          <p>
+            Час у мілісекундах, за який пакет даних проходить від вашого комп'ютера до дата-центру та повертається назад. Пінг до Варшави складає 12–18 мс, що гарантує миттєвий відгук віддалених робочих столів RDP.
+          </p>
+        </div>
+        <div class="faq-card">
+          <h4>Коливання затримки (Jitter)</h4>
+          <p>
+            Показник стабільності з'єднання: чим менший джитер (в ідеалі 1–3 мс), тим рівномірніше надходять пакети без мікрофризів та втрат для IP-телефонії, відеоконференцій та термінальних сесій.
+          </p>
+        </div>
+        <div class="faq-card">
+          <h4>BGP Anycast та прямий піринг</h4>
+          <p>
+            LIKEMARK CLOUD підключено безпосередньо до провідних точок обміну трафіком: DTEL-IX (Київ), Giganet (Україна), DE-CIX (Франкфурт) та AMS-IX (Амстердам) на швидкостях до 100 Gbps.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<div class="footer" data-v-a4670568>
+  <div class="footer__container container" data-v-a4670568>
+    <div class="footer__inner" data-v-a4670568>
+      <div class="footer__promo" data-v-a4670568>
+        <a class="footer__promo-logo" href="/" data-v-a4670568 style="display:inline-flex; align-items:center; text-decoration:none;">
+          <img src="/images/logo-footer.png" alt="LIKEMARK CLOUD" style="height:38px; width:auto; display:block;">
+        </a>
+        <button type="button" class="footer__promo-btn footer__promo-btn--only-mobile text-s16" data-v-a4670568 onclick="window.scrollTo({top:0, behavior:'smooth'})"> Вгору </button>
+        <button type="button" onclick="window.scrollTo({top:0, behavior:'smooth'})" class="button button--default button--outlined button--light !text-center footer__promo-btn footer__promo-btn--only-desktop text-s16" data-v-a4670568 data-v-c5d5fa05 style="margin-top:auto; padding:10px 20px; font-size:14px; width:auto; display:inline-flex; align-items:center; gap:8px;">
+          Вгору
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 25 24" data-v-a4670568 style="width:14px; height:14px; transform:rotate(-90deg);"><path fill="currentColor" d="m13.309 23.993-1.421-1.421 8.917-8.917c.242-.242.06-.665-.302-.665H.492v-1.995h20.01c.362 0 .544-.423.271-.695l-8.886-8.887 1.42-1.42s10.368 10.367 10.61 10.579a1.97 1.97 0 0 1 0 2.811l-10.61 10.61Z"></path></svg>
+        </button>
+      </div>
+      <nav class="footer-nav footer__nav" data-v-a4670568 data-v-105878b8>
+        <div class="footer-nav__columns" data-v-105878b8>
+          <div class="footer-nav__col" data-v-105878b8>
+            <div class="footer-nav__group" data-v-105878b8>
+              <div class="footer-nav__group-title" data-v-105878b8>Про компанію</div>
+              <ul class="footer-nav__group-links footer-links" data-v-105878b8>
+                <li class="footer-links__item" data-v-105878b8><a href="/servers" class="footer-links__item-link" data-v-105878b8><span data-v-105878b8>Про нас та інфраструктуру</span></a></li>
+                <li class="footer-links__item" data-v-105878b8><a href="/datacenters" class="footer-links__item-link" data-v-105878b8><span data-v-105878b8>Дата-центри Tier III (ЄС)</span></a></li>
+                <li class="footer-links__item" data-v-105878b8><a href="/cases/disaster-recovery-cloud" class="footer-links__item-link" data-v-105878b8><span data-v-105878b8>Безпека та Disaster Recovery</span></a></li>
+                <li class="footer-links__item" data-v-105878b8><a href="/contacts" class="footer-links__item-link" data-v-105878b8><span data-v-105878b8>Контакти та реквізити</span></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer-nav__col" data-v-105878b8>
+            <div class="footer-nav__group" data-v-105878b8>
+              <div class="footer-nav__group-title" data-v-105878b8>Документація</div>
+              <ul class="footer-nav__group-links footer-links" data-v-105878b8>
+                <li class="footer-links__item" data-v-105878b8><a href="/kb" class="footer-links__item-link" data-v-105878b8><span data-v-105878b8>Технічна документація</span></a></li>
+                <li class="footer-links__item" data-v-105878b8><a href="/terms" class="footer-links__item-link" data-v-105878b8><span data-v-105878b8>Регламент та SLA 99.98%</span></a></li>
+                <li class="footer-links__item" data-v-105878b8><a href="/panel" class="footer-links__item-link" data-v-105878b8><span data-v-105878b8>Панель керування</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div class="footer__contacts" data-v-a4670568>
+        <div class="footer-contact footer__contact" data-v-a4670568>
+          <a class="footer-contact__phone" href="tel:+380443345892">+380 (44) 334-58-92</a>
+          <a class="footer-contact__email" href="mailto:sales@likemark.cloud">sales@likemark.cloud</a>
+        </div>
+        <p class="footer__requisites text-r14" data-v-a4670568>
+          © 2026 ТОВ «ЛАЙКМАРК ЮКРЕЙН»<br>
+          Код ЄДРПОУ 45356074<br>
+          Київ, вул. Велика Васильківська, 72
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SPEED TEST MODAL ==================== -->
+<div id="speed-modal" style="display:none; position:fixed; inset:0; background:rgba(9,36,51,0.7); backdrop-filter:blur(6px); z-index:99999; align-items:center; justify-content:center; padding:16px;">
+  <div style="background:#fff; border-radius:16px; width:100%; max-width:480px; padding:28px; box-shadow:0 20px 50px rgba(0,0,0,0.25); position:relative; font-family:Manrope,sans-serif; box-sizing:border-box;">
+    <button type="button" class="modal-close-generic" style="position:absolute; top:16px; right:16px; background:none; border:none; font-size:22px; cursor:pointer; color:#9ca3af; line-height:1; width:32px; height:32px; display:flex; align-items:center; justify-content:center; border-radius:50%;">&times;</button>
+    <div style="display:inline-flex; align-items:center; gap:6px; background:rgba(16,185,129,0.1); color:#059669; font-size:12px; font-weight:700; padding:4px 10px; border-radius:4px; margin-bottom:12px;">
+      <span style="width:7px; height:7px; background:#10b981; border-radius:50%; display:inline-block;"></span>
+      ДАТА-ЦЕНТРИ TIER III / IV В ЄС
+    </div>
+    <h3 style="font-size:20px; font-weight:700; color:#092433; margin:0 0 6px;">Швидкість та пінг до дата-центрів</h3>
+    <p style="font-size:13px; color:rgba(9,36,51,0.65); margin:0 0 18px; line-height:1.45;">
+      Прямі BGP-лінки з провідними українськими точками обміну трафіком (DTEL-IX, Giganet, UA-IX).
+    </p>
+    <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:20px;" id="speed-test-results">
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 14px; background:#f8fafc; border:1px solid rgba(9,36,51,0.08); border-radius:8px;">
+        <div>
+          <div style="font-size:13.5px; font-weight:700; color:#092433;">Варшава, Польща (Atman WAW-1)</div>
+          <div style="font-size:11.5px; color:rgba(9,36,51,0.5);">Основний дата-центр • 10 Gbps Uplink</div>
+        </div>
+        <div style="text-align:right;">
+          <span style="font-size:15px; font-weight:800; color:#059669;" id="ping-waw">14 ms</span>
+        </div>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 14px; background:#f8fafc; border:1px solid rgba(9,36,51,0.08); border-radius:8px;">
+        <div>
+          <div style="font-size:13.5px; font-weight:700; color:#092433;">Франкфурт, Німеччина (Equinix FR-2)</div>
+          <div style="font-size:11.5px; color:rgba(9,36,51,0.5);">Резервний вузол • DE-CIX прямий стик</div>
+        </div>
+        <div style="text-align:right;">
+          <span style="font-size:15px; font-weight:800; color:#059669;" id="ping-fra">22 ms</span>
+        </div>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 14px; background:#f8fafc; border:1px solid rgba(9,36,51,0.08); border-radius:8px;">
+        <div>
+          <div style="font-size:13.5px; font-weight:700; color:#092433;">Амстердам, Нідерланди (Equinix AM-4)</div>
+          <div style="font-size:11.5px; color:rgba(9,36,51,0.5);">Вузол сховища S3 та CDN • AMS-IX</div>
+        </div>
+        <div style="text-align:right;">
+          <span style="font-size:15px; font-weight:800; color:#059669;" id="ping-ams">27 ms</span>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex; gap:10px;">
+      <button type="button" id="btn-retest-speed" style="flex:1; background:#092433; color:#fff; border:none; padding:11px; border-radius:8px; font-size:14px; font-weight:700; cursor:pointer;">Тестувати знову</button>
+      <a href="/datacenters.html" style="background:#f1f5f9; color:#092433; text-decoration:none; display:inline-flex; align-items:center; justify-content:center; padding:11px 16px; border-radius:8px; font-size:14px; font-weight:600;">Про дата-центри</a>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SEARCH MODAL ==================== -->
+<div id="search-modal" style="display:none; position:fixed; inset:0; background:rgba(9,36,51,0.7); backdrop-filter:blur(6px); z-index:99999; align-items:flex-start; justify-content:center; padding:60px 16px 16px;">
+  <div style="background:#fff; border-radius:16px; width:100%; max-width:560px; padding:24px; box-shadow:0 25px 60px rgba(0,0,0,0.3); position:relative; font-family:Manrope,sans-serif; box-sizing:border-box;">
+    <button type="button" class="modal-close-generic" style="position:absolute; top:16px; right:16px; background:none; border:none; font-size:22px; cursor:pointer; color:#9ca3af; line-height:1; width:32px; height:32px; display:flex; align-items:center; justify-content:center; border-radius:50%;">&times;</button>
+    <div style="display:flex; align-items:center; gap:10px; border-bottom:2px solid rgba(9,36,51,0.08); padding-bottom:12px; margin-bottom:16px;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#092433" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="text" id="header-search-input" placeholder="Пошук по статтях, серверах та інструкціях..." style="flex:1; border:none; outline:none; font-size:16px; font-weight:600; color:#092433; font-family:inherit;">
+    </div>
+    <div id="search-results-box" style="display:flex; flex-direction:column; gap:8px; max-height:360px; overflow-y:auto;">
+      <a href="/kb/cloud-vps.html" style="padding:10px 12px; border-radius:8px; background:#f8fafc; text-decoration:none; display:flex; justify-content:space-between; align-items:center;">
+        <div><div style="font-size:14px; font-weight:700; color:#092433;">Хмарні сервери (VPS/VDS)</div><div style="font-size:12px; color:rgba(9,36,51,0.6);">NVMe SSD, гарантований vCPU, 99.98% SLA</div></div>
+        <span style="font-size:11px; background:rgba(31,147,255,0.1); color:#1f93ff; font-weight:700; padding:3px 8px; border-radius:4px;">KB</span>
+      </a>
+      <a href="/servers.html" style="padding:10px 12px; border-radius:8px; background:#f8fafc; text-decoration:none; display:flex; justify-content:space-between; align-items:center;">
+        <div><div style="font-size:14px; font-weight:700; color:#092433;">Виділені сервери (Dedicated Bare Metal)</div><div style="font-size:12px; color:rgba(9,36,51,0.6);">AMD EPYC, Intel Xeon, IPMI консоль</div></div>
+        <span style="font-size:11px; background:rgba(10,180,118,0.1); color:#0ab476; font-weight:700; padding:3px 8px; border-radius:4px;">Сервери</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== FLOATING CONTROLS (BOTTOM-RIGHT) ==================== -->
+<div id="site-floating-controls" class="site-floating-controls">
+  <button type="button" id="btn-consult-floating" class="floating-consult-btn" title="Консультація перед замовленням">
+    <svg width="20" height="20" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block; flex-shrink:0;">
+      <path d="M240.808 240.808H122.123C56.6994 240.808 3.45695 187.562 3.45695 122.122C3.45695 56.7031 56.6994 3.45697 122.124 3.45697C187.566 3.45697 240.808 56.7031 240.808 122.122V240.808Z" fill="#FFFFFF"></path>
+    </svg>
+    <span class="floating-consult-text">Консультація перед замовленням</span>
+  </button>
+  <button type="button" id="btn-scroll-up" class="floating-up-btn" aria-label="Вгору">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width:20px; height:20px; fill:#fff; transform:rotate(-90deg); display:block;">
+      <path fill="#fff" d="m12.808 0-1.42 1.42 8.912 8.918c.241.241.06.665-.303.665H0v1.995h19.997c.363 0 .544.423.272.695l-8.88 8.886L12.808 24l10.603-10.603a1.97 1.97 0 0 0 0-2.81L12.808 0Z"></path>
+    </svg>
+  </button>
+</div>
+
+<!-- ==================== CONSULTATION MODAL ==================== -->
+<div id="consult-modal" style="display:none; position:fixed; inset:0; background:rgba(9,36,51,0.7); backdrop-filter:blur(6px); z-index:99999; align-items:center; justify-content:center; padding:16px;">
+  <div style="background:#fff; border-radius:16px; width:100%; max-width:440px; padding:28px; box-shadow:0 20px 50px rgba(0,0,0,0.25); position:relative; font-family:Manrope,sans-serif;">
+    <button type="button" class="modal-close-generic" style="position:absolute; top:16px; right:16px; background:none; border:none; font-size:22px; cursor:pointer; color:#9ca3af;">&times;</button>
+    <div style="display:inline-block; background:rgba(235,66,71,0.1); color:#eb4247; font-size:12px; font-weight:700; padding:4px 10px; border-radius:4px; margin-bottom:12px;">ОНЛАЙН-КОНСУЛЬТАЦІЯ</div>
+    <h3 style="font-size:22px; font-weight:700; color:#092433; margin:0 0 6px;">Консультація чергового інженера</h3>
+    <p style="font-size:13px; color:rgba(9,36,51,0.6); margin:0 0 16px;">Відповімо на запитання щодо міграції баз 1С/CRM, підбору сертифікованих серверів та умов SLA за 15 хвилин.</p>
+    <form id="form-consult" style="display:flex; flex-direction:column; gap:12px;">
+      <input type="hidden" name="source" value="Кнопка консультації перед замовленням">
+      <div>
+        <label style="display:block; font-size:13px; font-weight:600; color:#092433; margin-bottom:4px;">Ваше ім'я або назва компанії</label>
+        <input type="text" name="name" required placeholder="ТОВ або Сергій" style="width:100%; padding:10px 14px; border:1px solid rgba(9,36,51,0.2); border-radius:8px; font-size:14px; box-sizing:border-box;">
+      </div>
+      <div>
+        <label style="display:block; font-size:13px; font-weight:600; color:#092433; margin-bottom:4px;">Номер телефону</label>
+        <input type="tel" name="phone" required placeholder="+380 (XX) XXX-XX-XX" style="width:100%; padding:10px 14px; border:1px solid rgba(9,36,51,0.2); border-radius:8px; font-size:14px; box-sizing:border-box;">
+      </div>
+      <div>
+        <label style="display:block; font-size:13px; font-weight:600; color:#092433; margin-bottom:4px;">Завдання або запитання (необов'язково)</label>
+        <textarea name="comment" rows="2" placeholder="Потрібен розрахунок під базу 1С на 15 користувачів" style="width:100%; padding:10px 14px; border:1px solid rgba(9,36,51,0.2); border-radius:8px; font-size:14px; box-sizing:border-box;"></textarea>
+      </div>
+      <button type="submit" id="btn-consult-submit" style="background:#eb4247; color:#fff; border:none; padding:12px; border-radius:8px; font-size:15px; font-weight:700; cursor:pointer; margin-top:4px;">Замовити консультацію</button>
+    </form>
+  </div>
+</div>
+
+<!-- ==================== AUTH MODAL ==================== -->
+<div id="auth-modal" style="display:none; position:fixed; inset:0; background:rgba(9,36,51,0.7); backdrop-filter:blur(6px); z-index:99999; align-items:center; justify-content:center; padding:16px;">
+  <div style="background:#fff; border-radius:16px; width:100%; max-width:440px; padding:28px; box-shadow:0 20px 50px rgba(0,0,0,0.25); position:relative; font-family:Manrope,sans-serif;">
+    <button type="button" class="modal-close-generic" style="position:absolute; top:16px; right:16px; background:none; border:none; font-size:22px; cursor:pointer; color:#9ca3af;">&times;</button>
+    <div style="display:flex; border-bottom:2px solid rgba(9,36,51,0.08); margin-bottom:20px;">
+      <button type="button" id="tab-btn-login" style="flex:1; padding:10px 0; border:none; background:none; font-size:16px; font-weight:700; color:#092433; border-bottom:2px solid #092433; margin-bottom:-2px; cursor:pointer;">Вхід у кабінет</button>
+      <button type="button" id="tab-btn-register" style="flex:1; padding:10px 0; border:none; background:none; font-size:16px; font-weight:600; color:rgba(9,36,51,0.4); margin-bottom:-2px; cursor:pointer;">Створити акаунт</button>
+    </div>
+    <form id="form-login" style="display:flex; flex-direction:column; gap:14px;">
+      <div>
+        <label style="display:block; font-size:13px; font-weight:600; color:#092433; margin-bottom:4px;">Email або логін</label>
+        <input type="text" id="login-email" required placeholder="name@company.com" style="width:100%; padding:10px 14px; border:1px solid rgba(9,36,51,0.2); border-radius:8px; font-size:14px; box-sizing:border-box;">
+      </div>
+      <div>
+        <label style="display:block; font-size:13px; font-weight:600; color:#092433; margin-bottom:4px;">Пароль</label>
+        <input type="password" id="login-password" required placeholder="••••••••" style="width:100%; padding:10px 14px; border:1px solid rgba(9,36,51,0.2); border-radius:8px; font-size:14px; box-sizing:border-box;">
+      </div>
+      <button type="submit" style="background:#092433; color:#fff; border:none; padding:12px; border-radius:8px; font-size:15px; font-weight:700; cursor:pointer; margin-top:4px;">Увійти в панель</button>
+    </form>
+    <form id="form-register" style="display:none; flex-direction:column; gap:12px;">
+      <div>
+        <label style="display:block; font-size:13px; font-weight:600; color:#092433; margin-bottom:4px;">Робочий Email</label>
+        <input type="email" id="reg-email" required placeholder="name@company.com" style="width:100%; padding:10px 14px; border:1px solid rgba(9,36,51,0.2); border-radius:8px; font-size:14px; box-sizing:border-box;">
+      </div>
+      <div>
+        <label style="display:block; font-size:13px; font-weight:600; color:#092433; margin-bottom:4px;">Номер телефону</label>
+        <input type="tel" id="reg-phone" required placeholder="+380 (XX) XXX-XX-XX" style="width:100%; padding:10px 14px; border:1px solid rgba(9,36,51,0.2); border-radius:8px; font-size:14px; box-sizing:border-box;">
+      </div>
+      <div>
+        <label style="display:block; font-size:13px; font-weight:600; color:#092433; margin-bottom:4px;">Пароль</label>
+        <input type="password" id="reg-password" required placeholder="Мінімум 8 символів" style="width:100%; padding:10px 14px; border:1px solid rgba(9,36,51,0.2); border-radius:8px; font-size:14px; box-sizing:border-box;">
+      </div>
+      <button type="submit" style="background:#092433; color:#fff; border:none; padding:12px; border-radius:8px; font-size:15px; font-weight:700; cursor:pointer; margin-top:4px;">Створити акаунт</button>
+    </form>
+  </div>
+</div>
+
+<!-- SCRIPTS -->
+<script src="/js/site-header.js"></script>
+<script src="/js/modules/speedtest.js"></script>
+<script src="/js/modules/auth.js"></script>
+<script src="/js/modules/consult.js"></script>
+</body>
+</html>

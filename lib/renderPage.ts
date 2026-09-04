@@ -37,6 +37,10 @@ export function renderPage(filePathRelative: string, activeRoute: string = '') {
     headerHtml = headerHtml.replace(linkRegex, '$1 active$2');
   }
 
+  if (activeRoute === 'speedtest') {
+    headerHtml = headerHtml.replace('id="btn-top-speed"', 'id="btn-top-speed" style="color: #eb4247; font-weight: 700;"');
+  }
+
   // Ensure stylesheet links in <head>
   if (!html.includes('/css/site-theme.css')) {
     html = html.replace('</head>', '  <link rel="stylesheet" href="/css/site-theme.css">\n</head>');
@@ -46,6 +50,9 @@ export function renderPage(filePathRelative: string, activeRoute: string = '') {
   }
   if (!html.includes('/css/site-footer.css')) {
     html = html.replace('</head>', '  <link rel="stylesheet" href="/css/site-footer.css">\n</head>');
+  }
+  if (activeRoute === 'speedtest' && !html.includes('/css/speedtest.css')) {
+    html = html.replace('</head>', '  <link rel="stylesheet" href="/css/speedtest.css">\n</head>');
   }
 
   // Replace header in html
@@ -92,6 +99,13 @@ export function renderPage(filePathRelative: string, activeRoute: string = '') {
     const bodyClose = html.indexOf('</body>');
     if (bodyClose !== -1) {
       html = html.substring(0, bodyClose) + '\n' + cachedModals! + '\n' + cachedScripts! + '\n' + html.substring(bodyClose);
+    }
+  }
+
+  if (activeRoute === 'speedtest' && !html.includes('/js/modules/speedtest.js')) {
+    const bodyClose = html.indexOf('</body>');
+    if (bodyClose !== -1) {
+      html = html.substring(0, bodyClose) + '\n<script src="/js/modules/speedtest.js"></script>\n' + html.substring(bodyClose);
     }
   }
 
