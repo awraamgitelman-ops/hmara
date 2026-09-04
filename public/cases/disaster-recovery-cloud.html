@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
@@ -221,7 +221,7 @@
       <ol class="article-toc-list">
         <li><a href="#why-draas">Чому резервних копій (Backup) більше недостатньо</a></li>
         <li><a href="#rto-rpo">Метрики RTO та RPO: як визначити допустимі втрати бізнесу</a></li>
-        <li><a href="#architecture">Топологія LIKEMARK DRaaS: Active-Active та Active-Standby</a></li>
+        <li><a href="#architecture">Архітектура Disaster Recovery: топологія Active-Active та Active-Standby для бізнесу</a></li>
         <li><a href="#replication">Технології безперервної реплікації даних на рівні блоків та БД</a></li>
         <li><a href="#failover-engine">Автоматичний Failover: перемикання трафіку через BGP Anycast</a></li>
         <li><a href="#metrics">Результати тестування реальної аварії: метрики відновлення</a></li>
@@ -256,7 +256,7 @@
       </p>
       <ol>
         <li><strong>RTO (Recovery Time Objective):</strong> Максимально допустимий час, за який інфраструктура має повністю відновити роботу після оголошення аварії. Для критичних систем мета — менше 5 хвилин;</li>
-        <li><strong>RPO (Recovery Point Objective):</strong> Максимальний проміжок часу, за який дані можуть бути втрачені. Для транзакційних систем LIKEMARK DRaaS забезпечує RPO &lt; 15 секунд завдяки безперервній асинхронній реплікації журналів (WAL / Binlog / Storage snapshots).</li>
+        <li><strong>RPO (Recovery Point Objective):</strong> Максимальний проміжок часу, за який дані можуть бути втрачені. Для транзакційних систем інженери LIKEMARK налаштовують конфігурацію, яка забезпечує RPO &lt; 15 секунд завдяки безперервній асинхронній реплікації журналів (WAL / Binlog / Storage snapshots).</li>
       </ol>
 
       <h2 id="architecture">3. Топологія LIKEMARK DRaaS: Active-Active та Active-Standby</h2>
@@ -304,18 +304,18 @@
         Найскладніший етап відновлення — перенаправлення клієнтів на резервний майданчик без ручної зміни DNS-записів (адже DNS TTL у багатьох інтернет-провайдерів може оновлюватися годинами).
       </p>
       <p>
-        LIKEMARK реалізує <strong>BGP Anycast Routing</strong>: обидва дата-центри анонсують одну й ту саму IP-підмережу через протокол BGP. У разі аварії системи автоматичного моніторингу закривають сесію анонсування на основному сайті, і світові Tier 1 маршрутизатори протягом 15–30 секунд направляють весь трафік на резервний сайт у Франкфурті.
+        Інженери LIKEMARK налаштовують <strong>BGP Anycast Routing</strong>: обидва дата-центри анонсують одну й ту саму IP-підмережу через протокол BGP. У разі аварії системи автоматичного моніторингу закривають сесію анонсування на основному сайті, і світові Tier 1 маршрутизатори протягом 15–30 секунд направляють весь трафік на резервний сайт у Франкфурті.
       </p>
 
       <div class="code-box">
         <div class="code-box-header">
-          <span>/opt/likemark/draas-agent/healthcheck-failover.sh</span>
+          <span>/etc/keepalived/healthcheck.sh</span>
           <span>bash</span>
         </div>
         <pre><code>#!/usr/bin/env bash
-# LIKEMARK DRaaS Automated BGP Healthcheck & Failover Trigger
+# Automated Healthcheck & Failover Trigger (BGP / Patroni cluster)
 PRIMARY_TARGET="https://lb-pl.likemark.internal/healthz"
-FAIL_COUNT_FILE="/tmp/draas_fail_count"
+FAIL_COUNT_FILE="/tmp/dr_fail_count"
 MAX_FAILS=3
 
 HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" --connect-timeout 2 --max-time 3 "$PRIMARY_TARGET")
@@ -333,11 +333,11 @@ if [ "$HTTP_CODE" -ne 200 ]; then
     # 2. Promote Standby Database cluster in Frankfurt to Primary
     /usr/local/bin/patroni_ctl -c /etc/patroni/frankfurt.yml failover --candidate node-dr-de-01 --force
     
-    # 3. Unseal KMS and start warm compute instances
-    systemctl start likemark-dr-orchestrator.service
+    # 3. Start standby compute services in Frankfurt
+    systemctl restart keepalived
     
-    # 4. Notify on-call DevOps via Telegram / PagerDuty
-    /opt/likemark/scripts/alert-pagerduty.sh "DR Failover to Frankfurt Activated Successfully!"
+    # 4. Notify on-call DevOps via Telegram
+    /usr/local/bin/notify-telegram.sh "[ALERT] DR Failover to Frankfurt Activated Successfully!"
   fi
 else
   # Reset fail count on healthy check
