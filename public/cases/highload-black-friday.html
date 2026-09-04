@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Як найбільший маркетплейс витримує пікові навантаження в «Чорну п'ятницю» без збоїв | LIKEMARK CLOUD</title>
   <meta name="description" content="Інженерний кейс LIKEMARK: архітектура виділених серверів Highload для e-commerce маркетплейсу під час Black Friday. Оптимізація БД, BGP Anycast, тюнінг ядра Linux та 0% простою.">
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/article.css">
 
   <!-- Favicons -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -59,34 +59,110 @@
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header class="header">
-    <div class="container">
-      <div class="header-inner">
-        <a href="/" class="logo-wrap" style="display:flex; align-items:center; text-decoration:none;">
-          <img src="/images/logo-header.png" alt="LIKEMARK CLOUD" style="height: 36px; width: auto; display: block;">
+  <!-- SITE HEADER (IDENTICAL TO MAIN PAGE) -->
+  <header class="site-header">
+    <!-- Top Bar -->
+    <div class="top-bar">
+      <div class="container">
+        <!-- Left: Language UA -->
+        <div class="top-bar-left">
+          <div class="top-bar-lang">
+            <svg width="18" height="13" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="18" height="6.5" fill="#0057B7"/>
+              <rect y="6.5" width="18" height="6.5" fill="#FFDD00"/>
+            </svg>
+            <span>UA</span>
+          </div>
+        </div>
+
+        <!-- Right: Contacts -->
+        <div class="top-bar-right">
+          <a href="mailto:sales@likemark.cloud" class="top-bar-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="20" height="16" x="2" y="4" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+            <span>sales@likemark.cloud</span>
+          </a>
+
+          <a href="tel:+380443345892" class="top-bar-link" style="font-weight: 600;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            <span>+380 (44) 334-58-92</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <div class="header-main">
+      <div class="container">
+        <!-- Logo -->
+        <a href="/" class="header-logo">
+          <img src="/images/logo-header.png" alt="LIKEMARK CLOUD">
         </a>
 
-        <nav class="nav-links">
-          <a href="/#tariffs" class="nav-link">Сервери та тарифи</a>
-          <a href="/#migration" class="nav-link">Безкоштовна міграція</a>
-          <a href="/#scenarios" class="nav-link">Рішення для 1С/CRM</a>
-          <a href="/#datacenters" class="nav-link">Дата-центри ЄС</a>
-          <a href="/contacts" class="nav-link">Контакти</a>
+        <!-- Desktop Navigation -->
+        <nav class="header-nav">
+          <a href="/servers" class="header-nav-link">Сервери</a>
+          <a href="/migration" class="header-nav-link">Міграція</a>
+          <a href="/#scenarios" class="header-nav-link">Рішення</a>
+          <a href="/#datacenters" class="header-nav-link">Дата-центри</a>
+          <a href="/#cases" class="header-nav-link active">Кейси</a>
+          <a href="/contacts" class="header-nav-link">Контакти</a>
         </nav>
 
+        <!-- Right Controls -->
         <div class="header-actions">
           <a href="tel:+380443345892" class="header-phone">+380 (44) 334-58-92</a>
-          <button class="btn btn-primary btn-sm" data-open-modal data-tariff="Консультація: Highload сервери">
-            Отримати консультацію
+          <button type="button" class="btn-header-login" data-open-modal data-tariff="Вхід до кабінету">Увійти</button>
+          <button type="button" class="btn-header-cta" data-open-modal data-tariff="Консультація: Highload сервери">
+            Консультація
+          </button>
+          
+          <!-- Mobile Burger Toggle -->
+          <button type="button" class="header-burger-btn" id="header-burger-btn" aria-label="Відкрити меню">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
           </button>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- MAIN ARTICLE -->
-  <main class="article-container">
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer-overlay" id="mobile-drawer-overlay"></div>
+  <div class="mobile-drawer" id="mobile-drawer">
+    <div class="mobile-drawer-header">
+      <a href="/" class="header-logo">
+        <img src="/images/logo-header.png" alt="LIKEMARK CLOUD" style="height: 30px;">
+      </a>
+      <button class="mobile-drawer-close" id="mobile-drawer-close" aria-label="Закрити меню">&times;</button>
+    </div>
+    <div class="mobile-drawer-links">
+      <a href="/" class="mobile-drawer-link">Головна</a>
+      <a href="/servers" class="mobile-drawer-link">Виділені сервери</a>
+      <a href="/migration" class="mobile-drawer-link">Безкоштовна міграція</a>
+      <a href="/#scenarios" class="mobile-drawer-link">Рішення для 1С/CRM</a>
+      <a href="/#datacenters" class="mobile-drawer-link">Дата-центри ЄС</a>
+      <a href="/#cases" class="mobile-drawer-link active">Кейси та статті</a>
+      <a href="/contacts" class="mobile-drawer-link">Контакти та реквізити</a>
+    </div>
+    <div class="mobile-drawer-footer">
+      <a href="tel:+380443345892" class="top-bar-link" style="font-size: 15px; font-weight: 700; color: #092433;">+380 (44) 334-58-92</a>
+      <a href="mailto:sales@likemark.cloud" class="top-bar-link" style="font-size: 13px;">sales@likemark.cloud</a>
+      <button type="button" class="btn-cta-primary" style="width: 100%; justify-content: center; margin-top: 8px;" data-open-modal data-tariff="Запит з мобільного меню">
+        Замовити консультацію
+      </button>
+    </div>
+  </div>
+
+  <!-- MAIN ARTICLE WRAPPER -->
+  <main class="article-wrapper">
     
     <!-- Breadcrumbs -->
     <nav class="breadcrumbs" aria-label="Хлібні крихти">
@@ -171,7 +247,7 @@
         <svg class="article-callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
         <div class="article-callout-content">
           <div class="article-callout-title">Головна пастка високонавантажених розпродажів</div>
-          Спроба масштабуватися виключно збільшенням кількості віртуальних машин (horizontal pod autoscaling) часто призводить до «ефекту доміно»: щойно бекенд-інстанси починають масово генерувати запити до центральної бази даних, виникає connection pool exhaustion (вичерпання пулу з'єднань), блокування таблиць та повна зупинка checkout-сервісу.
+          <div class="article-callout-desc">Спроба масштабуватися виключно збільшенням кількості віртуальних машин (horizontal pod autoscaling) часто призводить до «ефекту доміно»: щойно бекенд-інстанси починають масово генерувати запити до центральної бази даних, виникає connection pool exhaustion (вичерпання пулу з'єднань), блокування таблиць та повна зупинка checkout-сервісу.</div>
         </div>
       </div>
 
@@ -264,7 +340,7 @@ fs.file-max = 2097152</code></pre>
         <svg class="article-callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
         <div class="article-callout-content">
           <div class="article-callout-title">Протокол BBR проти традиційного CUBIC</div>
-          Перехід на алгоритм контролю перевантажень Google BBR (Bottleneck Bandwidth and RTT) на базі Linux-ядра дозволив скоротити мережеву латентність для покупців з мобільних пристроїв та нестабільного 4G/LTE інтернету на 28%, усунувши повторні пересилання пакетів (TCP retransmissions).
+          <div class="article-callout-desc">Перехід на алгоритм контролю перевантажень Google BBR (Bottleneck Bandwidth and RTT) на базі Linux-ядра дозволив скоротити мережеву латентність для покупців з мобільних пристроїв та нестабільного 4G/LTE інтернету на 28%, усунувши повторні пересилання пакетів (TCP retransmissions).</div>
         </div>
       </div>
 
@@ -288,31 +364,31 @@ fs.file-max = 2097152</code></pre>
               <td><strong>Час формування сторінки (TTFB)</strong></td>
               <td>1,840 мс</td>
               <td>145 мс</td>
-              <td><span style="color: var(--color-primary); font-weight:700;">в 12.7 разів швидше</span></td>
+              <td><span style="color: var(--color-green); font-weight:700;">в 12.7 разів швидше</span></td>
             </tr>
             <tr>
               <td><strong>Помилки при оформленні (502 / 504)</strong></td>
               <td>4.8% від усіх замовлень</td>
               <td>0.001% (ізольовані клієнтські таймаути)</td>
-              <td><span style="color: var(--color-primary); font-weight:700;">Знижено в 4800 разів</span></td>
+              <td><span style="color: var(--color-green); font-weight:700;">Знижено в 4800 разів</span></td>
             </tr>
             <tr>
               <td><strong>Завантаження CPU на головних вузлах</strong></td>
               <td>94–98% (CPU Throttling)</td>
               <td>42% (великий запас міцності)</td>
-              <td><span style="color: var(--color-primary); font-weight:700;">58% запас потужності</span></td>
+              <td><span style="color: var(--color-green); font-weight:700;">58% запас потужності</span></td>
             </tr>
             <tr>
               <td><strong>Аптайм інфраструктури (SLA)</strong></td>
               <td>98.4% (простої ~45 хв)</td>
               <td>99.99% (0 секунд простою)</td>
-              <td><span style="color: var(--color-primary); font-weight:700;">100% безперервність</span></td>
+              <td><span style="color: var(--color-green); font-weight:700;">100% безперервність</span></td>
             </tr>
             <tr>
               <td><strong>Витрати на інфраструктуру за тиждень</strong></td>
               <td>~$18,500 (через оверюз та egress)</td>
               <td>Фіксовані $6,200/міс</td>
-              <td><span style="color: var(--color-primary); font-weight:700;">Економія 66%</span></td>
+              <td><span style="color: var(--color-green); font-weight:700;">Економія 66%</span></td>
             </tr>
           </tbody>
         </table>
@@ -343,7 +419,7 @@ fs.file-max = 2097152</code></pre>
         <p>
           Отримайте безкоштовний аудит поточної інфраструктури та індивідуальний розрахунок виділеного кластера Highload від інженерів LIKEMARK з гарантованим SLA 99.98% за договором.
         </p>
-        <button class="btn btn-primary btn-lg" data-open-modal data-tariff="Аудит та Highload сервери">
+        <button class="btn-cta-primary" data-open-modal data-tariff="Аудит та Highload сервери">
           Замовити консультацію архітектора
         </button>
       </div>
@@ -390,22 +466,30 @@ fs.file-max = 2097152</code></pre>
 
   </main>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container" style="text-align: center;">
-      <div style="display: flex; justify-content: center; margin-bottom: 16px;">
-        <a href="/" style="display:inline-flex; align-items:center; text-decoration:none;">
-          <img src="/images/logo-footer.png" alt="LIKEMARK CLOUD" style="height: 38px; width: auto; display: block;">
+  <!-- SITE FOOTER (IDENTICAL TO MAIN PAGE STYLE) -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <a href="/" class="footer-logo">
+          <img src="/images/logo-header.png" alt="LIKEMARK CLOUD">
         </a>
+        <nav class="footer-nav">
+          <a href="/">Головна</a>
+          <a href="/servers">Виділені сервери</a>
+          <a href="/migration">Міграція в хмару</a>
+          <a href="/#cases">Кейси</a>
+          <a href="/contacts">Контакти</a>
+          <a href="/privacy">Політика конфіденційності</a>
+          <a href="/terms">Публічна оферта IaaS</a>
+        </nav>
       </div>
-      <p>© 2023–2026 ТОВ «ЛАЙКМАРК ЮКРЕЙН» (код ЄДРПОУ 45356074). Усі права захищені.</p>
-      <div style="margin-top: 12px; display: flex; justify-content: center; gap: 20px; font-size: 0.85rem;">
-        <a href="/" class="footer-link">Головна</a>
-        <a href="/servers" class="footer-link">Виділені сервери</a>
-        <a href="/migration" class="footer-link">Міграція в хмару</a>
-        <a href="/contacts" class="footer-link">Контакти</a>
-        <a href="/privacy" class="footer-link">Політика конфіденційності</a>
-        <a href="/terms" class="footer-link">Публічна оферта IaaS</a>
+      <div class="footer-bottom">
+        <div>
+          © 2023–2026 ТОВ «ЛАЙКМАРК ЮКРЕЙН» (код ЄДРПОУ 45356074). Усі права захищені.
+        </div>
+        <div class="footer-legal-tag">
+          Європейські дата-центри Tier III • Франкфурт | Варшава | Амстердам • UA-IX Київ
+        </div>
       </div>
     </div>
   </footer>
@@ -413,28 +497,28 @@ fs.file-max = 2097152</code></pre>
   <!-- MODAL -->
   <div class="modal-overlay" id="lead-modal">
     <div class="modal-box">
-      <button class="modal-close" id="modal-close-btn">&times;</button>
+      <button class="modal-close" id="modal-close-btn" aria-label="Закрити">&times;</button>
       <h3 class="modal-title">Консультація архітектора LIKEMARK</h3>
       <p class="modal-desc" id="modal-desc">Залиште контакти, черговий інженер зв'яжеться з вами протягом 15 хвилин.</p>
-      <form class="ajax-lead-form">
+      <form class="ajax-lead-form modal-form">
         <input type="hidden" name="tariff" id="modal-tariff-input" value="Виділені сервери Highload">
         <div class="form-group">
-          <label class="form-label">Ваше ім'я:</label>
-          <input type="text" name="name" class="form-input" placeholder="Олександр" required>
+          <label class="form-label">Ваше ім'я або назва компанії:</label>
+          <input type="text" name="name" class="form-input" placeholder="ТОВ або Сергій" required>
         </div>
         <div class="form-group">
-          <label class="form-label">Телефон для зв'язку:</label>
-          <input type="tel" name="phone" class="form-input" placeholder="+380..." required>
+          <label class="form-label">Номер телефону:</label>
+          <input type="tel" name="phone" class="form-input" placeholder="+380 (XX) XXX-XX-XX" required>
         </div>
         <div class="form-group">
           <label class="form-label">Корпоративний Email (опціонально):</label>
-          <input type="email" name="email" class="form-input" placeholder="cto@company.ua">
+          <input type="email" name="email" class="form-input" placeholder="it@company.ua">
         </div>
-        <button type="submit" class="btn btn-primary" style="width: 100%;">Надіслати запит</button>
+        <button type="submit" class="btn-modal-submit">Надіслати запит</button>
       </form>
     </div>
   </div>
 
-  <script src="/js/main.js"></script>
+  <script src="/js/article.js"></script>
 </body>
 </html>

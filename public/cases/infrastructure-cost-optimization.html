@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Гайд: як оптимізувати витрати бізнесу на інфраструктуру та забезпечити SLA 99.98% | LIKEMARK CLOUD</title>
   <meta name="description" content="Практичний посібник з FinOps та оптимізації IT-інфраструктури від LIKEMARK: скорочення хмарних рахунків на 40–60%, правильний sizing у Kubernetes, тюнінг ресурсів та збереження SLA 99.98%.">
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/article.css">
 
   <!-- Favicons -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -59,34 +59,110 @@
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header class="header">
-    <div class="container">
-      <div class="header-inner">
-        <a href="/" class="logo-wrap" style="display:flex; align-items:center; text-decoration:none;">
-          <img src="/images/logo-header.png" alt="LIKEMARK CLOUD" style="height: 36px; width: auto; display: block;">
+  <!-- SITE HEADER (IDENTICAL TO MAIN PAGE) -->
+  <header class="site-header">
+    <!-- Top Bar -->
+    <div class="top-bar">
+      <div class="container">
+        <!-- Left: Language UA -->
+        <div class="top-bar-left">
+          <div class="top-bar-lang">
+            <svg width="18" height="13" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="18" height="6.5" fill="#0057B7"/>
+              <rect y="6.5" width="18" height="6.5" fill="#FFDD00"/>
+            </svg>
+            <span>UA</span>
+          </div>
+        </div>
+
+        <!-- Right: Contacts -->
+        <div class="top-bar-right">
+          <a href="mailto:sales@likemark.cloud" class="top-bar-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="20" height="16" x="2" y="4" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+            <span>sales@likemark.cloud</span>
+          </a>
+
+          <a href="tel:+380443345892" class="top-bar-link" style="font-weight: 600;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            <span>+380 (44) 334-58-92</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <div class="header-main">
+      <div class="container">
+        <!-- Logo -->
+        <a href="/" class="header-logo">
+          <img src="/images/logo-header.png" alt="LIKEMARK CLOUD">
         </a>
 
-        <nav class="nav-links">
-          <a href="/#tariffs" class="nav-link">Сервери та тарифи</a>
-          <a href="/#migration" class="nav-link">Безкоштовна міграція</a>
-          <a href="/#scenarios" class="nav-link">Рішення для 1С/CRM</a>
-          <a href="/#datacenters" class="nav-link">Дата-центри ЄС</a>
-          <a href="/contacts" class="nav-link">Контакти</a>
+        <!-- Desktop Navigation -->
+        <nav class="header-nav">
+          <a href="/servers" class="header-nav-link">Сервери</a>
+          <a href="/migration" class="header-nav-link">Міграція</a>
+          <a href="/#scenarios" class="header-nav-link">Рішення</a>
+          <a href="/#datacenters" class="header-nav-link">Дата-центри</a>
+          <a href="/#cases" class="header-nav-link active">Кейси</a>
+          <a href="/contacts" class="header-nav-link">Контакти</a>
         </nav>
 
+        <!-- Right Controls -->
         <div class="header-actions">
           <a href="tel:+380443345892" class="header-phone">+380 (44) 334-58-92</a>
-          <button class="btn btn-primary btn-sm" data-open-modal data-tariff="Консультація: FinOps та оптимізація">
-            Отримати консультацію
+          <button type="button" class="btn-header-login" data-open-modal data-tariff="Вхід до кабінету">Увійти</button>
+          <button type="button" class="btn-header-cta" data-open-modal data-tariff="Консультація: FinOps та оптимізація">
+            Консультація
+          </button>
+          
+          <!-- Mobile Burger Toggle -->
+          <button type="button" class="header-burger-btn" id="header-burger-btn" aria-label="Відкрити меню">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
           </button>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- MAIN ARTICLE -->
-  <main class="article-container">
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer-overlay" id="mobile-drawer-overlay"></div>
+  <div class="mobile-drawer" id="mobile-drawer">
+    <div class="mobile-drawer-header">
+      <a href="/" class="header-logo">
+        <img src="/images/logo-header.png" alt="LIKEMARK CLOUD" style="height: 30px;">
+      </a>
+      <button class="mobile-drawer-close" id="mobile-drawer-close" aria-label="Закрити меню">&times;</button>
+    </div>
+    <div class="mobile-drawer-links">
+      <a href="/" class="mobile-drawer-link">Головна</a>
+      <a href="/servers" class="mobile-drawer-link">Виділені сервери</a>
+      <a href="/migration" class="mobile-drawer-link">Безкоштовна міграція</a>
+      <a href="/#scenarios" class="mobile-drawer-link">Рішення для 1С/CRM</a>
+      <a href="/#datacenters" class="mobile-drawer-link">Дата-центри ЄС</a>
+      <a href="/#cases" class="mobile-drawer-link active">Кейси та статті</a>
+      <a href="/contacts" class="mobile-drawer-link">Контакти та реквізити</a>
+    </div>
+    <div class="mobile-drawer-footer">
+      <a href="tel:+380443345892" class="top-bar-link" style="font-size: 15px; font-weight: 700; color: #092433;">+380 (44) 334-58-92</a>
+      <a href="mailto:sales@likemark.cloud" class="top-bar-link" style="font-size: 13px;">sales@likemark.cloud</a>
+      <button type="button" class="btn-cta-primary" style="width: 100%; justify-content: center; margin-top: 8px;" data-open-modal data-tariff="Запит з мобільного меню">
+        Замовити консультацію
+      </button>
+    </div>
+  </div>
+
+  <!-- MAIN ARTICLE WRAPPER -->
+  <main class="article-wrapper">
     
     <!-- Breadcrumbs -->
     <nav class="breadcrumbs" aria-label="Хлібні крихти">
@@ -171,7 +247,7 @@
         <svg class="article-callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
         <div class="article-callout-content">
           <div class="article-callout-title">Парадокс хмарної економіки</div>
-          Компанії часто вважають, що публічна хмара дешевша завдяки відсутності капітальних витрат (CapEx). Проте при стабільному цілодобовому навантаженні (baseline load) операційні витрати (OpEx) на оренду віртуальних ядер у гіперскейлерах перевищують вартість виділеної приватної хмари <strong>в 2.8–3.4 раза щомісяця</strong>.
+          <div class="article-callout-desc">Компанії часто вважають, що публічна хмара дешевша завдяки відсутності капітальних витрат (CapEx). Проте при стабільному цілодобовому навантаженні (baseline load) операційні витрати (OpEx) на оренду віртуальних ядер у гіперскейлерах перевищують вартість виділеної приватної хмари <strong>в 2.8–3.4 раза щомісяця</strong>.</div>
         </div>
       </div>
 
@@ -234,25 +310,25 @@
               <td><strong>Вихідний трафік в інтернет (Egress)</strong></td>
               <td>$0.09 – $0.12 за 1 ГБ</td>
               <td><strong>0 ₴ (Безлімітний порт 1–10 Gbps)</strong></td>
-              <td><span style="color: var(--color-primary); font-weight:700;">100% економія на трафіку</span></td>
+              <td><span style="color: var(--color-green); font-weight:700;">100% економія на трафіку</span></td>
             </tr>
             <tr>
               <td><strong>Міжзонний трафік (Cross-AZ Traffic)</strong></td>
               <td>$0.02 за кожен ГБ між зонами</td>
               <td><strong>0 ₴ (Внутрішній vLAN безкоштовно)</strong></td>
-              <td><span style="color: var(--color-primary); font-weight:700;">Повна відсутність прихованих плат</span></td>
+              <td><span style="color: var(--color-green); font-weight:700;">Повна відсутність прихованих плат</span></td>
             </tr>
             <tr>
               <td><strong>Швидкісний диск NVMe (IOPS)</strong></td>
               <td>Окремий щомісячний чек за IOPS</td>
               <td><strong>Включено в тариф дисків до 1,400,000 IOPS</strong></td>
-              <td><span style="color: var(--color-primary); font-weight:700;">Без лімітів та burst-кредитів</span></td>
+              <td><span style="color: var(--color-green); font-weight:700;">Без лімітів та burst-кредитів</span></td>
             </tr>
             <tr>
               <td><strong>Managed Control Plane K8s</strong></td>
               <td>$73–$100 / місяць за кластер</td>
               <td><strong>Безкоштовно включено в Managed SLA</strong></td>
-              <td><span style="color: var(--color-primary); font-weight:700;">Нуль витрат на підтримку майстрів</span></td>
+              <td><span style="color: var(--color-green); font-weight:700;">Нуль витрат на підтримку майстрів</span></td>
             </tr>
           </tbody>
         </table>
@@ -347,7 +423,7 @@ spec:
         <p>
           Замовте комплексний FinOps-аудит вашої інфраструктури від інженерів LIKEMARK. Ми знайдемо неефективно витрачені ресурси та покажемо конкретний план скорочення бюджету без ризиків для SLA.
         </p>
-        <button class="btn btn-primary btn-lg" data-open-modal data-tariff="FinOps аудит інфраструктури">
+        <button class="btn-cta-primary" data-open-modal data-tariff="FinOps аудит інфраструктури">
           Замовити безкоштовний аудит витрат
         </button>
       </div>
@@ -394,22 +470,30 @@ spec:
 
   </main>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container" style="text-align: center;">
-      <div style="display: flex; justify-content: center; margin-bottom: 16px;">
-        <a href="/" style="display:inline-flex; align-items:center; text-decoration:none;">
-          <img src="/images/logo-footer.png" alt="LIKEMARK CLOUD" style="height: 38px; width: auto; display: block;">
+  <!-- SITE FOOTER (IDENTICAL TO MAIN PAGE STYLE) -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <a href="/" class="footer-logo">
+          <img src="/images/logo-header.png" alt="LIKEMARK CLOUD">
         </a>
+        <nav class="footer-nav">
+          <a href="/">Головна</a>
+          <a href="/servers">Виділені сервери</a>
+          <a href="/migration">Міграція в хмару</a>
+          <a href="/#cases">Кейси</a>
+          <a href="/contacts">Контакти</a>
+          <a href="/privacy">Політика конфіденційності</a>
+          <a href="/terms">Публічна оферта IaaS</a>
+        </nav>
       </div>
-      <p>© 2023–2026 ТОВ «ЛАЙКМАРК ЮКРЕЙН» (код ЄДРПОУ 45356074). Усі права захищені.</p>
-      <div style="margin-top: 12px; display: flex; justify-content: center; gap: 20px; font-size: 0.85rem;">
-        <a href="/" class="footer-link">Головна</a>
-        <a href="/servers" class="footer-link">Виділені сервери</a>
-        <a href="/migration" class="footer-link">Міграція в хмару</a>
-        <a href="/contacts" class="footer-link">Контакти</a>
-        <a href="/privacy" class="footer-link">Політика конфіденційності</a>
-        <a href="/terms" class="footer-link">Публічна оферта IaaS</a>
+      <div class="footer-bottom">
+        <div>
+          © 2023–2026 ТОВ «ЛАЙКМАРК ЮКРЕЙН» (код ЄДРПОУ 45356074). Усі права захищені.
+        </div>
+        <div class="footer-legal-tag">
+          Європейські дата-центри Tier III • Франкфурт | Варшава | Амстердам • UA-IX Київ
+        </div>
       </div>
     </div>
   </footer>
@@ -417,28 +501,28 @@ spec:
   <!-- MODAL -->
   <div class="modal-overlay" id="lead-modal">
     <div class="modal-box">
-      <button class="modal-close" id="modal-close-btn">&times;</button>
+      <button class="modal-close" id="modal-close-btn" aria-label="Закрити">&times;</button>
       <h3 class="modal-title">Замовлення FinOps аудиту</h3>
       <p class="modal-desc" id="modal-desc">Залиште контакти, черговий інженер зв'яжеться з вами протягом 15 хвилин.</p>
-      <form class="ajax-lead-form">
+      <form class="ajax-lead-form modal-form">
         <input type="hidden" name="tariff" id="modal-tariff-input" value="FinOps аудит інфраструктури">
         <div class="form-group">
-          <label class="form-label">Ваше ім'я:</label>
-          <input type="text" name="name" class="form-input" placeholder="Олександр" required>
+          <label class="form-label">Ваше ім'я або назва компанії:</label>
+          <input type="text" name="name" class="form-input" placeholder="ТОВ або Сергій" required>
         </div>
         <div class="form-group">
-          <label class="form-label">Телефон для зв'язку:</label>
-          <input type="tel" name="phone" class="form-input" placeholder="+380..." required>
+          <label class="form-label">Номер телефону:</label>
+          <input type="tel" name="phone" class="form-input" placeholder="+380 (XX) XXX-XX-XX" required>
         </div>
         <div class="form-group">
           <label class="form-label">Корпоративний Email (опціонально):</label>
           <input type="email" name="email" class="form-input" placeholder="cto@company.ua">
         </div>
-        <button type="submit" class="btn btn-primary" style="width: 100%;">Надіслати запит</button>
+        <button type="submit" class="btn-modal-submit">Надіслати запит</button>
       </form>
     </div>
   </div>
 
-  <script src="/js/main.js"></script>
+  <script src="/js/article.js"></script>
 </body>
 </html>
