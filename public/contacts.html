@@ -37,6 +37,32 @@
   <link rel="stylesheet" href="/css/site-header.css">
 </head>
 <body>
+<script id="cookie-handler-script">
+window.dismissCookieNotice = function() {
+  try {
+    localStorage.setItem('likemark_cookie_accepted', 'true');
+  } catch(e) {}
+  var b = document.querySelectorAll('#native-cookie-banner, .cookies, [data-sonner-toaster], [data-sonner-toast]');
+  b.forEach(function(el) {
+    el.style.setProperty('display', 'none', 'important');
+    el.style.setProperty('opacity', '0', 'important');
+    el.style.setProperty('visibility', 'hidden', 'important');
+    el.style.setProperty('pointer-events', 'none', 'important');
+    try { el.remove(); } catch(e) {}
+  });
+  var s = document.createElement('style');
+  s.innerHTML = '#native-cookie-banner, .cookies, [data-sonner-toaster], [data-sonner-toast] { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }';
+  document.head.appendChild(s);
+};
+try {
+  if (localStorage.getItem('likemark_cookie_accepted') === 'true') {
+    var s = document.createElement('style');
+    s.innerHTML = '#native-cookie-banner, .cookies, [data-sonner-toaster], [data-sonner-toast] { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }';
+    document.head.appendChild(s);
+  }
+} catch(e) {}
+</script>
+
 
   <!-- HEADER -->
     <!-- SITE HEADER -->
