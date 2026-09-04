@@ -1,0 +1,161 @@
+/* ==========================================================================
+   GLOBAL TYPOGRAPHY — LIKEMARK CLOUD (SELECTEL STYLE)
+   Font Family: Manrope (Regular, Medium, SemiBold, Bold)
+   Monospace: JetBrains Mono
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* Local Fallback Font Faces */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: local('Manrope Light'), local('Manrope-Light'), url('/css/ManropeLight.ClHVnlQc.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Manrope Regular'), local('Manrope-Regular'), local('Manrope'), url('/css/ManropeRegular.DwSNFBnA.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: local('Manrope Medium'), local('Manrope-Medium'), url('/css/ManropeMedium.D2xEcEwK.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Manrope SemiBold'), local('Manrope-SemiBold'), url('/css/ManropeSemibold.CM9VGQjF.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Manrope Bold'), local('Manrope-Bold'), url('/css/ManropeBold.Bx0w4FDG.woff2') format('woff2');
+}
+
+/* Global CSS Variables */
+:root {
+  --font-main: 'Manrope', Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif !important;
+  --theme-font: 'Manrope', Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif !important;
+  --sh-font-main: 'Manrope', Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif !important;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+}
+
+/* Universal Typography Enforcement across whole site */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+del,
+dfn,
+em,
+img,
+ins,
+q,
+s,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video,
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: 'Manrope', Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  text-rendering: optimizeLegibility !important;
+}
+
+/* Monospace overrides for code elements */
+code,
+code *,
+pre,
+pre *,
+kbd,
+samp,
+.font-mono,
+.mono,
+[class*="mono"],
+.docs-code-block code,
+.docs-code-block pre,
+.docs-code-block span {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+}

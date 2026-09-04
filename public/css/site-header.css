@@ -1,3 +1,4 @@
+@import url('/css/fonts.css');
 /* ==========================================================================
    LIKEMARK CLOUD — UNIFIED SITE HEADER
    ТОВ «ЛАЙКМАРК ЮКРЕЙН» (код ЄДРПОУ 45356074)
@@ -147,7 +148,11 @@
   color: var(--sh-data-blue) !important;
   text-decoration: none !important;
   font-size: 15px !important;
-  font-weight: 600 !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.01em !important;
+  font-family: 'Manrope', Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
   padding: 8px 0 !important;
   position: relative !important;
   transition: color 0.2s ease !important;

@@ -1,3 +1,4 @@
+@import url('/css/fonts.css');
 /* ==========================================================================
    LIKEMARK CLOUD — SELECTEL STYLE MODERN B2B THEME
    ТОВ "ЛАЙКМАРК ЮКРЕЙН" (код ЄДРПОУ 45356074)
@@ -27,7 +28,7 @@
   --text-muted: #94a3b8;
   --text-dark: #64748b;
   
-  --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-main: 'Manrope', Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --radius-sm: 8px;
   --radius-md: 14px;
   --radius-lg: 20px;
