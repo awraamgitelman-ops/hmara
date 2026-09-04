@@ -35,7 +35,8 @@
   padding: 0 !important;
   font-family: var(--sh-font-main) !important;
   box-sizing: border-box !important;
-  box-shadow: 0 1px 3px rgba(9, 36, 51, 0.04) !important;
+  box-shadow: none !important;
+  filter: none !important;
 }
 
 /* ==========================================================================
@@ -46,9 +47,12 @@
   border-bottom: 1px solid var(--sh-border-color) !important;
   font-size: 13px !important;
   line-height: 1.2 !important;
-  padding: 6px 0 !important;
+  padding: 8px 0 !important;
   color: var(--sh-data-blue) !important;
   box-sizing: border-box !important;
+  font-weight: 400 !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
 }
 
 @media (max-width: 991px) {
@@ -78,12 +82,12 @@
   display: inline-flex !important;
   align-items: center !important;
   gap: 6px !important;
-  font-weight: 700 !important;
+  font-weight: 600 !important;
   color: var(--sh-data-blue) !important;
   cursor: default !important;
   user-select: none !important;
-  font-size: 12px !important;
-  letter-spacing: 0.03em !important;
+  font-size: 12.5px !important;
+  letter-spacing: 0.02em !important;
 }
 
 .site-header .top-bar-item {
@@ -93,9 +97,11 @@
   color: var(--sh-data-blue-80) !important;
   text-decoration: none !important;
   font-size: 13px !important;
-  font-weight: 500 !important;
+  font-weight: 400 !important;
   transition: color 0.15s ease !important;
   cursor: pointer !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
 }
 
 .site-header .top-bar-item:hover {
@@ -146,8 +152,10 @@
   gap: 6px !important;
   color: var(--sh-data-blue-80) !important;
   text-decoration: none !important;
-  font-weight: 500 !important;
+  font-weight: 400 !important;
   transition: color 0.15s ease !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
 }
 
 .site-header .top-bar-link:hover {
@@ -155,7 +163,7 @@
 }
 
 .site-header .top-bar-phone {
-  font-weight: 600 !important;
+  font-weight: 400 !important;
   color: var(--sh-data-blue) !important;
 }
 
@@ -178,7 +186,8 @@
   align-items: center !important;
   width: 100% !important;
   box-sizing: border-box !important;
-  border-bottom: 1px solid var(--sh-border-color) !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
 }
 
 .site-header .header-main .container {
@@ -217,7 +226,7 @@
 .site-header .header-nav {
   display: flex !important;
   align-items: center !important;
-  gap: 6px !important;
+  gap: 4px !important;
 }
 
 @media (max-width: 1199px) {
@@ -236,19 +245,22 @@
 .site-header .nav-link-plain {
   background: transparent !important;
   border: none !important;
-  font-family: inherit !important;
+  font-family: var(--sh-font-main) !important;
   font-size: 15px !important;
-  font-weight: 500 !important;
+  font-weight: 400 !important;
   color: var(--sh-data-blue) !important;
   display: inline-flex !important;
   align-items: center !important;
-  gap: 6px !important;
+  gap: 5px !important;
   cursor: pointer !important;
-  padding: 8px 12px !important;
+  padding: 6px 10px !important;
   border-radius: var(--sh-radius-sm) !important;
   text-decoration: none !important;
   transition: color 0.15s ease, background-color 0.15s ease !important;
   white-space: nowrap !important;
+  letter-spacing: -0.01em !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
 }
 
 .site-header .nav-link-btn:hover,
@@ -260,9 +272,10 @@
 /* Chevron: Selectel Authentic Arrow SVG */
 .site-header .nav-chevron {
   transition: transform 0.25s ease, opacity 0.15s ease, color 0.15s ease !important;
-  opacity: 0.6 !important;
+  opacity: 0.65 !important;
   display: inline-block !important;
   flex-shrink: 0 !important;
+  color: var(--sh-data-blue) !important;
 }
 
 .site-header .nav-item.has-dropdown:hover .nav-chevron,
@@ -281,7 +294,7 @@
   background: #ffffff !important;
   border: 1px solid var(--sh-border-color) !important;
   border-radius: var(--sh-radius-lg) !important;
-  box-shadow: 0 16px 36px rgba(9, 36, 51, 0.12), 0 4px 12px rgba(9, 36, 51, 0.04) !important;
+  box-shadow: 0 10px 30px rgba(9, 36, 51, 0.08), 0 2px 6px rgba(9, 36, 51, 0.03) !important;
   padding: 10px !important;
   z-index: 1050 !important;
   opacity: 0 !important;
@@ -385,15 +398,18 @@
 .site-header .btn-header-login {
   background: transparent !important;
   border: none !important;
-  font-family: inherit !important;
+  font-family: var(--sh-font-main) !important;
   font-size: 15px !important;
-  font-weight: 500 !important;
+  font-weight: 400 !important;
   color: var(--sh-data-blue) !important;
   padding: 8px 12px !important;
   border-radius: var(--sh-radius-sm) !important;
   cursor: pointer !important;
   transition: color 0.15s ease, background-color 0.15s ease !important;
   white-space: nowrap !important;
+  letter-spacing: -0.01em !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
 }
 
 @media (max-width: 767px) {
@@ -412,9 +428,9 @@
   background-color: var(--sh-color-dark) !important;
   color: #ffffff !important;
   border: none !important;
-  font-family: inherit !important;
+  font-family: var(--sh-font-main) !important;
   font-size: 14px !important;
-  font-weight: 600 !important;
+  font-weight: 500 !important;
   padding: 10px 18px !important;
   border-radius: 8px !important;
   cursor: pointer !important;
@@ -424,6 +440,9 @@
   justify-content: center !important;
   white-space: nowrap !important;
   line-height: 1 !important;
+  box-shadow: none !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
 }
 
 .site-header .btn-header-register:hover {
