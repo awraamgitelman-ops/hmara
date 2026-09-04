@@ -80,7 +80,7 @@
             submitBtn.style.background = '#10b981';
             submitBtn.style.color = '#fff';
             submitBtn.style.opacity = '1';
-            submitBtn.textContent = '✓ Ви успішно підписалися!';
+            submitBtn.textContent = 'Ви успішно підписалися!';
           }
           if (successMsg) {
             successMsg.style.display = 'block';

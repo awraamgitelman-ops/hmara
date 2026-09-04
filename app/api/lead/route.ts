@@ -49,13 +49,13 @@ export async function POST(request: Request) {
     }
 
     const tgMessage =
-      `🚀 <b>НОВА ЗАЯВКА LIKEMARK CLOUD (Next.js)</b>\n\n` +
-      `👤 <b>Клієнт:</b> ${name}\n` +
-      `📞 <b>Телефон:</b> ${phone}\n` +
-      `✉️ <b>Email:</b> ${email || 'не вказано'}\n` +
-      `⚙️ <b>Тариф:</b> ${tariff}\n` +
-      `💬 <b>Коментар:</b> ${comment}\n` +
-      `📍 <b>Джерело:</b> ${source}\n` +
+      `<b>НОВА ЗАЯВКА LIKEMARK CLOUD (Next.js)</b>\n\n` +
+      ` <b>Клієнт:</b> ${name}\n` +
+      ` <b>Телефон:</b> ${phone}\n` +
+      ` <b>Email:</b> ${email || 'не вказано'}\n` +
+      ` <b>Тариф:</b> ${tariff}\n` +
+      ` <b>Коментар:</b> ${comment}\n` +
+      ` <b>Джерело:</b> ${source}\n` +
       `⏰ <b>Час:</b> ${dateStr}`;
 
     await sendTelegramNotification(tgMessage);

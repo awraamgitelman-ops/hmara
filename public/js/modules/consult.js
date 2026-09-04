@@ -65,7 +65,7 @@
         }).finally(function () {
           if (submitBtn) {
             submitBtn.style.background = '#0ab476';
-            submitBtn.textContent = '✓ Заявку прийнято! Інженер зателефонує вам';
+            submitBtn.textContent = 'Заявку прийнято! Інженер зателефонує вам';
           }
           setTimeout(function () {
             closeConsult();
