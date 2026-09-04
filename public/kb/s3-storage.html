@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Політика конфіденційності та захисту персональних даних | LIKEMARK CLOUD</title>
-  <meta name="description" content="Політика конфіденційності, обробки персональних даних та відповідність регламенту GDPR ТОВ «ЛАЙКМАРК ЮКРЕЙН».">
+  <title>S3-сумісне об'єктне сховище (Object Storage) | База знань LIKEMARK CLOUD</title>
+  <meta name="description" content="Надійне, необмежене хмарне сховище з повною підтримкою протоколу AWS S3 API для зберігання резервних копій, медіа-файлів та статичних ресурсів.">
   
   <!-- Favicons -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -16,12 +16,13 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   
-  <!-- Site Styles -->
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="/css/site-theme.css">
   <link rel="stylesheet" href="/css/site-header.css">
   <link rel="stylesheet" href="/css/site-footer.css">
+  <link rel="stylesheet" href="/css/docs.css">
 </head>
 <body>
 
@@ -126,100 +127,274 @@
     </div>
   </div>
 
-<main class="page-content">
-  <!-- HERO -->
-  <section class="page-hero">
-    <div class="site-container">
-      <div class="theme-pill">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+<main class="docs-wrapper">
+  <div class="site-container">
+
+    <!-- MOBILE SIDEBAR TOGGLE BUTTON -->
+    <button type="button" class="docs-mobile-toggle-btn" onclick="document.getElementById('docs-sidebar').classList.toggle('show-mobile');">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+      <span>Зміст документації</span>
+    </button>
+
+    <div class="docs-container">
+      
+      <!-- SIDEBAR -->
+      
+  <aside class="docs-sidebar" id="docs-sidebar">
+    <div class="docs-sidebar-header">
+      <div class="docs-sidebar-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#eb4247" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
         </svg>
-        <span>Захист персональних даних (GDPR)</span>
+        <span>База знань LIKEMARK</span>
       </div>
-      <h1 class="page-hero-title">Політика конфіденційності та захисту даних</h1>
-      <p class="page-hero-subtitle">Остання редакція: 2026 рік • ТОВ «ЛАЙКМАРК ЮКРЕЙН» (код ЄДРПОУ 45356074)</p>
     </div>
-  </section>
+  
+    <div class="docs-nav-group">
+      <div class="docs-nav-group-title">Виділені сервери (Dedicated)</div>
+      <ul class="docs-nav-list">
+    
+        <li>
+          <a href="/kb/ready-configurations" class="docs-nav-link ">
+            <span>Готові конфігурації</span>
+            <span class="docs-nav-badge">2 хв</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="/kb/custom-configurations" class="docs-nav-link ">
+            <span>Довільні конфігурації</span>
+            <span class="docs-nav-badge">Custom</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="/kb/gpu-servers" class="docs-nav-link ">
+            <span>Сервери з GPU NVIDIA</span>
+            <span class="docs-nav-badge">AI/ML</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="/kb/desktop-cpu-servers" class="docs-nav-link ">
+            <span>Десктопні процесори</span>
+            <span class="docs-nav-badge">Ryzen/i9</span>
+          </a>
+        </li>
+      
+      </ul>
+    </div>
+    
+    <div class="docs-nav-group">
+      <div class="docs-nav-group-title">Хмара LIKEMARK (IaaS & Storage)</div>
+      <ul class="docs-nav-list">
+    
+        <li>
+          <a href="/kb/cloud-vps" class="docs-nav-link ">
+            <span>Хмарні сервери (VPS/VDS)</span>
+            <span class="docs-nav-badge">NVMe</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="/kb/s3-storage" class="docs-nav-link active">
+            <span>S3-сумісне сховище</span>
+            <span class="docs-nav-badge">Object</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="/kb/container-registry" class="docs-nav-link ">
+            <span>Container Registry</span>
+            <span class="docs-nav-badge">Docker</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="/kb/mobile-farm" class="docs-nav-link ">
+            <span>Мобільна ферма</span>
+            <span class="docs-nav-badge">iOS/Android</span>
+          </a>
+        </li>
+      
+      </ul>
+    </div>
+    
+    <div class="docs-nav-group">
+      <div class="docs-nav-group-title">Managed Services & Containers</div>
+      <ul class="docs-nav-list">
+    
+        <li>
+          <a href="/kb/managed-databases" class="docs-nav-link ">
+            <span>Хмарні бази даних</span>
+            <span class="docs-nav-badge">Postgres/MySQL</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="/kb/managed-kubernetes" class="docs-nav-link ">
+            <span>Managed Kubernetes</span>
+            <span class="docs-nav-badge">K8s</span>
+          </a>
+        </li>
+      
+      </ul>
+    </div>
+    
+    <div class="docs-nav-group">
+      <div class="docs-nav-group-title">Безпека та Мережі</div>
+      <ul class="docs-nav-list">
+    
+        <li>
+          <a href="/kb/security-services" class="docs-nav-link ">
+            <span>Інформаційна безпека</span>
+            <span class="docs-nav-badge">WAF/DDoS</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="/kb/vpn-services" class="docs-nav-link ">
+            <span>IPsec та WireGuard VPN</span>
+            <span class="docs-nav-badge">Tunnel</span>
+          </a>
+        </li>
+      
+      </ul>
+    </div>
+    
+    <div class="docs-nav-group">
+      <div class="docs-nav-group-title">DevOps та Підтримка</div>
+      <ul class="docs-nav-list">
+    
+        <li>
+          <a href="/kb/devops-admin" class="docs-nav-link ">
+            <span>DevOps та Адміністрування</span>
+            <span class="docs-nav-badge">24/7</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="/kb/migration-guide" class="docs-nav-link ">
+            <span>Безкоштовна міграція</span>
+            <span class="docs-nav-badge">0% Downtime</span>
+          </a>
+        </li>
+      
+      </ul>
+    </div>
+    </aside>
 
-  <!-- DOCUMENT CONTENT -->
-  <section style="padding: 0 0 80px 0;">
-    <div class="site-container">
-      <div class="theme-doc-container">
+      <!-- ARTICLE CONTENT -->
+      <article class="docs-content">
         
-        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px 24px; margin-bottom: 32px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+        <!-- Breadcrumbs -->
+        <nav class="docs-breadcrumbs" aria-label="Хлібні крихти">
+          <a href="/">Головна</a>
+          <span>/</span>
+          <a href="/kb">База знань</a>
+          <span>/</span>
+          <span>Хмара LIKEMARK (IaaS & Storage)</span>
+        </nav>
+
+        <!-- Article Header -->
+        <header class="docs-article-header">
+          <div class="theme-pill" style="margin-bottom: 12px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+            <span>AWS S3 API • 99.999999999%</span>
+          </div>
+          <h1 class="docs-title">S3-сумісне об'єктне сховище (Object Storage)</h1>
+          <p class="docs-lead">Надійне, необмежене хмарне сховище з повною підтримкою протоколу AWS S3 API для зберігання резервних копій, медіа-файлів та статичних ресурсів.</p>
+          <div class="docs-meta-bar">
+            <span>⏱️ Час читання: ~4 хв</span>
+            <span>•</span>
+            <span>🏢 SLA доступності: 99.98%</span>
+            <span>•</span>
+            <span>📅 Оновлено: 2026 рік</span>
+          </div>
+        </header>
+
+        <!-- Article Body -->
+        <div class="docs-body">
+          
+      <h2>Архітектура та захист даних</h2>
+      <p>Об'єктне сховище LIKEMARK розгорнуто на незалежних масивах високої щільності з географічною реплікацією. Дані автоматично розбиваються на блоки з контрольними сумами, що виключає втрату інформації навіть у разі одночасного виходу з ладу кількох серверів зберігання.</p>
+    
+          
+      <h2>Технічні характеристики та параметри</h2>
+      <div style="overflow-x: auto;">
+        <table class="docs-table">
+          <thead>
+            <tr>
+              <th style="width: 35%;">Параметр</th>
+              <th>Значення / Специфікація LIKEMARK CLOUD</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Сумісність з API</strong></td><td>Amazon S3 REST API (AWS SDK, s3cmd, rclone, Cyberduck)</td></tr><tr><td><strong>Надійність збереження</strong></td><td>99.999999999% (11 дев'яток) завдяки георозподіленому Erasure Coding</td></tr><tr><td><strong>Шифрування</strong></td><td>Шифрування даних на льоту (HTTPS/TLS) та в спокої (SSE-S3, SSE-C)</td></tr><tr><td><strong>Тарифікація</strong></td><td>Оплата виключно за фактично використаний дисковий простір (Pay-as-you-go)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    
+          
+      <h2>Приклад конфігурації та API</h2>
+      <div class="docs-code-block">
+        <div class="docs-code-header">
+          <span>Terminal / Bash / Config</span>
+          <button type="button" class="docs-copy-btn" onclick="navigator.clipboard.writeText(this.parentElement.nextElementSibling.innerText); this.textContent='Скопійовано!'; setTimeout(() => this.textContent='Копіювати', 2000);">Копіювати</button>
+        </div>
+        <pre class="docs-code-content"><code># Підключення до S3 через AWS CLI
+aws configure --profile likemark
+# AWS Access Key ID: LKMRK_ACCESS_KEY_SAMPLE
+# AWS Secret Access Key: LKMRK_SECRET_KEY_SAMPLE
+# Default region name: eu-central-1
+
+# Синхронізація локального каталогу бекапів з бакетом
+aws --endpoint-url https://s3.likemark.cloud s3 sync /backup/db s3://company-backups/pg-cluster/</code></pre>
+      </div>
+    
+        </div>
+
+        <!-- CTA Action in Article -->
+        <div style="margin-top: 40px; padding: 24px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
           <div>
-            <div style="font-weight: 800; color: #092433; font-size: 15px;">ТОВ «ЛАЙКМАРК ЮКРЕЙН» (Оператор персональних даних)</div>
-            <div style="font-size: 13px; color: #64748b;">ЗУ «Про захист персональних даних» (№ 2297-VI) та GDPR (Regulation EU 2016/679)</div>
+            <div style="font-size: 16px; font-weight: 800; color: #092433; margin-bottom: 4px;">Бажаєте протестувати конфігурацію?</div>
+            <div style="font-size: 13.5px; color: #64748b;">Отримайте безкоштовний 7-денний тестовий доступ або зверніться до інженера.</div>
           </div>
-          <div class="theme-pill" style="margin: 0; background: #ecfdf5; color: #059669; border-color: #a7f3d0;">
-            ✓ Відповідність GDPR
+          <div style="display: flex; gap: 12px;">
+            <button type="button" class="btn-theme-primary" data-open-modal data-tariff="S3-сумісне об'єктне сховище (Object Storage)">Отримати тестовий доступ</button>
+            <a href="tel:+380443345892" class="btn-theme-secondary">+380 (44) 334-58-92</a>
           </div>
         </div>
 
-        <h2>1. Загальні положення</h2>
-        <p>
-          Ця Політика конфіденційності визначає порядок збору, обробки, зберігання та захисту персональних даних користувачів веб-сайту та послуг хмарної інфраструктури, що надаються ТОВ «ЛАЙКМАРК ЮКРЕЙН» (надалі — «Оператор» або «Компанія»), код ЄДРПОУ 45356074, відповідно до Закону України «Про захист персональних даних» та Загального регламенту захисту даних ЄС (GDPR).
-        </p>
+        <!-- Navigation Footer -->
+        
+    <div class="docs-nav-footer">
+      
+        <a href="/kb/cloud-vps" class="docs-nav-footer-card">
+          <span class="docs-nav-footer-label">&larr; Попередня стаття</span>
+          <span class="docs-nav-footer-title">Хмарні віртуальні сервери VPS / VDS на Enterprise NVMe</span>
+        </a>
+      
+      
+        <a href="/kb/container-registry" class="docs-nav-footer-card" style="text-align: right;">
+          <span class="docs-nav-footer-label">Наступна стаття &rarr;</span>
+          <span class="docs-nav-footer-title">Приватний реєстр контейнерів (Managed Container Registry)</span>
+        </a>
+      
+    </div>
+  
 
-        <h2>2. Які дані ми збираємо</h2>
-        <p>Ми збираємо виключно ту інформацію, яка необхідна для надання хмарних послуг, технічної підтримки та комунікації:</p>
-        <ul style="margin: 16px 0 24px 20px; line-height: 1.8; color: #334155;">
-          <li>Прізвище, ім'я або найменування юридичної особи клієнта;</li>
-          <li>Контактний номер телефону;</li>
-          <li>Адреса електронної пошти (Email);</li>
-          <li>Технічні параметри обраного серверного тарифу або коментар до заявки на міграцію;</li>
-          <li>Файли cookie та знеособлені технічні дані (IP-адреса, тип браузера, тривалість сесії).</li>
-        </ul>
-
-        <h2>3. Мета збору та цілі обробки даних</h2>
-        <p>Персональні дані використовуються виключно для таких законних цілей:</p>
-        <ul style="margin: 16px 0 24px 20px; line-height: 1.8; color: #334155;">
-          <li>Організації безкоштовного 7-денного тестового доступу до виділених хмарних серверів;</li>
-          <li>Укладання договорів надання послуг IaaS та виставлення рахунків за безготівковим розрахунком із ПДВ;</li>
-          <li>Зв'язку чергового системного інженера з клієнтом щодо налаштування та міграції баз даних;</li>
-          <li>Забезпечення стабільності та безпеки облікових записів, протидії несанкціонованим діям та спаму.</li>
-        </ul>
-
-        <h2>4. Захист та нерозголошення даних</h2>
-        <p>
-          Компанія суворо дотримується принципів конфіденційності. Ми <strong>ніколи не передаємо, не продаємо і не розголошуємо персональні дані та комерційний вміст баз даних клієнтів третім особам</strong>, за винятком випадків, прямо передбачених чинним законодавством України за офіційним рішенням суду. Усі мережеві потоки та канали передачі даних захищені сучасними протоколами TLS/SSL-шифрування.
-        </p>
-
-        <h2>5. Права суб'єкта персональних даних</h2>
-        <p>
-          Відповідно до статті 8 Закону України «Про захист персональних даних» та положень GDPR, кожен користувач має право на ознайомлення зі своїми даними, внесення змін або повне відкликання згоди на їх обробку. Для реалізації своїх прав звертайтеся за адресою: <a href="mailto:privacy@likemark.cloud" style="color: #eb4247; font-weight: 600;">privacy@likemark.cloud</a>.
-        </p>
-
-        <h2>6. Реквізити Оператора</h2>
-        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-top: 20px;">
-          <p style="margin: 0; line-height: 1.8; color: #334155;">
-            <strong>ТОВАРИСТВО З ОБМЕЖЕНОЮ ВІДПОВІДАЛЬНІСТЮ «ЛАЙКМАРК ЮКРЕЙН»</strong><br>
-            <strong>Код ЄДРПОУ:</strong> 45356074<br>
-            <strong>Юридична адреса:</strong> Україна, 15600, Чернігівська обл., Корюківський р-н, місто Мена, вулиця Виноградна<br>
-            <strong>Email з питань приватності:</strong> <a href="mailto:privacy@likemark.cloud" style="color: #eb4247; font-weight: 600;">privacy@likemark.cloud</a><br>
-            <strong>Контактний телефон:</strong> <a href="tel:+380443345892" style="color: #092433; font-weight: 700;">+380 (44) 334-58-92</a>
-          </p>
-        </div>
-
-        <div style="margin-top: 40px; padding-top: 24px; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
-          <a href="/" class="btn-theme-secondary" style="display: inline-flex;">&larr; Повернутися на головну</a>
-          <a href="/cookie-policy" class="btn-theme-primary">Політика файлів cookies &rarr;</a>
-        </div>
-
-      </div>
-
-      <!-- SIGNATURE CTA BANNER -->
-      <div class="theme-cta-banner">
-        <div class="theme-cta-title">Маєте запитання щодо збереження конфіденційності?</div>
-        <div class="theme-cta-desc">Наш DPO (офіцер із захисту даних) та чергові інженери готові надати повну технічну та юридичну консультацію щодо зберігання резервних копій.</div>
-        <div class="theme-cta-actions">
-          <button type="button" class="btn-theme-primary" data-open-modal data-tariff="Запит щодо захисту персональних даних">Запитати спеціаліста</button>
-          <a href="tel:+380443345892" class="btn-theme-secondary">+380 (44) 334-58-92</a>
-        </div>
-      </div>
+      </article>
 
     </div>
-  </section>
+  </div>
 </main>
 
 <div class="footer" data-v-a4670568>
