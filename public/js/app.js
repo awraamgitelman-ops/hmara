@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const segments = document.querySelectorAll('.slider-controls__pagination-segment');
 
   let currentIndex = 0;
+  let currentTranslateX = 0;
 
   function getStepWidth() {
     if (!slides || slides.length === 0) return 396;
@@ -29,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
     return Math.max(0, slides.length - 1);
   }
 
-  function updateSlider() {
+  function updateSlider(animate = true) {
     if (!wrapper || !track) return;
     const step = getStepWidth();
     const maxIdx = getMaxIndex();
@@ -46,7 +47,13 @@ document.addEventListener('DOMContentLoaded', function () {
     let targetX = currentIndex * step;
     if (targetX > maxScroll) targetX = maxScroll;
 
-    // Smooth transform
+    currentTranslateX = targetX;
+
+    if (animate) {
+      wrapper.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+    } else {
+      wrapper.style.transition = 'none';
+    }
     wrapper.style.transform = `translate3d(-${targetX}px, 0px, 0px)`;
 
     // Update segment active states (59px wide dash vs 12px short dash)
@@ -87,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
       e.preventDefault();
       if (currentIndex < getMaxIndex()) {
         currentIndex++;
-        updateSlider();
+        updateSlider(true);
       }
     });
   }
@@ -97,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
       e.preventDefault();
       if (currentIndex > 0) {
         currentIndex--;
-        updateSlider();
+        updateSlider(true);
       }
     });
   }
@@ -106,36 +113,154 @@ document.addEventListener('DOMContentLoaded', function () {
     seg.addEventListener('click', function (e) {
       e.preventDefault();
       currentIndex = idx;
-      updateSlider();
+      updateSlider(true);
     });
   });
 
-  // Touch Swipe Support
-  let touchStartX = 0;
-  let touchEndX = 0;
-  if (track) {
-    track.addEventListener('touchstart', function (e) {
-      touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
+  // Mouse Drag (Затискання ЛКМ для гортання каруселі)
+  let isDragging = false;
+  let startX = 0;
+  let initialScrollX = 0;
+  let dragDistance = 0;
+  let dragStartTime = 0;
+  let hasDragged = false;
 
-    track.addEventListener('touchend', function (e) {
-      touchEndX = e.changedTouches[0].screenX;
-      const diff = touchStartX - touchEndX;
-      if (Math.abs(diff) > 40) {
-        if (diff > 0 && currentIndex < getMaxIndex()) {
-          currentIndex++;
-          updateSlider();
-        } else if (diff < 0 && currentIndex > 0) {
-          currentIndex--;
-          updateSlider();
+  if (track && wrapper) {
+    track.style.cursor = 'grab';
+
+    // Prevent default drag of images and links
+    track.addEventListener('dragstart', function (e) {
+      e.preventDefault();
+    });
+
+    track.addEventListener('mousedown', function (e) {
+      if (e.button !== 0) return; // Only LMB
+
+      isDragging = true;
+      hasDragged = false;
+      startX = e.clientX;
+      initialScrollX = currentTranslateX;
+      dragDistance = 0;
+      dragStartTime = Date.now();
+
+      wrapper.style.transition = 'none';
+      track.style.cursor = 'grabbing';
+      document.body.style.userSelect = 'none';
+    });
+
+    window.addEventListener('mousemove', function (e) {
+      if (!isDragging) return;
+
+      const deltaX = e.clientX - startX;
+      dragDistance = deltaX;
+
+      if (Math.abs(deltaX) > 5) {
+        hasDragged = true;
+      }
+
+      const step = getStepWidth();
+      const trackWidth = track.clientWidth;
+      const totalWidth = wrapper.scrollWidth || (slides.length * step);
+      const maxScroll = Math.max(0, totalWidth - trackWidth);
+
+      let newTranslateX = initialScrollX - deltaX;
+
+      // Elastic resistance at boundaries
+      if (newTranslateX < 0) {
+        newTranslateX = newTranslateX * 0.35;
+      } else if (newTranslateX > maxScroll) {
+        newTranslateX = maxScroll + (newTranslateX - maxScroll) * 0.35;
+      }
+
+      wrapper.style.transform = `translate3d(-${newTranslateX}px, 0px, 0px)`;
+    });
+
+    function endDrag() {
+      if (!isDragging) return;
+      isDragging = false;
+      track.style.cursor = 'grab';
+      document.body.style.userSelect = '';
+
+      const timeElapsed = Date.now() - dragStartTime;
+      const velocity = Math.abs(dragDistance) / Math.max(1, timeElapsed);
+      const maxIdx = getMaxIndex();
+
+      if (hasDragged) {
+        if (Math.abs(dragDistance) > 40 || velocity > 0.25) {
+          if (dragDistance < 0 && currentIndex < maxIdx) {
+            currentIndex++;
+          } else if (dragDistance > 0 && currentIndex > 0) {
+            currentIndex--;
+          }
         }
       }
+
+      updateSlider(true);
+
+      setTimeout(() => {
+        hasDragged = false;
+      }, 80);
+    }
+
+    window.addEventListener('mouseup', endDrag);
+
+    // Suppress click on card items if dragged
+    track.addEventListener('click', function (e) {
+      if (hasDragged) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, true);
+
+    // Touch Swipe Support
+    let touchStartX = 0;
+    let touchDistance = 0;
+    let touchStartTime = 0;
+
+    track.addEventListener('touchstart', function (e) {
+      touchStartX = e.touches[0].clientX;
+      initialScrollX = currentTranslateX;
+      touchDistance = 0;
+      touchStartTime = Date.now();
+      wrapper.style.transition = 'none';
+    }, { passive: true });
+
+    track.addEventListener('touchmove', function (e) {
+      touchDistance = e.touches[0].clientX - touchStartX;
+      const step = getStepWidth();
+      const trackWidth = track.clientWidth;
+      const totalWidth = wrapper.scrollWidth || (slides.length * step);
+      const maxScroll = Math.max(0, totalWidth - trackWidth);
+
+      let newTranslateX = initialScrollX - touchDistance;
+      if (newTranslateX < 0) {
+        newTranslateX = newTranslateX * 0.35;
+      } else if (newTranslateX > maxScroll) {
+        newTranslateX = maxScroll + (newTranslateX - maxScroll) * 0.35;
+      }
+
+      wrapper.style.transform = `translate3d(-${newTranslateX}px, 0px, 0px)`;
+    }, { passive: true });
+
+    track.addEventListener('touchend', function () {
+      const timeElapsed = Date.now() - touchStartTime;
+      const velocity = Math.abs(touchDistance) / Math.max(1, timeElapsed);
+      const maxIdx = getMaxIndex();
+
+      if (Math.abs(touchDistance) > 40 || velocity > 0.25) {
+        if (touchDistance < 0 && currentIndex < maxIdx) {
+          currentIndex++;
+        } else if (touchDistance > 0 && currentIndex > 0) {
+          currentIndex--;
+        }
+      }
+      updateSlider(true);
     }, { passive: true });
   }
 
-  window.addEventListener('resize', updateSlider);
+  window.addEventListener('resize', () => updateSlider(false));
   // Initial run
-  updateSlider();
+  updateSlider(false);
 
   // =========================================================================
   // 2. NATIVE COOKIE NOTICE BANNER
