@@ -773,3 +773,46 @@ main, section, footer, .footer, .layout, #__nuxt, #app {
   max-width: 100% !important;
   pointer-events: none !important;
 }
+
+/* Homepage Articles 4-column Grid */
+.articles-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 24px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+@media (max-width: 1200px) {
+  .articles-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 20px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .articles-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+}
+
+.case-card-item {
+  display: flex !important;
+  flex-direction: column !important;
+  text-decoration: none !important;
+  color: inherit !important;
+  transition: transform 0.2s ease !important;
+}
+
+.case-card-item:hover {
+  transform: translateY(-2px) !important;
+}
+
+.case-card-item h5 {
+  transition: color 0.15s ease !important;
+}
+
+.case-card-item:hover h5 {
+  color: #eb4247 !important;
+}
