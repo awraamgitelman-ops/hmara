@@ -85,51 +85,66 @@ document.addEventListener('DOMContentLoaded', function () {
     btn.addEventListener('click', triggerConsult);
   });
 
-  // 3. Cookie Banner — event delegation (works after Vue hydration)
+  // 3. Cookie Banner — robust dismissal
   function dismissCookieBanner() {
-    var banner = document.getElementById('native-cookie-banner') ||
-                 document.getElementById('cookie-notice-banner') ||
-                 document.querySelector('.cookies');
-    if (!banner) return;
-    localStorage.setItem('likemark_cookie_accepted', 'true');
-    banner.style.transition = 'opacity 0.3s ease';
-    banner.style.opacity = '0';
-    setTimeout(function () {
-      banner.style.setProperty('display', 'none', 'important');
-    }, 300);
+    try {
+      localStorage.setItem('likemark_cookie_accepted', 'true');
+    } catch (e) {}
+
+    var banners = document.querySelectorAll('#native-cookie-banner, #cookie-notice-banner, .cookies, [data-sonner-toaster], [data-sonner-toast]');
+    banners.forEach(function (banner) {
+      banner.style.transition = 'opacity 0.25s ease';
+      banner.style.opacity = '0';
+      setTimeout(function () {
+        banner.style.setProperty('display', 'none', 'important');
+        banner.setAttribute('hidden', 'true');
+      }, 250);
+    });
   }
 
   // Show/hide banner based on localStorage
   function initCookieBanner() {
-    var banner = document.getElementById('native-cookie-banner') ||
-                 document.getElementById('cookie-notice-banner') ||
-                 document.querySelector('.cookies');
-    if (!banner) return;
-    if (localStorage.getItem('likemark_cookie_accepted') === 'true') {
-      banner.style.setProperty('display', 'none', 'important');
+    var accepted = false;
+    try {
+      accepted = localStorage.getItem('likemark_cookie_accepted') === 'true';
+    } catch (e) {}
+
+    if (accepted) {
+      var banners = document.querySelectorAll('#native-cookie-banner, #cookie-notice-banner, .cookies, [data-sonner-toaster], [data-sonner-toast]');
+      banners.forEach(function (banner) {
+        banner.style.setProperty('display', 'none', 'important');
+        banner.setAttribute('hidden', 'true');
+      });
     }
   }
 
-  // Use delegation so we catch buttons even after Vue replaces the DOM
+  // Capture phase (true) — fires BEFORE Nuxt/Vue component handlers,
+  // so stopPropagation() from inside the component cannot block us.
   document.addEventListener('click', function (e) {
     var t = e.target;
-    // Walk up to find a button (in case click was on SVG inside button)
     while (t && t !== document) {
-      if (t.id === 'btn-cookie-native-accept' ||
-          t.id === 'btn-cookie-native-close' ||
-          t.id === 'cookie-accept-btn' ||
-          t.id === 'cookie-close-btn' ||
-          t.classList.contains('cookies__close')) {
+      var id = t.id || '';
+      var classes = t.classList || { contains: function () { return false; } };
+      var text = (t.textContent || '').trim();
+
+      if (id === 'btn-cookie-native-accept' ||
+          id === 'btn-cookie-native-close'  ||
+          id === 'cookie-accept-btn'        ||
+          id === 'cookie-close-btn'         ||
+          classes.contains('cookies__close') ||
+          (t.tagName === 'BUTTON' && (text === 'Прийняти' || text === 'Accept'))) {
         e.preventDefault();
+        e.stopPropagation();
         dismissCookieBanner();
         return;
       }
       t = t.parentElement;
     }
-  });
+  }, true); // <-- capture phase
 
   // Init immediately and retry after short delay (Vue hydration may be async)
   initCookieBanner();
-  setTimeout(initCookieBanner, 500);
+  setTimeout(initCookieBanner, 300);
+  setTimeout(initCookieBanner, 800);
   setTimeout(initCookieBanner, 1500);
 });
