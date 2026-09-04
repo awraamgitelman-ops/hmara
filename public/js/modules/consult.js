@@ -32,11 +32,38 @@
 
     document.addEventListener('click', function (e) {
       var target = e.target;
-      if (target.closest('.btn-header-cta, .mobile-drawer-btn-cta, .modal-trigger-consult, a[href="#consult"]')) {
+      if (target.closest('.btn-header-cta, .mobile-drawer-btn-cta, .modal-trigger-consult, a[href="#consult"], #btn-consult-floating, .floating-consult-btn')) {
         e.preventDefault();
         openConsult();
       }
+      var upBtn = target.closest('#btn-scroll-up, .floating-up-btn, .up-button');
+      if (upBtn) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     });
+
+    function checkScroll() {
+      var scrollBtns = document.querySelectorAll('#btn-scroll-up, .floating-up-btn, .up-button');
+      var isScrolled = window.scrollY > 250;
+      scrollBtns.forEach(function (btn) {
+        if (isScrolled) {
+          btn.classList.add('visible');
+          btn.style.opacity = '1';
+          btn.style.visibility = 'visible';
+          btn.style.pointerEvents = 'auto';
+          btn.style.transform = 'translateY(0)';
+        } else {
+          btn.classList.remove('visible');
+          btn.style.opacity = '0';
+          btn.style.visibility = 'hidden';
+          btn.style.pointerEvents = 'none';
+          btn.style.transform = 'translateY(12px)';
+        }
+      });
+    }
+    window.addEventListener('scroll', checkScroll, { passive: true });
+    checkScroll();
 
     if (formConsult) {
       formConsult.addEventListener('submit', function (e) {

@@ -556,3 +556,100 @@ h1, h2, h3, h4, h5, h6,
   border-color: var(--theme-accent-blue);
   box-shadow: 0 0 0 3px rgba(31, 147, 255, 0.15);
 }
+
+/* ==================== FLOATING BOTTOM-RIGHT CONTROLS ==================== */
+.site-floating-controls {
+  position: fixed;
+  bottom: 24px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.floating-consult-btn {
+  pointer-events: auto;
+  background: #eb4247 !important;
+  color: #ffffff !important;
+  border: none;
+  border-radius: 100px;
+  height: 48px;
+  padding: 0 22px 0 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Manrope', Roboto, -apple-system, sans-serif !important;
+  font-size: 14.5px !important;
+  font-weight: 700 !important;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(235, 66, 71, 0.35);
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.floating-consult-btn:hover {
+  background: #d9383d !important;
+  box-shadow: 0 12px 32px rgba(235, 66, 71, 0.45);
+  transform: translateY(-2px);
+}
+
+.floating-consult-btn:active {
+  transform: translateY(0);
+}
+
+.floating-up-btn,
+.up-button {
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  background: #092433 !important;
+  color: #ffffff !important;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(9, 36, 51, 0.25);
+  transition: opacity 0.25s ease, transform 0.25s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  flex-shrink: 0;
+}
+
+.floating-up-btn.visible,
+.up-button.visible {
+  pointer-events: auto !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0) !important;
+}
+
+.floating-up-btn:hover,
+.up-button:hover {
+  background: #eb4247 !important;
+  box-shadow: 0 8px 28px rgba(235, 66, 71, 0.4);
+}
+
+@media (max-width: 640px) {
+  .site-floating-controls {
+    bottom: 16px;
+    right: 14px;
+    gap: 8px;
+  }
+  .floating-consult-btn {
+    height: 44px;
+    padding: 0 16px 0 12px;
+    font-size: 13px !important;
+  }
+  .floating-up-btn,
+  .up-button {
+    width: 44px;
+    height: 44px;
+  }
+}
+
