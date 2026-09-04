@@ -1,0 +1,385 @@
+/* ==========================================================================
+   LIKEMARK CLOUD — UNIFIED SITE HEADER
+   ТОВ «ЛАЙКМАРК ЮКРЕЙН» (код ЄДРПОУ 45356074)
+   ========================================================================== */
+
+:root {
+  --sh-font-main: 'Manrope', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --sh-data-blue: #092433;
+  --sh-data-blue-80: rgba(9, 36, 51, 0.8);
+  --sh-data-blue-60: rgba(9, 36, 51, 0.6);
+  --sh-data-blue-10: rgba(9, 36, 51, 0.08);
+  --sh-data-blue-5: rgba(9, 36, 51, 0.04);
+  --sh-color-primary: #eb4247;
+  --sh-color-primary-hover: #d9383d;
+  --sh-color-dark: #092433;
+  --sh-border-color: rgba(9, 36, 51, 0.08);
+  --sh-radius-sm: 6px;
+}
+
+/* Base Header Container */
+.site-header {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+  background-color: #ffffff !important;
+  box-shadow: 0 1px 4px rgba(9, 36, 51, 0.06) !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-family: var(--sh-font-main) !important;
+  box-sizing: border-box !important;
+}
+
+/* Top Information Bar */
+.site-header .top-bar {
+  background: #ffffff !important;
+  border-bottom: 1px solid var(--sh-border-color) !important;
+  font-size: 13px !important;
+  line-height: 1 !important;
+  padding: 7px 0 !important;
+  color: var(--sh-data-blue) !important;
+  box-sizing: border-box !important;
+}
+
+.site-header .top-bar .container {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 100% !important;
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 0 24px !important;
+  box-sizing: border-box !important;
+}
+
+.site-header .top-bar-left {
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+}
+
+.site-header .top-bar-lang {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  font-weight: 600 !important;
+  color: var(--sh-data-blue) !important;
+  cursor: default !important;
+  user-select: none !important;
+  font-size: 12.5px !important;
+}
+
+.site-header .top-bar-lang svg {
+  border-radius: 2px !important;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.25) !important;
+  flex-shrink: 0 !important;
+  display: block !important;
+}
+
+.site-header .top-bar-right {
+  display: flex !important;
+  align-items: center !important;
+  gap: 24px !important;
+  font-size: 13px !important;
+}
+
+.site-header .top-bar-link {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  color: var(--sh-data-blue-80) !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+  transition: color 0.15s ease !important;
+}
+
+.site-header .top-bar-link:hover {
+  color: var(--sh-color-primary) !important;
+}
+
+.site-header .top-bar-link svg {
+  opacity: 0.75 !important;
+  flex-shrink: 0 !important;
+}
+
+/* Main Navigation Bar */
+.site-header .header-main {
+  background: #ffffff !important;
+  border-bottom: 1px solid var(--sh-border-color) !important;
+  height: 72px !important;
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.site-header .header-main .container {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 100% !important;
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 0 24px !important;
+  box-sizing: border-box !important;
+}
+
+.site-header .header-logo {
+  display: flex !important;
+  align-items: center !important;
+  text-decoration: none !important;
+}
+
+.site-header .header-logo img {
+  height: 36px !important;
+  width: auto !important;
+  display: block !important;
+}
+
+.site-header .header-nav {
+  display: flex !important;
+  align-items: center !important;
+  gap: 32px !important;
+}
+
+.site-header .header-nav-link {
+  color: var(--sh-data-blue) !important;
+  text-decoration: none !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  padding: 8px 0 !important;
+  position: relative !important;
+  transition: color 0.2s ease !important;
+  display: inline-block !important;
+}
+
+.site-header .header-nav-link:hover {
+  color: var(--sh-color-primary) !important;
+}
+
+.site-header .header-nav-link.active {
+  color: var(--sh-color-primary) !important;
+}
+
+.site-header .header-nav-link.active::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: -4px !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 2px !important;
+  background-color: var(--sh-color-primary) !important;
+  border-radius: 2px !important;
+}
+
+/* Header Right Actions */
+.site-header .header-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+
+.site-header .header-phone {
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: var(--sh-data-blue) !important;
+  text-decoration: none !important;
+  margin-right: 8px !important;
+  transition: color 0.15s ease !important;
+  white-space: nowrap !important;
+}
+
+.site-header .header-phone:hover {
+  color: var(--sh-color-primary) !important;
+}
+
+.site-header .btn-header-login {
+  background: none !important;
+  border: 1px solid rgba(9, 36, 51, 0.15) !important;
+  color: var(--sh-data-blue) !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  padding: 8px 18px !important;
+  border-radius: var(--sh-radius-sm) !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  font-family: inherit !important;
+  white-space: nowrap !important;
+}
+
+.site-header .btn-header-login:hover {
+  border-color: var(--sh-data-blue) !important;
+  background: var(--sh-data-blue-5) !important;
+}
+
+.site-header .btn-header-cta {
+  background: var(--sh-color-dark) !important;
+  color: #ffffff !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  padding: 9px 20px !important;
+  border-radius: var(--sh-radius-sm) !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  font-family: inherit !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  white-space: nowrap !important;
+}
+
+.site-header .btn-header-cta:hover {
+  background: var(--sh-color-primary) !important;
+  box-shadow: 0 4px 12px rgba(235, 66, 71, 0.3) !important;
+}
+
+.site-header .header-burger-btn {
+  display: none !important;
+  background: none !important;
+  border: none !important;
+  cursor: pointer !important;
+  padding: 8px !important;
+  color: var(--sh-data-blue) !important;
+  border-radius: var(--sh-radius-sm) !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* ==========================================================================
+   MOBILE MENU DRAWER
+   ========================================================================== */
+.mobile-drawer-overlay {
+  position: fixed !important;
+  inset: 0 !important;
+  background: rgba(9, 36, 51, 0.5) !important;
+  backdrop-filter: blur(4px) !important;
+  z-index: 10000 !important;
+  display: none !important;
+  opacity: 0 !important;
+  transition: opacity 0.3s ease !important;
+}
+
+.mobile-drawer-overlay.active {
+  display: block !important;
+  opacity: 1 !important;
+}
+
+.mobile-drawer {
+  position: fixed !important;
+  top: 0 !important;
+  right: -340px !important;
+  width: 320px !important;
+  max-width: 85vw !important;
+  height: 100% !important;
+  background: #ffffff !important;
+  z-index: 10001 !important;
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.15) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  padding: 24px !important;
+  box-sizing: border-box !important;
+  transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  font-family: var(--sh-font-main) !important;
+}
+
+.mobile-drawer.active {
+  right: 0 !important;
+}
+
+.mobile-drawer-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 28px !important;
+  padding-bottom: 16px !important;
+  border-bottom: 1px solid var(--sh-border-color) !important;
+}
+
+.mobile-drawer-close {
+  background: none !important;
+  border: none !important;
+  font-size: 28px !important;
+  line-height: 1 !important;
+  color: var(--sh-data-blue) !important;
+  cursor: pointer !important;
+  padding: 4px !important;
+}
+
+.mobile-drawer-links {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 16px !important;
+  margin-bottom: 28px !important;
+  overflow-y: auto !important;
+}
+
+.mobile-drawer-link {
+  color: var(--sh-data-blue) !important;
+  text-decoration: none !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  padding: 6px 0 !important;
+  transition: color 0.15s !important;
+}
+
+.mobile-drawer-link:hover,
+.mobile-drawer-link.active {
+  color: var(--sh-color-primary) !important;
+}
+
+.mobile-drawer-footer {
+  margin-top: auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+  padding-top: 16px !important;
+  border-top: 1px solid var(--sh-border-color) !important;
+}
+
+.mobile-drawer-btn-cta {
+  background: var(--sh-color-primary) !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: var(--sh-radius-sm) !important;
+  padding: 12px !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  width: 100% !important;
+  text-align: center !important;
+  font-family: inherit !important;
+  transition: background-color 0.2s ease !important;
+}
+
+.mobile-drawer-btn-cta:hover {
+  background: var(--sh-color-primary-hover) !important;
+}
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .site-header .header-nav {
+    display: none !important;
+  }
+  .site-header .header-phone {
+    display: none !important;
+  }
+  .site-header .header-burger-btn {
+    display: flex !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .site-header .top-bar-right {
+    display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-header .btn-header-login {
+    display: none !important;
+  }
+}
