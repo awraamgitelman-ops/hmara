@@ -1,0 +1,15 @@
+﻿<svg width="340" height="200" viewBox="0 0 340 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gAjax" x1="0" y1="0" x2="340" y2="200" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FF5252"/>
+      <stop offset="50%" stop-color="#EB3636"/>
+      <stop offset="100%" stop-color="#C62828"/>
+    </linearGradient>
+  </defs>
+  <rect width="340" height="200" rx="16" fill="url(#gAjax)"/>
+  <g transform="translate(68, 80)">
+    <polygon points="18,4 32,12 32,28 18,36 4,28 4,12" stroke="#ffffff" stroke-width="3.5" fill="none"/>
+    <text x="44" y="27" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="24" fill="#ffffff" letter-spacing="2">AJAX</text>
+    <text x="44" y="39" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="10" fill="rgba(255,255,255,0.8)" letter-spacing="3.5">SYSTEMS</text>
+  </g>
+</svg>
