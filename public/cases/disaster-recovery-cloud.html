@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
@@ -56,10 +56,12 @@
     "dateModified": "2026-09-04"
   }
   </script>
+  <link rel="stylesheet" href="/css/site-header.css">
 </head>
 <body>
 
   <!-- SITE HEADER (IDENTICAL TO MAIN PAGE) -->
+    <!-- SITE HEADER -->
   <header class="site-header">
     <!-- Top Bar -->
     <div class="top-bar">
@@ -105,24 +107,24 @@
 
         <!-- Desktop Navigation -->
         <nav class="header-nav">
-          <a href="/servers" class="header-nav-link">Сервери</a>
-          <a href="/migration" class="header-nav-link">Міграція</a>
-          <a href="/#scenarios" class="header-nav-link">Рішення</a>
-          <a href="/#datacenters" class="header-nav-link">Дата-центри</a>
-          <a href="/#cases" class="header-nav-link active">Кейси</a>
-          <a href="/contacts" class="header-nav-link">Контакти</a>
+          <a href="/servers" class="header-nav-link">РЎРµСЂРІРµСЂРё</a>
+          <a href="/migration" class="header-nav-link">РњС–РіСЂР°С†С–СЏ</a>
+          <a href="/#scenarios" class="header-nav-link">Р С–С€РµРЅРЅСЏ</a>
+          <a href="/#datacenters" class="header-nav-link">Р”Р°С‚Р°-С†РµРЅС‚СЂРё</a>
+          <a href="/#cases" class="header-nav-link active">РљРµР№СЃРё</a>
+          <a href="/contacts" class="header-nav-link">РљРѕРЅС‚Р°РєС‚Рё</a>
         </nav>
 
         <!-- Right Controls -->
         <div class="header-actions">
           <a href="tel:+380443345892" class="header-phone">+380 (44) 334-58-92</a>
-          <button type="button" class="btn-header-login" data-open-modal data-tariff="Вхід до кабінету">Увійти</button>
-          <button type="button" class="btn-header-cta" data-open-modal data-tariff="Консультація: Disaster Recovery">
-            Консультація
+          <button type="button" class="btn-header-login" id="btn-header-login" data-open-modal data-tariff="Р’С…С–Рґ РґРѕ РєР°Р±С–РЅРµС‚Сѓ">РЈРІС–Р№С‚Рё</button>
+          <button type="button" class="btn-header-cta" id="btn-header-cta" data-open-modal data-tariff="РљРѕРЅСЃСѓР»СЊС‚Р°С†С–СЏ СЃРїРµС†С–Р°Р»С–СЃС‚Р° LIKEMARK">
+            РљРѕРЅСЃСѓР»СЊС‚Р°С†С–СЏ
           </button>
           
           <!-- Mobile Burger Toggle -->
-          <button type="button" class="header-burger-btn" id="header-burger-btn" aria-label="Відкрити меню">
+          <button type="button" class="header-burger-btn" id="header-burger-btn" aria-label="Р’С–РґРєСЂРёС‚Рё РјРµРЅСЋ">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="3" y1="12" x2="21" y2="12"></line>
               <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -141,27 +143,26 @@
       <a href="/" class="header-logo">
         <img src="/images/logo-header.png" alt="LIKEMARK CLOUD" style="height: 30px;">
       </a>
-      <button class="mobile-drawer-close" id="mobile-drawer-close" aria-label="Закрити меню">&times;</button>
+      <button class="mobile-drawer-close" id="mobile-drawer-close" aria-label="Р—Р°РєСЂРёС‚Рё РјРµРЅСЋ">&times;</button>
     </div>
     <div class="mobile-drawer-links">
-      <a href="/" class="mobile-drawer-link">Головна</a>
-      <a href="/servers" class="mobile-drawer-link">Виділені сервери</a>
-      <a href="/migration" class="mobile-drawer-link">Безкоштовна міграція</a>
-      <a href="/#scenarios" class="mobile-drawer-link">Рішення для 1С/CRM</a>
-      <a href="/#datacenters" class="mobile-drawer-link">Дата-центри ЄС</a>
-      <a href="/#cases" class="mobile-drawer-link active">Кейси та статті</a>
-      <a href="/contacts" class="mobile-drawer-link">Контакти та реквізити</a>
+      <a href="/" class="mobile-drawer-link">Р“РѕР»РѕРІРЅР°</a>
+      <a href="/servers" class="mobile-drawer-link">Р’РёРґС–Р»РµРЅС– СЃРµСЂРІРµСЂРё</a>
+      <a href="/migration" class="mobile-drawer-link">Р‘РµР·РєРѕС€С‚РѕРІРЅР° РјС–РіСЂР°С†С–СЏ</a>
+      <a href="/#scenarios" class="mobile-drawer-link">Р С–С€РµРЅРЅСЏ РґР»СЏ 1РЎ/CRM</a>
+      <a href="/#datacenters" class="mobile-drawer-link">Р”Р°С‚Р°-С†РµРЅС‚СЂРё Р„РЎ</a>
+      <a href="/#cases" class="mobile-drawer-link active">РљРµР№СЃРё С‚Р° СЃС‚Р°С‚С‚С–</a>
+      <a href="/contacts" class="mobile-drawer-link">РљРѕРЅС‚Р°РєС‚Рё С‚Р° СЂРµРєРІС–Р·РёС‚Рё</a>
     </div>
     <div class="mobile-drawer-footer">
       <a href="tel:+380443345892" class="top-bar-link" style="font-size: 15px; font-weight: 700; color: #092433;">+380 (44) 334-58-92</a>
       <a href="mailto:sales@likemark.cloud" class="top-bar-link" style="font-size: 13px;">sales@likemark.cloud</a>
-      <button type="button" class="btn-cta-primary" style="width: 100%; justify-content: center; margin-top: 8px;" data-open-modal data-tariff="Запит з мобільного меню">
-        Замовити консультацію
+      <button type="button" class="mobile-drawer-btn-cta" id="btn-drawer-cta" data-open-modal data-tariff="Р—Р°РїРёС‚ Р· РјРѕР±С–Р»СЊРЅРѕРіРѕ РјРµРЅСЋ">
+        Р—Р°РјРѕРІРёС‚Рё РєРѕРЅСЃСѓР»СЊС‚Р°С†С–СЋ
       </button>
     </div>
   </div>
 
-  <!-- MAIN ARTICLE WRAPPER -->
   <main class="article-wrapper">
     
     <!-- Breadcrumbs -->
@@ -519,5 +520,6 @@ fi</code></pre>
   </div>
 
   <script src="/js/article.js"></script>
+  <script src="/js/site-header.js"></script>
 </body>
 </html>
