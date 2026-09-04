@@ -84,4 +84,52 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('.btn-header-cta, .mobile-drawer-btn-cta').forEach(function (btn) {
     btn.addEventListener('click', triggerConsult);
   });
+
+  // 3. Cookie Banner — event delegation (works after Vue hydration)
+  function dismissCookieBanner() {
+    var banner = document.getElementById('native-cookie-banner') ||
+                 document.getElementById('cookie-notice-banner') ||
+                 document.querySelector('.cookies');
+    if (!banner) return;
+    localStorage.setItem('likemark_cookie_accepted', 'true');
+    banner.style.transition = 'opacity 0.3s ease';
+    banner.style.opacity = '0';
+    setTimeout(function () {
+      banner.style.setProperty('display', 'none', 'important');
+    }, 300);
+  }
+
+  // Show/hide banner based on localStorage
+  function initCookieBanner() {
+    var banner = document.getElementById('native-cookie-banner') ||
+                 document.getElementById('cookie-notice-banner') ||
+                 document.querySelector('.cookies');
+    if (!banner) return;
+    if (localStorage.getItem('likemark_cookie_accepted') === 'true') {
+      banner.style.setProperty('display', 'none', 'important');
+    }
+  }
+
+  // Use delegation so we catch buttons even after Vue replaces the DOM
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    // Walk up to find a button (in case click was on SVG inside button)
+    while (t && t !== document) {
+      if (t.id === 'btn-cookie-native-accept' ||
+          t.id === 'btn-cookie-native-close' ||
+          t.id === 'cookie-accept-btn' ||
+          t.id === 'cookie-close-btn' ||
+          t.classList.contains('cookies__close')) {
+        e.preventDefault();
+        dismissCookieBanner();
+        return;
+      }
+      t = t.parentElement;
+    }
+  });
+
+  // Init immediately and retry after short delay (Vue hydration may be async)
+  initCookieBanner();
+  setTimeout(initCookieBanner, 500);
+  setTimeout(initCookieBanner, 1500);
 });
