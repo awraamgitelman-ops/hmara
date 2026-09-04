@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
@@ -56,36 +56,49 @@
     "dateModified": "2026-09-04"
   }
   </script>
+  <link rel="stylesheet" href="/css/header-selectel.css">
 </head>
 <body>
 
   <!-- SITE HEADER (IDENTICAL TO MAIN PAGE) -->
-  <header class="site-header">
-    <!-- Top Bar -->
-    <div class="top-bar">
+    <!-- ==================== AUTHENTIC SELECTEL LIVE HEADER ==================== -->
+  <header class="header-selectel-root">
+    <!-- TOP BAR -->
+    <div class="top-header-selectel">
       <div class="container">
-        <!-- Left: Language UA -->
-        <div class="top-bar-left">
-          <div class="top-bar-lang">
+        <!-- LEFT: Language, Network Speed, Status -->
+        <div class="top-header-selectel__left">
+          <!-- Flag UA -->
+          <div class="top-header-selectel__lang">
             <svg width="18" height="13" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect width="18" height="6.5" fill="#0057B7"/>
               <rect y="6.5" width="18" height="6.5" fill="#FFDD00"/>
             </svg>
             <span>UA</span>
           </div>
+
+          <!-- Speed of Network -->
+          <button type="button" class="top-header-selectel__item" id="btn-selectel-speed" style="background:none; border:none; padding:0; font-family:inherit;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+            <span>Швидкість мережі</span>
+          </button>
+
+          <!-- System Status -->
+          <a href="/#status" class="top-header-selectel__item top-header-selectel__status">
+            <span class="top-header-selectel__status-dot"></span>
+            <span>Всі сервіси доступні</span>
+          </a>
         </div>
 
-        <!-- Right: Contacts -->
-        <div class="top-bar-right">
-          <a href="mailto:sales@likemark.cloud" class="top-bar-link">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect width="20" height="16" x="2" y="4" rx="2"/>
-              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-            </svg>
+        <!-- RIGHT: Email & Phone -->
+        <div class="top-header-selectel__right">
+          <a href="mailto:sales@likemark.cloud" class="top-header-selectel__link">
             <span>sales@likemark.cloud</span>
           </a>
-
-          <a href="tel:+380443345892" class="top-bar-link" style="font-weight: 600;">
+          <a href="tel:+380443345892" class="top-header-selectel__link top-header-selectel__link--bold">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
             </svg>
@@ -95,34 +108,186 @@
       </div>
     </div>
 
-    <!-- Main Navigation Bar -->
-    <div class="header-main">
+    <!-- MAIN HEADER BAR -->
+    <div class="main-header-selectel">
       <div class="container">
-        <!-- Logo -->
-        <a href="/" class="header-logo">
+        <!-- LOGO -->
+        <a href="/" class="main-header-selectel__logo">
           <img src="/images/logo-header.png" alt="LIKEMARK CLOUD">
         </a>
 
-        <!-- Desktop Navigation -->
-        <nav class="header-nav">
-          <a href="/servers" class="header-nav-link">Сервери</a>
-          <a href="/migration" class="header-nav-link">Міграція</a>
-          <a href="/#scenarios" class="header-nav-link">Рішення</a>
-          <a href="/#datacenters" class="header-nav-link">Дата-центри</a>
-          <a href="/#cases" class="header-nav-link active">Кейси</a>
-          <a href="/contacts" class="header-nav-link">Контакти</a>
+        <!-- NAVIGATION MENU -->
+        <nav class="main-header-selectel__nav">
+          <!-- 1. Продукти ˅ -->
+          <div class="main-header-selectel__nav-item">
+            <button type="button" class="main-header-selectel__nav-link">
+              <span>Продукти</span>
+              <svg class="main-header-selectel__chevron" viewBox="0 0 16 16">
+                <path d="M4 6l4 4 4-4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="selectel-dropdown">
+              <a href="/servers" class="selectel-dropdown__item">
+                <div class="selectel-dropdown__title">Виділені сервери (Bare-Metal) <span>&rarr;</span></div>
+                <div class="selectel-dropdown__desc">Фізичні сервери AMD EPYC та Intel Xeon без оверселінгу</div>
+              </a>
+              <a href="/#tariffs" class="selectel-dropdown__item">
+                <div class="selectel-dropdown__title">Хмарні сервери (VPS/VDS) <span>&rarr;</span></div>
+                <div class="selectel-dropdown__desc">Миттєве розгортання в дата-центрах Франкфурта та Варшави</div>
+              </a>
+              <a href="/#tariffs" class="selectel-dropdown__item">
+                <div class="selectel-dropdown__title">Managed Kubernetes <span>&rarr;</span></div>
+                <div class="selectel-dropdown__desc">Готові кластери з SLA 99.98% та автоматичним масштабуванням</div>
+              </a>
+              <a href="/#tariffs" class="selectel-dropdown__item">
+                <div class="selectel-dropdown__title">Сховище S3 (Ceph NVMe) <span>&rarr;</span></div>
+                <div class="selectel-dropdown__desc">AWS S3 сумісне сховище для бекапів та великих медіафайлів</div>
+              </a>
+              <a href="/servers" class="selectel-dropdown__item">
+                <div class="selectel-dropdown__title">Сервери з GPU (NVIDIA) <span>&rarr;</span></div>
+                <div class="selectel-dropdown__desc">Прискорення AI, LLM моделей та транскодування відео</div>
+              </a>
+            </div>
+          </div>
+
+          <!-- 2. Послуги ˅ -->
+          <div class="main-header-selectel__nav-item">
+            <button type="button" class="main-header-selectel__nav-link">
+              <span>Послуги</span>
+              <svg class="main-header-selectel__chevron" viewBox="0 0 16 16">
+                <path d="M4 6l4 4 4-4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="selectel-dropdown">
+              <a href="/migration" class="selectel-dropdown__item">
+                <div class="selectel-dropdown__title">Безкоштовна міграція в хмару <span>&rarr;</span></div>
+                <div class="selectel-dropdown__desc">Безшовний переніс баз 1С, CRM та сервісів без простою</div>
+              </a>
+              <a href="/#scenarios" class="selectel-dropdown__item">
+                <div class="selectel-dropdown__title">Хмара для 1С / BAS / CRM <span>&rarr;</span></div>
+                <div class="selectel-dropdown__desc">Оптимізовані сервери з захистом від блокувань та перевірок</div>
+              </a>
+              <a href="/cases/disaster-recovery-cloud" class="selectel-dropdown__item">
+                <div class="selectel-dropdown__title">Disaster Recovery (DRaaS) <span>&rarr;</span></div>
+                <div class="selectel-dropdown__desc">Гео-розподілена хмара з RTO &lt; 5 хв та RPO &lt; 15 сек</div>
+              </a>
+              <a href="/cases/video-streaming-cdn" class="selectel-dropdown__item">
+                <div class="selectel-dropdown__title">Відеострімінг та Edge CDN <span>&rarr;</span></div>
+                <div class="selectel-dropdown__desc">Роздача 4K відео з прямим пірингом UA-IX без буферизації</div>
+              </a>
+              <a href="/cases/infrastructure-cost-optimization" class="selectel-dropdown__item">
+                <div class="selectel-dropdown__title">FinOps оптимізація IT-витрат <span>&rarr;</span></div>
+                <div class="selectel-dropdown__desc">Аудит інфраструктури та скорочення хмарних чеків на 40%</div>
+              </a>
+            </div>
+          </div>
+
+          <!-- 3. LIKEMARK ˅ -->
+          <div class="main-header-selectel__nav-item">
+            <button type="button" class="main-header-selectel__nav-link">
+              <span>LIKEMARK</span>
+              <svg class="main-header-selectel__chevron" viewBox="0 0 16 16">
+                <path d="M4 6l4 4 4-4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="selectel-dropdown">
+              <a href="/#datacenters" class="selectel-dropdown__item">
+                <div class="selectel-dropdown__title">Дата-центри Tier III в ЄС <span>&rarr;</span></div>
+                <div class="selectel-dropdown__desc">Франкфурт, Варшава, Амстердам з прямими стиками до Києва</div>
+              </a>
+              <a href="/contacts" class="selectel-dropdown__item">
+                <div class="selectel-dropdown__title">Про компанію та реквізити <span>&rarr;</span></div>
+                <div class="selectel-dropdown__desc">ТОВ «ЛАЙКМАРК ЮКРЕЙН», код ЄДРПОУ 45356074</div>
+              </a>
+              <a href="/contacts" class="selectel-dropdown__item">
+                <div class="selectel-dropdown__title">Договірний відділ та контакти <span>&rarr;</span></div>
+                <div class="selectel-dropdown__desc">Безготівковий розрахунок, ПДВ, акти у «Вчасно» та M.E.Doc</div>
+              </a>
+            </div>
+          </div>
+
+          <!-- 4. Ціни ˅ -->
+          <div class="main-header-selectel__nav-item">
+            <button type="button" class="main-header-selectel__nav-link">
+              <span>Ціни</span>
+              <svg class="main-header-selectel__chevron" viewBox="0 0 16 16">
+                <path d="M4 6l4 4 4-4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="selectel-dropdown">
+              <a href="/servers" class="selectel-dropdown__item">
+                <div class="selectel-dropdown__title">Тарифи на виділені сервери <span>&rarr;</span></div>
+                <div class="selectel-dropdown__desc">Фіксовані ціни у гривні з ПДВ, без лімітів на трафік</div>
+              </a>
+              <a href="/#calc" class="selectel-dropdown__item">
+                <div class="selectel-dropdown__title">Калькулятор конфігурацій <span>&rarr;</span></div>
+                <div class="selectel-dropdown__desc">Точний розрахунок vCPU, RAM та NVMe під ваші вимоги</div>
+              </a>
+              <a href="/#tariffs" class="selectel-dropdown__item">
+                <div class="selectel-dropdown__title">Хмарні сервери та VPS <span>&rarr;</span></div>
+                <div class="selectel-dropdown__desc">Базові та високопродуктивні тарифи для бізнесу</div>
+              </a>
+            </div>
+          </div>
+
+          <!-- 5. Документація -->
+          <div class="main-header-selectel__nav-item">
+            <a href="/#scenarios" class="main-header-selectel__nav-link">Документація</a>
+          </div>
+
+          <!-- 6. Академія ˅ -->
+          <div class="main-header-selectel__nav-item">
+            <button type="button" class="main-header-selectel__nav-link">
+              <span>Академія</span>
+              <svg class="main-header-selectel__chevron" viewBox="0 0 16 16">
+                <path d="M4 6l4 4 4-4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="selectel-dropdown">
+              <a href="/cases/highload-black-friday" class="selectel-dropdown__item">
+                <div class="selectel-dropdown__title">Кейс: Highload Black Friday <span>&rarr;</span></div>
+                <div class="selectel-dropdown__desc">85,000+ одночасних сесій та 0% простою маркетплейсу</div>
+              </a>
+              <a href="/cases/disaster-recovery-cloud" class="selectel-dropdown__item">
+                <div class="selectel-dropdown__title">Кейс: Відмовостійка гео-хмара <span>&rarr;</span></div>
+                <div class="selectel-dropdown__desc">Як налаштувати автоматичний BGP failover між дата-центрами</div>
+              </a>
+              <a href="/cases/video-streaming-cdn" class="selectel-dropdown__item">
+                <div class="selectel-dropdown__title">Кейс: Відеострімінг та CDN <span>&rarr;</span></div>
+                <div class="selectel-dropdown__desc">4K мовлення для мільйонів користувачів без буферизації</div>
+              </a>
+              <a href="/cases/infrastructure-cost-optimization" class="selectel-dropdown__item">
+                <div class="selectel-dropdown__title">Гайд: Оптимізація IT-витрат <span>&rarr;</span></div>
+                <div class="selectel-dropdown__desc">Практики FinOps для Kubernetes та хмарних ресурсів</div>
+              </a>
+            </div>
+          </div>
+
+          <!-- 7. Кейси -->
+          <div class="main-header-selectel__nav-item">
+            <a href="/#cases" class="main-header-selectel__nav-link">Кейси</a>
+          </div>
+
+          <!-- 8. Search 🔍 -->
+          <button type="button" class="main-header-selectel__search-btn" id="btn-selectel-search" aria-label="Пошук">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </button>
         </nav>
 
-        <!-- Right Controls -->
-        <div class="header-actions">
-          <a href="tel:+380443345892" class="header-phone">+380 (44) 334-58-92</a>
-          <button type="button" class="btn-header-login" data-open-modal data-tariff="Вхід до кабінету">Увійти</button>
-          <button type="button" class="btn-header-cta" data-open-modal data-tariff="Консультація: Disaster Recovery">
-            Консультація
+        <!-- RIGHT CONTROLS -->
+        <div class="main-header-selectel__controls">
+          <button type="button" class="main-header-selectel__btn-login" id="btn-selectel-login" data-open-modal data-tariff="Вхід до панелі керування">
+            Увійти
           </button>
-          
-          <!-- Mobile Burger Toggle -->
-          <button type="button" class="header-burger-btn" id="header-burger-btn" aria-label="Відкрити меню">
+          <button type="button" class="main-header-selectel__btn-create" id="btn-selectel-create" data-open-modal data-tariff="Створення акаунту та підключення">
+            Створити акаунт
+          </button>
+
+          <!-- Hamburger for mobile -->
+          <button type="button" class="main-header-selectel__burger" id="btn-selectel-burger" aria-label="Відкрити меню">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="3" y1="12" x2="21" y2="12"></line>
               <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -134,32 +299,99 @@
     </div>
   </header>
 
-  <!-- Mobile Drawer -->
-  <div class="mobile-drawer-overlay" id="mobile-drawer-overlay"></div>
-  <div class="mobile-drawer" id="mobile-drawer">
-    <div class="mobile-drawer-header">
-      <a href="/" class="header-logo">
+  <!-- MOBILE DRAWER -->
+  <div class="mobile-drawer-selectel-overlay" id="mobile-drawer-selectel-overlay"></div>
+  <div class="mobile-drawer-selectel" id="mobile-drawer-selectel">
+    <div class="mobile-drawer-selectel__header">
+      <a href="/" class="main-header-selectel__logo">
         <img src="/images/logo-header.png" alt="LIKEMARK CLOUD" style="height: 30px;">
       </a>
-      <button class="mobile-drawer-close" id="mobile-drawer-close" aria-label="Закрити меню">&times;</button>
+      <button type="button" id="btn-selectel-drawer-close" style="background:none; border:none; font-size:24px; color:#092433; cursor:pointer;">&times;</button>
     </div>
-    <div class="mobile-drawer-links">
-      <a href="/" class="mobile-drawer-link">Головна</a>
-      <a href="/servers" class="mobile-drawer-link">Виділені сервери</a>
-      <a href="/migration" class="mobile-drawer-link">Безкоштовна міграція</a>
-      <a href="/#scenarios" class="mobile-drawer-link">Рішення для 1С/CRM</a>
-      <a href="/#datacenters" class="mobile-drawer-link">Дата-центри ЄС</a>
-      <a href="/#cases" class="mobile-drawer-link active">Кейси та статті</a>
-      <a href="/contacts" class="mobile-drawer-link">Контакти та реквізити</a>
+    <div class="mobile-drawer-selectel__links">
+      <a href="/" class="mobile-drawer-selectel__link">Головна</a>
+      <a href="/servers" class="mobile-drawer-selectel__link">Продукти (Виділені сервери)</a>
+      <a href="/migration" class="mobile-drawer-selectel__link">Послуги (Міграція в хмару)</a>
+      <a href="/#datacenters" class="mobile-drawer-selectel__link">Дата-центри LIKEMARK</a>
+      <a href="/servers" class="mobile-drawer-selectel__link">Ціни та конфігуратор</a>
+      <a href="/#scenarios" class="mobile-drawer-selectel__link">Документація</a>
+      <a href="/#cases" class="mobile-drawer-selectel__link">Академія та статті</a>
+      <a href="/#cases" class="mobile-drawer-selectel__link">Кейси клієнтів</a>
+      <a href="/contacts" class="mobile-drawer-selectel__link">Контакти та реквізити</a>
     </div>
-    <div class="mobile-drawer-footer">
-      <a href="tel:+380443345892" class="top-bar-link" style="font-size: 15px; font-weight: 700; color: #092433;">+380 (44) 334-58-92</a>
-      <a href="mailto:sales@likemark.cloud" class="top-bar-link" style="font-size: 13px;">sales@likemark.cloud</a>
-      <button type="button" class="btn-cta-primary" style="width: 100%; justify-content: center; margin-top: 8px;" data-open-modal data-tariff="Запит з мобільного меню">
-        Замовити консультацію
+    <div class="mobile-drawer-selectel__footer">
+      <div style="font-size:14px; font-weight:700; color:#092433;">+380 (44) 334-58-92</div>
+      <div style="font-size:13px; color:#64748b;">sales@likemark.cloud</div>
+      <button type="button" class="main-header-selectel__btn-create" style="width:100%; margin-top:8px;" data-open-modal data-tariff="Реєстрація з мобільного">
+        Створити акаунт
       </button>
     </div>
   </div>
+
+  <!-- SEARCH MODAL -->
+  <div class="search-modal-selectel" id="search-modal-selectel">
+    <div class="search-modal-selectel__box">
+      <div class="search-modal-selectel__input-wrap">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input type="search" class="search-modal-selectel__input" id="search-input-selectel" placeholder="Пошук по продуктах, базі знань та кейсах...">
+        <button type="button" onclick="document.getElementById('search-modal-selectel').classList.remove('active'); document.body.style.overflow='';" style="background:none; border:none; font-size:20px; color:#64748b; cursor:pointer;">&times;</button>
+      </div>
+      <div class="search-modal-selectel__quick-links">
+        <div style="font-size:12px; font-weight:700; color:#64748b; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:4px;">Популярні запити:</div>
+        <a href="/servers" class="search-modal-selectel__quick-item">⚡ Оренда виділених серверів Highload</a>
+        <a href="/migration" class="search-modal-selectel__quick-item">🚀 Безкоштовна міграція баз 1С/CRM у Варшаву</a>
+        <a href="/#calc" class="search-modal-selectel__quick-item">🧮 Хмарний калькулятор вартості ресурсів</a>
+        <a href="/cases/disaster-recovery-cloud" class="search-modal-selectel__quick-item">🛡️ Побудова Disaster Recovery хмари</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPEED LOOKING GLASS MODAL -->
+  <div class="speed-modal-selectel" id="speed-modal-selectel">
+    <div class="speed-modal-selectel__box">
+      <button type="button" id="btn-selectel-speed-close" style="position:absolute; top:18px; right:18px; background:none; border:none; font-size:22px; color:#64748b; cursor:pointer;">&times;</button>
+      <h3 style="font-size:19px; font-weight:800; color:#092433; margin-bottom:8px;">Швидкість та зв'язність мережі LIKEMARK</h3>
+      <p style="font-size:13.5px; color:#64748b; margin-bottom:20px;">Прямі волоконно-оптичні канали Tier 1 та піринг до українських точок обміну трафіком:</p>
+      
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 16px; background:#f8fafc; border-radius:8px; border:1px solid #e2e8f0;">
+          <div>
+            <div style="font-weight:700; font-size:14px; color:#092433;">Варшава (WA1/WA2 Tier III) &rarr; UA-IX Київ</div>
+            <div style="font-size:12px; color:#64748b;">Прямий транскордонний стик 100 Gbps</div>
+          </div>
+          <div style="font-size:16px; font-weight:800; color:#0ab476;">~11.8 мс</div>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 16px; background:#f8fafc; border-radius:8px; border:1px solid #e2e8f0;">
+          <div>
+            <div style="font-weight:700; font-size:14px; color:#092433;">Франкфурт (Interxion Tier III) &rarr; Київ</div>
+            <div style="font-size:12px; color:#64748b;">Резервний захищений канал DE-CIX</div>
+          </div>
+          <div style="font-size:16px; font-weight:800; color:#0ab476;">~24.5 мс</div>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 16px; background:#f8fafc; border-radius:8px; border:1px solid #e2e8f0;">
+          <div>
+            <div style="font-weight:700; font-size:14px; color:#092433;">Амстердам (Equinix Tier III) &rarr; Київ</div>
+            <div style="font-size:12px; color:#64748b;">AMS-IX прямий піринг для CDN</div>
+          </div>
+          <div style="font-size:16px; font-weight:800; color:#0ab476;">~27.2 мс</div>
+        </div>
+      </div>
+      
+      <div style="margin-top:20px; text-align:center;">
+        <button type="button" class="main-header-selectel__btn-create" style="width:100%;" data-open-modal data-tariff="Тестування швидкості та Looking Glass">
+          Замовити індивідуальний спідтест / IP Looking Glass
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Drawer -->
+  
 
   <!-- MAIN ARTICLE WRAPPER -->
   <main class="article-wrapper">
@@ -519,5 +751,6 @@ fi</code></pre>
   </div>
 
   <script src="/js/article.js"></script>
+  <script src="/js/header-selectel.js"></script>
 </body>
 </html>
