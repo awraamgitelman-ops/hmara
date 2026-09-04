@@ -84,25 +84,36 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('.btn-header-cta, .mobile-drawer-btn-cta').forEach(function (btn) {
     btn.addEventListener('click', triggerConsult);
   });
+});
 
-  // 3. Cookie Banner — robust dismissal
+// =========================================================================
+// 3. Cookie Banner Controller (Runs immediately, not waiting for DOMContentLoaded)
+// =========================================================================
+(function () {
   function dismissCookieBanner() {
     try {
       localStorage.setItem('likemark_cookie_accepted', 'true');
     } catch (e) {}
 
-    var banners = document.querySelectorAll('#native-cookie-banner, #cookie-notice-banner, .cookies, [data-sonner-toaster], [data-sonner-toast]');
+    var selectors = '#native-cookie-banner, #cookie-notice-banner, .cookies, [data-sonner-toaster], [data-sonner-toast]';
+    var banners = document.querySelectorAll(selectors);
     banners.forEach(function (banner) {
-      banner.style.transition = 'opacity 0.25s ease';
+      banner.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
       banner.style.opacity = '0';
+      banner.style.pointerEvents = 'none';
       setTimeout(function () {
         banner.style.setProperty('display', 'none', 'important');
         banner.setAttribute('hidden', 'true');
-      }, 250);
+      }, 200);
     });
+
+    // Also inject CSS rule to permanently hide it in current session
+    var style = document.createElement('style');
+    style.id = 'cookie-dismiss-override';
+    style.innerHTML = '#native-cookie-banner, #cookie-notice-banner, .cookies, [data-sonner-toaster], [data-sonner-toast] { display: none !important; opacity: 0 !important; pointer-events: none !important; }';
+    document.head.appendChild(style);
   }
 
-  // Show/hide banner based on localStorage
   function initCookieBanner() {
     var accepted = false;
     try {
@@ -115,14 +126,19 @@ document.addEventListener('DOMContentLoaded', function () {
         banner.style.setProperty('display', 'none', 'important');
         banner.setAttribute('hidden', 'true');
       });
+      if (!document.getElementById('cookie-dismiss-override')) {
+        var style = document.createElement('style');
+        style.id = 'cookie-dismiss-override';
+        style.innerHTML = '#native-cookie-banner, #cookie-notice-banner, .cookies, [data-sonner-toaster], [data-sonner-toast] { display: none !important; opacity: 0 !important; pointer-events: none !important; }';
+        document.head.appendChild(style);
+      }
     }
   }
 
-  // Capture phase (true) — fires BEFORE Nuxt/Vue component handlers,
-  // so stopPropagation() from inside the component cannot block us.
-  document.addEventListener('click', function (e) {
+  // Intercept click on window & document with capture phase
+  function handleCookieClick(e) {
     var t = e.target;
-    while (t && t !== document) {
+    while (t && t !== document && t !== window) {
       var id = t.id || '';
       var classes = t.classList || { contains: function () { return false; } };
       var text = (t.textContent || '').trim();
@@ -135,16 +151,24 @@ document.addEventListener('DOMContentLoaded', function () {
           (t.tagName === 'BUTTON' && (text === 'Прийняти' || text === 'Accept'))) {
         e.preventDefault();
         e.stopPropagation();
+        e.stopImmediatePropagation();
         dismissCookieBanner();
         return;
       }
       t = t.parentElement;
     }
-  }, true); // <-- capture phase
+  }
 
-  // Init immediately and retry after short delay (Vue hydration may be async)
-  initCookieBanner();
+  window.addEventListener('click', handleCookieClick, true);
+  document.addEventListener('click', handleCookieClick, true);
+
+  // Initialize checks
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCookieBanner);
+  } else {
+    initCookieBanner();
+  }
   setTimeout(initCookieBanner, 300);
-  setTimeout(initCookieBanner, 800);
-  setTimeout(initCookieBanner, 1500);
-});
+  setTimeout(initCookieBanner, 1000);
+})();
+
