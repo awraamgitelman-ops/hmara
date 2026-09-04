@@ -265,31 +265,60 @@
   }
 
   /* =========================================================================
-     FAILPROOF INFRASTRUCTURE - UKRAINE MAP BACKGROUND
+     FAILPROOF INFRASTRUCTURE - UKRAINE MAP BACKGROUND ENLARGED & BEHIND TEXT
      ========================================================================= */
   .failproof-infra,
   .failproof-infra[data-v-01e0585b] {
+    display: block !important;
+    aspect-ratio: auto !important;
     background-color: #ffffff !important;
     background-image: url('/images/ukraine-map.png') !important;
     background-repeat: no-repeat !important;
-    background-position: center bottom 20px !important;
-    background-size: 760px auto !important;
+    background-position: 62% 45% !important;
+    background-size: 1180px auto !important;
     color: #092433 !important;
-    padding-top: 80px !important;
-    padding-bottom: 340px !important;
-    min-height: 640px !important;
+    padding-top: 110px !important;
+    padding-bottom: 110px !important;
+    min-height: 560px !important;
     position: relative !important;
     overflow: hidden !important;
+  }
+
+  @media screen and (min-width: 1536px) {
+    .failproof-infra,
+    .failproof-infra[data-v-01e0585b] {
+      background-size: 1320px auto !important;
+      background-position: 60% 45% !important;
+      padding-top: 130px !important;
+      padding-bottom: 130px !important;
+      min-height: 620px !important;
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    .failproof-infra,
+    .failproof-infra[data-v-01e0585b] {
+      background-size: 960px auto !important;
+      background-position: 64% 45% !important;
+      padding-top: 90px !important;
+      padding-bottom: 90px !important;
+    }
   }
 
   @media screen and (max-width: 768px) {
     .failproof-infra,
     .failproof-infra[data-v-01e0585b] {
-      background-size: 92% auto !important;
-      background-position: center bottom 20px !important;
-      padding-bottom: 220px !important;
-      padding-top: 60px !important;
+      background-size: 680px auto !important;
+      background-position: 60% 50% !important;
+      padding-top: 70px !important;
+      padding-bottom: 70px !important;
+      min-height: auto !important;
     }
+  }
+
+  .failproof-infra .container {
+    position: relative !important;
+    z-index: 2 !important;
   }
 
   .failproof-infra h2 {
@@ -297,7 +326,7 @@
   }
 
   .failproof-infra p {
-    color: rgba(9, 36, 51, 0.75) !important;
+    color: rgba(9, 36, 51, 0.85) !important;
   }
 
   .failproof-infra .button {
