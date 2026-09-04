@@ -70,15 +70,9 @@ app.use((req, res, next) => {
 // Serve local static files first (CSS, JS, Fonts, local images)
 app.use(express.static(path.join(__dirname, 'public'), { extensions: ['html'] }));
 
-// Reverse proxy fallback for any missing images or Nuxt image optimizer assets
+// Handle 404 for any missing optimized assets
 app.use(['/_ipx', '/images'], (req, res) => {
-  const targetUrl = 'https://selectel.ru' + req.originalUrl;
-  https.get(targetUrl, { rejectUnauthorized: false }, (proxyRes) => {
-    res.writeHead(proxyRes.statusCode, proxyRes.headers);
-    proxyRes.pipe(res);
-  }).on('error', () => {
-    res.status(404).end();
-  });
+  res.status(404).end();
 });
 
 // Healthcheck for Railway
