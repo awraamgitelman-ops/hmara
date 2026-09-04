@@ -181,13 +181,29 @@
    ========================================================================== */
 .site-header .header-main {
   background: #ffffff !important;
-  height: 72px !important;
+  height: auto !important;
+  min-height: 72px !important;
+  padding-top: 30px !important;
+  padding-bottom: 30px !important;
   display: flex !important;
   align-items: center !important;
   width: 100% !important;
   box-sizing: border-box !important;
   border-bottom: none !important;
   box-shadow: none !important;
+}
+
+@media (max-width: 991px) {
+  .site-header .header-main {
+    padding-top: 14px !important;
+    padding-bottom: 14px !important;
+    min-height: 60px !important;
+  }
+}
+
+/* Symmetrical visual distance from header navigation to hero cards below */
+main .swiper-cards {
+  margin-top: 0 !important;
 }
 
 .site-header .header-main .container {
