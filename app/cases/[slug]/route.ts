@@ -1,23 +1,19 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
+import { renderPage } from '@/lib/renderPage';
 
 export async function GET(
   request: Request,
   { params }: { params: { slug: string } }
 ) {
-  const slug = params.slug;
-  const filePath = path.join(process.cwd(), 'public', 'cases', `${slug}.html`);
+  const slug = params.slug.replace(/\.html$/, '');
+  const filePath = `public/cases/${slug}.html`;
+  const fullPath = path.join(process.cwd(), filePath);
 
-  if (!fs.existsSync(filePath)) {
-    return new NextResponse('Case not found', { status: 404 });
+  if (fs.existsSync(fullPath)) {
+    return renderPage(filePath, 'cases');
   }
 
-  const html = fs.readFileSync(filePath, 'utf-8');
-  return new NextResponse(html, {
-    headers: {
-      'Content-Type': 'text/html; charset=utf-8',
-      'Cache-Control': 'no-store, no-cache, must-revalidate',
-    },
-  });
+  return new NextResponse('Case not found', { status: 404 });
 }

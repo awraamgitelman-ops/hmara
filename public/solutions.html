@@ -16,65 +16,78 @@
 </head>
 <body style="background:#092433; color:#fff; font-family:Manrope,sans-serif; margin:0;">
   <header class="site-header">
-    
-  <!-- Top Bar -->
-  <div class="top-bar">
-    <div class="container">
-      <div class="top-bar-left">
-        <div class="top-bar-lang">
-          <svg width="18" height="13" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="18" height="6.5" fill="#0057B7"></rect>
-            <rect y="6.5" width="18" height="6.5" fill="#FFDD00"></rect>
-          </svg>
-          <span>UA</span>
+    <!-- Top Bar -->
+    <div class="top-bar">
+      <div class="container">
+        <!-- Left: Language UA -->
+        <div class="top-bar-left">
+          <div class="top-bar-lang">
+            <svg width="18" height="13" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="18" height="6.5" fill="#0057B7"></rect>
+              <rect y="6.5" width="18" height="6.5" fill="#FFDD00"></rect>
+            </svg>
+            <span>UA</span>
+          </div>
+        </div>
+
+        <!-- Right: Contacts -->
+        <div class="top-bar-right">
+          <a href="mailto:sales@likemark.cloud" class="top-bar-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+            </svg>
+            <span>sales@likemark.cloud</span>
+          </a>
+
+          <a href="tel:+380443345892" class="top-bar-link" style="font-weight: 600;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+            <span>+380 (44) 334-58-92</span>
+          </a>
         </div>
       </div>
-      <div class="top-bar-right">
-        <a href="mailto:sales@likemark.cloud" class="top-bar-link">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-          </svg>
-          <span>sales@likemark.cloud</span>
-        </a>
-        <a href="tel:+380443345892" class="top-bar-link" style="font-weight: 600;">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-          </svg>
-          <span>+380 (44) 334-58-92</span>
-        </a>
-      </div>
     </div>
-  </div>
 
-  <!-- Main Navigation Bar -->
-  <div class="header-main">
-    <div class="container">
-      <a href="/" class="header-logo">
-        <img src="/images/logo-header.png" alt="LIKEMARK CLOUD">
-      </a>
-      <nav class="header-nav">
-        <a href="/servers" class="header-nav-link ">Сервери</a>
-        <a href="/migration" class="header-nav-link ">Міграція</a>
-        <a href="/solutions" class="header-nav-link active">Рішення</a>
-        <a href="/datacenters" class="header-nav-link ">Дата-центри</a>
-        <a href="/cases" class="header-nav-link ">Кейси</a>
-        <a href="/contacts" class="header-nav-link ">Контакти</a>
-      </nav>
-      <div class="header-actions">
-        <a href="tel:+380443345892" class="header-phone">+380 (44) 334-58-92</a>
-        <button type="button" class="btn-header-login" id="btn-header-login">Увійти</button>
-        <button type="button" class="btn-header-cta" id="btn-header-cta">Консультація</button>
-        <button type="button" class="header-burger-btn" id="header-burger-btn" aria-label="Відкрити меню">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-          </svg>
-        </button>
+    <!-- Main Navigation Bar -->
+    <div class="header-main">
+      <div class="container">
+        <!-- Logo -->
+        <a href="/" class="header-logo">
+          <img src="/images/logo-header.png" alt="LIKEMARK CLOUD">
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="header-nav">
+          <a href="/servers" class="header-nav-link">Сервери</a>
+          <a href="/migration" class="header-nav-link">Міграція</a>
+          <a href="/solutions" class="header-nav-link">Рішення</a>
+          <a href="/datacenters" class="header-nav-link">Дата-центри</a>
+          <a href="/cases" class="header-nav-link">Кейси</a>
+          <a href="/contacts" class="header-nav-link">Контакти</a>
+        </nav>
+
+        <!-- Right Controls -->
+        <div class="header-actions">
+          <a href="tel:+380443345892" class="header-phone">+380 (44) 334-58-92</a>
+          <button type="button" class="btn-header-login" id="btn-header-login" data-open-modal="" data-tariff="Вхід до кабінету">Увійти</button>
+          <button type="button" class="btn-header-cta" id="btn-header-cta" data-open-modal="" data-tariff="Консультація спеціаліста LIKEMARK">
+            Консультація
+          </button>
+          
+          <!-- Mobile Burger Toggle -->
+          <button type="button" class="header-burger-btn" id="header-burger-btn" aria-label="Відкрити меню">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
-  </div>
+  </header>
 
   <!-- Mobile Drawer -->
   <div class="mobile-drawer-overlay" id="mobile-drawer-overlay"></div>
@@ -86,22 +99,22 @@
       <button class="mobile-drawer-close" id="mobile-drawer-close" aria-label="Закрити меню">&times;</button>
     </div>
     <div class="mobile-drawer-links">
-      <a href="/" class="mobile-drawer-link">Головна</a>
-      <a href="/servers" class="mobile-drawer-link ">Сервери</a>
-      <a href="/migration" class="mobile-drawer-link ">Міграція</a>
-      <a href="/solutions" class="mobile-drawer-link active">Рішення</a>
-      <a href="/datacenters" class="mobile-drawer-link ">Дата-центри</a>
-      <a href="/cases" class="mobile-drawer-link ">Кейси</a>
-      <a href="/contacts" class="mobile-drawer-link ">Контакти</a>
+      <a href="/" class="mobile-drawer-link active">Головна</a>
+      <a href="/servers" class="mobile-drawer-link">Виділені сервери</a>
+      <a href="/migration" class="mobile-drawer-link">Безкоштовна міграція</a>
+      <a href="/solutions" class="mobile-drawer-link">Рішення для 1С/CRM</a>
+      <a href="/datacenters" class="mobile-drawer-link">Дата-центри ЄС</a>
+      <a href="/cases" class="mobile-drawer-link">Кейси та статті</a>
+      <a href="/contacts" class="mobile-drawer-link">Контакти та реквізити</a>
     </div>
     <div class="mobile-drawer-footer">
-      <a href="tel:+380443345892" class="top-bar-link" style="font-weight: 600; font-size: 1.1rem; color: #fff; margin-bottom: 12px; display: block;">+380 (44) 334-58-92</a>
-      <button type="button" class="btn-primary mobile-drawer-btn-cta" style="width: 100%;">Консультація інженера</button>
+      <a href="tel:+380443345892" class="top-bar-link" style="font-size: 15px; font-weight: 700; color: #092433;">+380 (44) 334-58-92</a>
+      <a href="mailto:sales@likemark.cloud" class="top-bar-link" style="font-size: 13px;">sales@likemark.cloud</a>
+      <button type="button" class="mobile-drawer-btn-cta" id="btn-drawer-cta" data-open-modal="" data-tariff="Запит з мобільного меню">
+        Замовити консультацію
+      </button>
     </div>
   </div>
-  
-  </header>
-
   <main style="padding: 60px 0 100px;">
     <div class="container" style="max-width:1200px; margin:0 auto; padding:0 20px;">
       
@@ -232,69 +245,9 @@
   </main>
 
   
-  <footer class="footer" style="background:#092433; color:#fff; padding:60px 0 40px; border-top:1px solid rgba(255,255,255,0.08); font-family:Manrope,sans-serif;">
-    <div class="container" style="max-width:1200px; margin:0 auto; padding:0 20px;">
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:40px; margin-bottom:40px;">
-        <div>
-          <a href="/" style="display:inline-block; margin-bottom:16px;">
-            <img src="/images/logo-footer.png" alt="LIKEMARK CLOUD" style="height:36px; width:auto;">
-          </a>
-          <p style="color:rgba(255,255,255,0.6); font-size:14px; line-height:1.6; margin-bottom:16px;">
-            Сучасний хмарний провайдер надійної IT-інфраструктури для бізнесу в європейських дата-центрах Варшави та Франкфурта.
-          </p>
-          <div style="font-size:13px; color:rgba(255,255,255,0.8);">
-            📞 <a href="tel:+380443345892" style="color:#fff; text-decoration:none; font-weight:700;">+380 (44) 334-58-92</a><br>
-            ✉️ <a href="mailto:support@likemark.cloud" style="color:#1f93ff; text-decoration:none;">support@likemark.cloud</a>
-          </div>
-        </div>
-
-        <div>
-          <h4 style="font-size:16px; font-weight:700; color:#fff; margin-bottom:16px;">Послуги та сервери</h4>
-          <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px; font-size:14px;">
-            <li><a href="/servers#dedicated" style="color:rgba(255,255,255,0.7); text-decoration:none;">Виділені сервери (Dedicated)</a></li>
-            <li><a href="/servers#vps" style="color:rgba(255,255,255,0.7); text-decoration:none;">Хмарні сервери (VPS/VDS)</a></li>
-            <li><a href="/solutions#databases" style="color:rgba(255,255,255,0.7); text-decoration:none;">Хмарні бази даних</a></li>
-            <li><a href="/solutions#k8s" style="color:rgba(255,255,255,0.7); text-decoration:none;">Managed Kubernetes</a></li>
-            <li><a href="/solutions#ai" style="color:rgba(255,255,255,0.7); text-decoration:none;">Сервери з GPU NVIDIA H100</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 style="font-size:16px; font-weight:700; color:#fff; margin-bottom:16px;">Інфраструктура</h4>
-          <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px; font-size:14px;">
-            <li><a href="/datacenters#warsaw" style="color:rgba(255,255,255,0.7); text-decoration:none;">Дата-центр Варшава (Tier III)</a></li>
-            <li><a href="/datacenters#frankfurt" style="color:rgba(255,255,255,0.7); text-decoration:none;">Дата-центр Франкфурт (Tier III+)</a></li>
-            <li><a href="/migration" style="color:rgba(255,255,255,0.7); text-decoration:none;">Безкоштовний переїзд інфраструктури</a></li>
-            <li><a href="/cases" style="color:rgba(255,255,255,0.7); text-decoration:none;">Кейси та статті клієнтів</a></li>
-            <li><a href="/panel" class="btn-open-panel" style="color:#00e599; font-weight:700; text-decoration:none;">Хмарна панель керування</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 style="font-size:16px; font-weight:700; color:#fff; margin-bottom:16px;">Підписка на новини</h4>
-          <p style="color:rgba(255,255,255,0.6); font-size:13px; line-height:1.5; margin-bottom:14px;">
-            Отримуйте дайджест оновлень, знижки на сервери та корисні рекомендації з кібербезпеки.
-          </p>
-          <button type="button" onclick="window.openNewsletterModal ? window.openNewsletterModal() : document.getElementById('newsletter-modal').style.display='flex';" class="button button--default button--colored button--light !text-center footer-info__block-subscribe-btn" style="width:100%; padding:10px; font-weight:700; border-radius:8px; border:none; background:#1f93ff; color:#fff; cursor:pointer;">
-            Підписатися на дайджест
-          </button>
-        </div>
-      </div>
-
-      <div style="padding-top:24px; border-top:1px solid rgba(255,255,255,0.08); display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:16px; font-size:13px; color:rgba(255,255,255,0.5);">
-        <div>
-          © 2023–2026 ТОВ «ЛАЙКМАРК ЮКРЕЙН» (код ЄДРПОУ 45356074). Усі права захищені.
-        </div>
-        <div style="display:flex; gap:20px;">
-          <a href="/privacy" style="color:rgba(255,255,255,0.6); text-decoration:none;">Політика конфіденційності</a>
-          <a href="/terms" style="color:rgba(255,255,255,0.6); text-decoration:none;">Публічна оферта IaaS</a>
-          <a href="/cookie-policy" style="color:rgba(255,255,255,0.6); text-decoration:none;">Файли Cookies</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-  
-  <div id="auth-modal" style="display:none; position:fixed; inset:0; background:rgba(9,36,51,0.7); backdrop-filter:blur(6px); z-index:99999; align-items:center; justify-content:center; padding:16px;">
+  <div class=footer data-v-a4670568><div class="footer__container container" data-v-a4670568><div class=footer__inner data-v-a4670568><div class=footer__promo data-v-a4670568><a class=footer__promo-logo href="/" data-v-a4670568 style="display:inline-flex; align-items:center; text-decoration:none;"><img src="/images/logo-footer.png" alt="LIKEMARK CLOUD" style="height:38px; width:auto; display:block;"></a><button type=button class="footer__promo-btn footer__promo-btn--only-mobile text-s16" data-v-a4670568> Вверх </button><button class="button button--default button--outlined button--light !text-center footer__promo-btn footer__promo-btn--only-desktop text-s16" data-v-a4670568 data-v-c5d5fa05> Вверх <svg xmlns=http://www.w3.org/2000/svg fill=none viewBox="0 0 25 24" data-v-a4670568><path fill=currentColor d="m13.309 23.993-1.421-1.421 8.917-8.917c.242-.242.06-.665-.302-.665H.492v-1.995h20.01c.362 0 .544-.423.271-.695l-8.886-8.887 1.42-1.42s10.368 10.367 10.61 10.579a1.97 1.97 0 0 1 0 2.811l-10.61 10.61Z"></path></svg></button></div><nav class="footer-nav footer__nav" data-v-a4670568 data-v-105878b8><ul class="footer-nav__list text-r14" data-v-105878b8><li class=footer-nav__group data-v-105878b8><div class=footer-nav__group-title data-v-105878b8>Про&nbsp;компанію</div><ul class="footer-nav__group-links footer-links" data-v-105878b8><li class=footer-links__item data-v-105878b8><a href="#calc" class=footer-links__item-link data-v-105878b8><span data-v-105878b8>Про нас</span></a><li class=footer-links__item data-v-105878b8><a href="#calc" class=footer-links__item-link data-v-105878b8><span data-v-105878b8>Дата-центри Tier III</span></a><li class=footer-links__item data-v-105878b8><a href="#calc" target=_blank class=footer-links__item-link data-v-105878b8><span data-v-105878b8>Безпека</span></a><li class=footer-links__item data-v-105878b8><a href="#calc" class=footer-links__item-link data-v-105878b8><span data-v-105878b8>Технічна лінія підтримки (відповідь за 5 хв)</span></a><li class=footer-links__item data-v-105878b8><a href="#calc" class=footer-links__item-link data-v-105878b8><span data-v-105878b8>Мережі та піринг</span></a><li class=footer-links__item data-v-105878b8><a href="#calc" class=footer-links__item-link data-v-105878b8><span data-v-105878b8>Партнерська програма</span></a><li class=footer-links__item data-v-105878b8><a href="#calc" target=_blank class=footer-links__item-link data-v-105878b8><span data-v-105878b8>Ділова етика та комплаєнс</span></a><li class=footer-links__item data-v-105878b8><a href="#calc" class=footer-links__item-link data-v-105878b8><span data-v-105878b8>Спеціальні пропозиції</span></a><li class=footer-links__item data-v-105878b8><a href="#calc" target=_blank class=footer-links__item-link data-v-105878b8><span data-v-105878b8>Аналітика та дослідження</span></a><li class=footer-links__item data-v-105878b8><a href="#calc" target=_blank class=footer-links__item-link data-v-105878b8><span data-v-105878b8>Гаряча лінія 24/7</span></a><li class=footer-links__item data-v-105878b8><a href="#calc" class=footer-links__item-link data-v-105878b8><span data-v-105878b8>Контакти та реквізити</span></a></ul><li class=footer-nav__group data-v-105878b8><div class=footer-nav__group-title data-v-105878b8>Документація</div><ul class="footer-nav__group-links footer-links" data-v-105878b8><li class=footer-links__item data-v-105878b8><a href="#calc" target=_blank class=footer-links__item-link data-v-105878b8><span data-v-105878b8>Документація</span></a><li class=footer-links__item data-v-105878b8><a href="#calc" target=_blank class=footer-links__item-link data-v-105878b8><span data-v-105878b8>API</span></a><li class=footer-links__item data-v-105878b8><a href="#calc" target=_blank class=footer-links__item-link data-v-105878b8><span data-v-105878b8>Terraform</span></a></ul><li class=footer-nav__group data-v-105878b8><div class=footer-nav__group-title data-v-105878b8>Кар'єра</div><ul class="footer-nav__group-links footer-links" data-v-105878b8><li class=footer-links__item data-v-105878b8><a href="#calc" class=footer-links__item-link data-v-105878b8><span data-v-105878b8>Робота в&nbsp;LIKEMARK</span></a><li class=footer-links__item data-v-105878b8><a href="#calc" class=footer-links__item-link data-v-105878b8><span data-v-105878b8>Вакансії</span></a><li class=footer-links__item data-v-105878b8><a href="#calc" class=footer-links__item-link data-v-105878b8><span data-v-105878b8>Стажування</span></a></ul><li class=footer-nav__group data-v-105878b8><div class=footer-nav__group-title data-v-105878b8>Інвесторам</div><ul class="footer-nav__group-links footer-links" data-v-105878b8><li class=footer-links__item data-v-105878b8><a href="#calc" target=_blank class=footer-links__item-link data-v-105878b8><span data-v-105878b8>Звітність та показники надійності</span></a><li class=footer-links__item data-v-105878b8><a href="#calc" target=_blank class=footer-links__item-link data-v-105878b8><span data-v-105878b8>Корпоративна інформація</span></a></ul><li class=footer-nav__group data-v-105878b8><div class=footer-nav__group-title data-v-105878b8>Пресі</div><ul class="footer-nav__group-links footer-links" data-v-105878b8><li class=footer-links__item data-v-105878b8><a href="#calc" target=_blank class=footer-links__item-link data-v-105878b8><span data-v-105878b8>Новини та оновлення платформи</span></a><li class=footer-links__item data-v-105878b8><a href="#calc" target=_blank class=footer-links__item-link data-v-105878b8><span data-v-105878b8>ЗМІ про нас</span></a><li class=footer-links__item data-v-105878b8><a href="#calc" target=_blank class=footer-links__item-link data-v-105878b8><span data-v-105878b8>Матеріали для ЗМІ</span></a><li class=footer-links__item data-v-105878b8><a href="#calc" target=_blank class=footer-links__item-link data-v-105878b8><span data-v-105878b8>Брендбук</span></a></ul><li class=footer-nav__group data-v-105878b8><div class=footer-nav__group-title data-v-105878b8>База знань</div><ul class="footer-nav__group-links footer-links" data-v-105878b8><li class=footer-links__item data-v-105878b8><a href="#calc" target=_blank class=footer-links__item-link data-v-105878b8><span data-v-105878b8>Блог</span></a><li class=footer-links__item data-v-105878b8><a href="#calc" target=_blank class=footer-links__item-link data-v-105878b8><span data-v-105878b8>База знань</span></a><li class=footer-links__item data-v-105878b8><a href="#calc" target=_blank class=footer-links__item-link data-v-105878b8><span data-v-105878b8>Події та вебінари</span></a><li class=footer-links__item data-v-105878b8><a href="#calc" target=_blank class=footer-links__item-link data-v-105878b8><span data-v-105878b8>Кейси</span></a></ul><li class=footer-nav__group data-v-105878b8><div class=footer-nav__group-title data-v-105878b8>Контрагентам</div><ul class="footer-nav__group-links footer-links" data-v-105878b8><li class=footer-links__item data-v-105878b8><a href="#calc" target=_blank class=footer-links__item-link data-v-105878b8><span data-v-105878b8>Офіційні документи та оферта</span></a><li class=footer-links__item data-v-105878b8><a href="#calc" target=_blank class=footer-links__item-link data-v-105878b8><span data-v-105878b8>Оплата (Безготівка з ПДВ, Картки)</span></a><li class=footer-links__item data-v-105878b8><a href="#calc" target=_blank class=footer-links__item-link data-v-105878b8><span data-v-105878b8>Реквізити ТОВ «ЛАЙКМАРК ЮКРЕЙН» та ліцензії</span></a><li class=footer-links__item data-v-105878b8><a href="#calc" target=_blank class=footer-links__item-link data-v-105878b8><span data-v-105878b8>Корпоративні тендери (Prozorro)</span></a></ul></ul></nav><div class="footer-info footer__info" data-v-a4670568 data-v-a920dbac><div class=footer-info__block data-v-a920dbac><h3 class="footer-info__block-title h5" data-v-a920dbac> Новини LIKEMARK </h3><div class="footer-info__block-content text-r14" data-v-a920dbac><p data-v-a920dbac> Підпишіться на нашу поштову розсилку: новини хмарних технологій, поради з кібербезпеки та знижки. </p><a href="javascript:void(0)" onclick="window.openNewsletterModal ? window.openNewsletterModal() : (document.getElementById('newsletter-modal').style.display='flex');" class="button button--default button--colored button--light !text-center footer-info__block-subscribe-btn" data-v-a920dbac data-v-c5d5fa05> Підписатися </a></div></div><div class=footer-info__block data-v-a920dbac><h3 class="footer-info__block-title h5" data-v-a920dbac> Потрібна допомога? </h3><div class="footer-info__block-content text-r14" data-v-a920dbac><p data-v-a920dbac> Телефонуйте <a href=tel:+380443345892 class="link nobr" data-v-a920dbac>+380&nbsp;(44)&nbsp;334-58-92</a> або пишіть <a href=mailto:support@likemark.cloud class=link data-v-a920dbac>support@likemark.cloud</a>&nbsp;— вивчимо задачу та підберемо відповідне рішення. </p><p data-v-a920dbac> Якщо у вас виникли запитання щодо послуг&nbsp;— відкрийте <a href="#consult" class="link modal-trigger-consult" data-v-a920dbac>консультацію</a>. </p></div></div></div><div class="footer-copyright text-r14 footer__copyright" data-v-a4670568 data-v-ed3795d2><p class=footer-copyright__company data-v-ed3795d2> © ТОВ «ЛАЙКМАРК ЮКРЕЙН», 2023–2026<div class=footer-copyright__content data-v-ed3795d2><p class=footer-copyright__text data-v-ed3795d2> Код ЄДРПОУ: 45356074 • Дата реєстрації: 2023 рік • КВЕД: 63.11 Оброблення даних, розміщення інформації на веб-вузлах <p class=footer-copyright__text data-v-ed3795d2><a class=link href="/contacts" target=_blank rel=nofollow data-v-ed3795d2> Офіційна інформація про ТОВ «ЛАЙКМАРК ЮКРЕЙН» у реєстрі юридичних осіб </a><p class=footer-copyright__text data-v-ed3795d2><a class=link href="/cookie-policy.html" target=_blank data-v-ed3795d2> Політика конфіденційності та файлів cookies та обробки персональних даних </a></p></div></div></div></div></div><section aria-label="Notifications alt+T" tabindex=-1 aria-live=polite aria-relevant="additions text" aria-atomic=false><ol data-sonner-toaster data-sonner-theme=light dir=ltr tabindex=-1 data-theme=light data-rich-colors=false data-y-position=bottom data-x-position=left data-lifted=false style=--front-toast-height:164.78125px;--width:356px;--gap:14px;--offset-top:24px;--offset-right:24px;--offset-bottom:24px;--offset-left:24px;--mobile-offset-top:24px;--mobile-offset-right:24px;--mobile-offset-bottom:24px;--mobile-offset-left:24px><li tabindex=0 data-sonner-toast data-rich-colors=false data-styled=false data-mounted=true data-promise=false data-swiped=false data-removed=false data-visible=true data-y-position=bottom data-x-position=left data-index=0 data-front=true data-swiping=false data-dismissible=true data-invert=false data-swipe-out=false data-expanded=true style=--index:0;--toasts-before:0;--z-index:0;--offset:0px;--initial-height:auto><div data-v-9842d00e class=cookies id="native-cookie-banner"><div data-v-9842d00e class=cookies__content><h5 data-v-9842d00e class=mb-2> Ми використовуємо файли Cookies </h5><p data-v-9842d00e class="text-r14 text-[--data-blue-alpha-80]"> Продовжуючи користуватися сайтом, ви погоджуєтеся <a data-v-c5d5fa05 data-v-9842d00e href="/cookie-policy.html" target=_blank class="button button--sm button--link button--dark !text-center">на обробку обов'язкових файлів cookie</a>. Детальніше&nbsp;— <span data-v-9842d00e class=whitespace-nowrap>в&nbsp;<a data-v-c5d5fa05 data-v-9842d00e href="/cookie-policy.html" target=_blank class="button button--sm button--link button--dark !text-center">Політиці конфіденційності</a>.</span></p></div><button data-v-c5d5fa05 data-v-51cc5a78 data-v-9842d00e id="btn-cookie-native-close" onclick="dismissCookieNotice()" class="button button--sm button--icon button--light !text-center close-btn cookies__close"><svg data-v-51cc5a78 xmlns=http://www.w3.org/2000/svg fill=none viewBox="0 0 48 48"><path fill=currentColor d="M19.708 25.45 0 45.16 2.841 48 22.55 28.292a2.007 2.007 0 0 1 2.841 0L45.16 48 48 45.159 28.232 25.45a2.007 2.007 0 0 1 0-2.841L48 2.84 45.159 0 25.39 19.768a2.007 2.007 0 0 1-2.84 0L2.84 0 0 2.841 19.708 22.61a2.007 2.007 0 0 1 0 2.84Z"></path></svg></button><div data-v-9842d00e class=cookies__footer><button type="button" id="btn-cookie-native-accept" onclick="dismissCookieNotice()" data-v-c5d5fa05="" data-v-9842d00e="" class="button button--sm button--colored button--dark !text-center"> Прийняти </button><a href="/cookie-policy.html" target="_blank" data-v-c5d5fa05 data-v-9842d00e class="button button--sm button--outlined button--dark !text-center"> Детальніше </a></div></div></ol></section><button class=up-button type=button data-v-b93fd132><svg xmlns=http://www.w3.org/2000/svg viewBox="0 0 24 24" data-v-b93fd132><path fill=inherit d="m12.808 0-1.42 1.42 8.912 8.918c.241.241.06.665-.303.665H0v1.995h19.997c.363 0 .544.423.272.695l-8.88 8.886L12.808 24s10.36-10.368 10.602-10.58a1.971 1.971 0 0 0 0-2.81L12.808 0Z"></path></svg></button></div></div><div id=teleports></div>
+<style id=cw-widget-styles data-turbo-permanent=true class=>:root{--b-100:#F2F3F7;--s-700:#37546D}.woot-widget-holder{box-shadow:0 5px 40px rgba(0,0,0,.16);will-change:transform,opacity;overflow:hidden!important;position:fixed!important;transition:opacity 0.2s linear,transform 0.25s linear}.woot-widget-holder iframe{border:0;color-scheme:normal;height:100%!important;width:100%!important;max-height:100vh!important}.woot-widget-bubble{border-radius:100px;border-width:0px;box-shadow:0 8px 24px rgba(0,0,0,.16)!important;cursor:pointer;height:64px;padding:0px;position:fixed;user-select:none;width:64px;overflow:hidden}.woot-widget-bubble.woot-widget-bubble--flat.woot--close::before,.woot-widget-bubble.woot-widget-bubble--flat.woot--close::after{left:28px;top:16px}.woot-widget-bubble.unread-notification::after{content:"";position:absolute;width:12px;height:12px;background:#ff4040;border-radius:100%;top:0px;right:0px;border:2px solid #ffffff;transition:background 0.2s ease}.woot-widget-bubble.woot-widget--expanded{bottom:24px;display:flex;height:48px!important;width:auto!important;align-items:center}.woot-widget-bubble.woot-widget--expanded div{align-items:center;color:#fff;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,Arial,sans-serif;font-size:16px;font-weight:500;justify-content:center;padding-right:20px;width:auto!important}.woot-widget-bubble.woot-widget--expanded svg{height:20px;width:20px}.woot-widget-bubble:hover{background:#1f93ff;box-shadow:0 8px 32px rgba(0,0,0,.4)!important}.woot-widget-bubble svg{all:revert}@media only screen and (min-width:667px){.woot-widget-holder.woot-elements--right{right:20px}}.woot--close:hover{opacity:1}.woot--close::before,.woot--close::after{background-color:#fff;content:" ";display:inline;height:24px;left:32px;position:absolute;top:20px;width:2px}.woot-widget-bubble-color--lighter.woot--close::before,.woot-widget-bubble-color--lighter.woot--close::after{background-color:var(--s-700)}.woot--close::before{transform:rotate(45deg)}.woot--close::after{transform:rotate(-45deg)}.woot--hide{bottom:-100vh!important;top:unset!important;opacity:0;visibility:hidden!important}.woot-widget-holder.woot--hide{transform:translateY(40px)}.woot-widget-bubble.woot--close.woot--hide{transform:translateX(8px) scale(.75) rotate(45deg);transition:transform 300ms ease,opacity 200ms ease,visibility 0ms linear 500ms,bottom 0ms ease 200ms}.woot-widget-bubble{transform-origin:center;will-change:transform,opacity}.woot-widget-bubble.woot-widget--expanded{transform:translateX(0px);transition:transform 300ms ease,opacity 100ms ease,visibility 0ms linear 0ms,bottom 0ms linear 0ms}@media only screen and (max-width:667px){.woot-widget-holder{height:100%;right:0;top:0;width:100%}.woot-widget-holder iframe{min-height:100%!important}.woot-widget-bubble.woot--close{bottom:60px;opacity:0;visibility:hidden!important;z-index:-1!important}}@media only screen and (min-width:667px){.woot-widget-holder{border-radius:16px;bottom:104px;height:calc(90% - 64px - 20px);max-height:640px!important;min-height:250px!important;width:400px!important}}</style>
+<div id="auth-modal" style="display:none; position:fixed; inset:0; background:rgba(9,36,51,0.7); backdrop-filter:blur(6px); z-index:99999; align-items:center; justify-content:center; padding:16px;">
   <div style="background:#fff; border-radius:16px; width:100%; max-width:440px; padding:28px; box-shadow:0 20px 50px rgba(0,0,0,0.25); position:relative; font-family:Manrope,sans-serif;">
     <button type="button" class="modal-close-generic" style="position:absolute; top:16px; right:16px; background:none; border:none; font-size:22px; cursor:pointer; color:#9ca3af;">✕</button>
     <div style="display:flex; border-bottom:2px solid rgba(9,36,51,0.08); margin-bottom:20px;">
