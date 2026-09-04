@@ -48,10 +48,7 @@ export function renderPage(filePathRelative: string, activeRoute: string = '') {
   }
 
   // Replace footer in html
-  let footerStart = html.indexOf('<div class="footer" data-v-a4670568>');
-  if (footerStart === -1) {
-    footerStart = html.indexOf('<div class=footer data-v-a4670568>');
-  }
+  let footerStart = html.indexOf('<div class=footer data-v-a4670568>');
   if (footerStart === -1) {
     footerStart = html.indexOf('<div class="footer');
   }
