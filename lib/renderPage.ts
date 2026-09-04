@@ -27,6 +27,18 @@ export function renderPage(filePathRelative: string, activeRoute: string = '') {
     headerHtml = headerHtml.replace(linkRegex, '$1 active$2');
   }
 
+  // Ensure stylesheet links in <head>
+  if (!html.includes('/css/site-header.css')) {
+    html = html.replace('</head>', '  <link rel="stylesheet" href="/css/site-header.css">\n</head>');
+  }
+  if (!html.includes('/css/site-footer.css')) {
+    if (html.includes('/css/site-header.css')) {
+      html = html.replace('/css/site-header.css">', '/css/site-header.css">\n  <link rel="stylesheet" href="/css/site-footer.css">');
+    } else {
+      html = html.replace('</head>', '  <link rel="stylesheet" href="/css/site-footer.css">\n</head>');
+    }
+  }
+
   // Replace header in html
   const headerStart = html.indexOf('<header class="site-header">');
   if (headerStart !== -1) {
@@ -39,24 +51,31 @@ export function renderPage(filePathRelative: string, activeRoute: string = '') {
   // Replace footer in html
   let footerStart = html.indexOf('<div class=footer data-v-a4670568>');
   if (footerStart === -1) {
+    footerStart = html.indexOf('<div class="footer');
+  }
+  if (footerStart === -1) {
+    footerStart = html.indexOf('<div class=footer');
+  }
+  if (footerStart === -1) {
     footerStart = html.indexOf('<footer');
   }
-  if (footerStart !== -1) {
-    let footerEnd = html.indexOf('<div id="auth-modal"', footerStart);
-    if (footerEnd === -1) {
-      footerEnd = html.indexOf('<!-- ====================', footerStart);
-    }
-    if (footerEnd === -1) {
-      const closingFooter = html.indexOf('</footer>', footerStart);
-      if (closingFooter !== -1) footerEnd = closingFooter + 9;
-    }
-    if (footerEnd === -1) {
-      footerEnd = html.indexOf('</body>', footerStart);
-    }
 
-    if (footerEnd !== -1) {
-      html = html.substring(0, footerStart) + cachedFooter! + '\n' + html.substring(footerEnd);
-    }
+  let footerEnd = html.indexOf('<div id="auth-modal"', footerStart !== -1 ? footerStart : 0);
+  if (footerEnd === -1) {
+    footerEnd = html.indexOf('<!-- ====================', footerStart !== -1 ? footerStart : 0);
+  }
+  if (footerEnd === -1) {
+    const closingFooter = html.indexOf('</footer>', footerStart !== -1 ? footerStart : 0);
+    if (closingFooter !== -1) footerEnd = closingFooter + 9;
+  }
+  if (footerEnd === -1) {
+    footerEnd = html.indexOf('</body>', footerStart !== -1 ? footerStart : 0);
+  }
+
+  if (footerStart !== -1 && footerEnd !== -1 && footerEnd > footerStart) {
+    html = html.substring(0, footerStart) + cachedFooter! + '\n\n' + html.substring(footerEnd);
+  } else if (footerEnd !== -1) {
+    html = html.substring(0, footerEnd) + cachedFooter! + '\n\n' + html.substring(footerEnd);
   }
 
   // Ensure modals and scripts exist
