@@ -20,6 +20,16 @@ export function renderPage(filePathRelative: string, activeRoute: string = '') {
   const fullPath = path.join(process.cwd(), filePathRelative);
   let html = fs.readFileSync(fullPath, 'utf8');
 
+  // If this is the standalone panel application, serve it directly
+  if (activeRoute === 'panel' || filePathRelative.endsWith('panel.html')) {
+    return new NextResponse(html, {
+      headers: {
+        'Content-Type': 'text/html; charset=utf-8',
+        'Cache-Control': 'no-store, no-cache, must-revalidate',
+      },
+    });
+  }
+
   // Build active header
   let headerHtml = cachedHeader!;
   if (activeRoute) {

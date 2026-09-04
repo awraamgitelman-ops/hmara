@@ -44,11 +44,7 @@
     }
 
     function openControlPanel() {
-      if (panelModal) {
-        panelModal.style.display = 'flex';
-      } else {
-        window.location.href = '/panel';
-      }
+      window.location.href = '/panel';
     }
 
     // --- User state ---
@@ -167,13 +163,17 @@
       var target = e.target;
       var panelTrigger = target.closest('#hero-btn-panel, a[href="#panel"], a[href="/panel"], .btn-open-panel, .btn-header-login');
       if (panelTrigger) {
+        if (panelTrigger.getAttribute('href') === '/panel') {
+          // Allow normal navigation to /panel
+          return;
+        }
         e.preventDefault();
         var user = localStorage.getItem('likemark_user');
-        if (user) {
+        if (user || panelTrigger.classList.contains('logged-in')) {
           openControlPanel();
         } else {
           // If clicking "Увійти", show login; if clicking "Перейти в панель", show registration
-          var isRegister = panelTrigger.id === 'hero-btn-panel' || panelTrigger.getAttribute('href') === '#panel' || panelTrigger.getAttribute('href') === '/panel';
+          var isRegister = panelTrigger.id === 'hero-btn-panel' || panelTrigger.getAttribute('href') === '#panel';
           openAuthModal(isRegister);
         }
       }

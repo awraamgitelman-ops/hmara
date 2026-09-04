@@ -3,961 +3,861 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Панель керування IaaS та виділеними серверами | LIKEMARK CLOUD</title>
-  <meta name="description" content="Особистий кабінет керування хмарною інфраструктурою, віртуальними машинами NVMe та білінгом ТОВ «ЛАЙКМАРК ЮКРЕЙН».">
+  <title>Панель керування та CRM хмарної інфраструктури | LIKEMARK CLOUD</title>
+  <meta name="description" content="Демо-консоль керування віртуальними серверами NVMe, виділеними серверами, базами даних та білінгом LIKEMARK CLOUD.">
   
   <!-- Favicons -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="shortcut icon" href="/favicon.ico">
-  
-  <!-- Google Fonts -->
-  <!-- Site Styles -->
-  <link rel="stylesheet" href="/css/site-theme.css">
-  <link rel="stylesheet" href="/css/site-header.css">
-  <link rel="stylesheet" href="/css/site-footer.css">
 
-  <style>
-    .panel-wrapper {
-      padding: 40px 0 80px 0;
-      background: #f8fafc;
-      min-height: calc(100vh - 400px);
-    }
-    .panel-card-user {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 16px;
-      padding: 24px 32px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 20px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-      margin-bottom: 28px;
-    }
-    .user-avatar-badge {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      background: #092433;
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 18px;
-    }
-    .table-container {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-      overflow: hidden;
-      margin-bottom: 32px;
-    }
-    .table-header-bar {
-      padding: 20px 28px;
-      border-bottom: 1px solid #e2e8f0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
-      background: #ffffff;
-    }
-    .panel-table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-    }
-    .panel-table th {
-      padding: 14px 24px;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: #64748b;
-      font-weight: 700;
-      background: #f8fafc;
-      border-bottom: 1px solid #e2e8f0;
-    }
-    .panel-table td {
-      padding: 18px 24px;
-      font-size: 14px;
-      color: #092433;
-      border-bottom: 1px solid #f1f5f9;
-      vertical-align: middle;
-    }
-    .panel-table tr:hover td {
-      background: #f8fafc;
-    }
-    .panel-table tr:last-child td {
-      border-bottom: none;
-    }
-    .badge-active {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
-      background: #ecfdf5;
-      color: #059669;
-      border: 1px solid #a7f3d0;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-    }
-    .btn-action {
-      background: #ffffff;
-      border: 1px solid #d0d5dd;
-      color: #344054;
-      font-weight: 600;
-      font-size: 13px;
-      padding: 6px 14px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .btn-action:hover {
-      background: #f8fafc;
-      border-color: #092433;
-      color: #092433;
-    }
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(9, 36, 51, 0.6);
-      backdrop-filter: blur(4px);
-      z-index: 99999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-    }
-    .modal-box {
-      background: #ffffff;
-      border-radius: 16px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-      border: 1px solid #e2e8f0;
-      width: 100%;
-      max-width: 520px;
-      padding: 32px;
-      box-sizing: border-box;
-      position: relative;
-    }
-  </style>
   <!-- Google Fonts: Manrope & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="/css/fonts.css">
+  <link rel="stylesheet" href="/css/panel.css">
 </head>
 <body>
 
-<header class="site-header">
-    <!-- Top Bar -->
-    <div class="top-bar">
-      <div class="container">
-        <!-- Left: Language UA -->
-        <div class="top-bar-left">
-          <div class="top-bar-lang">
-            <svg width="18" height="13" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="18" height="6.5" fill="#0057B7"></rect>
-              <rect y="6.5" width="18" height="6.5" fill="#FFDD00"></rect>
-            </svg>
-            <span>UA</span>
-          </div>
-        </div>
+<div class="console-app">
 
-        <!-- Right: Contacts -->
-        <div class="top-bar-right">
-          <a href="mailto:sales@likemark.cloud" class="top-bar-link">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-            </svg>
-            <span>sales@likemark.cloud</span>
-          </a>
-
-          <a href="tel:+380443345892" class="top-bar-link" style="font-weight: 600;">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-            </svg>
-            <span>+380 (44) 334-58-92</span>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Main Navigation Bar -->
-    <div class="header-main">
-      <div class="container">
-        <!-- Logo -->
-        <a href="/" class="header-logo">
-          <img src="/images/logo-header.png" alt="LIKEMARK CLOUD">
-        </a>
-
-        <!-- Desktop Navigation -->
-        <nav class="header-nav">
-          <a href="/servers" class="header-nav-link">Сервери</a>
-          <a href="/migration" class="header-nav-link">Міграція</a>
-          <a href="/solutions" class="header-nav-link">Рішення</a>
-          <a href="/datacenters" class="header-nav-link">Дата-центри</a>
-          <a href="/cases" class="header-nav-link">Кейси</a>
-          <a href="/contacts" class="header-nav-link">Контакти</a>
-        </nav>
-
-        <!-- Right Controls -->
-        <div class="header-actions">
-          <a href="tel:+380443345892" class="header-phone">+380 (44) 334-58-92</a>
-          <button type="button" class="btn-header-login" id="btn-header-login" data-open-modal="" data-tariff="Вхід до кабінету">Увійти</button>
-          <button type="button" class="btn-header-cta" id="btn-header-cta" data-open-modal="" data-tariff="Консультація спеціаліста LIKEMARK">
-            Консультація
-          </button>
-          
-          <!-- Mobile Burger Toggle -->
-          <button type="button" class="header-burger-btn" id="header-burger-btn" aria-label="Відкрити меню">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="3" y1="12" x2="21" y2="12"></line>
-              <line x1="3" y1="6" x2="21" y2="6"></line>
-              <line x1="3" y1="18" x2="21" y2="18"></line>
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- Mobile Drawer -->
-  <div class="mobile-drawer-overlay" id="mobile-drawer-overlay"></div>
-  <div class="mobile-drawer" id="mobile-drawer">
-    <div class="mobile-drawer-header">
-      <a href="/" class="header-logo">
-        <img src="/images/logo-header.png" alt="LIKEMARK CLOUD" style="height: 30px;">
+  <!-- ==================== SIDEBAR ==================== -->
+  <aside class="console-sidebar" id="console-sidebar">
+    <div class="console-sidebar-header">
+      <a href="/" class="console-logo-link" title="Повернутися на сайт LIKEMARK CLOUD">
+        <img src="/images/logo-header.png" alt="LIKEMARK CLOUD">
       </a>
-      <button class="mobile-drawer-close" id="mobile-drawer-close" aria-label="Закрити меню">&times;</button>
-    </div>
-    <div class="mobile-drawer-links">
-      <a href="/" class="mobile-drawer-link active">Головна</a>
-      <a href="/servers" class="mobile-drawer-link">Виділені сервери</a>
-      <a href="/migration" class="mobile-drawer-link">Безкоштовна міграція</a>
-      <a href="/solutions" class="mobile-drawer-link">Рішення для 1С/CRM</a>
-      <a href="/datacenters" class="mobile-drawer-link">Дата-центри ЄС</a>
-      <a href="/cases" class="mobile-drawer-link">Кейси та статті</a>
-      <a href="/contacts" class="mobile-drawer-link">Контакти та реквізити</a>
-    </div>
-    <div class="mobile-drawer-footer">
-      <a href="tel:+380443345892" class="top-bar-link" style="font-size: 15px; font-weight: 700; color: #092433;">+380 (44) 334-58-92</a>
-      <a href="mailto:sales@likemark.cloud" class="top-bar-link" style="font-size: 13px;">sales@likemark.cloud</a>
-      <button type="button" class="mobile-drawer-btn-cta" id="btn-drawer-cta" data-open-modal="" data-tariff="Запит з мобільного меню">
-        Замовити консультацію
-      </button>
-    </div>
-  </div>
-
-<main class="panel-wrapper">
-  <div class="site-container">
-
-    <!-- PAGE HERO -->
-    <div style="margin-bottom: 28px;">
-      <div class="theme-pill" style="margin-bottom: 12px;">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-          <line x1="8" y1="21" x2="16" y2="21"></line>
-          <line x1="12" y1="17" x2="12" y2="21"></line>
-        </svg>
-        <span>Хмарна консоль керування</span>
-      </div>
-      <h1 style="font-size: 28px; font-weight: 800; color: #092433; margin: 0 0 6px 0;">Панель керування IaaS</h1>
-      <p style="font-size: 15px; color: #64748b; margin: 0;">Моніторинг віртуальних машин, конфігурацій NVMe та білінгових реквізитів</p>
+      <span class="console-demo-badge">DEMO CRM</span>
     </div>
 
-    <!-- USER SUMMARY CARD -->
-    <div class="panel-card-user">
-      <div style="display: flex; align-items: center; gap: 16px;">
-        <div class="user-avatar-badge">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-            <circle cx="12" cy="7" r="4"></circle>
-          </svg>
-        </div>
-        <div>
-          <div style="font-size: 18px; font-weight: 800; color: #092433; display: flex; align-items: center; gap: 8px;">
-            <span id="panel-user-name">Клієнт LIKEMARK</span>
-            <span class="badge-active" style="padding: 2px 8px; font-size: 11px;">PRO Акаунт</span>
-          </div>
-          <div style="font-size: 13px; color: #64748b; margin-top: 2px;" id="panel-user-email">ID #45356074 • Договір оферти активний</div>
-        </div>
-      </div>
-
-      <div style="display: flex; align-items: center; gap: 24px;">
-        <div style="text-align: right;">
-          <div style="font-size: 12px; color: #64748b; font-weight: 500;">Баланс особового рахунку</div>
-          <div style="font-size: 22px; font-weight: 800; color: #059669;">1 500.00 ₴</div>
-        </div>
-        <button type="button" class="btn-theme-primary" onclick="alert('Для поповнення балансу або отримання рахунку зверніться за номером +380 (44) 334-58-92 або напишіть у чат.');" style="padding: 10px 18px; font-size: 13px;">
-          Поповнити баланс
-        </button>
-      </div>
-    </div>
-
-    <!-- METRICS GRID -->
-    <div class="theme-grid-4" style="margin-bottom: 28px;">
-      <div class="theme-card" style="padding: 20px;">
-        <div style="font-size: 12px; color: #64748b; font-weight: 600; text-transform: uppercase; margin-bottom: 6px;">Сервери онлайн</div>
-        <div style="font-size: 24px; font-weight: 800; color: #092433;">2 / 2</div>
-        <div style="font-size: 13px; color: #059669; font-weight: 600; margin-top: 4px;">● Усі вузли доступні 99.98%</div>
-      </div>
-      <div class="theme-card" style="padding: 20px;">
-        <div style="font-size: 12px; color: #64748b; font-weight: 600; text-transform: uppercase; margin-bottom: 6px;">Обчислювальні ядра</div>
-        <div style="font-size: 24px; font-weight: 800; color: #092433;">12 vCPU</div>
-        <div style="font-size: 13px; color: #64748b; margin-top: 4px;">AMD EPYC™ 9654 (3.7 GHz)</div>
-      </div>
-      <div class="theme-card" style="padding: 20px;">
-        <div style="font-size: 12px; color: #64748b; font-weight: 600; text-transform: uppercase; margin-bottom: 6px;">Оперативна пам'ять</div>
-        <div style="font-size: 24px; font-weight: 800; color: #092433;">24 GB RAM</div>
-        <div style="font-size: 13px; color: #64748b; margin-top: 4px;">DDR5 ECC Reg • 4800 MHz</div>
-      </div>
-      <div class="theme-card" style="padding: 20px;">
-        <div style="font-size: 12px; color: #64748b; font-weight: 600; text-transform: uppercase; margin-bottom: 6px;">NVMe Сховище</div>
-        <div style="font-size: 24px; font-weight: 800; color: #092433;">360 GB</div>
-        <div style="font-size: 13px; color: #64748b; margin-top: 4px;">Enterprise NVMe PCIe 4.0</div>
-      </div>
-    </div>
-
-    <!-- INSTANCES TABLE CARD -->
-    <div class="table-container">
-      <div class="table-header-bar">
-        <div>
-          <h2 style="font-size: 18px; font-weight: 800; color: #092433; margin: 0;">Активні виділені сервери (VPS/VDS)</h2>
-          <div style="font-size: 13px; color: #64748b; margin-top: 2px;">Керування живленням, перезапуск та web-консоль інстансів</div>
-        </div>
-        <button type="button" class="btn-theme-primary" onclick="document.getElementById('new-vm-modal').style.display='flex';" style="padding: 10px 18px; font-size: 13px;">
-          + Замовити сервер
-        </button>
-      </div>
-
-      <div style="overflow-x: auto;">
-        <table class="panel-table" id="panel-instances-table">
-          <thead>
-            <tr>
-              <th>Хост / Інстанс</th>
-              <th>Конфігурація</th>
-              <th>IP-адреса</th>
-              <th>Локація (DC)</th>
-              <th>Статус</th>
-              <th style="text-align: right;">Дії</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr id="row-vm-1">
-              <td style="font-weight: 700; color: #092433;">
-                <div style="display: flex; align-items: center; gap: 8px;">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#eb4247" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
-                    <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
-                    <line x1="6" y1="6" x2="6.01" y2="6"></line>
-                    <line x1="6" y1="18" x2="6.01" y2="18"></line>
-                  </svg>
-                  <span>vps-warsaw-1c-prod</span>
-                </div>
-              </td>
-              <td style="color: #64748b;">4 vCPU • 8 GB RAM • 120 GB NVMe</td>
-              <td style="font-family: 'JetBrains Mono', monospace; font-weight: 600; color: #092433;">185.193.17.42</td>
-              <td>Варшава (Tier III)</td>
-              <td><span class="badge-active" id="status-vm-1">● ACTIVE</span></td>
-              <td style="text-align: right;">
-                <div style="display: inline-flex; gap: 8px;">
-                  <button type="button" class="btn-action" onclick="openConsoleModal('vps-warsaw-1c-prod', '185.193.17.42')">Консоль</button>
-                  <button type="button" class="btn-action" onclick="rebootVM('vm-1')">Перезапуск</button>
-                </div>
-              </td>
-            </tr>
-            <tr id="row-vm-2">
-              <td style="font-weight: 700; color: #092433;">
-                <div style="display: flex; align-items: center; gap: 8px;">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#eb4247" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
-                    <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
-                    <line x1="6" y1="6" x2="6.01" y2="6"></line>
-                    <line x1="6" y1="18" x2="6.01" y2="18"></line>
-                  </svg>
-                  <span>vps-frankfurt-crm-backup</span>
-                </div>
-              </td>
-              <td style="color: #64748b;">8 vCPU • 16 GB RAM • 240 GB NVMe</td>
-              <td style="font-family: 'JetBrains Mono', monospace; font-weight: 600; color: #092433;">194.26.29.110</td>
-              <td>Франкфурт (Tier III+)</td>
-              <td><span class="badge-active" id="status-vm-2">● ACTIVE</span></td>
-              <td style="text-align: right;">
-                <div style="display: inline-flex; gap: 8px;">
-                  <button type="button" class="btn-action" onclick="openConsoleModal('vps-frankfurt-crm-backup', '194.26.29.110')">Консоль</button>
-                  <button type="button" class="btn-action" onclick="rebootVM('vm-2')">Перезапуск</button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- QUICK ACTIONS & SUPPORT -->
-    <div class="theme-grid-2" style="margin-bottom: 36px;">
-      <div class="theme-card" style="padding: 28px;">
-        <div class="theme-card-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-          </svg>
-        </div>
-        <h3 class="theme-card-title">Цілодобова чергова зміна системних інженерів</h3>
-        <p class="theme-card-desc">Виникли технічні питання чи потрібна допомога з конфігурацією баз 1С/CRM? Наші інженери відповідають за 15 хвилин у режимі 24/7/365.</p>
-        <button type="button" class="btn-theme-primary" data-open-modal data-tariff="Тікет інженеру з панелі" style="margin-top: 8px;">
-          Створити тікет інженеру
-        </button>
-      </div>
-
-      <div class="theme-card" style="padding: 28px;">
-        <div class="theme-card-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-            <polyline points="14 2 14 8 20 8"></polyline>
-            <line x1="16" y1="13" x2="8" y2="13"></line>
-            <line x1="16" y1="17" x2="8" y2="17"></line>
-          </svg>
-        </div>
-        <h3 class="theme-card-title">Бухгалтерія та юридичні документи</h3>
-        <p class="theme-card-desc">Акти виконаних робіт, договори та рахунки-фактури з ПДВ для ТОВ та ФОП через системи Вчасно або M.E.Doc за лічені хвилини.</p>
-        <a href="mailto:b2b@likemark.cloud" class="btn-theme-secondary" style="margin-top: 8px; display: inline-flex;">
-          Запросити акт / рахунок
-        </a>
-      </div>
-    </div>
-
-    <!-- SIGNATURE CTA BANNER -->
-    <div class="theme-cta-banner">
-      <div class="theme-cta-title">Потрібна допомога з розширенням або оптимізацією?</div>
-      <div class="theme-cta-desc">Наші сертифіковані архітектори допоможуть розрахувати кластерне рішення та налаштувати автоматичні бекапи безкоштовно.</div>
-      <div class="theme-cta-actions">
-        <button type="button" class="btn-theme-primary" data-open-modal data-tariff="Консультація архітектора (панель)">Зв'язатися з архітектором</button>
-        <a href="tel:+380443345892" class="btn-theme-secondary">+380 (44) 334-58-92</a>
-      </div>
-    </div>
-
-  </div>
-</main>
-
-<!-- CONSOLE MODAL -->
-<div id="console-modal" class="modal-overlay" style="display:none;">
-  <div style="background:#0d1117; border:1px solid #30363d; border-radius:12px; width:100%; max-width:720px; box-shadow:0 25px 60px rgba(0,0,0,0.6); overflow:hidden; font-family:'JetBrains Mono', monospace;">
-    <div style="background:#161b22; padding:12px 18px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #30363d;">
-      <span style="color:#58a6ff; font-weight:700; font-size:13px;" id="console-title">root@vps-warsaw-1c-prod:~#</span>
-      <button type="button" onclick="document.getElementById('console-modal').style.display='none';" style="background:none; border:none; color:#8b949e; font-size:18px; cursor:pointer;">✕</button>
-    </div>
-    <div style="padding:20px; color:#c9d1d9; font-size:13px; height:280px; overflow-y:auto; line-height:1.6;" id="console-body">
-      Welcome to Ubuntu 22.04.4 LTS (GNU/Linux 5.15.0-107-generic x86_64)<br>
-      * System load: 0.14<br>
-      * Usage of /: 20.2% of 118.90GB<br>
-      * Memory usage: 38%<br>
-      * Swap usage: 0%<br>
-      * Processes: 112<br>
-      * IPv4 address for eth0: 185.193.17.42<br>
-      <br>
-      Last login: Today from 195.68.12.3<br>
-      <span style="color:#7ee787;">root@server:~#</span> uptime<br>
-      15:20:00 up 48 days, 12:14, 1 user, load average: 0.14, 0.18, 0.15<br>
-      <span style="color:#7ee787;">root@server:~#</span> <span style="display:inline-block; width:8px; height:14px; background:#58a6ff; animation:blink 1s infinite;"></span>
-    </div>
-  </div>
-</div>
-
-<!-- CREATE NEW SERVER MODAL -->
-<div id="new-vm-modal" class="modal-overlay" style="display:none;">
-  <div class="modal-box">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-      <h3 style="font-size:20px; font-weight:800; color:#092433; margin:0;">Створення нового інстансу</h3>
-      <button type="button" onclick="document.getElementById('new-vm-modal').style.display='none';" style="background:none; border:none; color:#64748b; font-size:22px; cursor:pointer;">✕</button>
-    </div>
-    <form id="form-create-vm" onsubmit="handleCreateVM(event)">
-      <div style="margin-bottom:16px;">
-        <label style="display:block; font-size:13px; color:#092433; font-weight:600; margin-bottom:6px;">Ім'я інстансу</label>
-        <input type="text" id="vm-name-input" class="theme-input" required value="vps-dev-app">
-      </div>
-      <div style="margin-bottom:16px;">
-        <label style="display:block; font-size:13px; color:#092433; font-weight:600; margin-bottom:6px;">Дата-центр</label>
-        <select id="vm-location-input" class="theme-input">
-          <option value="Варшава (Tier III)">Варшава (Польща, Tier III) — ~12 мс</option>
-          <option value="Франкфурт (Tier III+)">Франкфурт (Німеччина, Tier III+) — DE-CIX</option>
-        </select>
-      </div>
-      <div style="margin-bottom:20px;">
-        <label style="display:block; font-size:13px; color:#092433; font-weight:600; margin-bottom:6px;">Тарифний план</label>
-        <select id="vm-plan-input" class="theme-input">
-          <option value="2 vCPU • 4 GB RAM • 60 GB NVMe">Старт: 2 vCPU • 4 GB RAM • 60 GB NVMe (385 ₴/міс)</option>
-          <option value="4 vCPU • 8 GB RAM • 120 GB NVMe" selected>Оптимум: 4 vCPU • 8 GB RAM • 120 GB NVMe (770 ₴/міс)</option>
-          <option value="8 vCPU • 16 GB RAM • 240 GB NVMe">Бізнес: 8 vCPU • 16 GB RAM • 240 GB NVMe (1 490 ₴/міс)</option>
-        </select>
-      </div>
-      <button type="submit" class="btn-theme-primary" style="width:100%; padding:14px; font-size:15px;">
-        Запустити сервер
-      </button>
-    </form>
-  </div>
-</div>
-
-<div class="footer" data-v-a4670568>
-  <div class="footer__container container" data-v-a4670568>
-    <div class="footer__inner" data-v-a4670568>
+    <nav class="console-nav-container">
+      <div class="console-nav-section-title">ОБЧИСЛЕННЯ ТА ХМАРА</div>
       
-      <!-- 1. BRAND / PROMO COLUMN (grid-area: logo) -->
-      <div class="footer__promo" data-v-a4670568>
-        <a class="footer__promo-logo" href="/" data-v-a4670568 style="display:inline-flex; align-items:center; text-decoration:none;">
-          <img src="/images/logo-footer.png" alt="LIKEMARK CLOUD" style="height:38px; width:auto; display:block;">
+      <a class="console-nav-item active" data-tab="overview">
+        <div class="console-nav-item-content">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"></rect><rect width="7" height="5" x="14" y="3" rx="1"></rect><rect width="7" height="9" x="14" y="12" rx="1"></rect><rect width="7" height="5" x="3" y="16" rx="1"></rect></svg>
+          <span>Дашборд</span>
+        </div>
+      </a>
+
+      <a class="console-nav-item" data-tab="servers">
+        <div class="console-nav-item-content">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"></rect><rect width="20" height="8" x="2" y="14" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+          <span>Хмарні сервери (VPS)</span>
+        </div>
+        <span class="console-nav-badge" id="nav-servers-count">2</span>
+      </a>
+
+      <a class="console-nav-item" data-tab="dedicated">
+        <div class="console-nav-item-content">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"></rect><path d="M7 7h10"></path><path d="M7 12h10"></path><path d="M7 17h10"></path></svg>
+          <span>Виділені сервери</span>
+        </div>
+        <span class="console-nav-badge">1</span>
+      </a>
+
+      <a class="console-nav-item" data-tab="databases">
+        <div class="console-nav-item-content">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M3 5V19A9 3 0 0 0 21 19V5"></path><path d="M3 12A9 3 0 0 0 21 12"></path></svg>
+          <span>Бази даних (DBaaS)</span>
+        </div>
+      </a>
+
+      <a class="console-nav-item" data-tab="storage">
+        <div class="console-nav-item-content">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path><path d="M12 12v9"></path><path d="m8 17 4 4 4-4"></path></svg>
+          <span>S3 Сховище</span>
+        </div>
+      </a>
+
+      <a class="console-nav-item" data-tab="k8s">
+        <div class="console-nav-item-content">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+          <span>Kubernetes</span>
+        </div>
+      </a>
+
+      <div class="console-nav-section-title">МЕРЕЖІ ТА БЕЗПЕКА</div>
+
+      <a class="console-nav-item" data-tab="networks">
+        <div class="console-nav-item-content">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="16" x="4" y="4" rx="2"></rect><rect width="6" height="6" x="9" y="9" rx="1"></rect><path d="M15 2v2"></path><path d="M15 20v2"></path><path d="M2 15h2"></path><path d="M2 9h2"></path><path d="M20 15h2"></path><path d="M20 9h2"></path><path d="M9 2v2"></path><path d="M9 20v2"></path></svg>
+          <span>Мережі, VPC & Firewall</span>
+        </div>
+      </a>
+
+      <div class="console-nav-section-title">БІЛІНГ ТА СЕРВІС</div>
+
+      <a class="console-nav-item" data-tab="billing">
+        <div class="console-nav-item-content">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+          <span>Білінг та Рахунки</span>
+        </div>
+      </a>
+
+      <a class="console-nav-item" data-tab="support">
+        <div class="console-nav-item-content">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          <span>Підтримка 24/7</span>
+        </div>
+        <span class="console-nav-badge" style="background:#eb4247; color:#fff;">2</span>
+      </a>
+
+      <a class="console-nav-item" data-tab="settings">
+        <div class="console-nav-item-content">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+          <span>Налаштування та API</span>
+        </div>
+      </a>
+    </nav>
+
+    <div class="console-sidebar-footer">
+      <div class="console-user-pill">
+        <div class="console-user-info">
+          <div class="console-avatar user-display-avatar">С</div>
+          <div style="min-width: 0;">
+            <div class="console-user-name user-display-name">Сергій Мельник</div>
+            <div class="console-user-id user-display-id">#45356074</div>
+          </div>
+        </div>
+        <a href="/" class="console-logout-btn" title="Вихід на сайт">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
         </a>
-        <button type="button" class="footer__promo-btn footer__promo-btn--only-mobile text-s16" data-v-a4670568 onclick="window.scrollTo({top:0, behavior:'smooth'})"> Вгору </button>
-        <button type="button" onclick="window.scrollTo({top:0, behavior:'smooth'})" class="button button--default button--outlined button--light !text-center footer__promo-btn footer__promo-btn--only-desktop text-s16" data-v-a4670568 data-v-c5d5fa05 style="margin-top:auto; padding:10px 20px; font-size:14px; width:auto; display:inline-flex; align-items:center; gap:8px;">
-          Вгору
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 25 24" data-v-a4670568 style="width:14px; height:14px; transform:rotate(-90deg);">
-            <path fill="currentColor" d="m13.309 23.993-1.421-1.421 8.917-8.917c.242-.242.06-.665-.302-.665H.492v-1.995h20.01c.362 0 .544-.423.271-.695l-8.886-8.887 1.42-1.42s10.368 10.367 10.61 10.579a1.97 1.97 0 0 1 0 2.811l-10.61 10.61Z"></path>
-          </svg>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==================== MAIN WORKSPACE ==================== -->
+  <main class="console-main">
+    
+    <!-- Topbar -->
+    <header class="console-topbar">
+      <div class="console-topbar-left">
+        <button type="button" class="console-mobile-menu-btn" id="console-mobile-toggle" aria-label="Меню">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
         </button>
+
+        <div class="console-project-select">
+          <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#10b981;"></span>
+          <span>Проєкт: PROD-INFRASTRUCTURE (UA-EU)</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </div>
       </div>
 
-      <!-- 2. NAVIGATION (grid-area: menu) -->
-      <nav class="footer-nav footer__nav" data-v-a4670568 data-v-105878b8>
-        <div class="footer-nav__columns" data-v-105878b8>
+      <div class="console-topbar-right">
+        <div class="console-balance-widget">
+          <div class="console-balance-text">Баланс рахунку:</div>
+          <div class="console-balance-val" id="topbar-balance-val">1 500.00 ₴</div>
+          <button type="button" class="console-topup-btn btn-open-topup">+ Поповнити</button>
+        </div>
+
+        <a href="/" class="console-site-link" title="Перейти на публічний сайт">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          <span>На сайт</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- Content Workspace -->
+    <div class="console-content">
+
+      <!-- ==================== VIEW 1: OVERVIEW / DASHBOARD ==================== -->
+      <section class="console-view active" id="view-overview">
+        <div class="console-view-header">
+          <div>
+            <h1 class="console-view-title">Огляд хмарної інфраструктури</h1>
+            <p class="console-view-desc">Поточний стан обчислювальних ресурсів, балансу та SLA доступності платформи.</p>
+          </div>
+          <div class="console-view-actions">
+            <button type="button" class="btn-primary" id="btn-open-create-server">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              Створити сервер
+            </button>
+            <button type="button" class="btn-secondary btn-open-topup">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="5" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+              Поповнити баланс
+            </button>
+          </div>
+        </div>
+
+        <!-- Metrics Grid -->
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-card-top">
+              <span class="metric-card-label">Віртуальні сервери</span>
+              <div class="metric-card-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"></rect><rect width="20" height="8" x="2" y="14" rx="2" ry="2"></rect></svg>
+              </div>
+            </div>
+            <div class="metric-card-value" id="metric-vms-count">2</div>
+            <div class="metric-card-sub positive">
+              <span class="status-dot" style="background:#10b981;"></span>
+              Всі інстанси онлайн
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-card-top">
+              <span class="metric-card-label">Ядра процесора</span>
+              <div class="metric-card-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"></rect><path d="M7 7h10"></path></svg>
+              </div>
+            </div>
+            <div class="metric-card-value" id="metric-cores-count">6 vCPU</div>
+            <div class="metric-card-sub">AMD EPYC Genoa (3.7+ GHz)</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-card-top">
+              <span class="metric-card-label">Оперативна пам'ять</span>
+              <div class="metric-card-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 19v-3"></path><path d="M10 19v-3"></path><path d="M14 19v-3"></path><path d="M18 19v-3"></path><rect width="20" height="8" x="2" y="8" rx="1"></rect></svg>
+              </div>
+            </div>
+            <div class="metric-card-value" id="metric-ram-count">12 GB</div>
+            <div class="metric-card-sub">DDR5 ECC Registered</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-card-top">
+              <span class="metric-card-label">Швидкісний простір</span>
+              <div class="metric-card-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M3 5V19A9 3 0 0 0 21 19V5"></path></svg>
+              </div>
+            </div>
+            <div class="metric-card-value" id="metric-disk-count">180 GB NVMe</div>
+            <div class="metric-card-sub positive">Hardware RAID-1</div>
+          </div>
+        </div>
+
+        <!-- Two Column Overview Layout -->
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(360px, 1fr)); gap:24px;">
           
-          <!-- Column 1: Про компанію -->
-          <div class="footer-nav__col" data-v-105878b8>
-            <div class="footer-nav__group" data-v-105878b8>
-              <div class="footer-nav__group-title" data-v-105878b8>Про компанію</div>
-              <ul class="footer-nav__group-links footer-links" data-v-105878b8>
-                <li class="footer-links__item" data-v-105878b8><a href="/servers" class="footer-links__item-link" data-v-105878b8><span data-v-105878b8>Про нас та інфраструктуру</span></a></li>
-                <li class="footer-links__item" data-v-105878b8><a href="/datacenters" class="footer-links__item-link" data-v-105878b8><span data-v-105878b8>Дата-центри Tier III (ЄС)</span></a></li>
-                <li class="footer-links__item" data-v-105878b8><a href="/cases/disaster-recovery-cloud" class="footer-links__item-link" data-v-105878b8><span data-v-105878b8>Безпека та Disaster Recovery</span></a></li>
-                <li class="footer-links__item" data-v-105878b8><a href="/cases/highload-black-friday" class="footer-links__item-link" data-v-105878b8><span data-v-105878b8>Мережі та BGP Anycast</span></a></li>
-                <li class="footer-links__item" data-v-105878b8><a href="/contacts" class="footer-links__item-link" data-v-105878b8><span data-v-105878b8>Партнерська програма</span></a></li>
-                <li class="footer-links__item" data-v-105878b8><a href="/contacts" class="footer-links__item-link" data-v-105878b8><span data-v-105878b8>Контакти та реквізити</span></a></li>
-              </ul>
+          <!-- Finance / Budget Card -->
+          <div class="console-card">
+            <div class="console-card-header">
+              <h2 class="console-card-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="5" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+                Стан особового рахунку
+              </h2>
+              <span style="font-size:12px; color:#10b981; font-weight:700;">SLA 99.98% активний</span>
+            </div>
+            <div style="padding:24px;">
+              <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:16px;">
+                <div>
+                  <div style="font-size:12px; color:#64748b; margin-bottom:4px;">Доступний залишок:</div>
+                  <div style="font-size:32px; font-weight:800; color:#092433; font-family:'JetBrains Mono', monospace;" id="billing-balance-val">1 500.00 ₴</div>
+                </div>
+                <div style="text-align:right;">
+                  <div style="font-size:12px; color:#64748b; margin-bottom:4px;">Прогноз витрат на місяць:</div>
+                  <div style="font-size:16px; font-weight:700; color:#475467;" id="metric-monthly-expense">1 490 ₴/міс</div>
+                </div>
+              </div>
+
+              <div style="background:#f8fafc; border-radius:8px; padding:14px; margin-bottom:20px; font-size:13px; color:#475467; border:1px solid #e2e8f0;">
+                Грант на безкоштовне тестування 1 500 ₴ активний. Списання виконується щогодини за фактично спожиті ресурси.
+              </div>
+
+              <div style="display:flex; gap:10px;">
+                <button type="button" class="btn-primary btn-open-topup" style="flex:1;">Поповнити карткою</button>
+                <button type="button" class="btn-secondary" id="btn-print-invoice" style="flex:1;">Рахунок з ПДВ</button>
+              </div>
             </div>
           </div>
 
-          <!-- Column 2: Документація, Кар'єра, Преса -->
-          <div class="footer-nav__col" data-v-105878b8>
-            <div class="footer-nav__group" data-v-105878b8>
-              <div class="footer-nav__group-title" data-v-105878b8>Документація</div>
-              <ul class="footer-nav__group-links footer-links" data-v-105878b8>
-                <li class="footer-links__item" data-v-105878b8><a href="/kb" class="footer-links__item-link" data-v-105878b8><span data-v-105878b8>Технічна документація</span></a></li>
-                <li class="footer-links__item" data-v-105878b8><a href="/terms" class="footer-links__item-link" data-v-105878b8><span data-v-105878b8>Регламент та SLA 99.98%</span></a></li>
-                <li class="footer-links__item" data-v-105878b8><a href="/panel" class="footer-links__item-link" data-v-105878b8><span data-v-105878b8>API консолі</span></a></li>
-                <li class="footer-links__item" data-v-105878b8><a href="/panel" class="footer-links__item-link" data-v-105878b8><span data-v-105878b8>Terraform</span></a></li>
-              </ul>
+          <!-- Activity Log Card -->
+          <div class="console-card">
+            <div class="console-card-header">
+              <h2 class="console-card-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                Журнал подій та аудит безпеки
+              </h2>
+              <span style="font-size:12px; color:#64748b;">Останні події</span>
             </div>
-
-            <div class="footer-nav__group" style="margin-top:20px;" data-v-105878b8>
-              <div class="footer-nav__group-title" data-v-105878b8>Кар'єра</div>
-              <ul class="footer-nav__group-links footer-links" data-v-105878b8>
-                <li class="footer-links__item" data-v-105878b8><a href="/contacts" class="footer-links__item-link" data-v-105878b8><span data-v-105878b8>Робота в LIKEMARK</span></a></li>
-                <li class="footer-links__item" data-v-105878b8><a href="/contacts" class="footer-links__item-link" data-v-105878b8><span data-v-105878b8>Вакансії та стажування</span></a></li>
-              </ul>
-            </div>
-
-            <div class="footer-nav__group" style="margin-top:20px;" data-v-105878b8>
-              <div class="footer-nav__group-title" data-v-105878b8>Преса</div>
-              <ul class="footer-nav__group-links footer-links" data-v-105878b8>
-                <li class="footer-links__item" data-v-105878b8><a href="/cases" class="footer-links__item-link" data-v-105878b8><span data-v-105878b8>Новини та оновлення платформи</span></a></li>
-                <li class="footer-links__item" data-v-105878b8><a href="/cases" class="footer-links__item-link" data-v-105878b8><span data-v-105878b8>Матеріали для ЗМІ та брендбук</span></a></li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Column 3: База знань & Юридичні документи -->
-          <div class="footer-nav__col" data-v-105878b8>
-            <div class="footer-nav__group" data-v-105878b8>
-              <div class="footer-nav__group-title" data-v-105878b8>База знань & Кейси</div>
-              <ul class="footer-nav__group-links footer-links" data-v-105878b8>
-                <li class="footer-links__item" data-v-105878b8><a href="/kb" class="footer-links__item-link" data-v-105878b8><span data-v-105878b8>База знань продуктів</span></a></li>
-                <li class="footer-links__item" data-v-105878b8><a href="/cases" class="footer-links__item-link" data-v-105878b8><span data-v-105878b8>Блог та архітектурні кейси</span></a></li>
-                <li class="footer-links__item" data-v-105878b8><a href="/cases" class="footer-links__item-link" data-v-105878b8><span data-v-105878b8>Події та вебінари</span></a></li>
-              </ul>
-            </div>
-
-            <div class="footer-nav__group" style="margin-top:20px;" data-v-105878b8>
-              <div class="footer-nav__group-title" data-v-105878b8>Контрагентам</div>
-              <ul class="footer-nav__group-links footer-links" data-v-105878b8>
-                <li class="footer-links__item" data-v-105878b8><a href="/terms" class="footer-links__item-link" data-v-105878b8><span data-v-105878b8>Публічний договір (оферта) IaaS</span></a></li>
-                <li class="footer-links__item" data-v-105878b8><a href="/contacts" class="footer-links__item-link" data-v-105878b8><span data-v-105878b8>Безготівковий розрахунок з ПДВ</span></a></li>
-                <li class="footer-links__item" data-v-105878b8><a href="/contacts" class="footer-links__item-link" data-v-105878b8><span data-v-105878b8>Корпоративні тендери (Prozorro)</span></a></li>
-              </ul>
+            <div style="padding:16px 24px;" id="overview-activity-list">
+              <!-- Rendered via JS -->
             </div>
           </div>
 
         </div>
-      </nav>
+      </section>
 
-      <!-- 3. FOOTER INFO (grid-area: info, 100% width, 2 equal 50% columns) -->
-      <div class="footer-info footer__info" data-v-a4670568 data-v-a920dbac>
-        <div class="footer-info__block" data-v-a920dbac>
-          <h3 class="footer-info__block-title h5" data-v-a920dbac>Новини LIKEMARK</h3>
-          <div class="footer-info__block-content text-r14" data-v-a920dbac>
-            <p data-v-a920dbac>Підпишіться на нашу розсилку: новини технологій, оновлення інфраструктури та спеціальні знижки.</p>
-            <a href="javascript:void(0)" onclick="window.openNewsletterModal ? window.openNewsletterModal() : (document.getElementById('newsletter-modal').style.display='flex');" class="button button--default button--colored button--light !text-center footer-info__block-subscribe-btn" data-v-a920dbac data-v-c5d5fa05>Підписатися</a>
+      <!-- ==================== VIEW 2: VIRTUAL SERVERS ==================== -->
+      <section class="console-view" id="view-servers">
+        <div class="console-view-header">
+          <div>
+            <h1 class="console-view-title">Хмарні сервери (VPS / VDS)</h1>
+            <p class="console-view-desc">Швидкі віртуальні машини на гіпервізорі Hardware KVM із прямим доступом до NVMe-масивів.</p>
+          </div>
+          <div class="console-view-actions">
+            <button type="button" class="btn-primary" onclick="window.openCreateServerModal ? window.openCreateServerModal() : document.getElementById('btn-open-create-server').click()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              Створити сервер
+            </button>
           </div>
         </div>
-        <div class="footer-info__block" data-v-a920dbac>
-          <h3 class="footer-info__block-title h5" data-v-a920dbac>Потрібна допомога?</h3>
-          <div class="footer-info__block-content text-r14" data-v-a920dbac>
-            <p data-v-a920dbac>Телефонуйте <a href="tel:+380443345892" class="link nobr" data-v-a920dbac>+380 (44) 334-58-92</a> або пишіть <a href="mailto:support@likemark.cloud" class="link" data-v-a920dbac>support@likemark.cloud</a> — інженери дадуть відповідь протягом 15 хвилин.</p>
-            <p data-v-a920dbac>Якщо у вас виникли запитання щодо послуг — відкрийте <a href="#consult" class="link modal-trigger-consult" data-v-a920dbac>консультацію</a>.</p>
+
+        <div class="console-card">
+          <div class="console-table-wrapper">
+            <table class="console-table">
+              <thead>
+                <tr>
+                  <th>Ім'я сервера / ОС</th>
+                  <th>Статус</th>
+                  <th>IP-адреса</th>
+                  <th>Конфігурація</th>
+                  <th>Локація</th>
+                  <th style="text-align:right;">Керування</th>
+                </tr>
+              </thead>
+              <tbody id="servers-table-body">
+                <!-- Rendered dynamically via JS -->
+              </tbody>
+            </table>
           </div>
         </div>
-      </div>
+      </section>
 
-      <!-- 4. FOOTER COPYRIGHT (grid-area: copyright, 100% width, balanced flex) -->
-      <div class="footer-copyright text-r14 footer__copyright" data-v-a4670568 data-v-ed3795d2>
-        <p class="footer-copyright__company" data-v-ed3795d2 style="margin:0; font-weight:700; color:#fff;">© ТОВ «ЛАЙКМАРК ЮКРЕЙН», 2023–2026</p>
-        <div class="footer-copyright__content" data-v-ed3795d2>
-          <p class="footer-copyright__text" data-v-ed3795d2 style="margin-bottom:6px;">Код ЄДРПОУ: 45356074 • Дата реєстрації: 2023 рік • КВЕД: 63.11 Оброблення даних</p>
-          <p class="footer-copyright__text" data-v-ed3795d2 style="margin:0; display:flex; flex-wrap:wrap; gap:12px; justify-content:flex-end;">
-            <a class="link" href="/privacy" target="_blank" data-v-ed3795d2>Політика конфіденційності</a>
-            <span style="color:var(--white-alpha-30);">•</span>
-            <a class="link" href="/cookie-policy" target="_blank" data-v-ed3795d2>Файли cookies</a>
-            <span style="color:var(--white-alpha-30);">•</span>
-            <a class="link" href="/contacts" target="_blank" rel="nofollow" data-v-ed3795d2>Офіційні реквізити</a>
-          </p>
+      <!-- ==================== VIEW 3: DEDICATED SERVERS ==================== -->
+      <section class="console-view" id="view-dedicated">
+        <div class="console-view-header">
+          <div>
+            <h1 class="console-view-title">Виділені фізичні сервери (Bare Metal)</h1>
+            <p class="console-view-desc">Ізольоване обладнання корпоративного класу без віртуалізації в дата-центрах Tier III.</p>
+          </div>
+          <div class="console-view-actions">
+            <a href="/servers" class="btn-secondary">Каталог конфігурацій</a>
+          </div>
         </div>
-      </div>
+
+        <div class="console-card">
+          <div class="console-card-header">
+            <div>
+              <div style="font-weight:800; font-size:16px; color:#092433;">dedicated-epyc-warsaw-db</div>
+              <div style="font-size:12px; color:#64748b; font-family:'JetBrains Mono', monospace;">IP: 185.156.40.10 • Atman DC WAW-1 (Варшава, Польща)</div>
+            </div>
+            <div class="status-pill active">
+              <span class="status-dot"></span>
+              <span>Підключено • Живлення OK</span>
+            </div>
+          </div>
+          <div style="padding:24px;">
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:16px; margin-bottom:20px;">
+              <div style="background:#f8fafc; padding:12px 16px; border-radius:8px; border:1px solid #e2e8f0;">
+                <div style="font-size:11px; color:#64748b; font-weight:700; text-transform:uppercase;">Процесор</div>
+                <div style="font-size:14px; font-weight:800; color:#092433; margin-top:2px;">AMD EPYC 9654 (96c/192t)</div>
+              </div>
+              <div style="background:#f8fafc; padding:12px 16px; border-radius:8px; border:1px solid #e2e8f0;">
+                <div style="font-size:11px; color:#64748b; font-weight:700; text-transform:uppercase;">Пам'ять</div>
+                <div style="font-size:14px; font-weight:800; color:#092433; margin-top:2px;">256 GB DDR5 ECC Reg</div>
+              </div>
+              <div style="background:#f8fafc; padding:12px 16px; border-radius:8px; border:1px solid #e2e8f0;">
+                <div style="font-size:11px; color:#64748b; font-weight:700; text-transform:uppercase;">Сховище</div>
+                <div style="font-size:14px; font-weight:800; color:#092433; margin-top:2px;">2x 3.84 TB U.2 RAID-1</div>
+              </div>
+              <div style="background:#f8fafc; padding:12px 16px; border-radius:8px; border:1px solid #e2e8f0;">
+                <div style="font-size:11px; color:#64748b; font-weight:700; text-transform:uppercase;">Температура / Живлення</div>
+                <div style="font-size:14px; font-weight:800; color:#059669; margin-top:2px;">38°C • 210 W (Норма)</div>
+              </div>
+            </div>
+
+            <div style="display:flex; gap:10px; justify-content:flex-end;">
+              <button type="button" class="btn-primary" onclick="alert('Підключення до віддаленої KVM-консолі IPMI 2.0...');">
+                Запустити IPMI / iDRAC Console
+              </button>
+              <button type="button" class="btn-secondary" onclick="alert('Режим Rescue завантажено в RAM.');">
+                Режим відновлення (Rescue Mode)
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== VIEW 4: DATABASES ==================== -->
+      <section class="console-view" id="view-databases">
+        <div class="console-view-header">
+          <div>
+            <h1 class="console-view-title">Керовані бази даних (DBaaS)</h1>
+            <p class="console-view-desc">Кластери PostgreSQL, MySQL та Redis із автоматичним резервним копіюванням та високою доступністю.</p>
+          </div>
+          <div class="console-view-actions">
+            <button type="button" class="btn-primary" onclick="alert('Майстер створення кластера бази даних (PostgreSQL 16 / MySQL 8.0 / Redis 7)...');">
+              + Створити кластер БД
+            </button>
+          </div>
+        </div>
+
+        <div class="console-card">
+          <div class="console-card-header">
+            <div>
+              <div style="font-weight:800; font-size:16px; color:#092433;">pg-cluster-production (PostgreSQL 16)</div>
+              <div style="font-size:12px; color:#64748b;">Primary Node + 1 Read Replica • Локація: Варшава (WAW-1)</div>
+            </div>
+            <div class="status-pill active">
+              <span class="status-dot"></span>
+              <span>Online • Реплікація в нормі</span>
+            </div>
+          </div>
+          <div style="padding:24px;">
+            <div style="margin-bottom:16px;">
+              <label style="display:block; font-size:12px; font-weight:700; color:#64748b; margin-bottom:4px;">Рядок підключення (Connection String):</label>
+              <div style="display:flex; gap:8px;">
+                <input type="text" readonly value="postgresql://app_user:••••••••••••@pg-prod.waw.likemark.internal:5432/main_db" style="width:100%; padding:8px 12px; font-family:'JetBrains Mono', monospace; font-size:13px; border:1px solid #e2e8f0; border-radius:6px; background:#f8fafc;">
+                <button type="button" class="btn-secondary" onclick="navigator.clipboard.writeText('postgresql://app_user:secure_pwd@pg-prod.waw.likemark.internal:5432/main_db'); alert('Рядок підключення скопійовано');">Копіювати</button>
+              </div>
+            </div>
+            <div style="font-size:13px; color:#475467;">
+              Обсяг даних: <strong>34.8 GB</strong> із 100 GB виділених. Останній бекап виконано сьогодні о 03:00 (S3-сумісне сховище).
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== VIEW 5: S3 OBJECT STORAGE ==================== -->
+      <section class="console-view" id="view-storage">
+        <div class="console-view-header">
+          <div>
+            <h1 class="console-view-title">S3-сумісне об'єктне сховище</h1>
+            <p class="console-view-desc">Надійне сховище файлів, медіа та бекапів із потрійною реплікацією даних (Geo-Replication).</p>
+          </div>
+          <div class="console-view-actions">
+            <button type="button" class="btn-primary" onclick="alert('Створення нового S3-бакета...');">+ Створити бакет</button>
+          </div>
+        </div>
+
+        <div class="console-card">
+          <table class="console-table">
+            <thead>
+              <tr>
+                <th>Назва бакета</th>
+                <th>Ендпоінт S3 API</th>
+                <th>Кількість об'єктів</th>
+                <th>Обсяг</th>
+                <th>Рівень доступу</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>likemark-static-assets</strong></td>
+                <td><span style="font-family:'JetBrains Mono', monospace; font-size:12px;">https://s3.waw.likemark.cloud/likemark-static-assets</span></td>
+                <td>1 482 об'єкти</td>
+                <td>18.4 GB</td>
+                <td><span class="status-pill active">Public Read</span></td>
+              </tr>
+              <tr>
+                <td><strong>db-backups-encrypted</strong></td>
+                <td><span style="font-family:'JetBrains Mono', monospace; font-size:12px;">https://s3.fra.likemark.cloud/db-backups-encrypted</span></td>
+                <td>38 архівів</td>
+                <td>142.6 GB</td>
+                <td><span class="status-pill stopped">Private (AES-256)</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ==================== VIEW 6: KUBERNETES ==================== -->
+      <section class="console-view" id="view-k8s">
+        <div class="console-view-header">
+          <div>
+            <h1 class="console-view-title">Managed Kubernetes (K8s)</h1>
+            <p class="console-view-desc">Оркестрація контейнерів без потреби адмініструвати Control Plane майстер-ноди.</p>
+          </div>
+          <div class="console-view-actions">
+            <button type="button" class="btn-primary" id="btn-download-kubeconfig">
+              Завантажити Kubeconfig
+            </button>
+          </div>
+        </div>
+
+        <div class="console-card">
+          <div class="console-card-header">
+            <div>
+              <div style="font-weight:800; font-size:16px; color:#092433;">likemark-k8s-prod (v1.30.2)</div>
+              <div style="font-size:12px; color:#64748b;">Control Plane: Multi-AZ High Availability • CNI: Cilium eBPF</div>
+            </div>
+            <div class="status-pill active">
+              <span class="status-dot"></span>
+              <span>3 Вузли готові</span>
+            </div>
+          </div>
+          <div style="padding:24px;">
+            <div style="font-size:13px; color:#475467; margin-bottom:16px;">
+              Пул робочих вузлів (Worker Node Pool): 3x стандартні інстанси (4 vCPU, 8 GB RAM, 80 GB NVMe).
+            </div>
+            <div style="background:#0d1117; color:#c9d1d9; border-radius:8px; padding:16px; font-family:'JetBrains Mono', monospace; font-size:12px; line-height:1.6;">
+              $ kubectl get nodes -o wide<br>
+              NAME&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STATUS&nbsp;&nbsp;&nbsp;ROLES&nbsp;&nbsp;&nbsp;AGE&nbsp;&nbsp;&nbsp;VERSION&nbsp;&nbsp;&nbsp;INTERNAL-IP<br>
+              likemark-waw-node-01&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ready&nbsp;&nbsp;&nbsp;&nbsp;&lt;none&gt;&nbsp;&nbsp;14d&nbsp;&nbsp;&nbsp;v1.30.2&nbsp;&nbsp;&nbsp;10.100.1.11<br>
+              likemark-waw-node-02&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ready&nbsp;&nbsp;&nbsp;&nbsp;&lt;none&gt;&nbsp;&nbsp;14d&nbsp;&nbsp;&nbsp;v1.30.2&nbsp;&nbsp;&nbsp;10.100.1.12<br>
+              likemark-waw-node-03&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ready&nbsp;&nbsp;&nbsp;&nbsp;&lt;none&gt;&nbsp;&nbsp;14d&nbsp;&nbsp;&nbsp;v1.30.2&nbsp;&nbsp;&nbsp;10.100.1.13
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== VIEW 7: NETWORKS & VPC ==================== -->
+      <section class="console-view" id="view-networks">
+        <div class="console-view-header">
+          <div>
+            <h1 class="console-view-title">Мережі, VPC та Firewall</h1>
+            <p class="console-view-desc">Приватні ізольовані підмережі, BGP Anycast анонси та правила міжмережевого екрану.</p>
+          </div>
+          <div class="console-view-actions">
+            <button type="button" class="btn-primary" onclick="alert('Додавання нового правила безпеки...');">+ Додати правило Firewall</button>
+          </div>
+        </div>
+
+        <div class="console-card">
+          <div class="console-card-header">
+            <h2 class="console-card-title">Активні правила безпеки (Default Security Group)</h2>
+            <span style="font-size:12px; color:#10b981; font-weight:700;">DDoS-захист L3-L7 активний</span>
+          </div>
+          <table class="console-table">
+            <thead>
+              <tr>
+                <th>Протокол</th>
+                <th>Порти</th>
+                <th>Джерело (CIDR)</th>
+                <th>Опис призначення</th>
+                <th>Статус</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>TCP</strong></td>
+                <td><span style="font-family:'JetBrains Mono', monospace;">22</span></td>
+                <td>0.0.0.0/0</td>
+                <td>SSH віддалений доступ</td>
+                <td><span class="status-pill active">Дозволено</span></td>
+              </tr>
+              <tr>
+                <td><strong>TCP</strong></td>
+                <td><span style="font-family:'JetBrains Mono', monospace;">80, 443</span></td>
+                <td>0.0.0.0/0</td>
+                <td>HTTP / HTTPS веб-трафік</td>
+                <td><span class="status-pill active">Дозволено</span></td>
+              </tr>
+              <tr>
+                <td><strong>TCP</strong></td>
+                <td><span style="font-family:'JetBrains Mono', monospace;">3389</span></td>
+                <td>185.156.0.0/16</td>
+                <td>RDP Віддалений робочий стіл (ізольований)</td>
+                <td><span class="status-pill active">Дозволено</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ==================== VIEW 8: BILLING & INVOICES ==================== -->
+      <section class="console-view" id="view-billing">
+        <div class="console-view-header">
+          <div>
+            <h1 class="console-view-title">Білінг, Рахунки та Фінанси</h1>
+            <p class="console-view-desc">Офіційний безготівковий розрахунок з ПДВ для юридичних осіб та ФОП від ТОВ «ЛАЙКМАРК ЮКРЕЙН».</p>
+          </div>
+          <div class="console-view-actions">
+            <button type="button" class="btn-primary btn-open-topup">+ Поповнити баланс</button>
+            <button type="button" class="btn-secondary" id="btn-print-invoice-2" onclick="window.print()">Друк рахунку</button>
+          </div>
+        </div>
+
+        <div class="console-card">
+          <div class="console-card-header">
+            <h2 class="console-card-title">Історія виставлених рахунків та актів</h2>
+          </div>
+          <table class="console-table">
+            <thead>
+              <tr>
+                <th>Номер документа</th>
+                <th>Дата</th>
+                <th>Призначення платежу</th>
+                <th>Сума з ПДВ</th>
+                <th>Статус</th>
+                <th style="text-align:right;">Документ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>#INV-2026-0814</strong></td>
+                <td>01.08.2026</td>
+                <td>Оренда обчислювальних хмарних ресурсів за серпень 2026</td>
+                <td style="font-weight:700;">1 490.00 ₴</td>
+                <td><span class="status-pill active">Оплачено</span></td>
+                <td style="text-align:right;">
+                  <button type="button" class="btn-secondary" style="padding:4px 10px; font-size:12px;" onclick="window.print()">Завантажити PDF</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ==================== VIEW 9: SUPPORT TICKETS ==================== -->
+      <section class="console-view" id="view-support">
+        <div class="console-view-header">
+          <div>
+            <h1 class="console-view-title">Служба підтримки та інженери 24/7</h1>
+            <p class="console-view-desc">Прямий зв'язок із черговою зміною системних адміністраторів. Гарантована перша відповідь до 15 хвилин.</p>
+          </div>
+          <div class="console-view-actions">
+            <button type="button" class="btn-primary" id="btn-open-new-ticket">
+              + Створити звернення
+            </button>
+          </div>
+        </div>
+
+        <div id="tickets-list-container">
+          <!-- Rendered via JS -->
+        </div>
+      </section>
+
+      <!-- ==================== VIEW 10: SETTINGS & API ==================== -->
+      <section class="console-view" id="view-settings">
+        <div class="console-view-header">
+          <div>
+            <h1 class="console-view-title">Налаштування профілю та API-токени</h1>
+            <p class="console-view-desc">Управління реквізитами організації, двофакторною автентифікацією та ключами для Terraform.</p>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); gap:24px;">
+          <div class="console-card">
+            <div class="console-card-header">
+              <h2 class="console-card-title">Реквізити організації</h2>
+            </div>
+            <div style="padding:24px;">
+              <div style="margin-bottom:12px;">
+                <label style="font-size:12px; color:#64748b; font-weight:700;">Назва компанії:</label>
+                <div style="font-size:14px; font-weight:700; color:#092433;">ТОВ «ТЕХНО-СОФТ ЮКРЕЙН»</div>
+              </div>
+              <div style="margin-bottom:12px;">
+                <label style="font-size:12px; color:#64748b; font-weight:700;">Код ЄДРПОУ:</label>
+                <div style="font-size:14px; font-family:'JetBrains Mono', monospace;">41895620</div>
+              </div>
+              <div style="margin-bottom:12px;">
+                <label style="font-size:12px; color:#64748b; font-weight:700;">Контактна особа:</label>
+                <div style="font-size:14px; font-weight:600; color:#092433;" class="user-display-name">Сергій Мельник</div>
+              </div>
+              <div>
+                <label style="font-size:12px; color:#64748b; font-weight:700;">Email для рахунків:</label>
+                <div style="font-size:14px; font-family:'JetBrains Mono', monospace;" class="user-display-email">sergiy@technosoft.ua</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="console-card">
+            <div class="console-card-header">
+              <h2 class="console-card-title">API-токени (Terraform & CLI)</h2>
+            </div>
+            <div style="padding:24px;">
+              <p style="font-size:13px; color:#64748b; margin-top:0;">Використовуйте цей токен для керування інфраструктурою як кодом (IaC) через офіційний провайдер Terraform або LIKEMARK CLI.</p>
+              <div style="display:flex; gap:8px; margin-bottom:16px;">
+                <input type="text" readonly value="lkm_live_9f83a84b12c7d9e4a3b8417c8025e" style="width:100%; padding:8px 12px; font-family:'JetBrains Mono', monospace; font-size:12.5px; border:1px solid #e2e8f0; border-radius:6px; background:#f8fafc;">
+                <button type="button" class="btn-secondary" onclick="navigator.clipboard.writeText('lkm_live_9f83a84b12c7d9e4a3b8417c8025e'); alert('API токен скопійовано');">Копіювати</button>
+              </div>
+              <button type="button" class="btn-secondary" onclick="alert('Новий API токен згенеровано');">Перегенерувати токен</button>
+            </div>
+          </div>
+        </div>
+      </section>
 
     </div>
-  </div>
+  </main>
 </div>
 
-<div id="auth-modal" style="display:none; position:fixed; inset:0; background:rgba(9,36,51,0.7); backdrop-filter:blur(6px); z-index:99999; align-items:center; justify-content:center; padding:16px;">
-  <div style="background:#fff; border-radius:16px; width:100%; max-width:440px; padding:28px; box-shadow:0 20px 50px rgba(0,0,0,0.25); position:relative; font-family:Manrope,sans-serif;">
-    <button type="button" class="modal-close-generic" style="position:absolute; top:16px; right:16px; background:none; border:none; font-size:22px; cursor:pointer; color:#9ca3af;">✕</button>
-    <div style="display:flex; border-bottom:2px solid rgba(9,36,51,0.08); margin-bottom:20px;">
-      <button type="button" id="tab-btn-login" style="flex:1; padding:10px 0; border:none; background:none; font-size:16px; font-weight:700; color:#092433; border-bottom:2px solid #092433; margin-bottom:-2px; cursor:pointer;">Вхід у кабінет</button>
-      <button type="button" id="tab-btn-register" style="flex:1; padding:10px 0; border:none; background:none; font-size:16px; font-weight:600; color:rgba(9,36,51,0.4); margin-bottom:-2px; cursor:pointer;">Створити акаунт</button>
+<!-- ==================== MODAL: CREATE SERVER ==================== -->
+<div class="modal-overlay" id="modal-create-server">
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <h3 class="modal-title">Створення нового хмарного сервера VPS</h3>
+      <button type="button" class="modal-close" data-modal-close>✕</button>
     </div>
-    <!-- Login Form -->
-    <form id="form-login" style="display:flex; flex-direction:column; gap:14px;">
-      <div>
-        <label style="display:block; font-size:13px; font-weight:600; color:#092433; margin-bottom:4px;">Email або логін</label>
-        <input type="text" id="login-email" required placeholder="name@company.com" style="width:100%; padding:10px 14px; border:1px solid rgba(9,36,51,0.2); border-radius:8px; font-size:14px; box-sizing:border-box;">
+    <form id="form-create-server">
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">Ім'я інстансу (Hostname)</label>
+          <input type="text" id="new-srv-name" class="form-input" required placeholder="vps-prod-crm-01">
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+          <div class="form-group">
+            <label class="form-label">Операційна система</label>
+            <select id="new-srv-os" class="form-select">
+              <option value="Ubuntu 24.04 LTS">Ubuntu 24.04 LTS</option>
+              <option value="Debian 12 Bookworm">Debian 12 Bookworm</option>
+              <option value="Rocky Linux 9">Rocky Linux 9</option>
+              <option value="Windows Server 2025">Windows Server 2025</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Локація дата-центру</label>
+            <select id="new-srv-region" class="form-select">
+              <option value="Варшава (WAW-1 Tier III)">Варшава (WAW-1 Tier III)</option>
+              <option value="Франкфурт (FRA-1 Tier III+)">Франкфурт (FRA-1 Tier III+)</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px;">
+          <div class="form-group">
+            <label class="form-label">Процесор (vCPU)</label>
+            <select id="new-srv-cpu" class="form-select">
+              <option value="2">2 vCPU</option>
+              <option value="4" selected>4 vCPU</option>
+              <option value="8">8 vCPU</option>
+              <option value="16">16 vCPU</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Оперативна пам'ять</label>
+            <select id="new-srv-ram" class="form-select">
+              <option value="4">4 GB DDR5</option>
+              <option value="8" selected>8 GB DDR5</option>
+              <option value="16">16 GB DDR5</option>
+              <option value="32">32 GB DDR5</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Диск NVMe</label>
+            <select id="new-srv-disk" class="form-select">
+              <option value="40">40 GB</option>
+              <option value="80" selected>80 GB</option>
+              <option value="160">160 GB</option>
+              <option value="320">320 GB</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="background:#f8fafc; border-radius:8px; padding:16px; border:1px solid #e2e8f0; margin-top:10px;">
+          <div style="font-size:12px; color:#64748b;">Орієнтовна вартість:</div>
+          <div style="font-size:22px; font-weight:800; color:#092433; font-family:'JetBrains Mono', monospace;">1 080 ₴ / міс (~1.50 ₴/год)</div>
+          <div style="font-size:11.5px; color:#059669; font-weight:600; margin-top:4px;">Покривається з вашого демо-балансу 1 500 ₴</div>
+        </div>
       </div>
-      <div>
-        <label style="display:block; font-size:13px; font-weight:600; color:#092433; margin-bottom:4px;">Пароль</label>
-        <input type="password" id="login-password" required placeholder="••••••••" style="width:100%; padding:10px 14px; border:1px solid rgba(9,36,51,0.2); border-radius:8px; font-size:14px; box-sizing:border-box;">
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" data-modal-close>Скасувати</button>
+        <button type="submit" class="btn-primary">Створити та запустити</button>
       </div>
-      <div style="display:flex; justify-content:space-between; align-items:center; font-size:12px;">
-        <label style="display:flex; align-items:center; gap:6px; cursor:pointer; color:rgba(9,36,51,0.7);">
-          <input type="checkbox" checked style="accent-color:#092433;"> Запам'ятати мене
-        </label>
-        <a href="#forgot" style="color:#eb4247; text-decoration:none;">Забули пароль?</a>
-      </div>
-      <button type="submit" style="background:#092433; color:#fff; border:none; padding:12px; border-radius:8px; font-size:15px; font-weight:700; cursor:pointer; margin-top:4px;">Увійти в панель</button>
-      <p style="font-size:12px; color:rgba(9,36,51,0.5); text-align:center; margin:0;">
-        Немає акаунта? <a href="#" id="link-switch-to-reg" style="color:#092433; font-weight:700; text-decoration:underline;">Зареєструватися</a>
-      </p>
     </form>
-    <!-- Register Form -->
-    <form id="form-register" style="display:none; flex-direction:column; gap:12px;">
-      <div style="background:rgba(10,180,118,0.1); color:#0ab476; padding:8px 12px; border-radius:6px; font-size:12px; font-weight:700;">
-        7 днів безкоштовного тестування при створенні акаунта
+  </div>
+</div>
+
+<!-- ==================== MODAL: TOPUP BALANCE ==================== -->
+<div class="modal-overlay" id="modal-topup-balance">
+  <div class="modal-dialog" style="max-width:480px;">
+    <div class="modal-header">
+      <h3 class="modal-title">Поповнення рахунку платформи</h3>
+      <button type="button" class="modal-close" data-modal-close>✕</button>
+    </div>
+    <form id="form-topup-balance">
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">Оберіть суму поповнення</label>
+          <select id="topup-amount" class="form-select">
+            <option value="500">500 ₴</option>
+            <option value="1000" selected>1 000 ₴</option>
+            <option value="2500">2 500 ₴ (+5% бонус)</option>
+            <option value="5000">5 000 ₴ (+10% бонус)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Спосіб оплати</label>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <label style="display:flex; align-items:center; gap:8px; font-size:13.5px; padding:10px 14px; border:1px solid #1f93ff; border-radius:8px; background:rgba(31,147,255,0.05); cursor:pointer;">
+              <input type="radio" name="pay-method" checked>
+              <strong>Банківська карта Visa / Mastercard (Миттєво)</strong>
+            </label>
+            <label style="display:flex; align-items:center; gap:8px; font-size:13.5px; padding:10px 14px; border:1px solid #e2e8f0; border-radius:8px; cursor:pointer;">
+              <input type="radio" name="pay-method">
+              <span>Безготівковий розрахунок за рахунком з ПДВ для ТОВ/ФОП</span>
+            </label>
+          </div>
+        </div>
       </div>
-      <div>
-        <label style="display:block; font-size:13px; font-weight:600; color:#092433; margin-bottom:4px;">Робочий Email</label>
-        <input type="email" id="reg-email" required placeholder="name@company.com" style="width:100%; padding:10px 14px; border:1px solid rgba(9,36,51,0.2); border-radius:8px; font-size:14px; box-sizing:border-box;">
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" data-modal-close>Скасувати</button>
+        <button type="submit" class="btn-primary">Поповнити рахунок</button>
       </div>
-      <div>
-        <label style="display:block; font-size:13px; font-weight:600; color:#092433; margin-bottom:4px;">Номер телефону</label>
-        <input type="tel" id="reg-phone" required placeholder="+380 (XX) XXX-XX-XX" style="width:100%; padding:10px 14px; border:1px solid rgba(9,36,51,0.2); border-radius:8px; font-size:14px; box-sizing:border-box;">
-      </div>
-      <div>
-        <label style="display:block; font-size:13px; font-weight:600; color:#092433; margin-bottom:4px;">Придумайте пароль</label>
-        <input type="password" id="reg-password" required placeholder="Мінімум 8 символів" style="width:100%; padding:10px 14px; border:1px solid rgba(9,36,51,0.2); border-radius:8px; font-size:14px; box-sizing:border-box;">
-      </div>
-      <div>
-        <label style="display:block; font-size:13px; font-weight:600; color:#092433; margin-bottom:4px;">Компанія / ПІБ</label>
-        <input type="text" id="reg-name" required placeholder="ТОВ або Сергій" style="width:100%; padding:10px 14px; border:1px solid rgba(9,36,51,0.2); border-radius:8px; font-size:14px; box-sizing:border-box;">
-      </div>
-      <button type="submit" style="background:#092433; color:#fff; border:none; padding:12px; border-radius:8px; font-size:15px; font-weight:700; cursor:pointer; margin-top:4px;">Створити акаунт</button>
-      <p style="font-size:12px; color:rgba(9,36,51,0.5); text-align:center; margin:0;">
-        Вже зареєстровані? <a href="#" id="link-switch-to-login" style="color:#092433; font-weight:700; text-decoration:underline;">Увійти</a>
-      </p>
     </form>
   </div>
 </div>
 
-<!-- ==================== CLIENT CONTROL PANEL MODAL ==================== -->
-<div id="panel-modal" style="display:none; position:fixed; inset:0; background:rgba(9,36,51,0.75); backdrop-filter:blur(8px); z-index:99999; align-items:center; justify-content:center; padding:16px;">
-  <div style="background:#f8fafc; border-radius:16px; width:100%; max-width:860px; max-height:90vh; overflow-y:auto; box-shadow:0 25px 60px rgba(0,0,0,0.3); font-family:Manrope,sans-serif; border:1px solid rgba(9,36,51,0.1);">
-    <div style="background:#092433; color:#fff; padding:16px 24px; border-top-left-radius:16px; border-top-right-radius:16px; display:flex; align-items:center; justify-content:space-between;">
-      <div style="display:flex; align-items:center; gap:12px;">
-        <span style="font-weight:800; font-size:18px; letter-spacing:-0.02em;">LIKEMARK Cloud Panel</span>
-        <span style="background:rgba(255,255,255,0.15); padding:2px 8px; border-radius:4px; font-size:12px;">ID #45356074</span>
+<!-- ==================== MODAL: VNC CONSOLE ==================== -->
+<div class="modal-overlay" id="modal-vnc-console">
+  <div class="modal-dialog" style="max-width:760px; background:#0d1117; border-color:#30363d;">
+    <div class="terminal-header">
+      <div class="terminal-dots">
+        <span class="terminal-dot red"></span>
+        <span class="terminal-dot yellow"></span>
+        <span class="terminal-dot green"></span>
       </div>
-      <div style="display:flex; align-items:center; gap:16px;">
-        <span style="font-size:13px; color:rgba(255,255,255,0.8);">Баланс: <strong style="color:#00e599;">1 500.00 ₴</strong></span>
-        <button type="button" class="modal-close-generic" style="background:none; border:none; color:#fff; font-size:20px; cursor:pointer;">✕</button>
-      </div>
+      <div class="terminal-title" id="vnc-server-title">Web VNC Console</div>
+      <button type="button" class="modal-close" style="color:#8b949e;" data-modal-close>✕</button>
     </div>
-    <div style="padding:24px;">
-      <div style="background:#fff; border-radius:12px; padding:20px; border:1px solid rgba(9,36,51,0.08); margin-bottom:20px; display:flex; justify-content:space-between; align-items:center;">
-        <div>
-          <h3 style="font-size:18px; font-weight:700; color:#092433; margin:0 0 4px;">Хмарні сервери та бази даних</h3>
-          <p style="font-size:13px; color:rgba(9,36,51,0.6); margin:0;">Дата-центри: Варшава (Tier III), Франкфурт (Tier III+). SLA 99.98%.</p>
-        </div>
-        <button type="button" id="btn-create-server" style="background:#092433; color:#fff; border:none; padding:10px 18px; border-radius:8px; font-size:13px; font-weight:700; cursor:pointer;">+ Створити сервер</button>
-      </div>
-      <div style="background:#fff; border-radius:12px; border:1px solid rgba(9,36,51,0.08); overflow:hidden; margin-bottom:20px;">
-        <div style="padding:14px 20px; border-bottom:1px solid rgba(9,36,51,0.08); font-weight:700; font-size:14px; color:#092433;">
-          Активні віртуальні машини (2)
-        </div>
-        <table style="width:100%; border-collapse:collapse; font-size:13px; text-align:left;">
-          <thead>
-            <tr style="background:rgba(9,36,51,0.02); color:rgba(9,36,51,0.6); border-bottom:1px solid rgba(9,36,51,0.08);">
-              <th style="padding:12px 20px;">Ім'я інстансу</th>
-              <th style="padding:12px 14px;">Ресурси</th>
-              <th style="padding:12px 14px;">IP-адреса</th>
-              <th style="padding:12px 14px;">Локація</th>
-              <th style="padding:12px 14px;">Статус</th>
-              <th style="padding:12px 20px; text-align:right;">Дії</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr style="border-bottom:1px solid rgba(9,36,51,0.05);">
-              <td style="padding:14px 20px; font-weight:600; color:#092433;">vps-warsaw-1c-prod</td>
-              <td style="padding:14px 14px; color:#565656;">4 vCPU • 8 GB RAM • 120 GB NVMe</td>
-              <td style="padding:14px 14px; font-family:monospace; color:#092433;">185.193.17.42</td>
-              <td style="padding:14px 14px; color:#565656;">Варшава</td>
-              <td style="padding:14px 14px;"><span style="background:rgba(10,180,118,0.15); color:#0ab476; padding:3px 8px; border-radius:4px; font-weight:700; font-size:11px;">● ACTIVE</span></td>
-              <td style="padding:14px 20px; text-align:right;">
-                <button type="button" style="background:rgba(9,36,51,0.06); border:none; padding:6px 12px; border-radius:4px; font-size:12px; font-weight:600; cursor:pointer;">Консоль</button>
-              </td>
-            </tr>
-            <tr>
-              <td style="padding:14px 20px; font-weight:600; color:#092433;">vps-frankfurt-crm-backup</td>
-              <td style="padding:14px 14px; color:#565656;">8 vCPU • 16 GB RAM • 240 GB NVMe</td>
-              <td style="padding:14px 14px; font-family:monospace; color:#092433;">194.26.29.110</td>
-              <td style="padding:14px 14px; color:#565656;">Франкфурт</td>
-              <td style="padding:14px 14px;"><span style="background:rgba(10,180,118,0.15); color:#0ab476; padding:3px 8px; border-radius:4px; font-weight:700; font-size:11px;">● ACTIVE</span></td>
-              <td style="padding:14px 20px; text-align:right;">
-                <button type="button" style="background:rgba(9,36,51,0.06); border:none; padding:6px 12px; border-radius:4px; font-size:12px; font-weight:600; cursor:pointer;">Консоль</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px;">
-        <div style="background:#fff; border-radius:12px; padding:16px; border:1px solid rgba(9,36,51,0.08);">
-          <span style="font-size:12px; color:rgba(9,36,51,0.6);">Середнє навантаження CPU</span>
-          <div style="font-size:22px; font-weight:700; color:#092433; margin:4px 0;">14%</div>
-          <div style="height:4px; background:rgba(9,36,51,0.1); border-radius:2px; overflow:hidden;">
-            <div style="width:14%; height:100%; background:#0ab476;"></div>
-          </div>
-        </div>
-        <div style="background:#fff; border-radius:12px; padding:16px; border:1px solid rgba(9,36,51,0.08);">
-          <span style="font-size:12px; color:rgba(9,36,51,0.6);">Використання RAM</span>
-          <div style="font-size:22px; font-weight:700; color:#092433; margin:4px 0;">38%</div>
-          <div style="height:4px; background:rgba(9,36,51,0.1); border-radius:2px; overflow:hidden;">
-            <div style="width:38%; height:100%; background:#3b82f6;"></div>
-          </div>
-        </div>
-        <div style="background:#fff; border-radius:12px; padding:16px; border:1px solid rgba(9,36,51,0.08);">
-          <span style="font-size:12px; color:rgba(9,36,51,0.6);">Дисковий простір NVMe</span>
-          <div style="font-size:22px; font-weight:700; color:#092433; margin:4px 0;">72 / 360 GB</div>
-          <div style="height:4px; background:rgba(9,36,51,0.1); border-radius:2px; overflow:hidden;">
-            <div style="width:20%; height:100%; background:#0ab476;"></div>
-          </div>
-        </div>
-      </div>
+    <div class="terminal-body" id="vnc-terminal-body">
+      <!-- Injected via JS -->
+    </div>
+    <div style="background:#161b22; padding:10px 16px; border-top:1px solid #30363d; display:flex; justify-content:space-between; align-items:center; font-size:12px; color:#8b949e; font-family:'JetBrains Mono', monospace;">
+      <span>VNC Security: TLS 1.3 • WebSockets</span>
+      <button type="button" class="btn-secondary" style="padding:4px 10px; font-size:11px; background:#21262d; border-color:#30363d; color:#c9d1d9;" onclick="alert('Ctrl+Alt+Del надіслано в гостьову ОС');">Send Ctrl+Alt+Del</button>
     </div>
   </div>
 </div>
 
-<!-- ==================== CALCULATOR MODAL ==================== -->
-<div id="calc-modal" style="display:none; position:fixed; inset:0; background:rgba(9,36,51,0.7); backdrop-filter:blur(6px); z-index:99999; align-items:center; justify-content:center; padding:16px;">
-  <div style="background:#fff; border-radius:16px; width:100%; max-width:540px; padding:32px; box-shadow:0 25px 50px rgba(0,0,0,0.25); position:relative; font-family:Manrope,sans-serif;">
-    <button type="button" class="modal-close-generic" style="position:absolute; top:16px; right:16px; background:none; border:none; font-size:22px; cursor:pointer; color:#9ca3af;">✕</button>
-    <div style="display:inline-block; background:rgba(9,36,51,0.06); color:#092433; font-size:12px; font-weight:700; padding:4px 10px; border-radius:4px; margin-bottom:12px;">ХМАРНИЙ КАЛЬКУЛЯТОР</div>
-    <h3 style="font-size:22px; font-weight:700; color:#092433; margin:0 0 6px;">Розрахувати вартість сервера</h3>
-    <p style="font-size:13px; color:rgba(9,36,51,0.6); margin:0 0 20px;">Оберіть ресурси для ваших баз 1С, CRM або корпоративних сайтів:</p>
-    <div style="display:flex; flex-direction:column; gap:16px;">
-      <div>
-        <div style="display:flex; justify-content:space-between; font-size:14px; font-weight:600; margin-bottom:6px;">
-          <span>Процесор (vCPU):</span>
-          <strong id="calc-cpu-val" style="color:#eb4247;">4 ядра</strong>
-        </div>
-        <input type="range" id="calc-cpu-range" min="1" max="32" step="1" value="4" style="width:100%; accent-color:#092433;">
-      </div>
-      <div>
-        <div style="display:flex; justify-content:space-between; font-size:14px; font-weight:600; margin-bottom:6px;">
-          <span>Оперативна пам'ять (RAM):</span>
-          <strong id="calc-ram-val" style="color:#eb4247;">8 GB</strong>
-        </div>
-        <input type="range" id="calc-ram-range" min="2" max="64" step="2" value="8" style="width:100%; accent-color:#092433;">
-      </div>
-      <div>
-        <div style="display:flex; justify-content:space-between; font-size:14px; font-weight:600; margin-bottom:6px;">
-          <span>Швидкісний диск (NVMe SSD):</span>
-          <strong id="calc-disk-val" style="color:#eb4247;">120 GB</strong>
-        </div>
-        <input type="range" id="calc-disk-range" min="20" max="1000" step="20" value="120" style="width:100%; accent-color:#092433;">
-      </div>
-      <div>
-        <label style="display:block; font-size:14px; font-weight:600; margin-bottom:6px;">Операційна система:</label>
-        <select id="calc-os-select" style="width:100%; padding:8px 12px; border:1px solid rgba(9,36,51,0.2); border-radius:6px; font-size:14px;">
-          <option value="0">Ubuntu / Debian / Linux (Безкоштовно)</option>
-          <option value="600">Windows Server 2022 / 2025 (+600 ₴/міс)</option>
-        </select>
-      </div>
-      <div style="background:rgba(9,36,51,0.03); border-radius:10px; padding:16px; margin-top:6px; display:flex; justify-content:space-between; align-items:center;">
-        <div>
-          <span style="font-size:12px; color:rgba(9,36,51,0.5);">Підсумкова вартість:</span>
-          <div id="calc-total-price" style="font-size:24px; font-weight:800; color:#092433;">1 490 ₴ / міс</div>
-        </div>
-        <button type="button" id="calc-order-btn" style="background:#092433; color:#fff; border:none; padding:12px 24px; border-radius:8px; font-size:14px; font-weight:700; cursor:pointer;">Замовити сервер</button>
-      </div>
+<!-- ==================== MODAL: NEW TICKET ==================== -->
+<div class="modal-overlay" id="modal-new-ticket">
+  <div class="modal-dialog" style="max-width:540px;">
+    <div class="modal-header">
+      <h3 class="modal-title">Створення звернення до чергового інженера</h3>
+      <button type="button" class="modal-close" data-modal-close>✕</button>
     </div>
-  </div>
-</div>
+    <form id="form-new-ticket">
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">Тема запиту</label>
+          <input type="text" id="ticket-subject" class="form-input" required placeholder="Налаштування резервного каналу зв'язку">
+        </div>
 
-<!-- ==================== CONSULTATION MODAL ==================== -->
-<div id="consult-modal" style="display:none; position:fixed; inset:0; background:rgba(9,36,51,0.7); backdrop-filter:blur(6px); z-index:99999; align-items:center; justify-content:center; padding:16px;">
-  <div style="background:#fff; border-radius:16px; width:100%; max-width:440px; padding:28px; box-shadow:0 20px 50px rgba(0,0,0,0.25); position:relative; font-family:Manrope,sans-serif;">
-    <button type="button" class="modal-close-generic" style="position:absolute; top:16px; right:16px; background:none; border:none; font-size:22px; cursor:pointer; color:#9ca3af;">✕</button>
-    <div style="display:inline-block; background:rgba(235,66,71,0.1); color:#eb4247; font-size:12px; font-weight:700; padding:4px 10px; border-radius:4px; margin-bottom:12px;">ОНЛАЙН-КОНСУЛЬТАЦІЯ</div>
-    <h3 style="font-size:22px; font-weight:700; color:#092433; margin:0 0 6px;">Консультація чергового інженера</h3>
-    <p style="font-size:13px; color:rgba(9,36,51,0.6); margin:0 0 16px;">Відповімо на запитання щодо міграції баз 1С/CRM, підбору сертифікованих серверів та умов SLA за 15 хвилин.</p>
-    <form id="form-consult" style="display:flex; flex-direction:column; gap:12px;">
-      <input type="hidden" name="source" value="Кнопка консультації перед замовленням">
-      <div>
-        <label style="display:block; font-size:13px; font-weight:600; color:#092433; margin-bottom:4px;">Ваше ім'я або назва компанії</label>
-        <input type="text" name="name" required placeholder="ТОВ або Сергій" style="width:100%; padding:10px 14px; border:1px solid rgba(9,36,51,0.2); border-radius:8px; font-size:14px; box-sizing:border-box;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+          <div class="form-group">
+            <label class="form-label">Послуга</label>
+            <select id="ticket-service" class="form-select">
+              <option value="Хмарні сервери VPS">Хмарні сервери VPS</option>
+              <option value="Виділені сервери">Виділені сервери</option>
+              <option value="Мережі та BGP">Мережі та BGP</option>
+              <option value="Бази даних DBaaS">Бази даних DBaaS</option>
+              <option value="Білінг та рахунки">Білінг та рахунки</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Пріоритет (SLA)</label>
+            <select id="ticket-priority" class="form-select">
+              <option value="Середній (до 30 хв)">Середній (до 30 хв)</option>
+              <option value="Високий (до 15 хв)" selected>Високий (до 15 хв)</option>
+              <option value="Критичний (до 5 хв)">Критичний (до 5 хв)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Детальний опис завдання</label>
+          <textarea id="ticket-message" rows="4" class="form-textarea" required placeholder="Опишіть завдання або технічні вимоги..."></textarea>
+        </div>
       </div>
-      <div>
-        <label style="display:block; font-size:13px; font-weight:600; color:#092433; margin-bottom:4px;">Номер телефону</label>
-        <input type="tel" name="phone" required placeholder="+380 (XX) XXX-XX-XX" style="width:100%; padding:10px 14px; border:1px solid rgba(9,36,51,0.2); border-radius:8px; font-size:14px; box-sizing:border-box;">
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" data-modal-close>Скасувати</button>
+        <button type="submit" class="btn-primary">Надіслати інженеру</button>
       </div>
-      <div>
-        <label style="display:block; font-size:13px; font-weight:600; color:#092433; margin-bottom:4px;">Завдання або запитання (необов'язково)</label>
-        <textarea name="comment" rows="2" placeholder="Потрібен розрахунок під базу 1С на 15 користувачів" style="width:100%; padding:10px 14px; border:1px solid rgba(9,36,51,0.2); border-radius:8px; font-size:14px; box-sizing:border-box;"></textarea>
-      </div>
-      <button type="submit" id="btn-consult-submit" style="background:#eb4247; color:#fff; border:none; padding:12px; border-radius:8px; font-size:15px; font-weight:700; cursor:pointer; margin-top:4px;">Замовити консультацію</button>
     </form>
   </div>
 </div>
 
-
-
-
-
-<!-- ==================== NEWSLETTER MODAL ==================== -->
-<div id="newsletter-modal" style="display:none; position:fixed; inset:0; background:rgba(9,36,51,0.7); backdrop-filter:blur(6px); z-index:99999; align-items:center; justify-content:center; padding:16px;">
-  <div style="background:#fff; border-radius:16px; width:100%; max-width:440px; padding:32px 28px; box-shadow:0 20px 50px rgba(0,0,0,0.25); position:relative; font-family:Manrope,sans-serif; box-sizing:border-box;">
-    <button type="button" class="modal-close-generic" style="position:absolute; top:16px; right:16px; background:none; border:none; font-size:22px; cursor:pointer; color:#9ca3af; line-height:1; width:32px; height:32px; display:flex; align-items:center; justify-content:center; border-radius:50%; transition:background 0.2s;">✕</button>
-    
-    <div style="display:inline-flex; align-items:center; gap:6px; background:rgba(31,147,255,0.1); color:#1f93ff; font-size:12px; font-weight:700; padding:4px 10px; border-radius:4px; margin-bottom:12px; letter-spacing:0.04em;">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-      АВТОРОЗСИЛКА ТА ДАЙДЖЕСТ
-    </div>
-    
-    <h3 style="font-size:22px; font-weight:700; color:#092433; margin:0 0 8px; line-height:1.25;">Підписка на розсилку новин</h3>
-    <p style="font-size:13px; color:rgba(9,36,51,0.65); margin:0 0 20px; line-height:1.5;">
-      Введіть вашу електронну пошту, щоб отримувати новини хмарних технологій, поради з кібербезпеки та персональні знижки.
-    </p>
-    
-    <form id="form-newsletter" style="display:flex; flex-direction:column; gap:14px;">
-      <input type="hidden" name="source" value="Підписка на розсилку новин LIKEMARK CLOUD">
-      <div>
-        <label style="display:block; font-size:13px; font-weight:600; color:#092433; margin-bottom:6px;">Ваша електронна пошта (Email)</label>
-        <input type="email" name="email" id="newsletter-email-input" required placeholder="name@company.ua" style="width:100%; padding:12px 14px; border:1px solid rgba(9,36,51,0.2); border-radius:8px; font-size:14px; box-sizing:border-box; outline:none; transition:border-color 0.2s;">
-      </div>
-      
-      <p style="font-size:11px; color:#64748b; margin:-4px 0 0; line-height:1.4;">
-        Без спаму. Ви зможете відписатися в будь-який момент в один клік.
-      </p>
-      
-      <button type="submit" id="btn-newsletter-submit" style="background:#1f93ff; color:#fff; border:none; padding:13px; border-radius:8px; font-size:15px; font-weight:700; cursor:pointer; transition:background 0.2s; margin-top:6px;">Підписатися</button>
-    </form>
-    
-    <div id="newsletter-success-msg" style="display:none; text-align:center; padding:14px; background:#e6f9f0; border:1px solid #10b981; border-radius:8px; color:#065f46; font-size:14px; font-weight:600; margin-top:14px;">
-      Дякуємо за підписку! Ваш Email додано до списку розсилки.
-    </div>
-  </div>
-</div>
-
-<!-- LIKEMARK CLOUD Interactive Modules -->
-<script src="/js/modules/carousel.js"></script>
-<script src="/js/modules/auth.js"></script>
-<script src="/js/modules/calculator.js"></script>
-<script src="/js/modules/consult.js"></script>
-<script src="/js/modules/newsletter.js"></script>
-<script src="/js/modules/modals.js"></script>
-<script src="/js/modules/security.js"></script>
-<script src="/js/site-header.js"></script>
-</body>
-</html>
-
-<script>
-  // Sync User Name & Email from localStorage
-  function syncUser() {
-    try {
-      var raw = localStorage.getItem('likemark_user');
-      if (raw) {
-        var user = JSON.parse(raw);
-        if (user.name) document.getElementById('panel-user-name').textContent = user.name;
-        if (user.email) document.getElementById('panel-user-email').textContent = user.email + ' • Договір активний';
-      }
-    } catch (e) {}
-  }
-  syncUser();
-
-  function openConsoleModal(name, ip) {
-    document.getElementById('console-title').textContent = 'root@' + name + ' (' + ip + '):~#';
-    document.getElementById('console-modal').style.display = 'flex';
-  }
-
-  function rebootVM(vmId) {
-    var statusEl = document.getElementById('status-' + vmId);
-    if (statusEl) {
-      statusEl.textContent = '⟳ REBOOTING...';
-      statusEl.style.color = '#d97706';
-      statusEl.style.background = '#fef3c7';
-      statusEl.style.borderColor = '#fcd34d';
-      setTimeout(function() {
-        statusEl.textContent = '● ACTIVE';
-        statusEl.style.color = '#059669';
-        statusEl.style.background = '#ecfdf5';
-        statusEl.style.borderColor = '#a7f3d0';
-      }, 1800);
-    }
-  }
-
-  function handleCreateVM(e) {
-    e.preventDefault();
-    var name = document.getElementById('vm-name-input').value.trim();
-    var loc = document.getElementById('vm-location-input').value;
-    var plan = document.getElementById('vm-plan-input').value;
-    
-    var table = document.getElementById('panel-instances-table').getElementsByTagName('tbody')[0];
-    var newRow = table.insertRow();
-    var randomIp = '185.193.' + Math.floor(Math.random() * 200 + 10) + '.' + Math.floor(Math.random() * 250 + 2);
-    
-    newRow.innerHTML = '<td style="font-weight:700; color:#092433;"><div style="display:flex; align-items:center; gap:8px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#eb4247" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg> ' + name + '</div></td>' +
-      '<td style="color:#64748b;">' + plan + '</td>' +
-      '<td style="font-family:\'JetBrains Mono\', monospace; font-weight:600; color:#092433;">' + randomIp + '</td>' +
-      '<td>' + loc + '</td>' +
-      '<td><span class="badge-active">● ACTIVE</span></td>' +
-      '<td style="text-align:right;"><div style="display:inline-flex; gap:8px;">' +
-      '<button type="button" class="btn-action" onclick="openConsoleModal(\'' + name + '\', \'' + randomIp + '\')">Консоль</button>' +
-      '<button type="button" class="btn-action" onclick="alert(\'Сервер ' + name + ' перезавантажується\')">Перезапуск</button>' +
-      '</div></td>';
-      
-    document.getElementById('new-vm-modal').style.display = 'none';
-  }
-</script>
+<script src="/js/panel-app.js"></script>
 </body>
 </html>
