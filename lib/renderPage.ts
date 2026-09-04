@@ -28,15 +28,14 @@ export function renderPage(filePathRelative: string, activeRoute: string = '') {
   }
 
   // Ensure stylesheet links in <head>
+  if (!html.includes('/css/site-theme.css')) {
+    html = html.replace('</head>', '  <link rel="stylesheet" href="/css/site-theme.css">\n</head>');
+  }
   if (!html.includes('/css/site-header.css')) {
     html = html.replace('</head>', '  <link rel="stylesheet" href="/css/site-header.css">\n</head>');
   }
   if (!html.includes('/css/site-footer.css')) {
-    if (html.includes('/css/site-header.css')) {
-      html = html.replace('/css/site-header.css">', '/css/site-header.css">\n  <link rel="stylesheet" href="/css/site-footer.css">');
-    } else {
-      html = html.replace('</head>', '  <link rel="stylesheet" href="/css/site-footer.css">\n</head>');
-    }
+    html = html.replace('</head>', '  <link rel="stylesheet" href="/css/site-footer.css">\n</head>');
   }
 
   // Replace header in html
