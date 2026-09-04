@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "sync": "node scripts/sync-templates.js",
+    "optimize:html": "node scripts/extract-inline-styles.js",
+    "validate": "node scripts/validate-site.js"
   },
   "dependencies": {
     "@types/node": "^26.4.1",
