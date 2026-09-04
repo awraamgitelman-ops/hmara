@@ -38,23 +38,30 @@ function initSiteHeader() {
   function triggerLogin(e) {
     if (e) e.preventDefault();
     closeDrawer();
+    const user = localStorage.getItem('likemark_user');
+    const panelModal = document.getElementById('panel-modal');
+    if (user && panelModal) {
+      panelModal.style.display = 'flex';
+      return;
+    }
+    if (window.openAuthModal) {
+      window.openAuthModal(false);
+      return;
+    }
     const authModal = document.getElementById('auth-modal');
     const leadModal = document.getElementById('lead-modal');
     const consultModal = document.getElementById('consultModal') || document.getElementById('consult-modal');
 
     if (authModal) {
       authModal.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
     } else if (leadModal) {
       const modalTariffInput = document.getElementById('modal-tariff-input');
       const modalTitle = leadModal.querySelector('.modal-title');
       if (modalTariffInput) modalTariffInput.value = 'Вхід до кабінету';
       if (modalTitle) modalTitle.textContent = 'Вхід до кабінету';
       leadModal.classList.add('active');
-      document.body.style.overflow = 'hidden';
     } else if (consultModal) {
       consultModal.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
     }
   }
 

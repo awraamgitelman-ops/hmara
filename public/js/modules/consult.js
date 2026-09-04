@@ -5,32 +5,55 @@
   'use strict';
 
   function initConsult() {
-    var consultModal     = document.getElementById('consult-modal');
-    var btnFloating      = document.getElementById('btn-consult-floating');
-    var formConsult      = document.getElementById('form-consult');
+    var consultModal = document.getElementById('consult-modal') || document.getElementById('consultModal');
+    var btnFloating  = document.getElementById('btn-consult-floating');
+    var formConsult  = document.getElementById('form-consult');
+
+    function openConsult() {
+      if (consultModal) {
+        consultModal.style.display = 'flex';
+      }
+    }
+
+    function closeConsult() {
+      if (consultModal) {
+        consultModal.style.display = 'none';
+      }
+    }
+
+    window.openConsultModal = openConsult;
+    window.closeConsultModal = closeConsult;
 
     if (btnFloating && consultModal) {
       btnFloating.addEventListener('click', function () {
-        consultModal.style.display = 'flex';
+        openConsult();
       });
     }
+
+    document.addEventListener('click', function (e) {
+      var target = e.target;
+      if (target.closest('.btn-header-cta, .mobile-drawer-btn-cta, .modal-trigger-consult, a[href="#consult"]')) {
+        e.preventDefault();
+        openConsult();
+      }
+    });
 
     if (formConsult) {
       formConsult.addEventListener('submit', function (e) {
         e.preventDefault();
-        var submitBtn = document.getElementById('btn-consult-submit');
+        var submitBtn = document.getElementById('btn-consult-submit') || formConsult.querySelector('button[type="submit"]');
 
         if (submitBtn) {
-          submitBtn.disabled     = true;
-          submitBtn.textContent  = '\u041D\u0430\u0434\u0441\u0438\u043B\u0430\u0454\u043C\u043E \u0437\u0430\u044F\u0432\u043A\u0443\u2026';
+          submitBtn.disabled    = true;
+          submitBtn.textContent = 'Надсилаємо заявку…';
         }
 
         var formData = new FormData(formConsult);
-        var payload  = {
+        var payload = {
           name:    formData.get('name'),
           phone:   formData.get('phone'),
           comment: formData.get('comment'),
-          source:  '\u0424\u043E\u0440\u043C\u0430 \u043E\u043D\u043B\u0430\u0439\u043D-\u043A\u043E\u043D\u0441\u0443\u043B\u044C\u0442\u0430\u0446\u0456\u0457 LIKEMARK CLOUD'
+          source:  'Форма онлайн-консультації LIKEMARK CLOUD'
         };
 
         fetch('/api/lead', {
@@ -42,23 +65,25 @@
         }).finally(function () {
           if (submitBtn) {
             submitBtn.style.background = '#0ab476';
-            submitBtn.textContent = '\u2713 \u0417\u0430\u044F\u0432\u043A\u0443 \u043F\u0440\u0438\u0439\u043D\u044F\u0442\u043E! \u0406\u043D\u0436\u0435\u043D\u0435\u0440 \u0437\u0430\u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0443\u0454 \u0432\u0430\u043C';
+            submitBtn.textContent = '✓ Заявку прийнято! Інженер зателефонує вам';
           }
           setTimeout(function () {
-            if (consultModal) consultModal.style.display = 'none';
+            closeConsult();
             formConsult.reset();
             if (submitBtn) {
               submitBtn.disabled     = false;
               submitBtn.style.background = '#eb4247';
-              submitBtn.textContent  = '\u0417\u0430\u043C\u043E\u0432\u0438\u0442\u0438 \u043A\u043E\u043D\u0441\u0443\u043B\u044C\u0442\u0430\u0446\u0456\u044E';
+              submitBtn.textContent  = 'Замовити консультацію';
             }
           }, 2500);
         });
       });
     }
+  }
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initConsult);
   } else {
     initConsult();
   }
-}());
+})();

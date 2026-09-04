@@ -1,5 +1,5 @@
 // LIKEMARK — Auth Module
-// Responsibility: login/register modal UI, user state (localStorage), user dropdown
+// Responsibility: login/register modal UI, user state (localStorage), user dropdown, auto-open panel upon account creation
 
 (function () {
   'use strict';
@@ -19,7 +19,6 @@
     var dropdownMenu    = document.getElementById('user-dropdown-menu');
     var menuLogout      = document.getElementById('menu-logout');
     var menuOpenPanel   = document.getElementById('menu-open-panel');
-    var heroBtnPanel    = document.getElementById('hero-btn-panel');
     var btnNavLogin     = document.getElementById('btn-nav-login');
     var btnNavRegister  = document.getElementById('btn-nav-register');
 
@@ -44,24 +43,50 @@
       if (isRegister) showRegisterTab(); else showLoginTab();
     }
 
+    function openControlPanel() {
+      if (panelModal) {
+        panelModal.style.display = 'flex';
+      } else {
+        window.location.href = '/panel';
+      }
+    }
+
     // --- User state ---
     function checkUserState() {
       var raw = localStorage.getItem('likemark_user');
-      if (raw && headerGuest && headerUser) {
-        headerGuest.style.display = 'none';
-        headerUser.style.display  = 'flex';
+      if (raw) {
         try {
           var parsed = JSON.parse(raw);
-          if (userNameDisplay && parsed.name) userNameDisplay.textContent = parsed.name;
+          var displayName = parsed.name || (parsed.email ? parsed.email.split('@')[0] : 'Клієнт');
+
+          if (headerGuest && headerUser) {
+            headerGuest.style.display = 'none';
+            headerUser.style.display  = 'flex';
+            if (userNameDisplay) userNameDisplay.textContent = displayName;
+          }
+
+          // Update header login buttons to show profile or panel
+          document.querySelectorAll('.btn-header-login, #btn-header-login').forEach(function (btn) {
+            btn.textContent = displayName;
+            btn.setAttribute('title', 'Відкрити панель керування');
+            btn.classList.add('logged-in');
+          });
         } catch (e) {}
-      } else if (headerGuest && headerUser) {
-        headerGuest.style.display = 'flex';
-        headerUser.style.display  = 'none';
+      } else {
+        if (headerGuest && headerUser) {
+          headerGuest.style.display = 'flex';
+          headerUser.style.display  = 'none';
+        }
+        document.querySelectorAll('.btn-header-login, #btn-header-login').forEach(function (btn) {
+          btn.textContent = 'Увійти';
+          btn.classList.remove('logged-in');
+        });
       }
     }
 
     function saveUser(name, email) {
-      localStorage.setItem('likemark_user', JSON.stringify({ name: name, email: email, loggedIn: true }));
+      var userObj = { name: name, email: email, loggedIn: true, registeredAt: new Date().toISOString() };
+      localStorage.setItem('likemark_user', JSON.stringify(userObj));
       checkUserState();
     }
 
@@ -74,24 +99,39 @@
     if (linkToReg)   linkToReg.addEventListener('click',   function (e) { e.preventDefault(); showRegisterTab(); });
     if (linkToLogin) linkToLogin.addEventListener('click', function (e) { e.preventDefault(); showLoginTab(); });
 
+    // Submit LOGIN form
     if (formLogin) {
       formLogin.addEventListener('submit', function (e) {
         e.preventDefault();
-        var email = document.getElementById('login-email').value;
+        var email = (document.getElementById('login-email') && document.getElementById('login-email').value || '').trim();
         saveUser(email.split('@')[0], email);
         if (authModal)  authModal.style.display  = 'none';
-        if (panelModal) panelModal.style.display = 'flex';
+        openControlPanel();
       });
     }
 
+    // Submit REGISTER form — immediately activates and opens control panel
     if (formRegister) {
       formRegister.addEventListener('submit', function (e) {
         e.preventDefault();
-        var email = document.getElementById('reg-email').value;
-        var name  = document.getElementById('reg-name').value;
+        var email = (document.getElementById('reg-email') && document.getElementById('reg-email').value || '').trim();
+        var name  = (document.getElementById('reg-name') && document.getElementById('reg-name').value || '').trim();
         saveUser(name || email.split('@')[0], email);
-        if (authModal)  authModal.style.display  = 'none';
-        if (panelModal) panelModal.style.display = 'flex';
+
+        // Submit registration notice to /api/lead
+        fetch('/api/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: name || email.split('@')[0],
+            email: email,
+            source: 'Реєстрація нового клієнта в панелі LIKEMARK',
+            comment: 'Створено акаунт у хмарній панелі'
+          })
+        }).catch(function () {});
+
+        if (authModal) authModal.style.display = 'none';
+        openControlPanel();
       });
     }
 
@@ -118,21 +158,31 @@
       menuOpenPanel.addEventListener('click', function (e) {
         e.preventDefault();
         if (dropdownMenu) dropdownMenu.style.display = 'none';
-        if (panelModal)   panelModal.style.display   = 'flex';
+        openControlPanel();
       });
     }
 
-    // Hero panel button
-    if (heroBtnPanel) {
-      heroBtnPanel.addEventListener('click', function (e) {
+    // Intercept clicks on panel buttons & links
+    document.addEventListener('click', function (e) {
+      var target = e.target;
+      var panelTrigger = target.closest('#hero-btn-panel, a[href="#panel"], a[href="/panel"], .btn-open-panel, .btn-header-login');
+      if (panelTrigger) {
         e.preventDefault();
-        if (localStorage.getItem('likemark_user') && panelModal) {
-          panelModal.style.display = 'flex';
+        var user = localStorage.getItem('likemark_user');
+        if (user) {
+          openControlPanel();
         } else {
-          openAuthModal(false);
+          // If clicking "Увійти", show login; if clicking "Перейти в панель", show registration
+          var isRegister = panelTrigger.id === 'hero-btn-panel' || panelTrigger.getAttribute('href') === '#panel' || panelTrigger.getAttribute('href') === '/panel';
+          openAuthModal(isRegister);
         }
+      }
+    });
+
     // Expose globally
     window.openAuthModal = openAuthModal;
+    window.openControlPanel = openControlPanel;
+    window.checkUserState = checkUserState;
 
     // Handle any links targeting #login or #register
     document.querySelectorAll('a[href="#login"]').forEach(function (el) {
@@ -140,9 +190,6 @@
     });
     document.querySelectorAll('a[href="#register"], a[href="#signup"]').forEach(function (el) {
       el.addEventListener('click', function (e) { e.preventDefault(); openAuthModal(true); });
-    });
-    document.querySelectorAll('.btn-header-login').forEach(function (el) {
-      el.addEventListener('click', function (e) { e.preventDefault(); openAuthModal(false); });
     });
 
     checkUserState();
@@ -153,4 +200,4 @@
   } else {
     initAuth();
   }
-}());
+})();

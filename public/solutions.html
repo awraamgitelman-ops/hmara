@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Хмарні рішення та корпоративні сервіси | LIKEMARK CLOUD</title>
+  <meta name="description" content="Комплексні хмарні рішення від LIKEMARK CLOUD: керовані бази даних (PostgreSQL, MySQL), Managed Kubernetes, S3 сховище, WAF/DDoS захист та AI інфраструктура з GPU H100.">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/site-header.css">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="canonical" href="https://hmara-production.up.railway.app/solutions">
+</head>
+<body style="background:#092433; color:#fff; font-family:Manrope,sans-serif; margin:0;">
+  <header class="site-header">
+    
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-bar-left">
+        <div class="top-bar-lang">
+          <svg width="18" height="13" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="18" height="6.5" fill="#0057B7"></rect>
+            <rect y="6.5" width="18" height="6.5" fill="#FFDD00"></rect>
+          </svg>
+          <span>UA</span>
+        </div>
+      </div>
+      <div class="top-bar-right">
+        <a href="mailto:sales@likemark.cloud" class="top-bar-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+          </svg>
+          <span>sales@likemark.cloud</span>
+        </a>
+        <a href="tel:+380443345892" class="top-bar-link" style="font-weight: 600;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+          </svg>
+          <span>+380 (44) 334-58-92</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navigation Bar -->
+  <div class="header-main">
+    <div class="container">
+      <a href="/" class="header-logo">
+        <img src="/images/logo-header.png" alt="LIKEMARK CLOUD">
+      </a>
+      <nav class="header-nav">
+        <a href="/servers" class="header-nav-link ">Сервери</a>
+        <a href="/migration" class="header-nav-link ">Міграція</a>
+        <a href="/solutions" class="header-nav-link active">Рішення</a>
+        <a href="/datacenters" class="header-nav-link ">Дата-центри</a>
+        <a href="/cases" class="header-nav-link ">Кейси</a>
+        <a href="/contacts" class="header-nav-link ">Контакти</a>
+      </nav>
+      <div class="header-actions">
+        <a href="tel:+380443345892" class="header-phone">+380 (44) 334-58-92</a>
+        <button type="button" class="btn-header-login" id="btn-header-login">Увійти</button>
+        <button type="button" class="btn-header-cta" id="btn-header-cta">Консультація</button>
+        <button type="button" class="header-burger-btn" id="header-burger-btn" aria-label="Відкрити меню">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer-overlay" id="mobile-drawer-overlay"></div>
+  <div class="mobile-drawer" id="mobile-drawer">
+    <div class="mobile-drawer-header">
+      <a href="/" class="header-logo">
+        <img src="/images/logo-header.png" alt="LIKEMARK CLOUD" style="height: 30px;">
+      </a>
+      <button class="mobile-drawer-close" id="mobile-drawer-close" aria-label="Закрити меню">&times;</button>
+    </div>
+    <div class="mobile-drawer-links">
+      <a href="/" class="mobile-drawer-link">Головна</a>
+      <a href="/servers" class="mobile-drawer-link ">Сервери</a>
+      <a href="/migration" class="mobile-drawer-link ">Міграція</a>
+      <a href="/solutions" class="mobile-drawer-link active">Рішення</a>
+      <a href="/datacenters" class="mobile-drawer-link ">Дата-центри</a>
+      <a href="/cases" class="mobile-drawer-link ">Кейси</a>
+      <a href="/contacts" class="mobile-drawer-link ">Контакти</a>
+    </div>
+    <div class="mobile-drawer-footer">
+      <a href="tel:+380443345892" class="top-bar-link" style="font-weight: 600; font-size: 1.1rem; color: #fff; margin-bottom: 12px; display: block;">+380 (44) 334-58-92</a>
+      <button type="button" class="btn-primary mobile-drawer-btn-cta" style="width: 100%;">Консультація інженера</button>
+    </div>
+  </div>
+  
+  </header>
+
+  <main style="padding: 60px 0 100px;">
+    <div class="container" style="max-width:1200px; margin:0 auto; padding:0 20px;">
+      
+      <!-- HERO -->
+      <div style="text-align:center; max-width:860px; margin:0 auto 70px;">
+        <div style="display:inline-block; background:rgba(31,147,255,0.15); color:#1f93ff; padding:6px 16px; border-radius:20px; font-weight:700; font-size:13px; margin-bottom:16px; letter-spacing:0.03em;">
+          ХМАРНА ЕКОСИСТЕМА ДЛЯ БІЗНЕСУ
+        </div>
+        <h1 style="font-size: clamp(2rem, 4vw, 3.2rem); font-weight:800; line-height:1.2; margin-bottom:20px; color:#fff;">
+          Готові рішення та керовані сервіси для будь-яких завдань
+        </h1>
+        <p style="font-size: clamp(1rem, 1.8vw, 1.25rem); color:rgba(255,255,255,0.7); line-height:1.6; margin-bottom:32px;">
+          Автоматизуйте інфраструктуру, запускайте мікросервіси та захищайте критичні дані. Усі сервіси розгорнуті в захищених європейських дата-центрах із фіксованим SLA 99.98%.
+        </p>
+        <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+          <button type="button" class="btn-primary" onclick="var m=document.getElementById('calc-modal');if(m)m.style.display='flex';" style="padding:14px 28px; font-size:15px; font-weight:700; border-radius:8px; background:#eb4247; border:none; color:#fff; cursor:pointer;">Розрахувати вартість</button>
+          <button type="button" class="btn-header-cta" style="padding:14px 28px; font-size:15px; font-weight:700; border-radius:8px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:#fff; cursor:pointer;">Отримати консультацію</button>
+        </div>
+      </div>
+
+      <!-- SOLUTIONS GRID -->
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); gap:30px; margin-bottom:80px;">
+        
+        <!-- 1. Databases -->
+        <div id="databases" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:32px; transition:border-color 0.2s;">
+          <div style="width:48px; height:48px; border-radius:12px; background:rgba(31,147,255,0.2); color:#1f93ff; display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:20px;">🗄️</div>
+          <h3 style="font-size:22px; font-weight:700; color:#fff; margin-bottom:12px;">Хмарні бази даних (DBaaS)</h3>
+          <p style="color:rgba(255,255,255,0.65); font-size:14px; line-height:1.6; margin-bottom:20px;">
+            Керовані кластери PostgreSQL, MySQL, Redis та ClickHouse. Автоматичне створення щоденних резервних копій, моніторинг повільних транзакцій і безшовне масштабування без зупинки сервісу.
+          </p>
+          <ul style="color:rgba(255,255,255,0.8); font-size:13px; line-height:1.8; margin-bottom:24px; padding-left:20px;">
+            <li>Швидкі диски NVMe Enterprise (до 85 000 IOPS)</li>
+            <li>Відмовостійка реплікація Master-Replica</li>
+            <li>Автоматичне відновлення на будь-яку точку часу (PITR)</li>
+          </ul>
+          <a href="#calc" onclick="var m=document.getElementById('calc-modal');if(m)m.style.display='flex';" style="color:#1f93ff; font-weight:700; font-size:14px; text-decoration:none;">Розрахувати базу даних →</a>
+        </div>
+
+        <!-- 2. Kubernetes -->
+        <div id="k8s" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:32px; transition:border-color 0.2s;">
+          <div style="width:48px; height:48px; border-radius:12px; background:rgba(50,108,229,0.2); color:#326ce5; display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:20px;">☸️</div>
+          <h3 style="font-size:22px; font-weight:700; color:#fff; margin-bottom:12px;">Managed Kubernetes</h3>
+          <p style="color:rgba(255,255,255,0.65); font-size:14px; line-height:1.6; margin-bottom:20px;">
+            Повністю налаштовані виробничі K8s-кластери з попередньо встановленим Ingress-контролером, Cert-Manager для SSL та інтегрованим Container Registry для безперервного розгортання.
+          </p>
+          <ul style="color:rgba(255,255,255,0.8); font-size:13px; line-height:1.8; margin-bottom:24px; padding-left:20px;">
+            <li>Автомасштабування воркер-нод за навантаженням</li>
+            <li>Безкоштовна панель керування кластером (Control Plane)</li>
+            <li>Підтримка GitOps (GitLab CI, GitHub Actions, ArgoCD)</li>
+          </ul>
+          <a href="#calc" onclick="var m=document.getElementById('calc-modal');if(m)m.style.display='flex';" style="color:#1f93ff; font-weight:700; font-size:14px; text-decoration:none;">Розгорнути кластер →</a>
+        </div>
+
+        <!-- 3. Security & Anti-DDoS -->
+        <div id="security" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:32px; transition:border-color 0.2s;">
+          <div style="width:48px; height:48px; border-radius:12px; background:rgba(235,66,71,0.2); color:#eb4247; display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:20px;">🛡️</div>
+          <h3 style="font-size:22px; font-weight:700; color:#fff; margin-bottom:12px;">Кібербезпека, WAF та Anti-DDoS</h3>
+          <p style="color:rgba(255,255,255,0.65); font-size:14px; line-height:1.6; margin-bottom:20px;">
+            Багаторівневий захист веб-ресурсів та внутрішньої мережі. Фільтрація шкідливого трафіку на рівнях L3–L7 пропускною здатністю до 2.5 Тбіт/с без затримок для реальних користувачів.
+          </p>
+          <ul style="color:rgba(255,255,255,0.8); font-size:13px; line-height:1.8; margin-bottom:24px; padding-left:20px;">
+            <li>Захист від SYN/UDP flood та бот-мереж</li>
+            <li>Web Application Firewall (OWASP Top-10 захист)</li>
+            <li>Захищені VPN-тунелі WireGuard / IPsec між офісом і хмарою</li>
+          </ul>
+          <a href="#consult" onclick="var m=document.getElementById('consult-modal');if(m)m.style.display='flex';" style="color:#1f93ff; font-weight:700; font-size:14px; text-decoration:none;">Захистити інфраструктуру →</a>
+        </div>
+
+        <!-- 4. Storage S3 -->
+        <div id="storage" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:32px; transition:border-color 0.2s;">
+          <div style="width:48px; height:48px; border-radius:12px; background:rgba(10,180,118,0.2); color:#0ab476; display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:20px;">📦</div>
+          <h3 style="font-size:22px; font-weight:700; color:#fff; margin-bottom:12px;">S3-сумісне об'єктне сховище</h3>
+          <p style="color:rgba(255,255,255,0.65); font-size:14px; line-height:1.6; margin-bottom:20px;">
+            Необмежене сховище для резервних копій, користувацьких файлів, статичних сайтів і медіа. Сумісність зі стандартним API AWS S3 та 99.9999999% збереження даних.
+          </p>
+          <ul style="color:rgba(255,255,255,0.8); font-size:13px; line-height:1.8; margin-bottom:24px; padding-left:20px;">
+            <li>Гео-реплікація між Варшавою та Франкфуртом</li>
+            <li>Оплата тільки за фактично використані гігабайти</li>
+            <li>Швидка інтеграція з будь-якими CMS та фреймворками</li>
+          </ul>
+          <a href="#calc" onclick="var m=document.getElementById('calc-modal');if(m)m.style.display='flex';" style="color:#1f93ff; font-weight:700; font-size:14px; text-decoration:none;">Підключити S3 сховище →</a>
+        </div>
+
+        <!-- 5. AI Infrastructure -->
+        <div id="ai" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:32px; transition:border-color 0.2s;">
+          <div style="width:48px; height:48px; border-radius:12px; background:rgba(118,185,0,0.2); color:#76b900; display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:20px;">🤖</div>
+          <h3 style="font-size:22px; font-weight:700; color:#fff; margin-bottom:12px;">AI-інфраструктура та GPU NVIDIA</h3>
+          <p style="color:rgba(255,255,255,0.65); font-size:14px; line-height:1.6; margin-bottom:20px;">
+            Потужні графічні прискорювачі NVIDIA H100, A100 та L40S для тренування нейромереж, розгортання власних LLM та виконання ресурсоємних аналітичних обчислень.
+          </p>
+          <ul style="color:rgba(255,255,255,0.8); font-size:13px; line-height:1.8; margin-bottom:24px; padding-left:20px;">
+            <li>До 80 GB HBM3 пам'яті на один GPU-чип</li>
+            <li>Готові образи з попередньо налаштованими CUDA, PyTorch</li>
+            <li>Швидкісні канали NVLink між відеокартами</li>
+          </ul>
+          <a href="#consult" onclick="var m=document.getElementById('consult-modal');if(m)m.style.display='flex';" style="color:#1f93ff; font-weight:700; font-size:14px; text-decoration:none;">Замовити GPU сервер →</a>
+        </div>
+
+        <!-- 6. DevOps & SysAdmin -->
+        <div id="devops" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:32px; transition:border-color 0.2s;">
+          <div style="width:48px; height:48px; border-radius:12px; background:rgba(255,153,0,0.2); color:#ff9900; display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:20px;">⚙️</div>
+          <h3 style="font-size:22px; font-weight:700; color:#fff; margin-bottom:12px;">DevOps as a Service</h3>
+          <p style="color:rgba(255,255,255,0.65); font-size:14px; line-height:1.6; margin-bottom:20px;">
+            Підтримка та налаштування інфраструктури вашого проєкту сертифікованими системними інженерами LIKEMARK CLOUD. Аудит безпеки, оптимізація витрат та цілодобове чергування.
+          </p>
+          <ul style="color:rgba(255,255,255,0.8); font-size:13px; line-height:1.8; margin-bottom:24px; padding-left:20px;">
+            <li>Налаштування CI/CD процесів для швидких релізів</li>
+            <li>Infrastructure as Code (Terraform, Ansible)</li>
+            <li>Реагування на інциденти від 5 хвилин за контрактом SLA</li>
+          </ul>
+          <a href="#consult" onclick="var m=document.getElementById('consult-modal');if(m)m.style.display='flex';" style="color:#1f93ff; font-weight:700; font-size:14px; text-decoration:none;">Замовити супровід →</a>
+        </div>
+
+      </div>
+
+      <!-- CTA BANNER -->
+      <div style="background:linear-gradient(135deg, rgba(31,147,255,0.15) 0%, rgba(9,36,51,0.9) 100%); border:1px solid rgba(31,147,255,0.3); border-radius:20px; padding:48px; text-align:center; max-width:900px; margin:0 auto;">
+        <h3 style="font-size:28px; font-weight:800; color:#fff; margin-bottom:12px;">Потрібне індивідуальне рішення чи безкоштовний аудит?</h3>
+        <p style="color:rgba(255,255,255,0.75); font-size:16px; margin-bottom:28px; max-width:600px; margin-left:auto; margin-right:auto;">
+          Наші старші архітектори проаналізують поточну архітектуру вашого сервісу та запропонують план оптимізації вартості й надійності за 24 години.
+        </p>
+        <button type="button" class="btn-primary" onclick="var m=document.getElementById('consult-modal');if(m)m.style.display='flex';" style="padding:16px 36px; font-size:16px; font-weight:700; border-radius:8px; background:#eb4247; border:none; color:#fff; cursor:pointer;">
+          Замовити консультацію архітектора
+        </button>
+      </div>
+
+    </div>
+  </main>
+
+  
+  <footer class="footer" style="background:#092433; color:#fff; padding:60px 0 40px; border-top:1px solid rgba(255,255,255,0.08); font-family:Manrope,sans-serif;">
+    <div class="container" style="max-width:1200px; margin:0 auto; padding:0 20px;">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:40px; margin-bottom:40px;">
+        <div>
+          <a href="/" style="display:inline-block; margin-bottom:16px;">
+            <img src="/images/logo-footer.png" alt="LIKEMARK CLOUD" style="height:36px; width:auto;">
+          </a>
+          <p style="color:rgba(255,255,255,0.6); font-size:14px; line-height:1.6; margin-bottom:16px;">
+            Сучасний хмарний провайдер надійної IT-інфраструктури для бізнесу в європейських дата-центрах Варшави та Франкфурта.
+          </p>
+          <div style="font-size:13px; color:rgba(255,255,255,0.8);">
+            📞 <a href="tel:+380443345892" style="color:#fff; text-decoration:none; font-weight:700;">+380 (44) 334-58-92</a><br>
+            ✉️ <a href="mailto:support@likemark.cloud" style="color:#1f93ff; text-decoration:none;">support@likemark.cloud</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 style="font-size:16px; font-weight:700; color:#fff; margin-bottom:16px;">Послуги та сервери</h4>
+          <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px; font-size:14px;">
+            <li><a href="/servers#dedicated" style="color:rgba(255,255,255,0.7); text-decoration:none;">Виділені сервери (Dedicated)</a></li>
+            <li><a href="/servers#vps" style="color:rgba(255,255,255,0.7); text-decoration:none;">Хмарні сервери (VPS/VDS)</a></li>
+            <li><a href="/solutions#databases" style="color:rgba(255,255,255,0.7); text-decoration:none;">Хмарні бази даних</a></li>
+            <li><a href="/solutions#k8s" style="color:rgba(255,255,255,0.7); text-decoration:none;">Managed Kubernetes</a></li>
+            <li><a href="/solutions#ai" style="color:rgba(255,255,255,0.7); text-decoration:none;">Сервери з GPU NVIDIA H100</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 style="font-size:16px; font-weight:700; color:#fff; margin-bottom:16px;">Інфраструктура</h4>
+          <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px; font-size:14px;">
+            <li><a href="/datacenters#warsaw" style="color:rgba(255,255,255,0.7); text-decoration:none;">Дата-центр Варшава (Tier III)</a></li>
+            <li><a href="/datacenters#frankfurt" style="color:rgba(255,255,255,0.7); text-decoration:none;">Дата-центр Франкфурт (Tier III+)</a></li>
+            <li><a href="/migration" style="color:rgba(255,255,255,0.7); text-decoration:none;">Безкоштовний переїзд інфраструктури</a></li>
+            <li><a href="/cases" style="color:rgba(255,255,255,0.7); text-decoration:none;">Кейси та статті клієнтів</a></li>
+            <li><a href="/panel" class="btn-open-panel" style="color:#00e599; font-weight:700; text-decoration:none;">Хмарна панель керування</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 style="font-size:16px; font-weight:700; color:#fff; margin-bottom:16px;">Підписка на новини</h4>
+          <p style="color:rgba(255,255,255,0.6); font-size:13px; line-height:1.5; margin-bottom:14px;">
+            Отримуйте дайджест оновлень, знижки на сервери та корисні рекомендації з кібербезпеки.
+          </p>
+          <button type="button" onclick="window.openNewsletterModal ? window.openNewsletterModal() : document.getElementById('newsletter-modal').style.display='flex';" class="button button--default button--colored button--light !text-center footer-info__block-subscribe-btn" style="width:100%; padding:10px; font-weight:700; border-radius:8px; border:none; background:#1f93ff; color:#fff; cursor:pointer;">
+            Підписатися на дайджест
+          </button>
+        </div>
+      </div>
+
+      <div style="padding-top:24px; border-top:1px solid rgba(255,255,255,0.08); display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:16px; font-size:13px; color:rgba(255,255,255,0.5);">
+        <div>
+          © 2023–2026 ТОВ «ЛАЙКМАРК ЮКРЕЙН» (код ЄДРПОУ 45356074). Усі права захищені.
+        </div>
+        <div style="display:flex; gap:20px;">
+          <a href="/privacy" style="color:rgba(255,255,255,0.6); text-decoration:none;">Політика конфіденційності</a>
+          <a href="/terms" style="color:rgba(255,255,255,0.6); text-decoration:none;">Публічна оферта IaaS</a>
+          <a href="/cookie-policy" style="color:rgba(255,255,255,0.6); text-decoration:none;">Файли Cookies</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <div id="auth-modal" style="display:none; position:fixed; inset:0; background:rgba(9,36,51,0.7); backdrop-filter:blur(6px); z-index:99999; align-items:center; justify-content:center; padding:16px;">
+  <div style="background:#fff; border-radius:16px; width:100%; max-width:440px; padding:28px; box-shadow:0 20px 50px rgba(0,0,0,0.25); position:relative; font-family:Manrope,sans-serif;">
+    <button type="button" class="modal-close-generic" style="position:absolute; top:16px; right:16px; background:none; border:none; font-size:22px; cursor:pointer; color:#9ca3af;">✕</button>
+    <div style="display:flex; border-bottom:2px solid rgba(9,36,51,0.08); margin-bottom:20px;">
+      <button type="button" id="tab-btn-login" style="flex:1; padding:10px 0; border:none; background:none; font-size:16px; font-weight:700; color:#092433; border-bottom:2px solid #092433; margin-bottom:-2px; cursor:pointer;">Вхід у кабінет</button>
+      <button type="button" id="tab-btn-register" style="flex:1; padding:10px 0; border:none; background:none; font-size:16px; font-weight:600; color:rgba(9,36,51,0.4); margin-bottom:-2px; cursor:pointer;">Створити акаунт</button>
+    </div>
+    <!-- Login Form -->
+    <form id="form-login" style="display:flex; flex-direction:column; gap:14px;">
+      <div>
+        <label style="display:block; font-size:13px; font-weight:600; color:#092433; margin-bottom:4px;">Email або логін</label>
+        <input type="text" id="login-email" required placeholder="name@company.com" style="width:100%; padding:10px 14px; border:1px solid rgba(9,36,51,0.2); border-radius:8px; font-size:14px; box-sizing:border-box;">
+      </div>
+      <div>
+        <label style="display:block; font-size:13px; font-weight:600; color:#092433; margin-bottom:4px;">Пароль</label>
+        <input type="password" id="login-password" required placeholder="••••••••" style="width:100%; padding:10px 14px; border:1px solid rgba(9,36,51,0.2); border-radius:8px; font-size:14px; box-sizing:border-box;">
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; font-size:12px;">
+        <label style="display:flex; align-items:center; gap:6px; cursor:pointer; color:rgba(9,36,51,0.7);">
+          <input type="checkbox" checked style="accent-color:#092433;"> Запам'ятати мене
+        </label>
+        <a href="#forgot" style="color:#eb4247; text-decoration:none;">Забули пароль?</a>
+      </div>
+      <button type="submit" style="background:#092433; color:#fff; border:none; padding:12px; border-radius:8px; font-size:15px; font-weight:700; cursor:pointer; margin-top:4px;">Увійти в панель</button>
+      <p style="font-size:12px; color:rgba(9,36,51,0.5); text-align:center; margin:0;">
+        Немає акаунта? <a href="#" id="link-switch-to-reg" style="color:#092433; font-weight:700; text-decoration:underline;">Зареєструватися</a>
+      </p>
+    </form>
+    <!-- Register Form -->
+    <form id="form-register" style="display:none; flex-direction:column; gap:12px;">
+      <div style="background:rgba(10,180,118,0.1); color:#0ab476; padding:8px 12px; border-radius:6px; font-size:12px; font-weight:700;">
+        🎁 7 днів безкоштовного тестування при створенні акаунта
+      </div>
+      <div>
+        <label style="display:block; font-size:13px; font-weight:600; color:#092433; margin-bottom:4px;">Робочий Email</label>
+        <input type="email" id="reg-email" required placeholder="name@company.com" style="width:100%; padding:10px 14px; border:1px solid rgba(9,36,51,0.2); border-radius:8px; font-size:14px; box-sizing:border-box;">
+      </div>
+      <div>
+        <label style="display:block; font-size:13px; font-weight:600; color:#092433; margin-bottom:4px;">Номер телефону</label>
+        <input type="tel" id="reg-phone" required placeholder="+380 (XX) XXX-XX-XX" style="width:100%; padding:10px 14px; border:1px solid rgba(9,36,51,0.2); border-radius:8px; font-size:14px; box-sizing:border-box;">
+      </div>
+      <div>
+        <label style="display:block; font-size:13px; font-weight:600; color:#092433; margin-bottom:4px;">Придумайте пароль</label>
+        <input type="password" id="reg-password" required placeholder="Мінімум 8 символів" style="width:100%; padding:10px 14px; border:1px solid rgba(9,36,51,0.2); border-radius:8px; font-size:14px; box-sizing:border-box;">
+      </div>
+      <div>
+        <label style="display:block; font-size:13px; font-weight:600; color:#092433; margin-bottom:4px;">Компанія / ПІБ</label>
+        <input type="text" id="reg-name" required placeholder="ТОВ або Сергій" style="width:100%; padding:10px 14px; border:1px solid rgba(9,36,51,0.2); border-radius:8px; font-size:14px; box-sizing:border-box;">
+      </div>
+      <button type="submit" style="background:#092433; color:#fff; border:none; padding:12px; border-radius:8px; font-size:15px; font-weight:700; cursor:pointer; margin-top:4px;">Створити акаунт</button>
+      <p style="font-size:12px; color:rgba(9,36,51,0.5); text-align:center; margin:0;">
+        Вже зареєстровані? <a href="#" id="link-switch-to-login" style="color:#092433; font-weight:700; text-decoration:underline;">Увійти</a>
+      </p>
+    </form>
+  </div>
+</div>
+
+<!-- ==================== CLIENT CONTROL PANEL MODAL ==================== -->
+<div id="panel-modal" style="display:none; position:fixed; inset:0; background:rgba(9,36,51,0.75); backdrop-filter:blur(8px); z-index:99999; align-items:center; justify-content:center; padding:16px;">
+  <div style="background:#f8fafc; border-radius:16px; width:100%; max-width:860px; max-height:90vh; overflow-y:auto; box-shadow:0 25px 60px rgba(0,0,0,0.3); font-family:Manrope,sans-serif; border:1px solid rgba(9,36,51,0.1);">
+    <div style="background:#092433; color:#fff; padding:16px 24px; border-top-left-radius:16px; border-top-right-radius:16px; display:flex; align-items:center; justify-content:space-between;">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <span style="font-weight:800; font-size:18px; letter-spacing:-0.02em;">LIKEMARK Cloud Panel</span>
+        <span style="background:rgba(255,255,255,0.15); padding:2px 8px; border-radius:4px; font-size:12px;">ID #45356074</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:16px;">
+        <span style="font-size:13px; color:rgba(255,255,255,0.8);">Баланс: <strong style="color:#00e599;">1 500.00 ₴</strong></span>
+        <button type="button" class="modal-close-generic" style="background:none; border:none; color:#fff; font-size:20px; cursor:pointer;">✕</button>
+      </div>
+    </div>
+    <div style="padding:24px;">
+      <div style="background:#fff; border-radius:12px; padding:20px; border:1px solid rgba(9,36,51,0.08); margin-bottom:20px; display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <h3 style="font-size:18px; font-weight:700; color:#092433; margin:0 0 4px;">Хмарні сервери та бази даних</h3>
+          <p style="font-size:13px; color:rgba(9,36,51,0.6); margin:0;">Дата-центри: Варшава (Tier III), Франкфурт (Tier III+). SLA 99.98%.</p>
+        </div>
+        <button type="button" id="btn-create-server" style="background:#092433; color:#fff; border:none; padding:10px 18px; border-radius:8px; font-size:13px; font-weight:700; cursor:pointer;">+ Створити сервер</button>
+      </div>
+      <div style="background:#fff; border-radius:12px; border:1px solid rgba(9,36,51,0.08); overflow:hidden; margin-bottom:20px;">
+        <div style="padding:14px 20px; border-bottom:1px solid rgba(9,36,51,0.08); font-weight:700; font-size:14px; color:#092433;">
+          Активні віртуальні машини (2)
+        </div>
+        <table style="width:100%; border-collapse:collapse; font-size:13px; text-align:left;">
+          <thead>
+            <tr style="background:rgba(9,36,51,0.02); color:rgba(9,36,51,0.6); border-bottom:1px solid rgba(9,36,51,0.08);">
+              <th style="padding:12px 20px;">Ім'я інстансу</th>
+              <th style="padding:12px 14px;">Ресурси</th>
+              <th style="padding:12px 14px;">IP-адреса</th>
+              <th style="padding:12px 14px;">Локація</th>
+              <th style="padding:12px 14px;">Статус</th>
+              <th style="padding:12px 20px; text-align:right;">Дії</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid rgba(9,36,51,0.05);">
+              <td style="padding:14px 20px; font-weight:600; color:#092433;">vps-warsaw-1c-prod</td>
+              <td style="padding:14px 14px; color:#565656;">4 vCPU • 8 GB RAM • 120 GB NVMe</td>
+              <td style="padding:14px 14px; font-family:monospace; color:#092433;">185.193.17.42</td>
+              <td style="padding:14px 14px; color:#565656;">Варшава</td>
+              <td style="padding:14px 14px;"><span style="background:rgba(10,180,118,0.15); color:#0ab476; padding:3px 8px; border-radius:4px; font-weight:700; font-size:11px;">● ACTIVE</span></td>
+              <td style="padding:14px 20px; text-align:right;">
+                <button type="button" style="background:rgba(9,36,51,0.06); border:none; padding:6px 12px; border-radius:4px; font-size:12px; font-weight:600; cursor:pointer;">Консоль</button>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:14px 20px; font-weight:600; color:#092433;">vps-frankfurt-crm-backup</td>
+              <td style="padding:14px 14px; color:#565656;">8 vCPU • 16 GB RAM • 240 GB NVMe</td>
+              <td style="padding:14px 14px; font-family:monospace; color:#092433;">194.26.29.110</td>
+              <td style="padding:14px 14px; color:#565656;">Франкфурт</td>
+              <td style="padding:14px 14px;"><span style="background:rgba(10,180,118,0.15); color:#0ab476; padding:3px 8px; border-radius:4px; font-weight:700; font-size:11px;">● ACTIVE</span></td>
+              <td style="padding:14px 20px; text-align:right;">
+                <button type="button" style="background:rgba(9,36,51,0.06); border:none; padding:6px 12px; border-radius:4px; font-size:12px; font-weight:600; cursor:pointer;">Консоль</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px;">
+        <div style="background:#fff; border-radius:12px; padding:16px; border:1px solid rgba(9,36,51,0.08);">
+          <span style="font-size:12px; color:rgba(9,36,51,0.6);">Середнє навантаження CPU</span>
+          <div style="font-size:22px; font-weight:700; color:#092433; margin:4px 0;">14%</div>
+          <div style="height:4px; background:rgba(9,36,51,0.1); border-radius:2px; overflow:hidden;">
+            <div style="width:14%; height:100%; background:#0ab476;"></div>
+          </div>
+        </div>
+        <div style="background:#fff; border-radius:12px; padding:16px; border:1px solid rgba(9,36,51,0.08);">
+          <span style="font-size:12px; color:rgba(9,36,51,0.6);">Використання RAM</span>
+          <div style="font-size:22px; font-weight:700; color:#092433; margin:4px 0;">38%</div>
+          <div style="height:4px; background:rgba(9,36,51,0.1); border-radius:2px; overflow:hidden;">
+            <div style="width:38%; height:100%; background:#3b82f6;"></div>
+          </div>
+        </div>
+        <div style="background:#fff; border-radius:12px; padding:16px; border:1px solid rgba(9,36,51,0.08);">
+          <span style="font-size:12px; color:rgba(9,36,51,0.6);">Дисковий простір NVMe</span>
+          <div style="font-size:22px; font-weight:700; color:#092433; margin:4px 0;">72 / 360 GB</div>
+          <div style="height:4px; background:rgba(9,36,51,0.1); border-radius:2px; overflow:hidden;">
+            <div style="width:20%; height:100%; background:#0ab476;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== CALCULATOR MODAL ==================== -->
+<div id="calc-modal" style="display:none; position:fixed; inset:0; background:rgba(9,36,51,0.7); backdrop-filter:blur(6px); z-index:99999; align-items:center; justify-content:center; padding:16px;">
+  <div style="background:#fff; border-radius:16px; width:100%; max-width:540px; padding:32px; box-shadow:0 25px 50px rgba(0,0,0,0.25); position:relative; font-family:Manrope,sans-serif;">
+    <button type="button" class="modal-close-generic" style="position:absolute; top:16px; right:16px; background:none; border:none; font-size:22px; cursor:pointer; color:#9ca3af;">✕</button>
+    <div style="display:inline-block; background:rgba(9,36,51,0.06); color:#092433; font-size:12px; font-weight:700; padding:4px 10px; border-radius:4px; margin-bottom:12px;">ХМАРНИЙ КАЛЬКУЛЯТОР</div>
+    <h3 style="font-size:22px; font-weight:700; color:#092433; margin:0 0 6px;">Розрахувати вартість сервера</h3>
+    <p style="font-size:13px; color:rgba(9,36,51,0.6); margin:0 0 20px;">Оберіть ресурси для ваших баз 1С, CRM або корпоративних сайтів:</p>
+    <div style="display:flex; flex-direction:column; gap:16px;">
+      <div>
+        <div style="display:flex; justify-content:space-between; font-size:14px; font-weight:600; margin-bottom:6px;">
+          <span>Процесор (vCPU):</span>
+          <strong id="calc-cpu-val" style="color:#eb4247;">4 ядра</strong>
+        </div>
+        <input type="range" id="calc-cpu-range" min="1" max="32" step="1" value="4" style="width:100%; accent-color:#092433;">
+      </div>
+      <div>
+        <div style="display:flex; justify-content:space-between; font-size:14px; font-weight:600; margin-bottom:6px;">
+          <span>Оперативна пам'ять (RAM):</span>
+          <strong id="calc-ram-val" style="color:#eb4247;">8 GB</strong>
+        </div>
+        <input type="range" id="calc-ram-range" min="2" max="64" step="2" value="8" style="width:100%; accent-color:#092433;">
+      </div>
+      <div>
+        <div style="display:flex; justify-content:space-between; font-size:14px; font-weight:600; margin-bottom:6px;">
+          <span>Швидкісний диск (NVMe SSD):</span>
+          <strong id="calc-disk-val" style="color:#eb4247;">120 GB</strong>
+        </div>
+        <input type="range" id="calc-disk-range" min="20" max="1000" step="20" value="120" style="width:100%; accent-color:#092433;">
+      </div>
+      <div>
+        <label style="display:block; font-size:14px; font-weight:600; margin-bottom:6px;">Операційна система:</label>
+        <select id="calc-os-select" style="width:100%; padding:8px 12px; border:1px solid rgba(9,36,51,0.2); border-radius:6px; font-size:14px;">
+          <option value="0">Ubuntu / Debian / Linux (Безкоштовно)</option>
+          <option value="600">Windows Server 2022 / 2025 (+600 ₴/міс)</option>
+        </select>
+      </div>
+      <div style="background:rgba(9,36,51,0.03); border-radius:10px; padding:16px; margin-top:6px; display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <span style="font-size:12px; color:rgba(9,36,51,0.5);">Підсумкова вартість:</span>
+          <div id="calc-total-price" style="font-size:24px; font-weight:800; color:#092433;">1 490 ₴ / міс</div>
+        </div>
+        <button type="button" id="calc-order-btn" style="background:#092433; color:#fff; border:none; padding:12px 24px; border-radius:8px; font-size:14px; font-weight:700; cursor:pointer;">Замовити сервер</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== CONSULTATION MODAL ==================== -->
+<div id="consult-modal" style="display:none; position:fixed; inset:0; background:rgba(9,36,51,0.7); backdrop-filter:blur(6px); z-index:99999; align-items:center; justify-content:center; padding:16px;">
+  <div style="background:#fff; border-radius:16px; width:100%; max-width:440px; padding:28px; box-shadow:0 20px 50px rgba(0,0,0,0.25); position:relative; font-family:Manrope,sans-serif;">
+    <button type="button" class="modal-close-generic" style="position:absolute; top:16px; right:16px; background:none; border:none; font-size:22px; cursor:pointer; color:#9ca3af;">✕</button>
+    <div style="display:inline-block; background:rgba(235,66,71,0.1); color:#eb4247; font-size:12px; font-weight:700; padding:4px 10px; border-radius:4px; margin-bottom:12px;">ОНЛАЙН-КОНСУЛЬТАЦІЯ</div>
+    <h3 style="font-size:22px; font-weight:700; color:#092433; margin:0 0 6px;">Консультація чергового інженера</h3>
+    <p style="font-size:13px; color:rgba(9,36,51,0.6); margin:0 0 16px;">Відповімо на запитання щодо міграції баз 1С/CRM, підбору сертифікованих серверів та умов SLA за 15 хвилин.</p>
+    <form id="form-consult" style="display:flex; flex-direction:column; gap:12px;">
+      <input type="hidden" name="source" value="Кнопка консультації перед замовленням">
+      <div>
+        <label style="display:block; font-size:13px; font-weight:600; color:#092433; margin-bottom:4px;">Ваше ім'я або назва компанії</label>
+        <input type="text" name="name" required placeholder="ТОВ або Сергій" style="width:100%; padding:10px 14px; border:1px solid rgba(9,36,51,0.2); border-radius:8px; font-size:14px; box-sizing:border-box;">
+      </div>
+      <div>
+        <label style="display:block; font-size:13px; font-weight:600; color:#092433; margin-bottom:4px;">Номер телефону</label>
+        <input type="tel" name="phone" required placeholder="+380 (XX) XXX-XX-XX" style="width:100%; padding:10px 14px; border:1px solid rgba(9,36,51,0.2); border-radius:8px; font-size:14px; box-sizing:border-box;">
+      </div>
+      <div>
+        <label style="display:block; font-size:13px; font-weight:600; color:#092433; margin-bottom:4px;">Завдання або запитання (необов'язково)</label>
+        <textarea name="comment" rows="2" placeholder="Потрібен розрахунок під базу 1С на 15 користувачів" style="width:100%; padding:10px 14px; border:1px solid rgba(9,36,51,0.2); border-radius:8px; font-size:14px; box-sizing:border-box;"></textarea>
+      </div>
+      <button type="submit" id="btn-consult-submit" style="background:#eb4247; color:#fff; border:none; padding:12px; border-radius:8px; font-size:15px; font-weight:700; cursor:pointer; margin-top:4px;">Замовити консультацію</button>
+    </form>
+  </div>
+</div>
+
+
+
+
+
+<!-- ==================== NEWSLETTER MODAL ==================== -->
+<div id="newsletter-modal" style="display:none; position:fixed; inset:0; background:rgba(9,36,51,0.7); backdrop-filter:blur(6px); z-index:99999; align-items:center; justify-content:center; padding:16px;">
+  <div style="background:#fff; border-radius:16px; width:100%; max-width:440px; padding:32px 28px; box-shadow:0 20px 50px rgba(0,0,0,0.25); position:relative; font-family:Manrope,sans-serif; box-sizing:border-box;">
+    <button type="button" class="modal-close-generic" style="position:absolute; top:16px; right:16px; background:none; border:none; font-size:22px; cursor:pointer; color:#9ca3af; line-height:1; width:32px; height:32px; display:flex; align-items:center; justify-content:center; border-radius:50%; transition:background 0.2s;">✕</button>
+    
+    <div style="display:inline-flex; align-items:center; gap:6px; background:rgba(31,147,255,0.1); color:#1f93ff; font-size:12px; font-weight:700; padding:4px 10px; border-radius:4px; margin-bottom:12px; letter-spacing:0.04em;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+      АВТОРОЗСИЛКА ТА ДАЙДЖЕСТ
+    </div>
+    
+    <h3 style="font-size:22px; font-weight:700; color:#092433; margin:0 0 8px; line-height:1.25;">Підписка на розсилку новин</h3>
+    <p style="font-size:13px; color:rgba(9,36,51,0.65); margin:0 0 20px; line-height:1.5;">
+      Введіть вашу електронну пошту, щоб отримувати новини хмарних технологій, поради з кібербезпеки та персональні знижки.
+    </p>
+    
+    <form id="form-newsletter" style="display:flex; flex-direction:column; gap:14px;">
+      <input type="hidden" name="source" value="Підписка на розсилку новин LIKEMARK CLOUD">
+      <div>
+        <label style="display:block; font-size:13px; font-weight:600; color:#092433; margin-bottom:6px;">Ваша електронна пошта (Email)</label>
+        <input type="email" name="email" id="newsletter-email-input" required placeholder="name@company.ua" style="width:100%; padding:12px 14px; border:1px solid rgba(9,36,51,0.2); border-radius:8px; font-size:14px; box-sizing:border-box; outline:none; transition:border-color 0.2s;">
+      </div>
+      
+      <p style="font-size:11px; color:#64748b; margin:-4px 0 0; line-height:1.4;">
+        🔒 Без спаму. Ви зможете відписатися в будь-який момент в один клік.
+      </p>
+      
+      <button type="submit" id="btn-newsletter-submit" style="background:#1f93ff; color:#fff; border:none; padding:13px; border-radius:8px; font-size:15px; font-weight:700; cursor:pointer; transition:background 0.2s; margin-top:6px;">Підписатися</button>
+    </form>
+    
+    <div id="newsletter-success-msg" style="display:none; text-align:center; padding:14px; background:#e6f9f0; border:1px solid #10b981; border-radius:8px; color:#065f46; font-size:14px; font-weight:600; margin-top:14px;">
+      ✓ Дякуємо за підписку! Ваш Email додано до списку розсилки.
+    </div>
+  </div>
+</div>
+
+
+  
+<!-- LIKEMARK CLOUD Interactive Modules -->
+<script src="/js/modules/auth.js"></script>
+<script src="/js/modules/calculator.js"></script>
+<script src="/js/modules/consult.js"></script>
+<script src="/js/modules/newsletter.js"></script>
+<script src="/js/modules/modals.js"></script>
+<script src="/js/site-header.js"></script>
+</body>
+</html>
+
