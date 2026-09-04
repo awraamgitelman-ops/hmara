@@ -1,14 +1,180 @@
-﻿<svg width="340" height="200" viewBox="0 0 340 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="680" height="400" viewBox="0 0 680 400" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="gMeg" x1="0" y1="0" x2="340" y2="200" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#FF5252"/>
-      <stop offset="50%" stop-color="#EB3636"/>
-      <stop offset="100%" stop-color="#C62828"/>
+    <!-- Background Gradients -->
+    <linearGradient id="bgGradMeg" x1="0" y1="0" x2="680" y2="400" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#090616"/>
+      <stop offset="50%" stop-color="#120A2B"/>
+      <stop offset="100%" stop-color="#1B0E38"/>
     </linearGradient>
+    <radialGradient id="glowPurpleMeg" cx="500" cy="140" r="340" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#A855F7" stop-opacity="0.3"/>
+      <stop offset="60%" stop-color="#6366F1" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#6366F1" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowCyanMeg" cx="160" cy="260" r="260" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00E5FF" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#00E5FF" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Wave & Stream Gradients -->
+    <linearGradient id="streamWaveGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00E5FF"/>
+      <stop offset="40%" stop-color="#A855F7"/>
+      <stop offset="80%" stop-color="#EC4899"/>
+      <stop offset="100%" stop-color="#F43F5E"/>
+    </linearGradient>
+    <linearGradient id="waveFillGrad" x1="0" y1="180" x2="0" y2="300" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#A855F7" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#A855F7" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- UI Panel Background -->
+    <linearGradient id="panelBgMeg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1E143B" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#120B24" stop-opacity="0.85"/>
+    </linearGradient>
+
+    <clipPath id="clipMeg">
+      <rect width="680" height="400" rx="20"/>
+    </clipPath>
+    <filter id="glowFiltMeg" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
   </defs>
-  <rect width="340" height="200" rx="16" fill="url(#gMeg)"/>
-  <g transform="translate(74, 80)">
-    <polygon points="12,8 32,22 12,36" fill="#ffffff"/>
-    <text x="44" y="30" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="28" fill="#ffffff" letter-spacing="3">MEGOGO</text>
+
+  <g clip-path="url(#clipMeg)">
+    <!-- Base Background -->
+    <rect width="680" height="400" fill="url(#bgGradMeg)"/>
+    <circle cx="500" cy="140" r="340" fill="url(#glowPurpleMeg)"/>
+    <circle cx="160" cy="260" r="260" fill="url(#glowCyanMeg)"/>
+
+    <!-- Subtle Grid -->
+    <path d="M40 0 V400 M100 0 V400 M160 0 V400 M220 0 V400 M280 0 V400 M340 0 V400 M400 0 V400 M460 0 V400 M520 0 V400 M580 0 V400 M640 0 V400" stroke="#ffffff" stroke-opacity="0.02" stroke-width="1"/>
+    <path d="M0 60 H680 M0 120 H680 M0 180 H680 M0 240 H680 M0 300 H680 M0 360 H680" stroke="#ffffff" stroke-opacity="0.02" stroke-width="1"/>
+
+    <!-- TOP BAR -->
+    <!-- Tag Badge -->
+    <g transform="translate(36, 32)">
+      <rect width="194" height="32" rx="16" fill="#A855F7" fill-opacity="0.15" stroke="#A855F7" stroke-opacity="0.4" stroke-width="1"/>
+      <circle cx="16" cy="16" r="4" fill="#A855F7" filter="url(#glowFiltMeg)"/>
+      <text x="28" y="20.5" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="700" font-size="11.5" fill="#D8B4FE" letter-spacing="1.2">CLOUD CDN &amp; STORAGE</text>
+    </g>
+
+    <!-- Client Integration: Megogo Pill -->
+    <g transform="translate(506, 32)">
+      <rect width="138" height="32" rx="16" fill="#ffffff" fill-opacity="0.07" stroke="#ffffff" stroke-opacity="0.12" stroke-width="1"/>
+      <polygon points="16,11 26,16 16,21" fill="#ffffff"/>
+      <text x="34" y="20.5" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="900" font-size="13" fill="#ffffff" letter-spacing="2">MEGOGO</text>
+    </g>
+
+    <!-- LEFT SIDE: STREAMING PLAYER & 4K BROADCAST HUD -->
+    <g transform="translate(36, 88)">
+      <rect width="330" height="276" rx="14" fill="url(#panelBgMeg)" stroke="#ffffff" stroke-opacity="0.1" stroke-width="1"/>
+
+      <!-- Header -->
+      <g transform="translate(20, 20)">
+        <text x="0" y="14" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="700" font-size="10.5" fill="#C084FC" letter-spacing="1.5">LIVE BROADCAST ENGINE</text>
+        <text x="0" y="38" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="800" font-size="22" fill="#FFFFFF">2 800 000+</text>
+        <text x="145" y="38" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="600" font-size="12" fill="#94A3B8">concurrent</text>
+
+        <!-- Live Badge -->
+        <g transform="translate(205, 14)">
+          <rect width="82" height="24" rx="12" fill="#EF4444" fill-opacity="0.2" stroke="#EF4444" stroke-opacity="0.5"/>
+          <circle cx="12" cy="12" r="3.5" fill="#EF4444" filter="url(#glowFiltMeg)"/>
+          <text x="22" y="15.5" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="800" font-size="10.5" fill="#FCA5A5" letter-spacing="1">● LIVE</text>
+        </g>
+      </g>
+
+      <!-- Video Player Frame with Animated Waves -->
+      <g transform="translate(20, 72)">
+        <rect width="290" height="126" rx="10" fill="#0A0618" stroke="#ffffff" stroke-opacity="0.08" stroke-width="1"/>
+
+        <!-- Concentric Sound / Broadcast Radar Rings -->
+        <circle cx="145" cy="54" r="38" fill="none" stroke="#A855F7" stroke-opacity="0.15" stroke-width="1"/>
+        <circle cx="145" cy="54" r="26" fill="none" stroke="#A855F7" stroke-opacity="0.25" stroke-width="1.5"/>
+        
+        <!-- Glowing Play Icon -->
+        <circle cx="145" cy="54" r="18" fill="#A855F7" filter="url(#glowFiltMeg)"/>
+        <polygon points="142,48 152,54 142,60" fill="#ffffff"/>
+
+        <!-- Flowing Audio/Video Equalizer Waves at bottom of player -->
+        <path d="M0 105 Q35 90 70 102 T145 96 T220 108 T290 98 L290 126 L0 126 Z" fill="url(#waveFillGrad)"/>
+        <path d="M0 105 Q35 90 70 102 T145 96 T220 108 T290 98" fill="none" stroke="url(#streamWaveGrad)" stroke-width="2.5" stroke-linecap="round"/>
+
+        <!-- Quality Pills on Video -->
+        <g transform="translate(10, 10)">
+          <rect width="50" height="20" rx="4" fill="#000000" fill-opacity="0.6"/>
+          <text x="7" y="14" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="800" font-size="9.5" fill="#00E5FF">4K UHD</text>
+        </g>
+        <g transform="translate(66, 10)">
+          <rect width="45" height="20" rx="4" fill="#000000" fill-opacity="0.6"/>
+          <text x="6" y="14" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="700" font-size="9.5" fill="#E2E8F0">60 FPS</text>
+        </g>
+        <g transform="translate(230, 10)">
+          <rect width="50" height="20" rx="4" fill="#000000" fill-opacity="0.6"/>
+          <text x="8" y="14" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="700" font-size="9" fill="#00E599">HDR10+</text>
+        </g>
+      </g>
+
+      <!-- Bottom Low Latency Bar -->
+      <g transform="translate(20, 214)">
+        <rect width="290" height="42" rx="8" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.08" stroke-width="1"/>
+        <circle cx="16" cy="21" r="3.5" fill="#00E599"/>
+        <text x="28" y="17" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="600" font-size="9.5" fill="#94A3B8">BUFFER TIME</text>
+        <text x="28" y="32" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="800" font-size="12" fill="#00E599">0.0 ms (Zero Lag)</text>
+
+        <text x="175" y="17" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="600" font-size="9.5" fill="#94A3B8">GLOBAL CACHE</text>
+        <text x="175" y="32" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="800" font-size="12" fill="#38BDF8">99.4% Hit Rate</text>
+      </g>
+    </g>
+
+    <!-- RIGHT SIDE: EDGE CDN PERFORMANCE SPECS -->
+    <g transform="translate(386, 88)">
+      <rect width="258" height="276" rx="14" fill="url(#panelBgMeg)" stroke="#ffffff" stroke-opacity="0.1" stroke-width="1"/>
+
+      <g transform="translate(20, 20)">
+        <text x="0" y="14" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="700" font-size="10.5" fill="#38BDF8" letter-spacing="1.5">CDN THROUGHPUT</text>
+        <text x="0" y="38" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="800" font-size="22" fill="#FFFFFF">5.4 Tbps</text>
+        <text x="96" y="38" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="600" font-size="12" fill="#8B98AB">peak bandwidth</text>
+      </g>
+
+      <!-- Frequency / Bitrate Bar Visualizer -->
+      <g transform="translate(20, 78)">
+        <rect x="0" y="40" width="8" height="40" rx="4" fill="#00E5FF"/>
+        <rect x="14" y="25" width="8" height="55" rx="4" fill="#00E5FF"/>
+        <rect x="28" y="15" width="8" height="65" rx="4" fill="#38BDF8"/>
+        <rect x="42" y="30" width="8" height="50" rx="4" fill="#38BDF8"/>
+        <rect x="56" y="8" width="8" height="72" rx="4" fill="#818CF8"/>
+        <rect x="70" y="20" width="8" height="60" rx="4" fill="#A855F7"/>
+        <rect x="84" y="5" width="8" height="75" rx="4" fill="#A855F7" filter="url(#glowFiltMeg)"/>
+        <rect x="98" y="18" width="8" height="62" rx="4" fill="#C084FC"/>
+        <rect x="112" y="32" width="8" height="48" rx="4" fill="#E879F9"/>
+        <rect x="126" y="12" width="8" height="68" rx="4" fill="#EC4899"/>
+        <rect x="140" y="24" width="8" height="56" rx="4" fill="#EC4899"/>
+        <rect x="154" y="4" width="8" height="76" rx="4" fill="#F43F5E" filter="url(#glowFiltMeg)"/>
+        <rect x="168" y="22" width="8" height="58" rx="4" fill="#FB7185"/>
+        <rect x="182" y="38" width="8" height="42" rx="4" fill="#FB7185"/>
+        <rect x="196" y="16" width="8" height="64" rx="4" fill="#F43F5E"/>
+        <rect x="210" y="34" width="8" height="46" rx="4" fill="#E11D48"/>
+      </g>
+
+      <!-- Spec Cards -->
+      <g transform="translate(20, 175)">
+        <g transform="translate(0, 0)">
+          <rect width="218" height="36" rx="8" fill="#ffffff" fill-opacity="0.04"/>
+          <text x="12" y="16" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="600" font-size="9" fill="#94A3B8">DISTRIBUTED EDGE NODES</text>
+          <text x="12" y="29" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="800" font-size="12" fill="#FFFFFF">140+ PoPs Globally</text>
+        </g>
+        <g transform="translate(0, 44)">
+          <rect width="218" height="36" rx="8" fill="#ffffff" fill-opacity="0.04"/>
+          <text x="12" y="16" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="600" font-size="9" fill="#94A3B8">OBJECT STORAGE BACKBONE</text>
+          <text x="12" y="29" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="800" font-size="12" fill="#00E599">Multi-Petabyte NVMe</text>
+        </g>
+      </g>
+    </g>
   </g>
 </svg>

@@ -1,17 +1,193 @@
-﻿<svg width="340" height="200" viewBox="0 0 340 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="680" height="400" viewBox="0 0 680 400" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="gRoz" x1="0" y1="0" x2="340" y2="200" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#FF5252"/>
-      <stop offset="50%" stop-color="#EB3636"/>
-      <stop offset="100%" stop-color="#C62828"/>
+    <!-- Background Gradients -->
+    <linearGradient id="bgGradRoz" x1="0" y1="0" x2="680" y2="400" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0B0E17"/>
+      <stop offset="50%" stop-color="#121826"/>
+      <stop offset="100%" stop-color="#1A0D15"/>
     </linearGradient>
+    <radialGradient id="glowRed" cx="540" cy="120" r="300" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FF2A2A" stop-opacity="0.25"/>
+      <stop offset="60%" stop-color="#EB3636" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#EB3636" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowGreen" cx="160" cy="280" r="220" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00A046" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#00A046" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Chart Fill Gradient -->
+    <linearGradient id="chartFillRoz" x1="0" y1="180" x2="0" y2="310" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FF334B" stop-opacity="0.45"/>
+      <stop offset="70%" stop-color="#FF334B" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#FF334B" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="chartLineRoz" x1="280" y1="310" x2="620" y2="180" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FF8A00"/>
+      <stop offset="50%" stop-color="#FF334B"/>
+      <stop offset="100%" stop-color="#00E599"/>
+    </linearGradient>
+
+    <!-- UI Panel Gradients -->
+    <linearGradient id="panelBgRoz" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1E2738" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#111824" stop-opacity="0.85"/>
+    </linearGradient>
+    <linearGradient id="serverGradRoz" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1F2A3D"/>
+      <stop offset="100%" stop-color="#141B28"/>
+    </linearGradient>
+
+    <clipPath id="clipRoz">
+      <rect width="680" height="400" rx="20"/>
+    </clipPath>
+    <filter id="glowFiltRoz" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
   </defs>
-  <rect width="340" height="200" rx="16" fill="url(#gRoz)"/>
-  <g transform="translate(68, 78)">
-    <circle cx="22" cy="22" r="20" fill="#00A046"/>
-    <circle cx="16" cy="18" r="3.5" fill="#ffffff"/>
-    <circle cx="28" cy="18" r="3.5" fill="#ffffff"/>
-    <path d="M14 26 Q22 35 30 26" stroke="#ffffff" stroke-width="3" stroke-linecap="round" fill="none"/>
-    <text x="52" y="30" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="24" fill="#ffffff" letter-spacing="1">ROZETKA</text>
+
+  <g clip-path="url(#clipRoz)">
+    <!-- Base Background -->
+    <rect width="680" height="400" fill="url(#bgGradRoz)"/>
+    <circle cx="540" cy="120" r="300" fill="url(#glowRed)"/>
+    <circle cx="160" cy="280" r="220" fill="url(#glowGreen)"/>
+
+    <!-- Subtle Tech Grid -->
+    <path d="M40 0 V400 M100 0 V400 M160 0 V400 M220 0 V400 M280 0 V400 M340 0 V400 M400 0 V400 M460 0 V400 M520 0 V400 M580 0 V400 M640 0 V400" stroke="#ffffff" stroke-opacity="0.025" stroke-width="1"/>
+    <path d="M0 60 H680 M0 120 H680 M0 180 H680 M0 240 H680 M0 300 H680 M0 360 H680" stroke="#ffffff" stroke-opacity="0.025" stroke-width="1"/>
+
+    <!-- TOP BAR / HEADER -->
+    <!-- Tag Badge -->
+    <g transform="translate(36, 32)">
+      <rect width="186" height="32" rx="16" fill="#FF334B" fill-opacity="0.15" stroke="#FF334B" stroke-opacity="0.4" stroke-width="1"/>
+      <circle cx="16" cy="16" r="4" fill="#FF334B" filter="url(#glowFiltRoz)"/>
+      <text x="28" y="20.5" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="700" font-size="11.5" fill="#FF6B7D" letter-spacing="1.2">HIGHLOAD CLUSTER</text>
+    </g>
+
+    <!-- Client Integration: Rozetka Logo Pill -->
+    <g transform="translate(492, 32)">
+      <rect width="152" height="32" rx="16" fill="#ffffff" fill-opacity="0.07" stroke="#ffffff" stroke-opacity="0.12" stroke-width="1"/>
+      <circle cx="20" cy="16" r="10" fill="#00A046"/>
+      <circle cx="17" cy="14" r="1.8" fill="#ffffff"/>
+      <circle cx="23" cy="14" r="1.8" fill="#ffffff"/>
+      <path d="M16 18 Q20 22 24 18" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+      <text x="38" y="20.5" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="800" font-size="13" fill="#ffffff" letter-spacing="1">ROZETKA</text>
+    </g>
+
+    <!-- LEFT SIDE: DEDICATED HARDWARE / SERVER BLADES -->
+    <g transform="translate(36, 88)">
+      <!-- Panel Frame -->
+      <rect width="210" height="276" rx="14" fill="url(#panelBgRoz)" stroke="#ffffff" stroke-opacity="0.1" stroke-width="1"/>
+      
+      <!-- Panel Header -->
+      <text x="18" y="30" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="700" font-size="11" fill="#7E8B9F" letter-spacing="1.5">SERVER INFRASTRUCTURE</text>
+      <text x="18" y="48" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="800" font-size="15" fill="#FFFFFF">Dedicated Tier III</text>
+      
+      <!-- Blade 1 -->
+      <g transform="translate(14, 64)">
+        <rect width="182" height="56" rx="8" fill="url(#serverGradRoz)" stroke="#00E599" stroke-opacity="0.35" stroke-width="1"/>
+        <circle cx="16" cy="20" r="4" fill="#00E599" filter="url(#glowFiltRoz)"/>
+        <text x="28" y="23" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="700" font-size="11.5" fill="#FFFFFF">Node 01 • Master</text>
+        <text x="136" y="23" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="600" font-size="10" fill="#00E599">ACTIVE</text>
+        <!-- CPU & RAM bars -->
+        <rect x="16" y="36" width="70" height="5" rx="2.5" fill="#ffffff" fill-opacity="0.1"/>
+        <rect x="16" y="36" width="58" height="5" rx="2.5" fill="#00E599"/>
+        <text x="92" y="41" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="600" font-size="9" fill="#8B98AB">NVMe 40Gbps</text>
+      </g>
+
+      <!-- Blade 2 -->
+      <g transform="translate(14, 130)">
+        <rect width="182" height="56" rx="8" fill="url(#serverGradRoz)" stroke="#00E599" stroke-opacity="0.35" stroke-width="1"/>
+        <circle cx="16" cy="20" r="4" fill="#00E599" filter="url(#glowFiltRoz)"/>
+        <text x="28" y="23" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="700" font-size="11.5" fill="#FFFFFF">Node 02 • Highload</text>
+        <text x="136" y="23" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="600" font-size="10" fill="#00E599">ACTIVE</text>
+        <rect x="16" y="36" width="70" height="5" rx="2.5" fill="#ffffff" fill-opacity="0.1"/>
+        <rect x="16" y="36" width="62" height="5" rx="2.5" fill="#FF8A00"/>
+        <text x="92" y="41" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="600" font-size="9" fill="#8B98AB">Load Balancer</text>
+      </g>
+
+      <!-- Blade 3 -->
+      <g transform="translate(14, 196)">
+        <rect width="182" height="56" rx="8" fill="url(#serverGradRoz)" stroke="#00E599" stroke-opacity="0.35" stroke-width="1"/>
+        <circle cx="16" cy="20" r="4" fill="#00E599" filter="url(#glowFiltRoz)"/>
+        <text x="28" y="23" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="700" font-size="11.5" fill="#FFFFFF">Node 03 • DB Cluster</text>
+        <text x="136" y="23" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="600" font-size="10" fill="#00E599">ACTIVE</text>
+        <rect x="16" y="36" width="70" height="5" rx="2.5" fill="#ffffff" fill-opacity="0.1"/>
+        <rect x="16" y="36" width="45" height="5" rx="2.5" fill="#00E599"/>
+        <text x="92" y="41" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="600" font-size="9" fill="#8B98AB">Redis / Postgre</text>
+      </g>
+    </g>
+
+    <!-- RIGHT SIDE: BLACK FRIDAY TRAFFIC SPIKE DASHBOARD -->
+    <g transform="translate(266, 88)">
+      <rect width="378" height="276" rx="14" fill="url(#panelBgRoz)" stroke="#ffffff" stroke-opacity="0.1" stroke-width="1"/>
+
+      <!-- Dashboard Header -->
+      <g transform="translate(24, 20)">
+        <text x="0" y="14" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="700" font-size="11" fill="#FF6B7D" letter-spacing="1.5">BLACK FRIDAY TELEMETRY</text>
+        <text x="0" y="38" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="800" font-size="24" fill="#FFFFFF">385 000</text>
+        <text x="110" y="38" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="600" font-size="13" fill="#8B98AB">req / sec peak</text>
+        
+        <!-- Live Surge Pill -->
+        <g transform="translate(225, 14)">
+          <rect width="105" height="26" rx="13" fill="#FF334B" fill-opacity="0.2" stroke="#FF334B" stroke-opacity="0.5"/>
+          <path d="M12 13 L17 8 L21 11 L26 6" stroke="#FF334B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M22 6 H26 V10" stroke="#FF334B" stroke-width="2" stroke-linecap="round"/>
+          <text x="34" y="17" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="700" font-size="11" fill="#FF8595">+850% PEAK</text>
+        </g>
+      </g>
+
+      <!-- Chart Grid Lines -->
+      <g transform="translate(24, 82)">
+        <line x1="0" y1="30" x2="330" y2="30" stroke="#ffffff" stroke-opacity="0.07" stroke-dasharray="3 3"/>
+        <line x1="0" y1="75" x2="330" y2="75" stroke="#ffffff" stroke-opacity="0.07" stroke-dasharray="3 3"/>
+        <line x1="0" y1="120" x2="330" y2="120" stroke="#ffffff" stroke-opacity="0.07" stroke-dasharray="3 3"/>
+
+        <!-- Area Fill under curve -->
+        <path d="M0 120 C40 118 70 112 100 100 C130 88 155 70 185 45 C215 20 250 8 280 6 C305 4 320 12 330 18 L330 135 L0 135 Z" fill="url(#chartFillRoz)"/>
+
+        <!-- Traffic Spike Neon Line -->
+        <path d="M0 120 C40 118 70 112 100 100 C130 88 155 70 185 45 C215 20 250 8 280 6 C305 4 320 12 330 18" fill="none" stroke="url(#chartLineRoz)" stroke-width="3.5" stroke-linecap="round"/>
+
+        <!-- Peak Indicator Circle -->
+        <circle cx="280" cy="6" r="6" fill="#00E599" filter="url(#glowFiltRoz)"/>
+        <circle cx="280" cy="6" r="3" fill="#ffffff"/>
+
+        <!-- Tooltip Label -->
+        <g transform="translate(212, -26)">
+          <rect width="118" height="24" rx="6" fill="#0B101B" stroke="#00E599" stroke-opacity="0.7" stroke-width="1"/>
+          <text x="10" y="16" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="700" font-size="10.5" fill="#00E599">0% PACKET LOSS</text>
+        </g>
+      </g>
+
+      <!-- Bottom Metrics Strip -->
+      <g transform="translate(24, 230)">
+        <!-- Metric 1 -->
+        <g transform="translate(0, 0)">
+          <rect width="102" height="32" rx="8" fill="#ffffff" fill-opacity="0.05"/>
+          <circle cx="12" cy="16" r="3" fill="#00E599"/>
+          <text x="22" y="15" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="600" font-size="9" fill="#7E8B9F">UPTIME</text>
+          <text x="22" y="26" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="700" font-size="11" fill="#FFFFFF">100.0%</text>
+        </g>
+        <!-- Metric 2 -->
+        <g transform="translate(114, 0)">
+          <rect width="102" height="32" rx="8" fill="#ffffff" fill-opacity="0.05"/>
+          <circle cx="12" cy="16" r="3" fill="#00E599"/>
+          <text x="22" y="15" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="600" font-size="9" fill="#7E8B9F">LATENCY</text>
+          <text x="22" y="26" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="700" font-size="11" fill="#FFFFFF">1.2 ms</text>
+        </g>
+        <!-- Metric 3 -->
+        <g transform="translate(228, 0)">
+          <rect width="102" height="32" rx="8" fill="#ffffff" fill-opacity="0.05"/>
+          <circle cx="12" cy="16" r="3" fill="#00E599"/>
+          <text x="22" y="15" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="600" font-size="9" fill="#7E8B9F">BANDWIDTH</text>
+          <text x="22" y="26" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="700" font-size="11" fill="#FFFFFF">40 Gbps</text>
+        </g>
+      </g>
+    </g>
   </g>
 </svg>

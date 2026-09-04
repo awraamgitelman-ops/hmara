@@ -1,15 +1,179 @@
-﻿<svg width="340" height="200" viewBox="0 0 340 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="680" height="400" viewBox="0 0 680 400" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="gAjax" x1="0" y1="0" x2="340" y2="200" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#FF5252"/>
-      <stop offset="50%" stop-color="#EB3636"/>
-      <stop offset="100%" stop-color="#C62828"/>
+    <!-- Background Gradients -->
+    <linearGradient id="bgGradAjax" x1="0" y1="0" x2="680" y2="400" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#051216"/>
+      <stop offset="50%" stop-color="#0A1F26"/>
+      <stop offset="100%" stop-color="#102E35"/>
     </linearGradient>
+    <radialGradient id="glowMintAjax" cx="480" cy="160" r="320" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#10B981" stop-opacity="0.25"/>
+      <stop offset="60%" stop-color="#059669" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#059669" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowCyanAjax" cx="160" cy="240" r="240" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#06B6D4" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#06B6D4" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- UI Panel Background -->
+    <linearGradient id="panelBgAjax" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#132B32" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#0A1B20" stop-opacity="0.85"/>
+    </linearGradient>
+
+    <!-- Cost Optimization Trend Gradient -->
+    <linearGradient id="costLineGrad" x1="0" y1="0" x2="260" y2="90" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F59E0B"/>
+      <stop offset="60%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#00E599"/>
+    </linearGradient>
+
+    <clipPath id="clipAjax">
+      <rect width="680" height="400" rx="20"/>
+    </clipPath>
+    <filter id="glowFiltAjax" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
   </defs>
-  <rect width="340" height="200" rx="16" fill="url(#gAjax)"/>
-  <g transform="translate(68, 80)">
-    <polygon points="18,4 32,12 32,28 18,36 4,28 4,12" stroke="#ffffff" stroke-width="3.5" fill="none"/>
-    <text x="44" y="27" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="24" fill="#ffffff" letter-spacing="2">AJAX</text>
-    <text x="44" y="39" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="10" fill="rgba(255,255,255,0.8)" letter-spacing="3.5">SYSTEMS</text>
+
+  <g clip-path="url(#clipAjax)">
+    <!-- Base Background -->
+    <rect width="680" height="400" fill="url(#bgGradAjax)"/>
+    <circle cx="480" cy="160" r="320" fill="url(#glowMintAjax)"/>
+    <circle cx="160" cy="240" r="240" fill="url(#glowCyanAjax)"/>
+
+    <!-- Tech Grid Lines -->
+    <path d="M40 0 V400 M100 0 V400 M160 0 V400 M220 0 V400 M280 0 V400 M340 0 V400 M400 0 V400 M460 0 V400 M520 0 V400 M580 0 V400 M640 0 V400" stroke="#ffffff" stroke-opacity="0.02" stroke-width="1"/>
+    <path d="M0 60 H680 M0 120 H680 M0 180 H680 M0 240 H680 M0 300 H680 M0 360 H680" stroke="#ffffff" stroke-opacity="0.02" stroke-width="1"/>
+
+    <!-- TOP BAR -->
+    <!-- Tag Badge -->
+    <g transform="translate(36, 32)">
+      <rect width="210" height="32" rx="16" fill="#10B981" fill-opacity="0.15" stroke="#10B981" stroke-opacity="0.4" stroke-width="1"/>
+      <circle cx="16" cy="16" r="4" fill="#10B981" filter="url(#glowFiltAjax)"/>
+      <text x="28" y="20.5" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="700" font-size="11.5" fill="#6EE7B7" letter-spacing="1.2">MANAGED KUBERNETES</text>
+    </g>
+
+    <!-- Client Integration: Ajax Systems Pill -->
+    <g transform="translate(476, 32)">
+      <rect width="168" height="32" rx="16" fill="#ffffff" fill-opacity="0.07" stroke="#ffffff" stroke-opacity="0.12" stroke-width="1"/>
+      <!-- Ajax Systems Hexagon -->
+      <polygon points="18,10 24,13 24,19 18,22 12,19 12,13" stroke="#ffffff" stroke-width="2" fill="none"/>
+      <text x="32" y="20.5" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="900" font-size="12.5" fill="#ffffff" letter-spacing="1.5">AJAX SYSTEMS</text>
+    </g>
+
+    <!-- LEFT SIDE: KUBERNETES CLUSTER & SLA GAUGE -->
+    <g transform="translate(36, 88)">
+      <rect width="320" height="276" rx="14" fill="url(#panelBgAjax)" stroke="#ffffff" stroke-opacity="0.1" stroke-width="1"/>
+
+      <!-- Header -->
+      <g transform="translate(20, 20)">
+        <text x="0" y="14" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="700" font-size="10.5" fill="#6EE7B7" letter-spacing="1.5">CLUSTER ORCHESTRATION</text>
+        <text x="0" y="38" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="800" font-size="22" fill="#FFFFFF">SLA 99.98%</text>
+        <text x="135" y="38" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="600" font-size="12" fill="#94A3B8">guaranteed</text>
+      </g>
+
+      <!-- Central Kubernetes Helm Wheel & Nodes Graphic -->
+      <g transform="translate(160, 142)">
+        <!-- Outer Orbit Circle -->
+        <circle cx="0" cy="0" r="62" fill="none" stroke="#00E5FF" stroke-opacity="0.15" stroke-dasharray="4 3"/>
+        <circle cx="0" cy="0" r="42" fill="none" stroke="#10B981" stroke-opacity="0.25" stroke-width="1.5"/>
+
+        <!-- Kubernetes Wheel Shape -->
+        <g stroke="#00E5FF" stroke-width="2.5" fill="none" filter="url(#glowFiltAjax)">
+          <polygon points="0,-24 21,-12 21,12 0,24 -21,12 -21,-12"/>
+          <line x1="0" y1="-24" x2="0" y2="24"/>
+          <line x1="21" y1="-12" x2="-21" y2="12"/>
+          <line x1="21" y1="12" x2="-21" y2="-12"/>
+          <circle cx="0" cy="0" r="7" fill="#0A1F26" stroke="#00E5FF" stroke-width="2"/>
+        </g>
+
+        <!-- Orbiting Pods -->
+        <!-- Pod 1: Top -->
+        <g transform="translate(0, -62)">
+          <circle cx="0" cy="0" r="12" fill="#0D2C34" stroke="#10B981" stroke-width="1.5"/>
+          <circle cx="0" cy="0" r="4" fill="#10B981" filter="url(#glowFiltAjax)"/>
+          <text x="16" y="4" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="700" font-size="9" fill="#6EE7B7">API Pod</text>
+        </g>
+        <!-- Pod 2: Bottom-Right -->
+        <g transform="translate(54, 32)">
+          <circle cx="0" cy="0" r="12" fill="#0D2C34" stroke="#06B6D4" stroke-width="1.5"/>
+          <circle cx="0" cy="0" r="4" fill="#06B6D4" filter="url(#glowFiltAjax)"/>
+          <text x="-48" y="24" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="700" font-size="9" fill="#67E8F9">IoT Mesh</text>
+        </g>
+        <!-- Pod 3: Bottom-Left -->
+        <g transform="translate(-54, 32)">
+          <circle cx="0" cy="0" r="12" fill="#0D2C34" stroke="#10B981" stroke-width="1.5"/>
+          <circle cx="0" cy="0" r="4" fill="#10B981" filter="url(#glowFiltAjax)"/>
+          <text x="-12" y="24" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="700" font-size="9" fill="#A7F3D0">Auto-Scale</text>
+        </g>
+      </g>
+
+      <!-- Bottom Status Pill -->
+      <g transform="translate(20, 226)">
+        <rect width="280" height="34" rx="8" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.08" stroke-width="1"/>
+        <circle cx="16" cy="17" r="3.5" fill="#00E599"/>
+        <text x="28" y="21" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="600" font-size="10.5" fill="#94A3B8">High Availability:</text>
+        <text x="125" y="21" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="800" font-size="11" fill="#00E599">Zero Downtime</text>
+        <text x="210" y="21" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="600" font-size="10" fill="#64748B">Tier III</text>
+      </g>
+    </g>
+
+    <!-- RIGHT SIDE: COST OPTIMIZATION GUIDE HUD -->
+    <g transform="translate(376, 88)">
+      <rect width="268" height="276" rx="14" fill="url(#panelBgAjax)" stroke="#ffffff" stroke-opacity="0.1" stroke-width="1"/>
+
+      <!-- Header & Cost Reduction Metric -->
+      <g transform="translate(20, 20)">
+        <text x="0" y="14" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="700" font-size="10.5" fill="#34D399" letter-spacing="1.5">COST OPTIMIZATION</text>
+        
+        <!-- Big Green Saving Badge -->
+        <g transform="translate(0, 24)">
+          <text x="0" y="28" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="900" font-size="32" fill="#10B981">-42%</text>
+          <text x="96" y="18" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="700" font-size="13" fill="#FFFFFF">Cloud Spend</text>
+          <text x="96" y="32" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="600" font-size="10.5" fill="#94A3B8">FinOps Strategy</text>
+        </g>
+      </g>
+
+      <!-- Downward Cost Reduction Chart Curve -->
+      <g transform="translate(20, 105)">
+        <rect width="228" height="85" rx="8" fill="#06161B" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1"/>
+        
+        <!-- Grid lines inside chart -->
+        <line x1="12" y1="25" x2="216" y2="25" stroke="#ffffff" stroke-opacity="0.06" stroke-dasharray="3 3"/>
+        <line x1="12" y1="55" x2="216" y2="55" stroke="#ffffff" stroke-opacity="0.06" stroke-dasharray="3 3"/>
+
+        <!-- Downward Slope Line -->
+        <path d="M16 22 C60 24 90 48 130 54 C165 58 190 70 212 72" fill="none" stroke="url(#costLineGrad)" stroke-width="3" stroke-linecap="round"/>
+
+        <!-- Start Point (High Cost) -->
+        <circle cx="16" cy="22" r="4" fill="#F59E0B"/>
+        <text x="24" y="20" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="700" font-size="8.5" fill="#FBBF24">Legacy</text>
+
+        <!-- End Point (Optimized) -->
+        <circle cx="212" cy="72" r="5" fill="#10B981" filter="url(#glowFiltAjax)"/>
+        <circle cx="212" cy="72" r="2.5" fill="#ffffff"/>
+        <text x="148" y="80" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="800" font-size="8.5" fill="#34D399">OPTIMIZED</text>
+      </g>
+
+      <!-- Strategy Tags -->
+      <g transform="translate(20, 206)">
+        <g transform="translate(0, 0)">
+          <rect width="228" height="26" rx="6" fill="#ffffff" fill-opacity="0.04"/>
+          <text x="10" y="17" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="600" font-size="10" fill="#94A3B8">Spot Pods &amp; Scheduling:</text>
+          <text x="165" y="17" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="800" font-size="10.5" fill="#10B981">-28%</text>
+        </g>
+        <g transform="translate(0, 32)">
+          <rect width="228" height="26" rx="6" fill="#ffffff" fill-opacity="0.04"/>
+          <text x="10" y="17" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="600" font-size="10" fill="#94A3B8">Auto-scaling &amp; Right-sizing:</text>
+          <text x="165" y="17" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="800" font-size="10.5" fill="#10B981">-14%</text>
+        </g>
+      </g>
+    </g>
   </g>
 </svg>

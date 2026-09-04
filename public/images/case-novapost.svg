@@ -1,14 +1,175 @@
-﻿<svg width="340" height="200" viewBox="0 0 340 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="680" height="400" viewBox="0 0 680 400" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="gNova" x1="0" y1="0" x2="340" y2="200" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#FF5252"/>
-      <stop offset="50%" stop-color="#EB3636"/>
-      <stop offset="100%" stop-color="#C62828"/>
+    <!-- Background Gradients -->
+    <linearGradient id="bgGradNova" x1="0" y1="0" x2="680" y2="400" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#08101E"/>
+      <stop offset="50%" stop-color="#0E1B33"/>
+      <stop offset="100%" stop-color="#141E38"/>
     </linearGradient>
+    <radialGradient id="glowBlueNova" cx="480" cy="180" r="320" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1E88E5" stop-opacity="0.25"/>
+      <stop offset="60%" stop-color="#0D47A1" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#0D47A1" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowRedNova" cx="160" cy="220" r="260" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#E53935" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#E53935" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Fiber Routes Gradient -->
+    <linearGradient id="fiberLineGrad" x1="160" y1="260" x2="480" y2="150" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#E53935"/>
+      <stop offset="50%" stop-color="#00E5FF"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+
+    <!-- UI Panel Background -->
+    <linearGradient id="panelBgNova" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1A2640" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#0F1829" stop-opacity="0.85"/>
+    </linearGradient>
+
+    <clipPath id="clipNova">
+      <rect width="680" height="400" rx="20"/>
+    </clipPath>
+    <filter id="glowFiltNova" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
   </defs>
-  <rect width="340" height="200" rx="16" fill="url(#gNova)"/>
-  <g transform="translate(56, 78)">
-    <path d="M22 2 L27 16 L42 22 L27 28 L22 42 L17 28 L2 22 L17 16 Z" fill="#ffffff"/>
-    <text x="50" y="30" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="23" fill="#ffffff" letter-spacing="1.5">NOVA POST</text>
+
+  <g clip-path="url(#clipNova)">
+    <!-- Base Background -->
+    <rect width="680" height="400" fill="url(#bgGradNova)"/>
+    <circle cx="480" cy="180" r="320" fill="url(#glowBlueNova)"/>
+    <circle cx="160" cy="220" r="260" fill="url(#glowRedNova)"/>
+
+    <!-- Subtle Tech Matrix -->
+    <path d="M40 0 V400 M100 0 V400 M160 0 V400 M220 0 V400 M280 0 V400 M340 0 V400 M400 0 V400 M460 0 V400 M520 0 V400 M580 0 V400 M640 0 V400" stroke="#ffffff" stroke-opacity="0.02" stroke-width="1"/>
+    <path d="M0 60 H680 M0 120 H680 M0 180 H680 M0 240 H680 M0 300 H680 M0 360 H680" stroke="#ffffff" stroke-opacity="0.02" stroke-width="1"/>
+
+    <!-- TOP BAR -->
+    <!-- Tag Badge -->
+    <g transform="translate(36, 32)">
+      <rect width="202" height="32" rx="16" fill="#00E5FF" fill-opacity="0.12" stroke="#00E5FF" stroke-opacity="0.35" stroke-width="1"/>
+      <circle cx="16" cy="16" r="4" fill="#00E5FF" filter="url(#glowFiltNova)"/>
+      <text x="28" y="20.5" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="700" font-size="11.5" fill="#38BDF8" letter-spacing="1.2">EUROPEAN CLOUD MESH</text>
+    </g>
+
+    <!-- Client Integration: Nova Post Pill -->
+    <g transform="translate(480, 32)">
+      <rect width="164" height="32" rx="16" fill="#ffffff" fill-opacity="0.07" stroke="#ffffff" stroke-opacity="0.12" stroke-width="1"/>
+      <!-- Nova Post 4-point star -->
+      <g transform="translate(20, 16) scale(0.6)">
+        <path d="M0 -15 L3.5 -4 L15 0 L3.5 4 L0 15 L-3.5 4 L-15 0 L-3.5 -4 Z" fill="#E53935"/>
+      </g>
+      <text x="36" y="20.5" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="800" font-size="13" fill="#ffffff" letter-spacing="1.2">NOVA POST</text>
+    </g>
+
+    <!-- LEFT SIDE: EUROPEAN DC TOPOLOGY MAP -->
+    <g transform="translate(36, 88)">
+      <rect width="320" height="276" rx="14" fill="url(#panelBgNova)" stroke="#ffffff" stroke-opacity="0.1" stroke-width="1"/>
+
+      <text x="20" y="28" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="700" font-size="10.5" fill="#38BDF8" letter-spacing="1.5">MULTI-REGION INFRASTRUCTURE</text>
+      <text x="20" y="46" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="800" font-size="15" fill="#FFFFFF">Resilient European Cloud</text>
+
+      <!-- Network Map Visual -->
+      <g transform="translate(20, 68)">
+        <!-- Curved Fiber Optic Routes -->
+        <!-- Frankfurt to Warsaw -->
+        <path d="M40 100 C70 65 110 60 145 65" fill="none" stroke="url(#fiberLineGrad)" stroke-width="2.5" stroke-dasharray="4 2"/>
+        <!-- Warsaw to Kyiv -->
+        <path d="M145 65 C185 70 215 115 245 130" fill="none" stroke="url(#fiberLineGrad)" stroke-width="2.5" stroke-dasharray="4 2"/>
+        <!-- Direct Frankfurt to Kyiv link -->
+        <path d="M40 100 C110 150 180 160 245 130" fill="none" stroke="#00E5FF" stroke-opacity="0.3" stroke-width="1.5"/>
+
+        <!-- Moving Signal Pulse Packets -->
+        <circle cx="95" cy="72" r="3" fill="#00E5FF" filter="url(#glowFiltNova)"/>
+        <circle cx="195" cy="98" r="3" fill="#E53935" filter="url(#glowFiltNova)"/>
+
+        <!-- NODE 1: Frankfurt -->
+        <g transform="translate(40, 100)">
+          <circle cx="0" cy="0" r="14" fill="#0E1E38" stroke="#3B82F6" stroke-opacity="0.4" stroke-width="1"/>
+          <circle cx="0" cy="0" r="5" fill="#3B82F6" filter="url(#glowFiltNova)"/>
+          <text x="-25" y="24" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="700" font-size="9" fill="#93C5FD">FRANKFURT</text>
+          <text x="-16" y="34" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="600" font-size="7.5" fill="#64748B">Core DC</text>
+        </g>
+
+        <!-- NODE 2: Warsaw -->
+        <g transform="translate(145, 65)">
+          <circle cx="0" cy="0" r="16" fill="#0E1E38" stroke="#00E5FF" stroke-opacity="0.5" stroke-width="1"/>
+          <circle cx="0" cy="0" r="6" fill="#00E5FF" filter="url(#glowFiltNova)"/>
+          <text x="-20" y="-12" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="700" font-size="9.5" fill="#67E8F9">WARSAW</text>
+          <text x="-14" y="-2" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="600" font-size="8" fill="#64748B">Hub Tier III</text>
+        </g>
+
+        <!-- NODE 3: Kyiv -->
+        <g transform="translate(245, 130)">
+          <!-- Pulsing Radar Waves -->
+          <circle cx="0" cy="0" r="18" fill="none" stroke="#E53935" stroke-opacity="0.3" stroke-width="1"/>
+          <circle cx="0" cy="0" r="12" fill="#1A1526" stroke="#E53935" stroke-opacity="0.6" stroke-width="1.5"/>
+          <circle cx="0" cy="0" r="5" fill="#E53935" filter="url(#glowFiltNova)"/>
+          <text x="-12" y="24" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="700" font-size="10" fill="#FCA5A5">KYIV</text>
+          <text x="-16" y="34" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="600" font-size="8" fill="#64748B">Primary HQ</text>
+        </g>
+      </g>
+
+      <!-- Sync Latency Footer -->
+      <g transform="translate(18, 226)">
+        <rect width="284" height="34" rx="8" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.08" stroke-width="1"/>
+        <circle cx="16" cy="17" r="3.5" fill="#00E599"/>
+        <text x="28" y="21" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="600" font-size="10.5" fill="#94A3B8">Cross-Border Sync:</text>
+        <text x="135" y="21" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="800" font-size="11" fill="#00E599">&lt; 14 ms</text>
+        <text x="190" y="21" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="600" font-size="10" fill="#64748B">Active-Active</text>
+      </g>
+    </g>
+
+    <!-- RIGHT SIDE: PARCEL TRACKING TELEMETRY HUD -->
+    <g transform="translate(376, 88)">
+      <rect width="268" height="276" rx="14" fill="url(#panelBgNova)" stroke="#ffffff" stroke-opacity="0.1" stroke-width="1"/>
+
+      <!-- Header & Icon -->
+      <g transform="translate(20, 20)">
+        <text x="0" y="14" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="700" font-size="10.5" fill="#E53935" letter-spacing="1.5">REAL-TIME TELEMETRY</text>
+        <text x="0" y="38" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="800" font-size="22" fill="#FFFFFF">14.2M+</text>
+        <text x="86" y="38" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="600" font-size="12" fill="#8B98AB">parcels / day</text>
+      </g>
+
+      <!-- Isometric 3D Tracking Package Graphic -->
+      <g transform="translate(134, 126)">
+        <!-- Iso Cube -->
+        <!-- Top Face -->
+        <polygon points="0,-24 38,-4 0,16 -38,-4" fill="#253A5E" stroke="#00E5FF" stroke-width="1.5"/>
+        <!-- Right Face -->
+        <polygon points="0,16 38,-4 38,36 0,56" fill="#14223A" stroke="#00E5FF" stroke-width="1.5"/>
+        <!-- Left Face -->
+        <polygon points="-38,-4 0,16 0,56 -38,36" fill="#1A2D4B" stroke="#00E5FF" stroke-width="1.5"/>
+        <!-- Red Tracking Tape -->
+        <polygon points="-12,-18 0,-12 0,48 -12,42" fill="#E53935" fill-opacity="0.8"/>
+        <!-- Glowing Scan Beam Line -->
+        <line x1="-50" y1="12" x2="50" y2="12" stroke="#00E5FF" stroke-width="2" stroke-dasharray="3 3" filter="url(#glowFiltNova)"/>
+        <!-- QR / Barcode indicator on side -->
+        <rect x="10" y="12" width="18" height="12" fill="#ffffff" fill-opacity="0.15" transform="skewY(26.5)"/>
+      </g>
+
+      <!-- Telemetry Metric Rows -->
+      <g transform="translate(20, 200)">
+        <!-- Row 1 -->
+        <g transform="translate(0, 0)">
+          <rect width="228" height="28" rx="6" fill="#ffffff" fill-opacity="0.04"/>
+          <text x="10" y="18" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="600" font-size="10.5" fill="#94A3B8">Tracking SLA:</text>
+          <text x="155" y="18" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="800" font-size="11" fill="#00E599">99.999%</text>
+        </g>
+        <!-- Row 2 -->
+        <g transform="translate(0, 34)">
+          <rect width="228" height="28" rx="6" fill="#ffffff" fill-opacity="0.04"/>
+          <text x="10" y="18" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="600" font-size="10.5" fill="#94A3B8">Failover Switch:</text>
+          <text x="155" y="18" font-family="'Inter', -apple-system, system-ui, sans-serif" font-weight="800" font-size="11" fill="#38BDF8">&lt; 2.0 sec</text>
+        </g>
+      </g>
+    </g>
   </g>
 </svg>
