@@ -5,7 +5,7 @@
    ========================================================================== */
 
 :root {
-  --theme-bg-body: #f8fafc;
+  --theme-bg-body: #ffffff;
   --theme-bg-card: #ffffff;
   --theme-text-primary: #092433;
   --theme-text-secondary: rgba(9, 36, 51, 0.68);
@@ -41,6 +41,7 @@
 html {
   box-sizing: border-box;
   scroll-behavior: smooth;
+  background-color: #ffffff !important;
 }
 *, *:before, *:after {
   box-sizing: inherit;
@@ -49,13 +50,17 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background-color: var(--theme-bg-body) !important;
+  background-color: #ffffff !important;
   color: var(--theme-text-primary) !important;
   font-family: var(--theme-font) !important;
   font-size: 16px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+main, #__nuxt, #app, .layout {
+  background-color: #ffffff !important;
 }
 
 /* Container */
