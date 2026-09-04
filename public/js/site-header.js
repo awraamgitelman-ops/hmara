@@ -1,5 +1,5 @@
 // LIKEMARK CLOUD — Unified Site Header Controller
-document.addEventListener('DOMContentLoaded', function () {
+function initSiteHeader() {
   // 1. Mobile Drawer Navigation
   const burgerBtn = document.getElementById('header-burger-btn');
   const drawerOverlay = document.getElementById('mobile-drawer-overlay');
@@ -84,7 +84,13 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('.btn-header-cta, .mobile-drawer-btn-cta').forEach(function (btn) {
     btn.addEventListener('click', triggerConsult);
   });
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initSiteHeader);
+} else {
+  initSiteHeader();
+}
 
 // =========================================================================
 // 3. Cookie Banner Controller (Runs immediately, not waiting for DOMContentLoaded)

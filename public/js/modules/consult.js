@@ -56,7 +56,9 @@
         });
       });
     }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initConsult);
+  } else {
+    initConsult();
   }
-
-  document.addEventListener('DOMContentLoaded', initConsult);
 }());

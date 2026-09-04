@@ -12,28 +12,33 @@
       document.getElementById('consult-modal')
     ].filter(Boolean);
 
-    // Generic close buttons
-    document.querySelectorAll('.modal-close-generic').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        modals.forEach(function (m) { m.style.display = 'none'; });
-      });
-    });
-
-    // Outside click
-    modals.forEach(function (modal) {
-      modal.addEventListener('click', function (e) {
-        if (e.target === modal) modal.style.display = 'none';
-      });
+    // Close on any modal close button or ESC
+    document.addEventListener('click', function (e) {
+      if (e.target.classList.contains('modal-close-generic') || e.target.closest('.modal-close-generic')) {
+        document.querySelectorAll('#auth-modal, #panel-modal, #calc-modal, #consult-modal, #lead-modal').forEach(function (m) {
+          m.style.display = 'none';
+        });
+      }
+      var targetModal = e.target;
+      if (targetModal && (targetModal.id === 'auth-modal' || targetModal.id === 'panel-modal' || targetModal.id === 'calc-modal' || targetModal.id === 'consult-modal' || targetModal.id === 'lead-modal')) {
+        targetModal.style.display = 'none';
+      }
     });
 
     // ESC key
     document.addEventListener('keydown', function (e) {
       if (e.key !== 'Escape') return;
-      modals.forEach(function (m) { m.style.display = 'none'; });
+      document.querySelectorAll('#auth-modal, #panel-modal, #calc-modal, #consult-modal, #lead-modal').forEach(function (m) {
+        m.style.display = 'none';
+      });
       var dropdown = document.getElementById('user-dropdown-menu');
       if (dropdown) dropdown.style.display = 'none';
     });
   }
 
-  document.addEventListener('DOMContentLoaded', initModals);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initModals);
+  } else {
+    initModals();
+  }
 }());

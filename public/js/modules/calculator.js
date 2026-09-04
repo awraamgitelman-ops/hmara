@@ -72,5 +72,9 @@
     recalculate();
   }
 
-  document.addEventListener('DOMContentLoaded', initCalculator);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCalculator);
+  } else {
+    initCalculator();
+  }
 }());

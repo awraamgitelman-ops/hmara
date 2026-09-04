@@ -131,11 +131,26 @@
         } else {
           openAuthModal(false);
         }
-      });
-    }
+    // Expose globally
+    window.openAuthModal = openAuthModal;
+
+    // Handle any links targeting #login or #register
+    document.querySelectorAll('a[href="#login"]').forEach(function (el) {
+      el.addEventListener('click', function (e) { e.preventDefault(); openAuthModal(false); });
+    });
+    document.querySelectorAll('a[href="#register"], a[href="#signup"]').forEach(function (el) {
+      el.addEventListener('click', function (e) { e.preventDefault(); openAuthModal(true); });
+    });
+    document.querySelectorAll('.btn-header-login').forEach(function (el) {
+      el.addEventListener('click', function (e) { e.preventDefault(); openAuthModal(false); });
+    });
 
     checkUserState();
   }
 
-  document.addEventListener('DOMContentLoaded', initAuth);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAuth);
+  } else {
+    initAuth();
+  }
 }());

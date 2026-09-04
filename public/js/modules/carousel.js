@@ -161,8 +161,14 @@
     }, { passive: true });
   }
 
-  document.addEventListener('DOMContentLoaded', function () {
+  function start() {
     initCarousel();
     initScrollLock();
-  });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start);
+  } else {
+    start();
+  }
 }());
